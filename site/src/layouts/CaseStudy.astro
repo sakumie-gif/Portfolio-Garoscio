@@ -24,7 +24,7 @@ const accentClass = {
         href="/works"
         class="text-sm text-voile transition-colors hover:text-encre"
       >
-        ← La saison
+        ← À l'affiche
       </a>
       {kicker && (
         <p class="mt-8 text-sm uppercase tracking-[0.18em] text-voile">
@@ -43,7 +43,12 @@ const accentClass = {
     </header>
 
     <!-- Corps: sidebar TOC + contenu -->
-    <div class="grid grid-cols-1 gap-12 pt-12 lg:grid-cols-[200px_1fr] lg:gap-16">
+    <div
+      class:list={[
+        "grid grid-cols-1 gap-12 pt-12 lg:gap-16",
+        sections.length > 0 && "lg:grid-cols-[200px_1fr]",
+      ]}
+    >
       <!-- Table des matières (desktop) -->
       {
         sections.length > 0 && (
