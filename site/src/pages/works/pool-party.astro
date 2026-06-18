@@ -1,0 +1,167 @@
+---
+import CaseStudy from "../../layouts/CaseStudy.astro";
+
+const sections = [
+  { id: "en-bref", label: "En bref" },
+  { id: "contexte", label: "Contexte" },
+  { id: "mon-role", label: "Mon rôle" },
+  { id: "ce-que-jai-fait", label: "Ce que j'ai fait" },
+  { id: "difficile", label: "Ce qui a été dur" },
+  { id: "retiens", label: "Ce que j'en retiens" },
+];
+---
+
+<CaseStudy
+  title="Pool Party"
+  kicker="Marketplace P2P"
+  didascalie="Marketplace de location de piscines entre particuliers. Île-de-France."
+  sections={sections}
+  accent="brume"
+>
+  <h2 id="en-bref">En bref</h2>
+  <p>
+    Un brief de fin de cycle, un client fictif mais traité comme un vrai.
+    Concevoir une marketplace P2P pour la location d'espaces aquatiques privés
+    (piscines, jacuzzis, spas, hammams) entre particuliers. Du cadrage
+    stratégique jusqu'à la maquette livrable, en passant par la direction
+    artistique et la stratégie de communication.
+  </p>
+  <p class="font-display italic text-voile">
+    Projet mené en autonomie. Institut IEF2I, MBA Chef de projet digital. Six
+    mois.
+  </p>
+
+  <figure>
+    <img src="/images/poolparty-page-daccueil-maquette-page-daccueil-ordinateur.jpg" alt="Maquette de la page d'accueil de Pool Party (desktop)" loading="lazy" />
+    <figcaption>Aperçu de la marketplace. Maquette Figma haute fidélité.</figcaption>
+  </figure>
+
+  <h2 id="contexte">Contexte</h2>
+  <p>
+    L'usage des piscines privées a explosé après 2020. Côté propriétaires,
+    l'entretien d'un bassin coûte cher pour quelques semaines d'utilisation
+    réelle. Côté demande, les familles cherchent des espaces aquatiques privés,
+    à la journée, sans s'engager dans un abonnement. La rencontre des deux
+    restait peu structurée, dispersée entre quelques plateformes encore peu
+    connues du grand public. C'est de là qu'est partie Pool Party.
+  </p>
+  <p>
+    Le brief demandait un livrable complet, du cahier des charges à la maquette
+    du site, traité comme un dossier client.
+  </p>
+
+  <h2 id="mon-role">Mon rôle</h2>
+  <p>
+    Cheffe de projet sur la totalité du périmètre. Cadrage, recherche
+    utilisateur, architecture de l'information, direction artistique, conception
+    des écrans, planification budgétaire. J'ai porté chaque phase de bout en
+    bout.
+  </p>
+
+  <h2 id="ce-que-jai-fait">Ce que j'ai fait</h2>
+
+  <h3>Le cadrage stratégique</h3>
+  <p>
+    Veille concurrentielle sur les marketplaces P2P, audit SEO et accessibilité
+    des concurrents, construction de trois personas, matrice MoSCoW pour
+    prioriser les fonctionnalités. C'est ce travail qui a posé les fondations du
+    reste.
+  </p>
+
+  <h3>L'architecture et le parcours utilisateur</h3>
+  <p>
+    Tri de cartes sur Optimal Workshop pour valider l'arborescence avec des
+    utilisateurs réels. Schémas de parcours pour les deux côtés de la
+    marketplace : le loueur qui publie son bassin, le visiteur qui réserve.
+    Hiérarchie de l'information pensée mobile-first.
+  </p>
+
+  <div class="my-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <img src="/images/poolparty-wireframe-page-daccueil-ordinateur.png" alt="Wireframe de la page d'accueil (desktop)" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-page-contact-wireframe-tablette.png" alt="Wireframe de la page contact (tablette)" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+  </div>
+
+  <h3>La direction artistique</h3>
+  <p>
+    Univers visuel inspiré de l'Art Nouveau et du design organique, en réponse
+    au sujet : l'eau, les formes douces, les courbes. Palette identitaire
+    travaillée, association typographique Cormorant Garamond pour les titres,
+    Inter et Poppins pour le corps. Iconographie sur-mesure.
+  </p>
+
+  <div class="my-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <img src="/images/poolparty-moodboard.png" alt="Moodboard de Pool Party" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-chartre-graphique.png" alt="Charte graphique de Pool Party" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-concept-4-1.png" alt="Recherche de concept visuel" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-enseigne.png" alt="Déclinaison enseigne" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-sac-logo.png" alt="Déclinaison sac" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-serviette.png" alt="Déclinaison serviette" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-carte-de-visite.png" alt="Carte de visite Pool Party" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+  </div>
+
+  <h3>Les maquettes</h3>
+  <p>
+    Système de design complet sur Figma, écrans haute fidélité pour les huit
+    pages principales du site, déclinaisons responsive desktop et mobile.
+  </p>
+
+  <div class="my-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <img src="/images/poolparty-page-daccueil-maquette-tablette.png" alt="Page d'accueil — tablette" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-page-daccueil-maquette-mobile.png" alt="Page d'accueil — mobile" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-page-ctegorie-maquette-page-produit.png" alt="Page catégorie — desktop" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-page-ctegorie-maquette-mobile.png" alt="Page catégorie — mobile" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-page-produit-maquette-page-produit.png" alt="Page produit — desktop" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-maquette-page-produit-map.png" alt="Page produit avec carte" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-page-produit-mobile.png" alt="Page produit — mobile" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-page-contact-maquette-mobile.png" alt="Page contact — mobile" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-login.png" alt="Écran de connexion" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-calendar.png" alt="Sélecteur de calendrier de réservation" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+  </div>
+
+  <h3>La stratégie de communication</h3>
+  <p>
+    Plan d'action sur douze mois couvrant SEO, SEA, SMO, emailing et CRM, avec
+    KPI associés. Trois scénarios budgétaires pour adapter la stratégie au budget
+    réel du client.
+  </p>
+
+  <h2 id="difficile">Ce qui a été dur</h2>
+  <p>
+    Tenir le cap sur la durée. Un projet de six mois mené seule, c'est un
+    exercice d'endurance autant que de design. Il y a des moments où on doute,
+    où on a envie de tout réécrire, où il faut accepter qu'une décision prise il
+    y a un mois n'est plus valable et qu'il faut itérer.
+  </p>
+  <p>
+    L'autre difficulté, c'était de jongler entre des registres très différents.
+    Passer d'un budget à une palette de couleurs, d'une matrice de pilotage à un
+    mockup haute fidélité, d'une étude SEO à un picto vectoriel. Ce sont des
+    modes de pensée différents et il faut apprendre à les enchaîner sans rupture.
+  </p>
+
+  <h2 id="retiens">Ce que j'en retiens</h2>
+  <p>
+    Apprendre à porter un projet seule de A à Z, en sachant quand m'appuyer sur
+    mes propres ressources et quand chercher de l'aide à l'extérieur. Savoir
+    passer d'une réflexion stratégique à une décision design sans perdre la
+    cohérence du tout. Et accepter qu'un projet long demande autant de souplesse
+    que de méthode.
+  </p>
+
+  <p class="citation">
+    La rigueur, c'est ce qui fait tenir un projet. La souplesse, c'est ce qui le
+    rend bon.
+  </p>
+
+  <div class="meta">
+    <p>
+      <strong>Outils</strong> : Figma (Dev Mode), VS Code, Optimal Workshop,
+      GanttProject, Notion, Google Analytics 4.
+    </p>
+    <p>
+      <strong>Méthodes</strong> : tri de cartes, personas, benchmark
+      concurrentiel, audit SEO et accessibilité, matrices de priorisation,
+      analyse des risques, planification, scénarios budgétaires.
+    </p>
+  </div>
+</CaseStudy>

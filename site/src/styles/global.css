@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------
+   Thème — palette et typographies du portfolio
+   Les noms de couleurs deviennent des classes utilitaires Tailwind
+   (ex: bg-ivoire, text-encre, border-voile)
+--------------------------------------------------------------- */
+@theme {
+  --color-ivoire: #f8f5ef;
+  --color-encre: #1a1a1f;
+  --color-voile: #8a847a;
+  --color-rose: #ecd5cd;
+  --color-bordeaux: #7b1e2b;
+  --color-brume: #c9d1d6;
+  --color-sauge: #c5cfb8;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Manrope", system-ui, sans-serif;
+}
+
+/* ---------------------------------------------------------------
+   Base
+--------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  /* Décale les ancres pour ne pas passer sous une éventuelle barre */
+  scroll-padding-top: 6rem;
+}
+
+body {
+  background-color: var(--color-ivoire);
+  color: var(--color-encre);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: var(--color-bordeaux);
+  color: var(--color-ivoire);
+}
+
+/* Focus clavier visible et discret */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-encre);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* ---------------------------------------------------------------
+   Arrivée — fade-in léger (nom, puis photo)
+--------------------------------------------------------------- */
+@keyframes lever {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lever {
+  opacity: 0;
+  animation: lever 0.9s ease forwards;
+}
+
+.lever-1 { animation-delay: 0.1s; }
+.lever-2 { animation-delay: 0.5s; }
+.lever-3 { animation-delay: 0.9s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .lever {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+}

@@ -1,0 +1,117 @@
+---
+import CaseStudy from "../../layouts/CaseStudy.astro";
+
+const sections = [
+  { id: "en-bref", label: "En bref" },
+  { id: "lidee", label: "L'idée" },
+  { id: "produit", label: "Ce que j'ai produit" },
+  { id: "retiens", label: "Ce que j'en retiens" },
+];
+---
+
+<CaseStudy
+  title="Pool & Splash"
+  kicker="Refonte UI, direction kidculting"
+  didascalie="Refonte UI d'un site de vente de piscines."
+  sections={sections}
+  accent="rose"
+>
+  <h2 id="en-bref">En bref</h2>
+  <p>
+    Reprendre un site de vente de piscines qui ressemblait à un catalogue froid
+    et daté, et le transformer en une expérience qui fait rêver. Le parti pris :
+    assumer un ton décalé, joyeux, presque enfantin, là où tous les concurrents
+    jouent le sérieux. L'été, l'insouciance, le plaisir de plonger.
+  </p>
+  <p class="font-display italic text-voile">
+    Projet de cours UI Design. Master Chef de projet digital, F2i DSP. Une
+    semaine, en sprint.
+  </p>
+
+  <figure>
+    <img src="/images/homepage-1.png" alt="Page d'accueil redessinée de Pool & Splash" loading="lazy" />
+    <figcaption>Home redessinée. Univers turquoise, cartes flottantes, mascotte.</figcaption>
+  </figure>
+
+  <h2 id="lidee">L'idée</h2>
+  <p>
+    Tous les sites de piscines se ressemblent. Du bleu, des photos de bassins, un
+    ton commercial et lisse. Personne ne raconte l'émotion réelle d'une piscine :
+    les étés d'enfance, les apéros au bord de l'eau, le jardin qui devient un lieu
+    de vie. J'ai voulu prendre le contre-pied total.
+  </p>
+  <p>
+    La direction artistique part du kidculting, cette esthétique qui réinjecte de
+    l'enfance et du jeu dans le design adulte. Des couleurs acidulées, une
+    typographie ronde et bulleuse, et une mascotte improbable : une poule en
+    bouée, qui devient le fil rouge de la marque. Le sérieux n'a pas sa place ici,
+    et c'est exactement le but.
+  </p>
+
+  <h2 id="produit">Ce que j'ai produit</h2>
+
+  <h3>La home redessinée</h3>
+  <p>
+    Un univers turquoise et lumineux, un titre qui parle aux familles plutôt
+    qu'aux acheteurs, des photos de piscines mises en scène en cartes flottantes,
+    et la mascotte qui accueille le visiteur. On passe d'un catalogue à une
+    invitation.
+  </p>
+
+  <h3>Un carrousel Instagram</h3>
+  <p>
+    Huit slides pensés comme une vraie accroche social media. Un ton complice, des
+    punchlines, une montée jusqu'au call to action. « T'as besoin d'une piscine ?
+    Splash répond en 6 questions. » Le genre de contenu qu'on a envie de swiper
+    jusqu'au bout.
+  </p>
+
+  <figure>
+    <img src="/images/carrousel.png" alt="Carrousel Instagram Pool & Splash" loading="lazy" />
+    <figcaption>Carrousel social media, huit slides pensés comme une accroche.</figcaption>
+  </figure>
+
+  <h3>L'identité visuelle</h3>
+  <p>
+    Palette acidulée, typographie Poppins, mascotte, éléments graphiques. Un
+    système cohérent qui tient du premier écran jusqu'au dernier slide.
+  </p>
+
+  <div class="my-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <img src="/images/logo.png" alt="Logo Pool & Splash" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/logo-1.png" alt="Déclinaison du logo Pool & Splash" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/logo5.png" alt="Déclinaison du logo Pool & Splash" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/logo6.png" alt="Déclinaison du logo Pool & Splash" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/page-22.png" alt="Premiers tests de logo" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/page-13.png" alt="Typographie de la marque" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/page-10.png" alt="Palette — couleurs neutres" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/page-11.png" alt="Palette — couleurs primaires" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/page-12.png" alt="Palette — couleurs d'accents" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/page-6.png" alt="Moodboard kidculting" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/page-2.png" alt="Maquette Pool & Splash" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/page-24.png" alt="Déclinaison Pool & Splash" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/page-25.png" alt="Déclinaison Pool & Splash" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/page-30.png" alt="Déclinaison Pool & Splash" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/page-31.png" alt="Déclinaison Pool & Splash" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/page-32.png" alt="Déclinaison Pool & Splash" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/page-34.png" alt="Déclinaison Pool & Splash" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+  </div>
+
+  <h2 id="retiens">Ce que j'en retiens</h2>
+  <p>
+    Une semaine, des nuits courtes, et le pari d'oser un ton que personne n'ose
+    dans ce secteur. C'est ce projet qui m'a montré qu'une direction artistique
+    forte se décide vite mais se tient longtemps. Une fois la poule choisie, une
+    fois le ton posé, tout le reste a découlé de là.
+  </p>
+  <p>
+    J'ai aussi appris qu'un site ne vend pas un produit, il vend une émotion. Le
+    jour où j'ai arrêté de montrer des piscines pour raconter des étés, le projet
+    a pris son sens.
+  </p>
+
+  <p class="citation">
+    Le bon ton, ce n'est pas le ton attendu. C'est celui qui fait sourire au bon
+    moment.
+  </p>
+</CaseStudy>

@@ -1,0 +1,20 @@
+Déposer ici les visuels du site.
+
+Portrait :
+  portrait.jpg  (ou .webp)
+  Puis ouvrir src/components/PhotoPlaceholder.astro et suivre la note en haut
+  du fichier pour le remplacer par la vraie image. Le placeholder est utilisé
+  sur la home (index.astro) et sur la page about.astro.
+
+Maquettes des projets :
+  pool-party.webp, sumo.webp, pool-splash.webp, etc.
+  Les emplacements "Maquette à venir" se trouvent dans :
+    - src/pages/works.astro          (vignettes de la saison)
+    - src/pages/works/*.astro        (figures dans chaque étude)
+  Remplacer le <div ... "Maquette à venir"> par :
+    <img src="/images/pool-party.webp" alt="..." class="w-full rounded-[2px]" />
+
+Esquisses (Golyeo, etc.) :
+  golyeo.webp, etc., référencés dans src/pages/works.astro section Esquisses.
+
+Formats conseillés : WebP (léger) ou PNG. Largeur 1200 à 1600 px suffit.

@@ -1,0 +1,158 @@
+---
+import Base from "../layouts/Base.astro";
+
+// Endpoint du formulaire Formspree (les messages arrivent sur product.garoscio@gmail.com).
+const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
+---
+
+<Base title="Contact — Audrey Garoscio" current="contact">
+  <section class="mx-auto max-w-3xl px-6 pt-16 sm:px-10 sm:pt-24">
+    <h1 class="font-display text-4xl font-semibold sm:text-5xl">Le guichet</h1>
+    <p class="mt-5 max-w-xl font-display text-lg italic leading-relaxed text-voile">
+      Disponible dès octobre 2026 pour rejoindre votre équipe. Si mon profil
+      résonne avec votre projet, écrivez-moi.
+    </p>
+
+    <div class="mt-12 space-y-6 border-t border-voile/20 pt-10">
+      <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-8">
+        <span class="font-display text-sm text-voile sm:w-32">Email</span>
+        <a
+          href="mailto:product.garoscio@gmail.com?subject=Contact%20depuis%20votre%20portfolio"
+          class="text-lg transition-colors hover:font-semibold"
+        >
+          product.garoscio@gmail.com
+        </a>
+      </div>
+
+      <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-8">
+        <span class="font-display text-sm text-voile sm:w-32">LinkedIn</span>
+        <a
+          href="https://www.linkedin.com/in/audrey-garoscio-3a4660106/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-lg transition-colors hover:font-semibold"
+        >
+          Audrey Garoscio
+        </a>
+      </div>
+
+      <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-8">
+        <span class="font-display text-sm text-voile sm:w-32">Où</span>
+        <span class="text-lg">Noisy-le-Grand, Île-de-France</span>
+      </div>
+    </div>
+
+    <!-- Formulaire de contact -->
+    <div class="mt-14 border-t border-voile/20 pt-10">
+      <h2 class="font-display text-2xl font-medium">Glissez-moi un mot</h2>
+
+      <form
+        id="contact-form"
+        action={formspreeEndpoint}
+        method="POST"
+        class="mt-8 space-y-6"
+      >
+        <!-- Anti-spam (champ invisible que les robots remplissent) -->
+        <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" />
+        <!-- Sujet de l'email reçu -->
+        <input type="hidden" name="_subject" value="Nouveau message depuis le portfolio" />
+
+        <div>
+          <label for="name" class="font-display text-sm uppercase tracking-[0.14em] text-voile">
+            Nom
+          </label>
+          <input
+            id="name"
+            type="text"
+            name="name"
+            required
+            class="mt-2 w-full rounded-lg border border-voile/30 bg-transparent px-4 py-3 text-base text-encre transition-colors focus:border-encre focus:outline-none"
+          />
+        </div>
+
+        <div>
+          <label for="email" class="font-display text-sm uppercase tracking-[0.14em] text-voile">
+            Email
+          </label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            required
+            class="mt-2 w-full rounded-lg border border-voile/30 bg-transparent px-4 py-3 text-base text-encre transition-colors focus:border-encre focus:outline-none"
+          />
+        </div>
+
+        <div>
+          <label for="message" class="font-display text-sm uppercase tracking-[0.14em] text-voile">
+            Message
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            required
+            class="mt-2 w-full rounded-lg border border-voile/30 bg-transparent px-4 py-3 text-base text-encre transition-colors focus:border-encre focus:outline-none"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="group inline-flex items-center gap-2 text-sm text-encre transition-colors hover:font-semibold"
+        >
+          <span class="underline decoration-bordeaux decoration-2 underline-offset-4">Envoyer le message</span>
+          <span class="transition-transform group-hover:translate-x-1">→</span>
+        </button>
+
+        <!-- Messages de retour -->
+        <p id="form-success" class="hidden text-sm text-encre">
+          Merci, votre message est bien parti. Je vous réponds très vite.
+        </p>
+        <p id="form-error" class="hidden text-sm text-bordeaux">
+          Oups, l'envoi a échoué. Réessayez, ou écrivez-moi directement à
+          product.garoscio@gmail.com.
+        </p>
+      </form>
+    </div>
+
+    <p class="mt-16 font-display text-xl italic leading-relaxed text-voile">
+      « Une idée en coulisses, un projet à mettre en scène ? Parlons-en. »
+    </p>
+  </section>
+
+  <script>
+    const form = document.getElementById("contact-form") as HTMLFormElement | null;
+    const success = document.getElementById("form-success");
+    const error = document.getElementById("form-error");
+
+    if (form && success && error) {
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        success.classList.add("hidden");
+        error.classList.add("hidden");
+
+        const button = form.querySelector("button[type='submit']") as HTMLButtonElement | null;
+        if (button) button.disabled = true;
+
+        try {
+          const response = await fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: { Accept: "application/json" },
+          });
+
+          if (response.ok) {
+            form.reset();
+            success.classList.remove("hidden");
+          } else {
+            error.classList.remove("hidden");
+          }
+        } catch {
+          error.classList.remove("hidden");
+        } finally {
+          if (button) button.disabled = false;
+        }
+      });
+    }
+  </script>
+</Base>

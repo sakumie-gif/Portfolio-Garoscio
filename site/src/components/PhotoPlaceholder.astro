@@ -1,0 +1,22 @@
+---
+// Emplacement réservé pour le portrait éditorial.
+// Quand la photo est prête:
+//   1. déposer le fichier dans /public/images/ (ex: portrait.jpg)
+//   2. remplacer tout ce composant par:
+//      <img src="/images/portrait.jpg" alt="Portrait d'Audrey Garoscio"
+//           class="w-full rounded-[2px] object-cover" />
+const { ratio = "aspect-[4/5]" } = Astro.props;
+---
+
+<div
+  class:list={[
+    "flex w-full items-center justify-center rounded-[2px] border border-dashed border-voile/40 bg-ivoire",
+    ratio,
+  ]}
+  role="img"
+  aria-label="Emplacement réservé pour le portrait, à venir"
+>
+  <span class="px-6 text-center font-display text-sm italic text-voile">
+    Portrait à venir
+  </span>
+</div>

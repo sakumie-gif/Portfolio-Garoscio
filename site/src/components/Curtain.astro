@@ -1,0 +1,136 @@
+---
+// Rideau d'ouverture, un seul pan ancré à droite.
+// Image : /public/images/rideau.png (rideau de velours blanc plein cadre).
+// Le pan se rétracte vers la droite. Texte calé à droite.
+---
+
+<div id="curtain" class="curtain" role="presentation" aria-hidden="true">
+  <div class="curtain-panel"></div>
+  <p class="curtain-text">
+    <em>Garoscio production présente…</em>
+  </p>
+</div>
+
+<style>
+  .curtain {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  /* Un seul pan, qui couvre tout l'écran et qui se rétracte vers la droite */
+  .curtain-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    transform-origin: right center;
+    background-color: #f8f5ef;
+    /* Léger voile ivoire pour réchauffer l'image et l'accorder au site */
+    background-image: linear-gradient(
+        rgba(248, 245, 239, 0.32),
+        rgba(248, 245, 239, 0.32)
+      ),
+      url("/images/rideau.png");
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: cover;
+    transition: transform 2.4s cubic-bezier(0.7, 0, 0.25, 1);
+    will-change: transform;
+  }
+
+  /* Texte calé à droite, ton serif italique */
+  .curtain-text {
+    position: absolute;
+    top: 50%;
+    right: clamp(2rem, 8vw, 6rem);
+    transform: translateY(-50%);
+    margin: 0;
+    max-width: 22ch;
+    text-align: right;
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(1.35rem, 2.4vw, 2rem);
+    line-height: 1.3;
+    color: #1a1a1f;
+    opacity: 0;
+    z-index: 2;
+    text-shadow: 0 0 22px rgba(255, 255, 255, 0.85);
+  }
+  .curtain-text em { font-style: italic; font-weight: 500; }
+
+  /* Apparition du texte au chargement */
+  .curtain.is-ready .curtain-text { opacity: 1; }
+
+  /* Ouverture : on rétracte le pan vers la droite, le texte s'efface */
+  .curtain.is-open .curtain-text {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .curtain.is-open .curtain-panel {
+    transform: scaleX(0);
+  }
+
+  /* Une fois fini, on retire le rideau du chemin */
+  .curtain.is-done { display: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .curtain { display: none; }
+  }
+</style>
+
+<script>
+  const curtain = document.getElementById("curtain");
+
+  // On ne montre le rideau que 2 fois par session.
+  // En développement (npm run dev), la limite est désactivée pour faciliter les tests.
+  const MAX_PAR_SESSION = 2;
+  const enDev = import.meta.env.DEV;
+  const vues = Number(sessionStorage.getItem("curtain-vues") || "0");
+
+  if (curtain && !enDev && vues >= MAX_PAR_SESSION) {
+    // Quota atteint : on retire le rideau immédiatement.
+    curtain.remove();
+  } else if (curtain) {
+    if (!enDev) sessionStorage.setItem("curtain-vues", String(vues + 1));
+
+    // Durées (ms)
+    const TEMPS_AFFICHAGE = 1000; // combien de temps le rideau reste fermé
+    const DELAI_ANTI_CLIC = 1000; // on ignore les clics pendant ce délai
+    const DUREE_RETRACTION = 2500; // doit couvrir la transition CSS du pan
+
+    let opened = false;
+    const open = () => {
+      if (opened) return;
+      opened = true;
+      curtain.classList.add("is-open");
+      setTimeout(() => curtain.classList.add("is-done"), DUREE_RETRACTION);
+    };
+
+    // On démarre seulement quand l'image du rideau est prête (avec un
+    // garde-fou si elle tarde ou échoue), pour qu'on la voie vraiment.
+    let demarre = false;
+    const demarrer = () => {
+      if (demarre) return;
+      demarre = true;
+      requestAnimationFrame(() => curtain.classList.add("is-ready"));
+
+      // L'ouverture au clic n'est active qu'après un court délai, pour
+      // éviter qu'un clic involontaire ne ferme le rideau aussitôt.
+      setTimeout(() => curtain.addEventListener("click", open), DELAI_ANTI_CLIC);
+
+      // Auto-ouverture après le temps d'affichage.
+      setTimeout(open, TEMPS_AFFICHAGE);
+    };
+
+    const img = new Image();
+    img.onload = demarrer;
+    img.onerror = demarrer;
+    img.src = "/images/rideau.png";
+    // Si l'image est déjà en cache, onload peut ne pas se déclencher : on force.
+    if (img.complete) demarrer();
+  }
+</script>

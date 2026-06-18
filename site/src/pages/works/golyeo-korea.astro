@@ -1,0 +1,54 @@
+---
+import CaseStudy from "../../layouts/CaseStudy.astro";
+
+const logos = [
+  "/images/golyeo-logo-1.jpg",
+  "/images/golyeo-logo-3.jpg",
+  "/images/golyeo-logo-4.jpg",
+  "/images/golyeo-logo-5.jpg",
+  "/images/golyeo-logo-2.jpg",
+];
+---
+
+<CaseStudy
+  title="Golyeo Korea"
+  kicker="Esquisse — identité visuelle"
+  didascalie="Exploration d'identité pour un restaurant coréen traditionnel."
+  accent="rose"
+>
+  <h2>L'exploration</h2>
+  <p>
+    Recherche d'identité visuelle pour Golyeo Korea, un restaurant coréen
+    traditionnel. L'objectif : trouver un univers qui raconte à la fois
+    l'authenticité de la cuisine et une certaine douceur, sans tomber dans le
+    cliché.
+  </p>
+  <p>
+    Deux directions explorées : l'une mignonne et pastel, inspirée du design
+    kawaii coréen ; l'autre plus traditionnelle et sobre. Le travail a couvert le
+    logo, la palette et la carte de visite.
+  </p>
+
+  <figure>
+    <img src="/images/golyeo-photo.jpg" alt="Mise en situation de l'identité Golyeo Korea" loading="lazy" />
+    <figcaption>Mise en situation de l'univers Golyeo Korea.</figcaption>
+  </figure>
+
+  <h2>Les pistes de logo</h2>
+  <div class="my-10 grid grid-cols-2 gap-4 sm:grid-cols-3">
+    {logos.map((src) => (
+      <img src={src} alt="Piste de logo Golyeo Korea" loading="lazy" class="w-full rounded-[2px]" />
+    ))}
+  </div>
+
+  <h2>La carte de visite</h2>
+  <figure>
+    <img
+      src="/images/golyeo-carte.png"
+      alt="Carte de visite Golyeo Korea"
+      loading="lazy"
+      class="mx-auto max-w-[260px]"
+    />
+    <figcaption>Carte de visite, direction traditionnelle.</figcaption>
+  </figure>
+</CaseStudy>

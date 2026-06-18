@@ -1,0 +1,205 @@
+---
+import Base from "../layouts/Base.astro";
+
+// Les six pointes du radar et leur valeur (de 0 à 100).
+// Ajuste les valeurs si tu veux pondérer différemment.
+const radar = [
+  { label: "Conception UX/UI", value: 88 },
+  { label: "Direction artistique", value: 92 },
+  { label: "Mise en scène, narration", value: 95 },
+  { label: "Rythme et lisibilité", value: 90 },
+  { label: "Gestion de projet", value: 85 },
+  { label: "Sens du service", value: 95 },
+];
+
+// Calcul des points de l'hexagone pour le SVG
+const cx = 200;
+const cy = 200;
+const radius = 140;
+const angle = (i) => (Math.PI * 2 * i) / radar.length - Math.PI / 2;
+
+const axisPoints = radar.map((_, i) => ({
+  x: cx + radius * Math.cos(angle(i)),
+  y: cy + radius * Math.sin(angle(i)),
+}));
+
+const dataPoints = radar.map((c, i) => ({
+  x: cx + radius * (c.value / 100) * Math.cos(angle(i)),
+  y: cy + radius * (c.value / 100) * Math.sin(angle(i)),
+}));
+
+const polygon = (pts) => pts.map((p) => `${p.x},${p.y}`).join(" ");
+
+const labelPoints = radar.map((c, i) => {
+  const r = radius + 28;
+  const x = cx + r * Math.cos(angle(i));
+  const y = cy + r * Math.sin(angle(i));
+  // alignement horizontal selon la position
+  let anchor = "middle";
+  if (x < cx - 10) anchor = "end";
+  else if (x > cx + 10) anchor = "start";
+  return { x, y, anchor, label: c.label };
+});
+---
+
+<Base title="About — Audrey Garoscio" current="about">
+  <section class="mx-auto max-w-5xl px-6 pt-10 sm:px-10 sm:pt-16">
+    <!-- En-tête : titre + tagline -->
+    <header class="max-w-2xl border-b border-voile/20 pb-10">
+      <p class="text-sm uppercase tracking-[0.18em] text-voile">Les coulisses</p>
+      <h1 class="mt-3 font-display text-4xl font-semibold leading-tight sm:text-5xl">
+        Audrey Garoscio, Product Designer
+      </h1>
+      <p class="mt-5 font-display text-lg italic leading-relaxed text-voile">
+        À la croisée du produit et de la scène.
+      </p>
+    </header>
+
+    <!-- Fiche identité + portrait -->
+    <div class="mt-12 grid grid-cols-1 gap-12 md:grid-cols-[1fr_300px] md:gap-16">
+      <div>
+        <ul class="space-y-4 text-base">
+          <li class="flex items-baseline gap-4">
+            <span class="font-display text-sm uppercase tracking-[0.14em] text-voile shrink-0 sm:w-28">Profil</span>
+            <span>Audrey Garoscio, 36 ans</span>
+          </li>
+          <li class="flex items-baseline gap-4">
+            <span class="font-display text-sm uppercase tracking-[0.14em] text-voile shrink-0 sm:w-28">Vit à</span>
+            <span>Noisy-le-Grand, Île-de-France</span>
+          </li>
+          <li class="flex items-baseline gap-4">
+            <span class="font-display text-sm uppercase tracking-[0.14em] text-voile shrink-0 sm:w-28">Aime</span>
+            <span>le théâtre, le DIY, les reconstitutions historiques, les jeux de société, fouiner le net à la recherche d'inspiration</span>
+          </li>
+        </ul>
+
+        <!-- Bloc accroche 1 -->
+        <div class="mt-12 max-w-[60ch]">
+          <h2 class="font-display text-2xl font-medium">
+            Le produit comme un spectacle
+          </h2>
+          <p class="mt-4 text-base leading-relaxed">
+            Je conçois des interfaces avec les réflexes du plateau. Une attention
+            au rythme, à la lisibilité, à ce qu'on donne à voir en premier et à
+            ce qu'on garde en réserve. Mon parcours hybride, costume à
+            Disneyland Paris, vente chez Pronuptia, gestion administrative à
+            l'URSSAF, m'a appris une chose qui me sert tous les jours : un bon
+            produit, comme une bonne mise en scène, sert d'abord la personne qui
+            le regarde.
+          </p>
+        </div>
+
+        <!-- Bloc accroche 2 -->
+        <div class="mt-10 max-w-[60ch]">
+          <h2 class="font-display text-2xl font-medium">
+            Un parcours qui passe d'un registre à l'autre
+          </h2>
+          <p class="mt-4 text-base leading-relaxed">
+            Aujourd'hui Product Designer en alternance chez EasyVista, en MBA1
+            Marketing, Communication et Design digital à la Digital School Paris
+            (IEF2I). Je passe du
+            stratégique au visuel, de la matrice à la maquette, sans rupture.
+            Ce qui m'intéresse au fond, c'est la rencontre entre une exigence
+            d'usage et une vraie présence de marque.
+          </p>
+        </div>
+
+        <div class="mt-12 max-w-[60ch] border-t border-voile/20 pt-8">
+          <h2 class="font-display text-base font-semibold uppercase tracking-[0.14em] text-voile">
+            Une note sur ce portfolio
+          </h2>
+          <p class="mt-4 text-base leading-relaxed">
+            Ce site a été conçu en moins de 24 heures, avec Claude comme copilote de code. Le positionnement, la direction artistique, l'architecture des pages, les contenus et les décisions de design sont les miens. La mise en code a été déléguée à l'IA, pour privilégier la rapidité d'exécution.
+          </p>
+          <p class="mt-3 text-base leading-relaxed">
+            Ce que vous voyez ici, c'est mon œil, mes choix, et ma façon de tenir un projet sous contrainte de temps. Pour aller plus loin, mes maquettes Figma et mes recherches sont disponibles sur demande.
+          </p>
+        </div>
+
+        <p class="mt-10 text-sm text-voile">
+          Disponible dès octobre 2026 pour rejoindre votre équipe. Si mon profil
+          résonne avec votre projet,
+          <a href="/contact" class="text-encre underline decoration-bordeaux decoration-2 underline-offset-4">
+            parlons-en.
+          </a>
+        </p>
+      </div>
+
+      <div class="mx-auto w-full max-w-[280px] md:max-w-none">
+        <img
+          src="/images/about.jpg"
+          alt="Portrait d'Audrey Garoscio"
+          width="599"
+          height="900"
+          class="w-full rounded-[2px] object-cover"
+        />
+      </div>
+    </div>
+
+    <!-- Radar des compétences -->
+    <div class="mt-20 border-t border-voile/20 pt-12">
+      <h2 class="font-display text-3xl font-semibold">Le plateau</h2>
+      <p class="mt-3 max-w-xl font-display text-lg italic leading-relaxed text-voile">
+        Les rôles que je sais tenir, et l'équilibre entre eux.
+      </p>
+
+      <div class="mt-10 flex justify-center">
+        <svg
+          viewBox="-160 -20 720 440"
+          class="h-auto w-full max-w-[640px]"
+          role="img"
+          aria-label="Carte radar des compétences"
+        >
+          <!-- Anneaux de fond -->
+          {[0.25, 0.5, 0.75, 1].map((r) => (
+            <polygon
+              points={polygon(axisPoints.map((p) => ({
+                x: cx + (p.x - cx) * r,
+                y: cy + (p.y - cy) * r,
+              })))}
+              fill="none"
+              stroke="#8a847a"
+              stroke-opacity="0.18"
+              stroke-width="1"
+            />
+          ))}
+
+          <!-- Axes -->
+          {axisPoints.map((p) => (
+            <line x1={cx} y1={cy} x2={p.x} y2={p.y} stroke="#8a847a" stroke-opacity="0.18" stroke-width="1" />
+          ))}
+
+          <!-- Aire des compétences -->
+          <polygon
+            points={polygon(dataPoints)}
+            fill="#ecd5cd"
+            fill-opacity="0.55"
+            stroke="#1a1a1f"
+            stroke-width="1.5"
+            stroke-linejoin="round"
+          />
+
+          <!-- Points sur chaque sommet -->
+          {dataPoints.map((p) => (
+            <circle cx={p.x} cy={p.y} r="3.5" fill="#1a1a1f" />
+          ))}
+
+          <!-- Étiquettes -->
+          {labelPoints.map((l) => (
+            <text
+              x={l.x}
+              y={l.y}
+              text-anchor={l.anchor}
+              dominant-baseline="middle"
+              font-family="Manrope, sans-serif"
+              font-size="13"
+              fill="#1a1a1f"
+            >
+              {l.label}
+            </text>
+          ))}
+        </svg>
+      </div>
+    </div>
+  </section>
+</Base>

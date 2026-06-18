@@ -1,0 +1,98 @@
+---
+import Base from "../layouts/Base.astro";
+import Curtain from "../components/Curtain.astro";
+
+const saison = [
+  {
+    href: "/works/pool-party",
+    titre: "Pool Party",
+    note: "Marketplace de location de piscines entre particuliers.",
+  },
+  {
+    href: "/works/sumo-tournament",
+    titre: "Sumo Tournament",
+    note: "Site événementiel pour un tournoi de sumo fictif.",
+  },
+  {
+    href: "/works/pool-and-splash",
+    titre: "Pool & Splash",
+    note: "Refonte UI d'un site de vente de piscines.",
+  },
+];
+---
+
+<Base current="">
+  <Curtain />
+  <section class="mx-auto max-w-5xl px-6 pb-10 pt-8 sm:px-10 sm:pt-16">
+    <div class="grid grid-cols-1 items-center gap-12 md:grid-cols-[1fr_360px] md:gap-16">
+      <!-- Affiche -->
+      <div>
+        <p class="lever lever-1 text-sm uppercase tracking-[0.18em] text-voile">
+          Portfolio, saison 2026
+        </p>
+        <h1 class="lever lever-1 mt-5 font-display text-5xl font-semibold leading-[1.05] sm:text-6xl">
+          Audrey<br />Garoscio<span class="text-bordeaux">.</span>
+        </h1>
+        <p class="lever lever-2 mt-6 max-w-md font-display text-xl italic leading-relaxed text-voile">
+          Product Designer, à la croisée du produit et de la scène.
+        </p>
+        <p class="lever lever-2 mt-6 max-w-md text-base leading-relaxed">
+          Je conçois des interfaces comme on monte un spectacle. Une attention
+          au rythme, au détail et à ce que l'on donne à voir en premier.
+        </p>
+
+        <div class="lever lever-2 mt-8">
+          <a
+            href="/about"
+            class="group inline-flex items-center gap-2 text-sm text-encre transition-colors hover:font-semibold"
+          >
+            <span class="underline decoration-bordeaux decoration-2 underline-offset-4">Mieux me connaître</span>
+            <span class="transition-transform group-hover:translate-x-1">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Portrait -->
+      <div class="lever lever-3 mx-auto w-full max-w-[320px] md:max-w-none">
+        <img
+          src="/images/portrait.jpeg"
+          alt="Portrait d'Audrey Garoscio"
+          width="1104"
+          height="1472"
+          class="w-full rounded-[2px] object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Teasers vers la saison -->
+  <section class="mx-auto max-w-5xl px-6 pb-8 pt-12 sm:px-10 sm:pt-20">
+    <div class="flex items-baseline justify-between border-b border-voile/20 pb-4">
+      <h2 class="font-display text-2xl font-medium">La saison</h2>
+      <a href="/works" class="text-sm text-voile transition-colors hover:font-semibold hover:text-encre">
+        Tout voir →
+      </a>
+    </div>
+
+    <ul>
+      {
+        saison.map((p, i) => (
+          <li class="border-b border-voile/15 transition-colors hover:border-voile/40">
+            <a
+              href={p.href}
+              class="group -mx-4 flex flex-col gap-1 rounded-lg px-4 py-6 transition-colors hover:bg-encre/[0.04] sm:flex-row sm:items-baseline sm:gap-8"
+            >
+              <span class="font-display text-sm text-voile sm:w-8">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span class="font-display text-2xl font-medium sm:w-64">
+                {p.titre}
+              </span>
+              <span class="text-base text-voile transition-colors group-hover:text-encre">{p.note}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>

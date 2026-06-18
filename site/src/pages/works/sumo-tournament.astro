@@ -1,0 +1,102 @@
+---
+import CaseStudy from "../../layouts/CaseStudy.astro";
+
+const sections = [
+  { id: "en-bref", label: "En bref" },
+  { id: "le-sujet", label: "Le sujet" },
+  { id: "ce-que-jai-fait", label: "Ce que j'ai fait" },
+  { id: "difficile", label: "Ce qui a été dur" },
+  { id: "retiens", label: "Ce que j'en retiens" },
+];
+---
+
+<CaseStudy
+  title="Sumo Tournament"
+  kicker="Événementiel, design et code"
+  didascalie="Site événementiel pour un tournoi de sumo fictif. Paris."
+  sections={sections}
+  accent="sauge"
+>
+  <h2 id="en-bref">En bref</h2>
+  <p>
+    Concevoir et développer un site complet pour un tournoi de sumo imaginaire à
+    Paris. Pas seulement une vitrine : une vraie plateforme avec billetterie et
+    un back-office pour gérer les données du tournoi, les lutteurs, les combats,
+    les réservations. Le projet où le design rencontre le code pour de vrai.
+  </p>
+  <p class="font-display italic text-voile">
+    Projet de formation. Conception et mise en production de bout en bout. Une
+    semaine, en sprint intense.
+  </p>
+
+  <figure>
+    <img src="/images/sumo-home.png" alt="Page d'accueil du site Sumo Tournament" loading="lazy" />
+    <figcaption>Page d'accueil du tournoi. Interface contemporaine sur un univers codifié.</figcaption>
+  </figure>
+
+  <h2 id="le-sujet">Le sujet</h2>
+  <p>
+    Le sumo est un univers d'une richesse visuelle rare. Des siècles de codes,
+    de rituels, de symboles. Le défi était de traduire cette culture forte et
+    très codifiée dans une interface web contemporaine, sans la trahir et sans
+    tomber dans le cliché. Trouver le point où le respect de l'univers rencontre
+    la clarté d'une interface moderne.
+  </p>
+
+  <h2 id="ce-que-jai-fait">Ce que j'ai fait</h2>
+
+  <h3>La conception</h3>
+  <p>
+    Arborescence du site, wireframes des pages principales, design des
+    composants. C'est le cœur de mon travail et là où j'étais pleinement à la
+    manœuvre.
+  </p>
+
+  <h3>La mise en production</h3>
+  <p>
+    Pour donner vie au projet, j'ai porté l'intégration front (HTML, CSS) et la
+    partie dynamique (PHP, base MySQL) en m'appuyant sur l'IA comme copilote de
+    code. Mon rôle n'était pas d'écrire chaque ligne en experte, mais de piloter
+    la construction : comprendre l'architecture, formuler les bonnes demandes,
+    intégrer, tester, déboguer jusqu'à ce que le site fonctionne vraiment.
+  </p>
+
+  <div class="my-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <img src="/images/sumo-header.png" alt="En-tête du site Sumo Tournament" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/sumo-event.png" alt="Page événement du tournoi" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/sumo-history.png" alt="Page histoire du sumo" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/sumo-contact.png" alt="Page contact du site" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/sumo-test-card.png" alt="Carte d'événement (test card)" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+  </div>
+
+  <h2 id="difficile">Ce qui a été dur</h2>
+  <p>
+    Faire fonctionner le site pour de vrai. Comprendre pourquoi une page ne
+    s'affichait pas comme prévu, pourquoi une donnée ne remontait pas, et
+    corriger jusqu'à ce que tout réponde. C'est une autre forme de rigueur que le
+    design, plus binaire. Soit ça marche, soit ça ne marche pas, et il faut
+    comprendre pourquoi.
+  </p>
+
+  <h2 id="retiens">Ce que j'en retiens</h2>
+  <p>
+    Le moment où le site a pris vie, quand les pages sont devenues dynamiques et
+    que mes maquettes sont passées de l'image à l'outil qui répond.
+  </p>
+  <p>
+    Mais surtout, ce projet m'a appris à produire avec l'IA sans me laisser
+    dépasser par elle. Savoir ce que je veux, le formuler clairement, vérifier ce
+    qui revient, corriger. C'est une compétence de chef de projet autant que de
+    designer : obtenir un résultat juste en orchestrant les bons outils, sans
+    avoir besoin de tout maîtriser soi-même.
+  </p>
+
+  <p class="citation">
+    Concevoir, c'est savoir ce qu'on veut obtenir. Même quand ce sont d'autres
+    outils qui exécutent.
+  </p>
+
+  <div class="meta">
+    <p><strong>Outils</strong> : Figma, VS Code, HTML, CSS, PHP, MySQL.</p>
+  </div>
+</CaseStudy>

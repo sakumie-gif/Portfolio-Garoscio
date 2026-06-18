@@ -1,0 +1,151 @@
+---
+import Base from "../layouts/Base.astro";
+
+const saison = [
+  {
+    href: "/works/pool-party",
+    titre: "Pool Party",
+    sous: "Marketplace P2P de location de piscines",
+    didascalie:
+      "Du cadrage stratégique à la maquette livrable. Six mois, en autonomie.",
+    accent: "border-l-brume",
+    image: "/images/poolparty-wireframe-page-daccueil-ordinateur.png",
+  },
+  {
+    href: "/works/sumo-tournament",
+    titre: "Sumo Tournament",
+    sous: "Site événementiel et back-office",
+    didascalie:
+      "Le projet où le design rencontre le code pour de vrai. Conception et mise en production.",
+    accent: "border-l-sauge",
+    image: "/images/sumo-home.png",
+  },
+  {
+    href: "/works/pool-and-splash",
+    titre: "Pool & Splash",
+    sous: "Refonte UI, direction kidculting",
+    didascalie:
+      "Oser un ton joyeux là où tout le secteur joue le sérieux.",
+    accent: "border-l-rose",
+    image: "/images/homepage.png",
+  },
+];
+
+const esquisses = [
+  {
+    href: "/works/golyeo-korea",
+    titre: "Golyeo Korea",
+    note:
+      "Exploration d'identité pour un restaurant coréen. Deux directions : une mignonne et pastel inspirée du design kawaii coréen, une plus traditionnelle et sobre. Recherche de logo, palette, carte de visite.",
+    cover: "/images/golyeo-logo-1.jpg",
+  },
+];
+---
+
+<Base title="Works — Audrey Garoscio" current="works">
+  <!-- LA SAISON -->
+  <section class="mx-auto max-w-5xl px-6 pt-10 sm:px-10 sm:pt-16">
+    <header class="max-w-xl">
+      <h1 class="font-display text-4xl font-semibold sm:text-5xl">La saison</h1>
+      <p class="mt-4 font-display text-lg italic leading-relaxed text-voile">
+        Trois projets menés de bout en bout. Chacun avec son sujet, son rythme,
+        ses contraintes.
+      </p>
+    </header>
+
+    <div class="mt-12 space-y-6">
+      {
+        saison.map((p, i) => (
+          <a
+            href={p.href}
+            class:list={[
+              "group block border-l-2 bg-ivoire py-8 pl-8 pr-6 transition-colors hover:bg-encre/[0.03]",
+              p.accent,
+            ]}
+          >
+            <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+              <div class="max-w-xl">
+                <p class="font-display text-sm text-voile">
+                  {String(i + 1).padStart(2, "0")}
+                </p>
+                <h2 class="mt-2 font-display text-3xl font-semibold leading-tight sm:text-4xl">
+                  {p.titre}
+                </h2>
+                <p class="mt-2 text-base text-voile">{p.sous}</p>
+                <p class="mt-4 font-display italic leading-relaxed text-voile">
+                  {p.didascalie}
+                </p>
+                <span class="mt-5 inline-block text-sm text-encre">
+                  Lire l'étude <span class="transition-transform group-hover:translate-x-1 inline-block">→</span>
+                </span>
+              </div>
+
+              {p.image ? (
+                <img
+                  src={p.image}
+                  alt={`Aperçu du projet ${p.titre}`}
+                  class="aspect-[16/10] w-full shrink-0 rounded-[2px] object-contain lg:w-72"
+                />
+              ) : (
+                <div class="aspect-[16/10] w-full shrink-0 rounded-[2px] border border-dashed border-voile/40 lg:w-72">
+                  <div class="flex h-full items-center justify-center px-4 text-center font-display text-sm italic text-voile">
+                    Maquette à venir
+                  </div>
+                </div>
+              )}
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- ESQUISSES -->
+  <section class="mx-auto max-w-5xl px-6 pt-20 sm:px-10 sm:pt-28">
+    <header class="max-w-xl border-t border-voile/20 pt-12">
+      <h2 class="font-display text-3xl font-semibold">Esquisses</h2>
+      <p class="mt-4 font-display text-lg italic leading-relaxed text-voile">
+        Explorations plus libres. Identités, pistes graphiques, projets en
+        recherche.
+      </p>
+    </header>
+
+    <div class="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
+      {
+        esquisses.map((e) =>
+          e.href ? (
+            <a href={e.href} class="group block border border-voile/20 p-6 transition-colors hover:bg-encre/[0.03]">
+              <img
+                src={e.cover}
+                alt={`Aperçu de l'esquisse ${e.titre}`}
+                class="aspect-[4/3] w-full rounded-[2px] object-contain"
+              />
+              <h3 class="mt-5 font-display text-xl font-medium">{e.titre}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-voile">{e.note}</p>
+              <span class="mt-4 inline-block text-sm text-encre">
+                Voir l'esquisse <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
+              </span>
+            </a>
+          ) : (
+            <article class="border border-voile/20 p-6">
+              <div class="aspect-[4/3] w-full rounded-[2px] border border-dashed border-voile/40">
+                <div class="flex h-full items-center justify-center px-4 text-center font-display text-sm italic text-voile">
+                  Visuel à venir
+                </div>
+              </div>
+              <h3 class="mt-5 font-display text-xl font-medium">{e.titre}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-voile">{e.note}</p>
+            </article>
+          )
+        )
+      }
+
+      {/* Emplacements libres pour d'autres esquisses */}
+      <article class="flex items-center justify-center border border-dashed border-voile/30 p-6">
+        <p class="text-center font-display text-sm italic text-voile">
+          Autres explorations à venir
+        </p>
+      </article>
+    </div>
+  </section>
+</Base>
