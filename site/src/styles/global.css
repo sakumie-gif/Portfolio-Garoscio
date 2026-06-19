@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Variante sombre pilotée par la classe .dark sur <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ---------------------------------------------------------------
    Thème — palette et typographies du portfolio
    Les noms de couleurs deviennent des classes utilitaires Tailwind
@@ -14,8 +17,38 @@
   --color-brume: #c9d1d6;
   --color-sauge: #c5cfb8;
 
+  /* Surface secondaire sombre (chips, élévations) — utilisée via dark: */
+  --color-surface: #11192a;
+
   --font-display: "Fraunces", Georgia, serif;
   --font-body: "Manrope", system-ui, sans-serif;
+}
+
+/* ---------------------------------------------------------------
+   Mode salle obscure — surcharge des tokens sous .dark
+   (le bordeaux, accent de marque, reste identique)
+--------------------------------------------------------------- */
+.dark {
+  --color-ivoire: #08111e; /* fond bleu nuit profond */
+  --color-encre: #f2ece0;  /* texte ivoire chaud */
+  --color-voile: #8b94a6;  /* secondaire / bordures, lisible sur nuit */
+}
+
+/* Sélection lisible en mode sombre : texte clair sur bordeaux */
+.dark ::selection {
+  color: var(--color-encre);
+}
+
+/* Bascule jour / nuit fluide. Instantanée si prefers-reduced-motion. */
+@media (prefers-reduced-motion: no-preference) {
+  *,
+  *::before,
+  *::after {
+    transition-property: background-color, border-color, color, fill, stroke,
+      text-decoration-color;
+    transition-duration: 250ms;
+    transition-timing-function: ease;
+  }
 }
 
 /* ---------------------------------------------------------------

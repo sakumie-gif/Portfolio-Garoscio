@@ -1,0 +1,223 @@
+---
+import Base from "../layouts/Base.astro";
+
+const experiences = [
+  {
+    dates: "Février 2025 à septembre 2026 (en cours, alternance)",
+    poste: "Product Designer UX/UI",
+    employeur: "EasyVista",
+    missions: [
+      "Analyse et formalisation des besoins utilisateurs pour identifier les points de friction dans les parcours agents, administrateurs et utilisateurs finaux.",
+      "Création de wireframes, maquettes haute fidélité et prototypes interactifs sur Figma pour des interfaces SaaS B2B.",
+      "Contribution au design system : composants Figma, styles, règles d'usage, cohérence graphique, accessibilité.",
+      "Préparation de la transmission aux développeurs : maquettes propres, comportements détaillés, spécifications fonctionnelles, suivi de l'implémentation.",
+      "Participation aux tests utilisateurs, recette UX/UI, contrôle du rendu responsive.",
+      "Collaboration avec PO, développeurs et équipes métier.",
+      "Contribution à l'amélioration de 24 composants du design system.",
+      "Suivi de 6 fonctionnalités jusqu'à leur passage en développement.",
+    ],
+  },
+  {
+    dates: "2024",
+    poste: "Technicienne administrative",
+    employeur: "URSSAF",
+    missions: [
+      "Accompagnement des employeurs sur le dispositif TESE par téléphone et mail, avec écoute, reformulation et vulgarisation des informations.",
+      "Fiabilisation des données employeurs : saisie, vérification et mise à jour des déclarations.",
+      "Contrôle de la conformité des pièces et détection des anomalies.",
+      "Traçabilité des actions et suivi administratif, classement et mise à jour des fichiers.",
+    ],
+  },
+  {
+    dates: "2019",
+    poste: "Conseillère de vente",
+    employeur: "Pronuptia",
+    missions: [
+      "Conseil personnalisé et accompagnement des clientes en robes de mariée.",
+      "Présentation, mise en valeur et organisation des rayons.",
+      "Prise de mesures et suivi des retouches avec l'atelier.",
+    ],
+  },
+  {
+    dates: "2017 à 2018",
+    poste: "Costumière et habilleuse",
+    employeur: "Disneyland Paris",
+    missions: [
+      "Habilleuse sur les shows Marvel.",
+      "Gestion des stocks de costumes et organisation des loges.",
+      "Création, ajustements et entretien de chapeaux et accessoires pour les spectacles.",
+    ],
+  },
+];
+
+const formations = [
+  {
+    dates: "2025 à 2026",
+    intitule: "MBA1 et B3 Chef de projet digital, Design et Digital marketing",
+    lieu: "Institut IEF2I, Digital School Paris, Vincennes",
+  },
+  {
+    dates: "2016",
+    intitule: "CAP Chapelier Modiste",
+    lieu: "Lycée La Source, Nogent-sur-Marne",
+  },
+  {
+    dates: "2015",
+    intitule: "DMA Costumier Réalisateur",
+    lieu: "Lycée des Coteaux, Cannes",
+  },
+  {
+    dates: "2013",
+    intitule: "DTMS Habillage",
+    lieu: "Lycée La Source, Nogent-sur-Marne",
+  },
+  {
+    dates: "2010",
+    intitule: "Baccalauréat STG, comptabilité et finances des entreprises",
+    lieu: "Lycée Cabrini, Noisy-le-Grand",
+  },
+];
+
+const competences = [
+  "Recherche utilisateur",
+  "Parcours client",
+  "Wireframes",
+  "Prototypage Figma",
+  "Maquettes UI",
+  "UI design",
+  "Design system",
+  "Responsive design",
+  "Mobile first",
+  "Accessibilité",
+  "Tests utilisateurs",
+  "Recette UX/UI",
+  "Spécifications UX/UI",
+  "Benchmark concurrentiel",
+  "Interface web",
+];
+
+const outils = [
+  {
+    titre: "Design et illustration",
+    lignes: [
+      "Figma, Illustrator, Photoshop, InDesign, Clip Studio Paint, Krita, Inkscape, Vegas Pro",
+    ],
+  },
+  {
+    titre: "Collaboration et environnement",
+    lignes: ["VS Code, Notion, Loop, Teams, Discord, Suite Office, IA générative"],
+  },
+  {
+    titre: "Langues",
+    lignes: ["Français, langue maternelle", "Anglais, compréhension écrite"],
+  },
+];
+---
+
+<Base title="Parcours — Audrey Garoscio" current="parcours">
+  <div class="mx-auto max-w-4xl px-6 pb-20 pt-16 sm:px-10 sm:pt-24">
+    <!-- En-tête -->
+    <p class="font-display text-sm italic tracking-[0.12em] text-voile [font-variant:small-caps]">
+      Biographie de l'artiste
+    </p>
+    <h1 class="mt-3 font-display text-4xl font-semibold sm:text-5xl">Parcours</h1>
+    <p class="mt-5 font-display text-lg italic leading-relaxed text-voile">
+      Product Designer UX/UI, en alternance chez EasyVista, MBA1 à Digital
+      School Paris.
+    </p>
+
+    <div class="mt-6">
+      <a
+        href="/cv/audrey-garoscio-cv.pdf"
+        download
+        aria-label="Télécharger le CV d'Audrey Garoscio au format PDF"
+        class="group inline-flex items-center gap-2 text-sm text-encre transition-colors hover:font-semibold"
+      >
+        <span class="underline decoration-bordeaux decoration-2 underline-offset-4">Télécharger le CV (PDF)</span>
+        <span class="transition-transform group-hover:translate-y-1">↓</span>
+      </a>
+    </div>
+
+    <!-- Expériences -->
+    <section class="mt-16 border-t border-voile/20 pt-12">
+      <h2 class="font-display text-3xl font-semibold">Expériences</h2>
+      <ol class="mt-10">
+        {
+          experiences.map((x, i) => (
+            <li class="relative flex gap-5">
+              <span class="absolute left-[5.5px] top-2 h-full w-px bg-voile/30"></span>
+              <span class="relative z-10 mt-2 h-3 w-3 shrink-0 self-start rounded-full bg-bordeaux"></span>
+              <div class={`flex-1 ${i < experiences.length - 1 ? "pb-10" : ""}`}>
+                <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                  <h3 class="font-display text-xl font-medium leading-snug">{x.poste}</h3>
+                  <p class="text-sm text-voile">{x.dates}</p>
+                </div>
+                <p class="mt-1 text-base text-voile">{x.employeur}</p>
+                <ul class="mt-4 space-y-2 text-base leading-relaxed">
+                  {x.missions.map((m) => (
+                    <li>{m}</li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <!-- Formation -->
+    <section class="mt-16 border-t border-voile/20 pt-12">
+      <h2 class="font-display text-3xl font-semibold">Formation</h2>
+      <div class="mt-10 divide-y divide-voile/15">
+        {
+          formations.map((f) => (
+            <div class="grid gap-1 py-5 first:pt-0 sm:grid-cols-[150px_1fr] sm:gap-10">
+              <p class="text-sm text-voile sm:pt-0.5">{f.dates}</p>
+              <div>
+                <h3 class="font-display text-lg font-medium leading-snug">{f.intitule}</h3>
+                <p class="mt-0.5 text-base text-voile">{f.lieu}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Compétences UX/UI -->
+    <section class="mt-16 border-t border-voile/20 pt-12">
+      <h2 class="font-display text-3xl font-semibold">Compétences UX/UI</h2>
+      <div class="mt-8 flex flex-wrap gap-2">
+        {
+          competences.map((c) => (
+            <span class="rounded-full bg-voile/10 px-3 py-1 text-sm text-encre dark:bg-surface">
+              {c}
+            </span>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Outils et langues -->
+    <section class="mt-16 border-t border-voile/20 pt-12">
+      <h2 class="font-display text-3xl font-semibold">Outils et langues</h2>
+      <div class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-3">
+        {
+          outils.map((o) => (
+            <div>
+              <h3 class="font-display text-lg font-medium">{o.titre}</h3>
+              <div class="mt-3 space-y-1 text-base leading-relaxed text-voile">
+                {o.lignes.map((l) => (
+                  <p>{l}</p>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <p class="mt-8 text-sm italic text-voile">
+        Ce sur quoi on me prend souvent : sens du détail, collaboration,
+        pédagogie.
+      </p>
+    </section>
+  </div>
+</Base>

@@ -13,6 +13,18 @@ const {
 <!doctype html>
 <html lang="fr">
   <head>
+    <script is:inline>
+      // Anti-flash : applique le mode avant le premier rendu
+      (function () {
+        try {
+          var pref = localStorage.getItem("theme");
+          var dark = pref
+            ? pref === "dark"
+            : window.matchMedia("(prefers-color-scheme: dark)").matches;
+          if (dark) document.documentElement.classList.add("dark");
+        } catch (e) {}
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
