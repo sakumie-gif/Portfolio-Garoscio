@@ -1,10 +1,11 @@
 ---
 import { Image } from "astro:assets";
 
-// Icônes du portfolio. Les sources sont les PNG d'Audrey, en ~1240px et
-// ~800Ko pièce : on ne les sert JAMAIS telles quelles. En passant par
-// astro:assets, sharp les redimensionne et les convertit en webp au build,
-// ce qui les ramène à quelques Ko.
+// Icônes du portfolio. Les originaux sont dans img/icons/ (1254px, ~800Ko
+// pièce, dessinés sur une plaque blanche opaque) : on ne les importe JAMAIS
+// tels quels. scripts/detourage.mjs les détoure et les réduit à 96px ici ;
+// astro:assets les convertit ensuite en webp au build, à quelques Ko.
+// Retoucher un original impose donc de relancer le script.
 //
 // Elles sont toutes décoratives : le texte à côté porte déjà le sens, donc
 // alt="" et elles sortent de l'arbre d'accessibilité (WCAG 1.1.1).
