@@ -7,11 +7,13 @@ const {
   title = "Audrey Garoscio — Product Designer",
   description = "Product Designer, à la croisée du produit et de la scène.",
   current = "",
+  // Langue du document (WCAG 3.1.1). Surchargeable pour une page traduite.
+  lang = "fr",
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="fr">
+<html lang={lang}>
   <head>
     <script is:inline>
       // Anti-flash : applique le mode avant le premier rendu
@@ -40,8 +42,9 @@ const {
     />
   </head>
   <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
     <Nav current={current} />
-    <main>
+    <main id="contenu" tabindex="-1">
       <slot />
     </main>
     <Footer />

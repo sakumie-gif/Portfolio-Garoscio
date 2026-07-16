@@ -127,14 +127,14 @@ const outils = [
     </p>
 
     <div class="mt-6">
+      <!-- Pas d'aria-label : il masquait le texte visible sans le contenir (2.5.3) -->
       <a
         href="/cv/audrey-garoscio-cv.pdf"
         download
-        aria-label="Télécharger le CV d'Audrey Garoscio au format PDF"
-        class="group inline-flex items-center gap-2 text-sm text-encre transition-colors hover:font-semibold"
+        class="group inline-flex items-center gap-2 py-1 text-sm text-encre transition-colors hover:font-semibold"
       >
-        <span class="underline decoration-bordeaux decoration-2 underline-offset-4">Télécharger le CV (PDF)</span>
-        <span class="transition-transform group-hover:translate-y-1">↓</span>
+        <span class="underline decoration-accent decoration-2 underline-offset-4">Télécharger le CV (PDF)</span>
+        <span class="transition-transform group-hover:translate-y-1" aria-hidden="true">↓</span>
       </a>
     </div>
 
@@ -146,7 +146,7 @@ const outils = [
           experiences.map((x, i) => (
             <li class="relative flex gap-5">
               <span class="absolute left-[5.5px] top-2 h-full w-px bg-voile/30"></span>
-              <span class="relative z-10 mt-2 h-3 w-3 shrink-0 self-start rounded-full bg-bordeaux"></span>
+              <span class="relative z-10 mt-2 h-3 w-3 shrink-0 self-start rounded-full bg-accent" aria-hidden="true"></span>
               <div class={`flex-1 ${i < experiences.length - 1 ? "pb-10" : ""}`}>
                 <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
                   <h3 class="font-display text-xl font-medium leading-snug">{x.poste}</h3>

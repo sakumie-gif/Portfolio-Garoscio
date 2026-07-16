@@ -55,27 +55,33 @@ const esquisses = [
 
     <div class="mt-12 space-y-6">
       {
+        /* Motif "stretched link" : seul le titre est un lien, mais son ::after
+           couvre toute la carte, qui reste donc cliquable en entier. Auparavant
+           un <a> englobait titre + sous-titre + didascalie + "Lire l'étude" +
+           l'alt de l'image : le nom du lien faisait un paragraphe (WCAG 2.4.4).
+           L'image devient décorative (alt=""), le titre la nomme déjà. */
         saison.map((p, i) => (
-          <a
-            href={p.href}
+          <article
             class:list={[
-              "group block border-l-2 bg-ivoire py-8 pl-8 pr-6 transition-colors hover:bg-encre/[0.03]",
+              "group relative border-l-2 bg-ivoire py-8 pl-8 pr-6 transition-colors hover:bg-encre/[0.03] focus-within:bg-encre/[0.03]",
               p.accent,
             ]}
           >
             <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
               <div class="max-w-xl">
-                <p class="font-display text-sm text-voile">
+                <p class="font-display text-sm text-voile" aria-hidden="true">
                   {String(i + 1).padStart(2, "0")}
                 </p>
                 <h2 class="mt-2 font-display text-3xl font-semibold leading-tight sm:text-4xl">
-                  {p.titre}
+                  <a href={p.href} class="after:absolute after:inset-0 after:content-['']">
+                    {p.titre}
+                  </a>
                 </h2>
                 <p class="mt-2 text-base text-voile">{p.sous}</p>
                 <p class="mt-4 font-display italic leading-relaxed text-voile">
                   {p.didascalie}
                 </p>
-                <span class="mt-5 inline-block text-sm text-encre">
+                <span class="mt-5 inline-block text-sm text-encre" aria-hidden="true">
                   Lire l'étude <span class="transition-transform group-hover:translate-x-1 inline-block">→</span>
                 </span>
               </div>
@@ -83,7 +89,7 @@ const esquisses = [
               {p.image ? (
                 <img
                   src={p.image}
-                  alt={`Aperçu du projet ${p.titre}`}
+                  alt=""
                   class="aspect-[16/10] w-full shrink-0 rounded-[2px] object-contain lg:w-72"
                 />
               ) : (
@@ -94,7 +100,7 @@ const esquisses = [
                 </div>
               )}
             </div>
-          </a>
+          </article>
         ))
       }
     </div>
@@ -114,18 +120,22 @@ const esquisses = [
       {
         esquisses.map((e) =>
           e.href ? (
-            <a href={e.href} class="group block border border-voile/20 p-6 transition-colors hover:bg-encre/[0.03]">
+            <article class="group relative border border-voile/20 p-6 transition-colors hover:bg-encre/[0.03] focus-within:bg-encre/[0.03]">
               <img
                 src={e.cover}
-                alt={`Aperçu de l'esquisse ${e.titre}`}
+                alt=""
                 class="aspect-[4/3] w-full rounded-[2px] object-contain"
               />
-              <h3 class="mt-5 font-display text-xl font-medium">{e.titre}</h3>
+              <h3 class="mt-5 font-display text-xl font-medium">
+                <a href={e.href} class="after:absolute after:inset-0 after:content-['']">
+                  {e.titre}
+                </a>
+              </h3>
               <p class="mt-2 text-sm leading-relaxed text-voile">{e.note}</p>
-              <span class="mt-4 inline-block text-sm text-encre">
+              <span class="mt-4 inline-block text-sm text-encre" aria-hidden="true">
                 Voir l'esquisse <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
               </span>
-            </a>
+            </article>
           ) : (
             <article class="border border-voile/20 p-6">
               <div class="aspect-[4/3] w-full rounded-[2px] border border-dashed border-voile/40">

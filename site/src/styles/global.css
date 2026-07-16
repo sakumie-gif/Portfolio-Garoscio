@@ -11,14 +11,18 @@
 @theme {
   --color-ivoire: #f8f5ef;
   --color-encre: #1a1a1f;
-  --color-voile: #8a847a;
+  /* Secondaire : assombri pour atteindre 4.5:1 sur ivoire (WCAG 1.4.3).
+     #8a847a, la valeur d'origine, ne montait qu'à 3.41:1. */
+  --color-voile: #6b665e;
   --color-rose: #ecd5cd;
   --color-bordeaux: #7b1e2b;
   --color-brume: #c9d1d6;
   --color-sauge: #c5cfb8;
 
-  /* Surface secondaire sombre (chips, élévations) — utilisée via dark: */
-  --color-surface: #11192a;
+  /* Accent lisible sur le fond courant. Distinct de --color-bordeaux, qui
+     reste la couleur de marque brute et sert de FOND à ::selection.
+     Clair : bordeaux sur ivoire = 9.36:1. Sombre : voir .dark plus bas. */
+  --color-accent: var(--color-bordeaux);
 
   --font-display: "Fraunces", Georgia, serif;
   --font-body: "Manrope", system-ui, sans-serif;
@@ -26,12 +30,14 @@
 
 /* ---------------------------------------------------------------
    Mode salle obscure — surcharge des tokens sous .dark
-   (le bordeaux, accent de marque, reste identique)
 --------------------------------------------------------------- */
 .dark {
   --color-ivoire: #08111e; /* fond bleu nuit profond */
   --color-encre: #f2ece0;  /* texte ivoire chaud */
   --color-voile: #8b94a6;  /* secondaire / bordures, lisible sur nuit */
+  /* Le bordeaux tombe à 1.86:1 sur le fond nuit : illisible. Le rose,
+     déjà dans la palette, prend le relais comme accent (13.49:1). */
+  --color-accent: var(--color-rose);
 }
 
 /* Sélection lisible en mode sombre : texte clair sur bordeaux */
@@ -75,12 +81,44 @@ body {
   color: var(--color-ivoire);
 }
 
-/* Focus clavier visible et discret */
-a:focus-visible,
-button:focus-visible {
+/* Focus clavier visible et discret.
+   Volontairement sur :focus-visible tous éléments, et pas sur une liste de
+   sélecteurs : les champs de formulaire étaient auparavant exclus. */
+:focus-visible {
   outline: 2px solid var(--color-encre);
   outline-offset: 3px;
   border-radius: 1px;
+}
+
+/* ---------------------------------------------------------------
+   Lien d'évitement (WCAG 2.4.1 / RGAA 12.7)
+   Hors écran, révélé à la prise de focus clavier.
+--------------------------------------------------------------- */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  /* Sort du flux visuel sans disparaître de l'ordre de tabulation */
+  transform: translateY(-120%);
+  margin: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--color-ivoire);
+  color: var(--color-encre);
+  border: 2px solid var(--color-encre);
+  border-radius: 2px;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Cibles de saut (ex: <main tabindex="-1">) : reçoivent le focus par
+   programmation, sans avoir à afficher d'anneau autour du conteneur. */
+[tabindex="-1"]:focus {
+  outline: none;
 }
 
 /* ---------------------------------------------------------------

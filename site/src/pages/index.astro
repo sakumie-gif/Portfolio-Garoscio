@@ -31,7 +31,7 @@ const saison = [
           Portfolio, saison 2026
         </p>
         <h1 class="lever lever-1 mt-5 font-display text-5xl font-semibold leading-[1.05] sm:text-6xl">
-          Audrey<br />Garoscio<span class="text-bordeaux">.</span>
+          Audrey<br />Garoscio<span class="text-accent">.</span>
         </h1>
         <p class="lever lever-2 mt-6 max-w-md font-display text-xl italic leading-relaxed text-voile">
           Product Designer, à la croisée du produit et de la scène.
@@ -46,8 +46,8 @@ const saison = [
             href="/about"
             class="group inline-flex items-center gap-2 text-sm text-encre transition-colors hover:font-semibold"
           >
-            <span class="underline decoration-bordeaux decoration-2 underline-offset-4">Mieux me connaître</span>
-            <span class="transition-transform group-hover:translate-x-1">→</span>
+            <span class="underline decoration-accent decoration-2 underline-offset-4">Mieux me connaître</span>
+            <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
           </a>
         </div>
       </div>
@@ -65,12 +65,47 @@ const saison = [
     </div>
   </section>
 
+  <!-- Actualité -->
+  <section class="mx-auto max-w-5xl px-6 pt-4 sm:px-10">
+    <div class="lever lever-3">
+      <p
+        class="flex flex-wrap items-center gap-x-3 gap-y-2 rounded-2xl border border-encre/10 bg-white/45 px-5 py-4 text-sm shadow-[0_1px_20px_-10px_rgb(0_0_0/0.3)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.05]"
+      >
+        <span
+          class="rounded-full border border-accent/25 px-2.5 py-0.5 text-xs uppercase tracking-[0.18em] text-accent"
+        >
+          News
+        </span>
+        <span>
+          Pool Party, le site présenté à ma soutenance, est en ligne. L'accès est protégé par un
+          code jusqu'en septembre&nbsp;: écrivez-moi et je vous le communique.
+        </span>
+        <a href="/contact" class="group text-encre transition-colors hover:font-semibold">
+          <span class="underline decoration-accent decoration-2 underline-offset-4">
+            Demander le code
+          </span>
+          <span class="inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+        </a>
+        <a
+          href="https://poolparty-dsp-ddm-f25a-o24b-g4.fr"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-encre underline decoration-voile/50 underline-offset-4 transition-colors hover:font-semibold"
+        >
+          Voir le site
+          <span aria-hidden="true">↗</span>
+          <span class="sr-only">(nouvel onglet)</span>
+        </a>
+      </p>
+    </div>
+  </section>
+
   <!-- Teasers vers la saison -->
   <section class="mx-auto max-w-5xl px-6 pb-8 pt-12 sm:px-10 sm:pt-20">
     <div class="flex items-baseline justify-between border-b border-voile/20 pb-4">
       <h2 class="font-display text-2xl font-medium">À l'affiche</h2>
-      <a href="/works" class="text-sm text-voile transition-colors hover:font-semibold hover:text-encre">
-        Tout voir →
+      <a href="/works" class="-my-1 py-1 text-sm text-voile transition-colors hover:font-semibold hover:text-encre">
+        Tout voir <span aria-hidden="true">→</span>
       </a>
     </div>
 

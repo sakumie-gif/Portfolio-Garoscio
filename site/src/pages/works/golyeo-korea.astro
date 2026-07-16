@@ -1,12 +1,30 @@
 ---
 import CaseStudy from "../../layouts/CaseStudy.astro";
 
+// Chaque piste a son propre alt : un alt identique répété cinq fois ne
+// permettait pas de les distinguer à l'écoute (WCAG 1.1.1). Le motif commun
+// est un renard à neuf queues tenant un bol de nouilles, en bordeaux sur ivoire.
 const logos = [
-  "/images/golyeo-logo-1.jpg",
-  "/images/golyeo-logo-3.jpg",
-  "/images/golyeo-logo-4.jpg",
-  "/images/golyeo-logo-5.jpg",
-  "/images/golyeo-logo-2.jpg",
+  {
+    src: "/images/golyeo-logo-1.jpg",
+    alt: "Piste 1 : le renard cerné d'un filet circulaire fin, GOLYEO en arc au-dessus, KOREA en arc en dessous, un losange plein de chaque côté.",
+  },
+  {
+    src: "/images/golyeo-logo-3.jpg",
+    alt: "Piste 2 : la même composition débarrassée du cercle, les deux arcs de texte tenant seuls, losanges écartés sur les bords.",
+  },
+  {
+    src: "/images/golyeo-logo-4.jpg",
+    alt: "Piste 3 : version médaillon à double filet, le texte courant sur l'anneau et le renard enfermé dans le cercle intérieur.",
+  },
+  {
+    src: "/images/golyeo-logo-5.jpg",
+    alt: "Piste 4 : variante sans cercle, queues déployées plus largement et bol de nouilles ramené plus bas.",
+  },
+  {
+    src: "/images/golyeo-logo-2.jpg",
+    alt: "Piste 5, direction pastel : tout le logo en orange abricot, filet circulaire épais, tracé du renard plus détaillé, losanges ramenés à l'intérieur du cercle.",
+  },
 ];
 ---
 
@@ -36,8 +54,8 @@ const logos = [
 
   <h2>Les pistes de logo</h2>
   <div class="my-10 grid grid-cols-2 gap-4 sm:grid-cols-3">
-    {logos.map((src) => (
-      <img src={src} alt="Piste de logo Golyeo Korea" loading="lazy" class="w-full rounded-[2px]" />
+    {logos.map((logo) => (
+      <img src={logo.src} alt={logo.alt} loading="lazy" class="w-full rounded-[2px]" />
     ))}
   </div>
 

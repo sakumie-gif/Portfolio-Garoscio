@@ -16,12 +16,18 @@ const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
     <div class="mt-12 space-y-6 border-t border-voile/20 pt-10">
       <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-8">
         <span class="font-display text-sm text-voile sm:w-32">Email</span>
-        <a
-          href="mailto:product.garoscio@gmail.com?subject=Contact%20depuis%20votre%20portfolio"
-          class="text-lg transition-colors hover:font-semibold"
-        >
-          product.garoscio@gmail.com
-        </a>
+        <div>
+          <a
+            href="mailto:product.garoscio@gmail.com?subject=Contact%20depuis%20votre%20portfolio"
+            class="text-lg transition-colors hover:font-semibold"
+          >
+            product.garoscio@gmail.com
+          </a>
+          <p class="mt-2 max-w-md text-sm leading-relaxed text-voile">
+            Adresse réservée à ce portfolio : elle diffère volontairement de celle qui figure
+            sur mon CV, mais les messages me parviennent tout aussi vite.
+          </p>
+        </div>
       </div>
 
       <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-8">
@@ -32,7 +38,7 @@ const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
           rel="noopener noreferrer"
           class="text-lg transition-colors hover:font-semibold"
         >
-          Audrey Garoscio
+          Audrey Garoscio<span class="sr-only"> (nouvel onglet)</span>
         </a>
       </div>
 
@@ -57,6 +63,8 @@ const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
         <!-- Sujet de l'email reçu -->
         <input type="hidden" name="_subject" value="Nouveau message depuis le portfolio" />
 
+        <p class="text-sm text-voile">Tous les champs sont obligatoires.</p>
+
         <div>
           <label for="name" class="font-display text-sm uppercase tracking-[0.14em] text-voile">
             Nom
@@ -66,7 +74,8 @@ const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
             type="text"
             name="name"
             required
-            class="mt-2 w-full rounded-lg border border-voile/30 bg-transparent px-4 py-3 text-base text-encre transition-colors focus:border-encre focus:outline-none"
+            autocomplete="name"
+            class="mt-2 w-full rounded-lg border border-voile bg-transparent px-4 py-3 text-base text-encre transition-colors focus:border-encre"
           />
         </div>
 
@@ -79,7 +88,8 @@ const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
             type="email"
             name="email"
             required
-            class="mt-2 w-full rounded-lg border border-voile/30 bg-transparent px-4 py-3 text-base text-encre transition-colors focus:border-encre focus:outline-none"
+            autocomplete="email"
+            class="mt-2 w-full rounded-lg border border-voile bg-transparent px-4 py-3 text-base text-encre transition-colors focus:border-encre"
           />
         </div>
 
@@ -92,23 +102,27 @@ const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
             name="message"
             rows="5"
             required
-            class="mt-2 w-full rounded-lg border border-voile/30 bg-transparent px-4 py-3 text-base text-encre transition-colors focus:border-encre focus:outline-none"
+            class="mt-2 w-full rounded-lg border border-voile bg-transparent px-4 py-3 text-base text-encre transition-colors focus:border-encre"
           ></textarea>
         </div>
 
         <button
           type="submit"
-          class="group inline-flex items-center gap-2 text-sm text-encre transition-colors hover:font-semibold"
+          class="group inline-flex items-center gap-2 py-1 text-sm text-encre transition-colors hover:font-semibold"
         >
-          <span class="underline decoration-bordeaux decoration-2 underline-offset-4">Envoyer le message</span>
-          <span class="transition-transform group-hover:translate-x-1">→</span>
+          <span class="underline decoration-accent decoration-2 underline-offset-4">Envoyer le message</span>
+          <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
         </button>
 
-        <!-- Messages de retour -->
-        <p id="form-success" class="hidden text-sm text-encre">
+        <!-- Messages de retour.
+             role="status" / role="alert" : sans eux, la bascule de la classe
+             `hidden` était totalement muette pour un lecteur d'écran (4.1.3).
+             Les deux <p> restent dans le DOM en permanence, sinon la région
+             live ne serait pas observée au moment de l'insertion. -->
+        <p id="form-success" class="hidden text-sm text-encre" role="status">
           Merci, votre message est bien parti. Je vous réponds très vite.
         </p>
-        <p id="form-error" class="hidden text-sm text-bordeaux">
+        <p id="form-error" class="hidden text-sm text-accent" role="alert">
           Oups, l'envoi a échoué. Réessayez, ou écrivez-moi directement à
           product.garoscio@gmail.com.
         </p>
@@ -126,13 +140,20 @@ const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
     const error = document.getElementById("form-error");
 
     if (form && success && error) {
+      // On ne désactive PAS le bouton pendant l'envoi : il porte le focus au
+      // moment du submit, et le désactiver renverrait le focus sur <body>,
+      // éjectant silencieusement l'utilisateur en haut de page. Un verrou
+      // simple suffit à empêcher le double envoi.
+      let envoiEnCours = false;
+
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
+        if (envoiEnCours) return;
+        envoiEnCours = true;
+
         success.classList.add("hidden");
         error.classList.add("hidden");
-
-        const button = form.querySelector("button[type='submit']") as HTMLButtonElement | null;
-        if (button) button.disabled = true;
+        form.setAttribute("aria-busy", "true");
 
         try {
           const response = await fetch(form.action, {
@@ -150,7 +171,8 @@ const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
         } catch {
           error.classList.remove("hidden");
         } finally {
-          if (button) button.disabled = false;
+          form.removeAttribute("aria-busy");
+          envoiEnCours = false;
         }
       });
     }

@@ -1,9 +1,11 @@
 ---
 import ThemeToggle from "./ThemeToggle.astro";
 const { current = "" } = Astro.props;
+// `lang` marque les intitulés anglais dans un document déclaré fr, pour que la
+// synthèse vocale ne les prononce pas à la française (WCAG 3.1.2 / RGAA 8.7).
 const links = [
-  { href: "/works", label: "Works", key: "works" },
-  { href: "/about", label: "About", key: "about" },
+  { href: "/works", label: "Works", key: "works", lang: "en" },
+  { href: "/about", label: "About", key: "about", lang: "en" },
   { href: "/parcours", label: "Parcours", key: "parcours" },
   { href: "/contact", label: "Contact", key: "contact" },
 ];
@@ -17,9 +19,9 @@ const links = [
     <a
       href="/"
       class="font-display text-xl font-semibold tracking-tight text-encre transition-colors hover:text-voile"
-      aria-label="Retour à l'accueil"
+      aria-label="Garoscio — retour à l'accueil"
     >
-      Garoscio<span class="text-bordeaux">.</span>
+      Garoscio<span class="text-accent" aria-hidden="true">.</span>
     </a>
 
     <div class="flex flex-col items-end gap-3">
@@ -29,8 +31,9 @@ const links = [
             <li>
               <a
                 href={link.href}
+                lang={link.lang}
                 class:list={[
-                  "transition-colors hover:font-semibold hover:text-encre",
+                  "-my-1 block py-1 transition-colors hover:font-semibold hover:text-encre",
                   current === link.key ? "text-encre" : "text-voile",
                 ]}
                 aria-current={current === link.key ? "page" : undefined}

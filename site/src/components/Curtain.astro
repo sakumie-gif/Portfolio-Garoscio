@@ -2,9 +2,16 @@
 // Rideau d'ouverture, un seul pan ancré à droite.
 // Image : /public/images/rideau.png (rideau de velours blanc plein cadre).
 // Le pan se rétracte vers la droite. Texte calé à droite.
+//
+// Accessibilité — le rideau est purement décoratif, donc il ne doit JAMAIS
+// pouvoir retenir la page :
+//   - masqué par défaut, révélé seulement si le script s'exécute ;
+//   - aucune capture de clic une fois l'ouverture lancée (2.1.1 / 2.4.11) ;
+//   - fermable au clavier autant qu'à la souris, en plus de l'auto-ouverture ;
+//   - hors de l'arbre d'accessibilité (aria-hidden).
 ---
 
-<div id="curtain" class="curtain" role="presentation" aria-hidden="true">
+<div id="curtain" class="curtain" aria-hidden="true">
   <div class="curtain-panel"></div>
   <p class="curtain-text">
     <em>Garoscio production présente…</em>
@@ -12,7 +19,14 @@
 </div>
 
 <style>
+  /* Masqué par défaut : sans JS (ou si le script échoue), aucun rideau
+     n'apparaît et la page reste utilisable. Le script ajoute .is-live. */
   .curtain {
+    display: none;
+  }
+
+  .curtain.is-live {
+    display: block;
     position: fixed;
     inset: 0;
     z-index: 100;
@@ -28,8 +42,10 @@
     bottom: 0;
     width: 100%;
     transform-origin: right center;
-    background-color: var(--color-ivoire);
-    /* Léger voile ivoire pour réchauffer l'image et l'accorder au site */
+    background-color: #f8f5ef;
+    /* Léger voile ivoire pour réchauffer l'image et l'accorder au site.
+       Teinte figée (et non var(--color-ivoire)) : le pan doit rester clair
+       même en salle obscure, car .curtain-text est encre foncée. */
     background-image: linear-gradient(
         rgba(248, 245, 239, 0.32),
         rgba(248, 245, 239, 0.32)
@@ -65,7 +81,12 @@
   /* Apparition du texte au chargement */
   .curtain.is-ready .curtain-text { opacity: 1; }
 
-  /* Ouverture : on rétracte le pan vers la droite, le texte s'efface */
+  /* Ouverture : on rétracte le pan vers la droite, le texte s'efface.
+     pointer-events dès cet instant : la page redevient cliquable
+     immédiatement, sans attendre la fin des 2.4s de transition. */
+  .curtain.is-open {
+    pointer-events: none;
+  }
   .curtain.is-open .curtain-text {
     opacity: 0;
     transition: opacity 0.4s ease;
@@ -78,28 +99,50 @@
   .curtain.is-done { display: none; }
 
   @media (prefers-reduced-motion: reduce) {
-    .curtain { display: none; }
+    .curtain,
+    .curtain.is-live { display: none; }
   }
 </style>
 
 <script>
   const curtain = document.getElementById("curtain");
 
+  // sessionStorage jette une SecurityError quand le stockage est bloqué
+  // (cookies désactivés, certaines politiques d'entreprise). Sans ce garde,
+  // le script mourrait ici et le rideau resterait affiché indéfiniment.
+  const lireVues = () => {
+    try {
+      return Number(sessionStorage.getItem("curtain-vues") || "0");
+    } catch (e) {
+      return 0;
+    }
+  };
+  const ecrireVues = (n: number) => {
+    try {
+      sessionStorage.setItem("curtain-vues", String(n));
+    } catch (e) {
+      /* stockage indisponible : on continue sans mémoriser */
+    }
+  };
+
   // On ne montre le rideau que 2 fois par session.
   // En développement (npm run dev), la limite est désactivée pour faciliter les tests.
   const MAX_PAR_SESSION = 2;
   const enDev = import.meta.env.DEV;
-  const vues = Number(sessionStorage.getItem("curtain-vues") || "0");
+  const vues = lireVues();
 
-  if (curtain && !enDev && vues >= MAX_PAR_SESSION) {
-    // Quota atteint : on retire le rideau immédiatement.
+  // Respecte le choix système : pas d'animation d'intro du tout.
+  const reduit = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (curtain && (reduit || (!enDev && vues >= MAX_PAR_SESSION))) {
+    // Quota atteint ou animation non souhaitée : on retire le rideau.
     curtain.remove();
   } else if (curtain) {
-    if (!enDev) sessionStorage.setItem("curtain-vues", String(vues + 1));
+    if (!enDev) ecrireVues(vues + 1);
 
     // Durées (ms)
     const TEMPS_AFFICHAGE = 1000; // combien de temps le rideau reste fermé
-    const DELAI_ANTI_CLIC = 1000; // on ignore les clics pendant ce délai
+    const DELAI_ANTI_CLIC = 1000; // on ignore les interactions pendant ce délai
     const DUREE_RETRACTION = 2500; // doit couvrir la transition CSS du pan
 
     let opened = false;
@@ -107,8 +150,10 @@
       if (opened) return;
       opened = true;
       curtain.classList.add("is-open");
+      window.removeEventListener("keydown", onKey);
       setTimeout(() => curtain.classList.add("is-done"), DUREE_RETRACTION);
     };
+    const onKey = () => open();
 
     // On démarre seulement quand l'image du rideau est prête (avec un
     // garde-fou si elle tarde ou échoue), pour qu'on la voie vraiment.
@@ -116,11 +161,19 @@
     const demarrer = () => {
       if (demarre) return;
       demarre = true;
+      // .is-live n'est posé qu'ici : tant que le script n'a pas prouvé
+      // qu'il tourne, le rideau n'existe pas visuellement.
+      curtain.classList.add("is-live");
       requestAnimationFrame(() => curtain.classList.add("is-ready"));
 
-      // L'ouverture au clic n'est active qu'après un court délai, pour
-      // éviter qu'un clic involontaire ne ferme le rideau aussitôt.
-      setTimeout(() => curtain.addEventListener("click", open), DELAI_ANTI_CLIC);
+      // L'ouverture n'est active qu'après un court délai, pour éviter
+      // qu'une interaction involontaire ne ferme le rideau aussitôt.
+      setTimeout(() => {
+        curtain.addEventListener("click", open);
+        // Équivalent clavier du clic : n'importe quelle touche lève le
+        // rideau. Le div n'est pas focusable, on écoute donc la fenêtre.
+        window.addEventListener("keydown", onKey);
+      }, DELAI_ANTI_CLIC);
 
       // Auto-ouverture après le temps d'affichage.
       setTimeout(open, TEMPS_AFFICHAGE);

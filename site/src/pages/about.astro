@@ -132,16 +132,17 @@ const labelPoints = radar.map((c, i) => {
         <p class="mt-10 text-sm text-voile">
           Disponible dès octobre 2026 pour rejoindre votre équipe. Si mon profil
           résonne avec votre projet,
-          <a href="/contact" class="text-encre underline decoration-bordeaux decoration-2 underline-offset-4">
+          <a href="/contact" class="text-encre underline decoration-accent decoration-2 underline-offset-4">
             parlons-en.
           </a>
         </p>
 
         <div class="mt-6">
+          <!-- Pas d'aria-label ici : il était redondant avec le texte visible
+               tout en ne le contenant pas, ce qui casse WCAG 2.5.3. -->
           <a
             href="/cv/audrey-garoscio-cv.pdf"
             download
-            aria-label="Télécharger le CV d'Audrey Garoscio au format PDF"
             class="inline-flex items-center rounded-[20px] border border-encre px-6 py-3 text-sm text-encre transition-colors hover:bg-encre/[0.04]"
           >
             Télécharger le CV (PDF)
@@ -167,12 +168,23 @@ const labelPoints = radar.map((c, i) => {
         Les rôles que je sais tenir, et l'équilibre entre eux.
       </p>
 
+      <!-- Équivalent textuel du radar (WCAG 1.1.1).
+           role="img" sur le <svg> rend tous ses descendants présentationnels :
+           les <text> des étiquettes ne sont donc PAS lus. Les données vivent
+           ici, hors du SVG, reliées par aria-describedby. -->
+      <ul id="radar-donnees" class="sr-only">
+        {radar.map((c) => (
+          <li>{c.label} : {c.value} sur 100</li>
+        ))}
+      </ul>
+
       <div class="mt-10 flex justify-center">
         <svg
           viewBox="-160 -20 720 440"
           class="h-auto w-full max-w-[640px]"
           role="img"
-          aria-label="Carte radar des compétences"
+          aria-label="Carte radar des compétences, sur six axes"
+          aria-describedby="radar-donnees"
         >
           <!-- Anneaux de fond -->
           {[0.25, 0.5, 0.75, 1].map((r) => (
