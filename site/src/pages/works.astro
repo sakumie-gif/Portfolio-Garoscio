@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import Icone from "../components/Icone.astro";
 
 const saison = [
   {
@@ -29,7 +30,7 @@ const saison = [
     note: "Oser un ton joyeux là où tout le secteur joue le sérieux.",
     role: "Direction artistique et UI",
     contexte: "Refonte",
-    teinte: "bg-rose",
+    teinte: "bg-corail/35",
     image: "/images/homepage.png",
   },
 ];
@@ -50,11 +51,11 @@ const esquisses = [
   <section class="relative mx-auto max-w-6xl px-6 pt-10 sm:px-10 sm:pt-16">
     <!-- Calée sous la nav et dans la largeur : cf. les deux règles d'usage
          de .blob dans global.css. Elle déborde librement vers le bas. -->
-    <div class="blob right-0 top-4 h-72 w-72 bg-corail/20" aria-hidden="true"></div>
+    <div class="blob right-0 top-4 h-72 w-72 bg-corail/15" aria-hidden="true"></div>
 
     <header class="max-w-2xl">
       <p class="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
-        <span aria-hidden="true">✳</span> À l'affiche
+        <Icone nom="etoile" taille={14} class="shrink-0" /> À l'affiche
       </p>
       <h1 class="mt-4 text-5xl font-extrabold leading-[1.03] sm:text-6xl">
         Projets
@@ -155,7 +156,7 @@ const esquisses = [
       {
         esquisses.map((e) => (
           <article class="group relative overflow-hidden rounded-[24px] rounded-tl-[4px] border border-encre/10 transition-colors hover:border-encre/25">
-            <div class="bg-rose/50 p-6">
+            <div class="bg-corail/15 p-6">
               <img
                 src={e.cover}
                 alt=""

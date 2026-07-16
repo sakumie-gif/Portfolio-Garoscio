@@ -6,13 +6,13 @@ const {
   kicker,
   didascalie,
   sections = [],
-  accent = "rose", // rose | brume | jaune
+  accent = "corail", // corail | brume | jaune
 } = Astro.props;
 
 // Teinte décorative de l'en-tête. Ces aplats ne portent jamais de texte :
 // aucune contrainte de contraste ne s'y applique.
 const accentClass = {
-  rose: "bg-rose",
+  corail: "bg-corail/35",
   brume: "bg-brume",
   jaune: "bg-jaune",
 }[accent];

@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import Icone from "../components/Icone.astro";
 
 const experiences = [
   {
@@ -100,9 +101,9 @@ const competences = [
 // d'impact fabriquées : le concept écarte explicitement les « 100 % de
 // réussite » invérifiables.
 const chiffres = [
-  { valeur: "24", libelle: "composants du design system améliorés", teinte: "bg-rose/60" },
-  { valeur: "6", libelle: "fonctionnalités suivies jusqu'au développement", teinte: "bg-jaune/50" },
-  { valeur: "2025", libelle: "Product Designer chez EasyVista depuis", teinte: "bg-brume/70" },
+  { valeur: "24", libelle: "composants du design system améliorés", teinte: "bg-corail/15" },
+  { valeur: "6", libelle: "fonctionnalités suivies jusqu'au développement", teinte: "bg-jaune/35" },
+  { valeur: "2025", libelle: "Product Designer chez EasyVista depuis", teinte: "bg-brume/35" },
 ];
 
 const outils = [
@@ -129,7 +130,7 @@ const outils = [
     <div class="blob right-0 top-2 h-64 w-64 bg-jaune/35" aria-hidden="true"></div>
 
     <p class="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
-      <span aria-hidden="true">✳</span> Le programme
+      <Icone nom="etoile" taille={14} class="shrink-0" /> Le programme
     </p>
     <h1 class="mt-4 text-5xl font-extrabold leading-[1.03] sm:text-6xl">Parcours</h1>
     <p class="mt-6 max-w-xl text-lg leading-relaxed text-voile">
@@ -212,7 +213,7 @@ const outils = [
       <div class="mt-8 flex flex-wrap gap-2">
         {
           competences.map((c) => (
-            <span class="rounded-full bg-brume/60 px-3.5 py-1 text-sm text-encre">
+            <span class="rounded-full bg-brume/35 px-3.5 py-1 text-sm text-encre">
               {c}
             </span>
           ))

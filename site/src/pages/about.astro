@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import Icone from "../components/Icone.astro";
 
 // Les six pointes du radar et leur valeur (de 0 à 100).
 // Ajuste les valeurs si tu veux pondérer différemment.
@@ -45,11 +46,11 @@ const labelPoints = radar.map((c, i) => {
 <Base title="À propos — Audrey Garoscio" current="about">
   <section class="relative mx-auto max-w-5xl px-6 pt-10 sm:px-10 sm:pt-16">
     <!-- En-tête : titre + tagline -->
-    <div class="blob right-0 top-2 h-64 w-64 bg-corail/20" aria-hidden="true"></div>
+    <div class="blob right-0 top-2 h-64 w-64 bg-corail/15" aria-hidden="true"></div>
 
     <header class="max-w-2xl border-b border-encre/10 pb-10">
       <p class="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
-        <span aria-hidden="true">✳</span> À propos
+        <Icone nom="etoile" taille={14} class="shrink-0" /> À propos
       </p>
       <h1 class="mt-4 text-4xl font-extrabold leading-[1.05] sm:text-5xl">
         D'une costumière à <span class="trace">Product Designer</span>.
@@ -155,8 +156,8 @@ const labelPoints = radar.map((c, i) => {
       </div>
 
       <div class="relative mx-auto w-full max-w-[280px] md:max-w-none">
-        <div class="blob -left-5 -top-5 h-[70%] w-[80%] bg-rose/80" aria-hidden="true"></div>
-        <div class="blob -bottom-4 right-0 h-[40%] w-[45%] bg-jaune/60" aria-hidden="true"></div>
+        <div class="blob -left-5 -top-5 h-[70%] w-[80%] bg-corail/35" aria-hidden="true"></div>
+        <div class="blob -bottom-4 right-0 h-[40%] w-[45%] bg-jaune/35" aria-hidden="true"></div>
         <img
           src="/images/about.jpg"
           alt="Portrait d'Audrey Garoscio"
@@ -217,7 +218,7 @@ const labelPoints = radar.map((c, i) => {
           <!-- Aire des compétences -->
           <polygon
             points={polygon(dataPoints)}
-            class="fill-rose stroke-encre"
+            class="fill-corail/35 stroke-encre"
             fill-opacity="0.55"
             stroke-width="1.5"
             stroke-linejoin="round"

@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import Curtain from "../components/Curtain.astro";
+import Icone from "../components/Icone.astro";
 
 // Un projet majeur, puis deux secondaires traités différemment : le concept
 // écarte explicitement la grille de cartes identiques.
@@ -31,35 +32,47 @@ const secondaires = [
     note: "Oser un ton joyeux là où tout le secteur joue le sérieux.",
     image: "/images/homepage.png",
     role: "Direction artistique et UI",
-    teinte: "bg-rose",
+    teinte: "bg-corail/35",
   },
 ];
 
 // Le vocabulaire est celui de son travail réel chez EasyVista, pas un
 // process générique : recherche, wireframes, design system, transmission dev.
+// Les teintes des pastilles reprennent celles de la maquette. Ce sont des
+// aplats décoratifs : l'icône posée dessus est encre, jamais corail.
 const etapes = [
   {
     titre: "Comprendre",
+    icone: "recherche",
+    teinte: "bg-brume/35",
     texte:
       "J'analyse les besoins réels et je cherche les points de friction dans les parcours, côté agent comme côté utilisateur final.",
   },
   {
     titre: "Structurer",
+    icone: "arborescence",
+    teinte: "bg-jaune/35",
     texte:
       "Je pose l'architecture de l'information et les parcours avant de dessiner quoi que ce soit.",
   },
   {
     titre: "Concevoir",
+    icone: "crayon",
+    teinte: "bg-corail/35",
     texte:
       "Wireframes, puis maquettes haute fidélité et prototypes, alignés sur le design system.",
   },
   {
     titre: "Tester",
+    icone: "utilisateurs",
+    teinte: "bg-corail/15",
     texte:
       "Tests utilisateurs, recette UX/UI, contrôle du responsive et de l'accessibilité.",
   },
   {
     titre: "Transmettre",
+    icone: "envoi",
+    teinte: "bg-brume/15",
     texte:
       "Maquettes propres, comportements détaillés, spécifications, et suivi jusqu'en développement.",
   },
@@ -98,7 +111,7 @@ const coulisses = [
     <div class="grid grid-cols-1 items-center gap-10 md:grid-cols-[1.05fr_0.95fr] md:gap-14">
       <div>
         <p class="lever lever-1 flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
-          <span aria-hidden="true">✳</span>
+          <Icone nom="etoile" taille={14} class="shrink-0" />
           Théâtre contemporain du Product Design
         </p>
 
@@ -116,13 +129,16 @@ const coulisses = [
         </p>
 
         <ul class="lever lever-2 mt-8 flex flex-wrap gap-2.5">
-          <li class="rounded-full bg-rose/60 px-4 py-1.5 text-sm text-encre">
-            <span lang="en">Product Designer</span> UX/UI
+          <li class="flex items-center gap-2 rounded-full bg-corail/15 px-4 py-1.5 text-sm text-encre">
+            <Icone nom="wireframe" taille={15} class="shrink-0" />
+            <span><span lang="en">Product Designer</span> UX/UI</span>
           </li>
-          <li class="rounded-full bg-jaune/50 px-4 py-1.5 text-sm text-encre">
+          <li class="flex items-center gap-2 rounded-full bg-jaune/35 px-4 py-1.5 text-sm text-encre">
+            <Icone nom="utilisateurs" taille={15} class="shrink-0" />
             SaaS B2B
           </li>
-          <li class="rounded-full bg-brume/70 px-4 py-1.5 text-sm text-encre">
+          <li class="flex items-center gap-2 rounded-full bg-brume/35 px-4 py-1.5 text-sm text-encre">
+            <Icone nom="accessibilite" taille={15} class="shrink-0" />
             Accessibilité
           </li>
         </ul>
@@ -150,12 +166,12 @@ const coulisses = [
            décorative : aucune règle de contraste ne s'y applique. -->
       <div class="lever lever-3 relative mx-auto w-full max-w-[380px] md:max-w-none">
         <div
-          class="blob -right-4 -top-8 h-[85%] w-[85%] bg-corail/85"
+          class="blob -right-4 -top-8 h-[85%] w-[85%] bg-corail"
           aria-hidden="true"
         >
         </div>
         <div
-          class="blob -bottom-6 -left-6 h-[45%] w-[55%] bg-jaune/70"
+          class="blob -bottom-6 -left-6 h-[45%] w-[55%] bg-jaune/35"
           aria-hidden="true"
         >
         </div>
@@ -166,7 +182,9 @@ const coulisses = [
           height="1448"
           class="relative w-full rounded-[48%_52%_46%_54%/40%_38%_62%_60%] object-cover"
         />
-        <p class="note absolute -bottom-2 right-0 max-w-[13rem] -rotate-3 text-right sm:right-2">
+        <!-- Sous le portrait et non dessus : en absolu par-dessus la photo,
+             le corail de .note devenait illisible sur le visage. -->
+        <p class="note mt-5 max-w-[15rem] -rotate-2 sm:ml-auto sm:text-right">
           Concevoir des expériences utiles, belles et humaines.
         </p>
       </div>
@@ -190,7 +208,7 @@ const coulisses = [
         </span>
         <a href="/contact" class="group text-encre transition-colors hover:font-semibold">
           <span class="underline decoration-accent decoration-2 underline-offset-4">
-            Demander le code
+            Demander l'accès
           </span>
           <span class="inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
         </a>
@@ -213,7 +231,7 @@ const coulisses = [
     <div class="flex flex-wrap items-end justify-between gap-4">
       <div>
         <p class="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
-          <span aria-hidden="true">✳</span> À l'affiche
+          <Icone nom="etoile" taille={14} class="shrink-0" /> À l'affiche
         </p>
         <h2 class="mt-3 text-4xl font-extrabold sm:text-5xl">Projets</h2>
       </div>
@@ -263,7 +281,7 @@ const coulisses = [
 
         <!-- Pas de .blob ici : le fond brume de ce bloc le masquerait
              (z-index négatif = derrière le fond du parent). -->
-        <div class="relative order-1 flex items-center justify-center overflow-hidden bg-brume/40 p-8 lg:order-2">
+        <div class="relative order-1 flex items-center justify-center overflow-hidden bg-brume/35 p-8 lg:order-2">
           <!-- Les maquettes sont des captures de page entière (jusqu'à
                1920x4948) : en object-contain elles imposaient une carte de
                1300px de haut. On cadre sur le haut de la maquette, comme une
@@ -327,14 +345,22 @@ const coulisses = [
         </p>
       </div>
 
-      <ol class="grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+      <ol class="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
         {
           etapes.map((e, i) => (
             <li>
-              <p class="text-sm font-semibold text-bordeaux" aria-hidden="true">
+              <span
+                class:list={[
+                  "flex h-14 w-14 items-center justify-center rounded-[18px] rounded-tl-[4px]",
+                  e.teinte,
+                ]}
+              >
+                <Icone nom={e.icone} taille={26} />
+              </span>
+              <p class="mt-4 text-sm font-semibold text-bordeaux" aria-hidden="true">
                 {String(i + 1).padStart(2, "0")}
               </p>
-              <h3 class="mt-2 text-lg font-bold">{e.titre}</h3>
+              <h3 class="mt-1 text-lg font-bold">{e.titre}</h3>
               <p class="mt-2 text-sm leading-relaxed text-voile">{e.texte}</p>
             </li>
           ))
@@ -384,8 +410,8 @@ const coulisses = [
   <section class="mx-auto max-w-6xl px-6 pt-24 sm:px-10 sm:pt-32">
     <div class="grid grid-cols-1 items-center gap-12 md:grid-cols-[300px_1fr] md:gap-16">
       <div class="relative mx-auto w-full max-w-[260px] md:max-w-none">
-        <div class="blob -left-6 -top-6 h-[70%] w-[80%] bg-rose/80" aria-hidden="true"></div>
-        <div class="blob -bottom-4 right-0 h-[40%] w-[45%] bg-jaune/60" aria-hidden="true"></div>
+        <div class="blob -left-6 -top-6 h-[70%] w-[80%] bg-corail/35" aria-hidden="true"></div>
+        <div class="blob -bottom-4 right-0 h-[40%] w-[45%] bg-jaune/35" aria-hidden="true"></div>
         <img
           src="/images/about.jpg"
           alt=""
@@ -398,7 +424,7 @@ const coulisses = [
 
       <div>
         <p class="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
-          <span aria-hidden="true">✳</span> À propos
+          <Icone nom="etoile" taille={14} class="shrink-0" /> À propos
         </p>
         <h2 class="mt-4 text-3xl font-extrabold leading-tight sm:text-4xl">
           D'une costumière<br />à Product Designer.
@@ -436,8 +462,8 @@ const coulisses = [
       <!-- Cette carte garde overflow-hidden (les formes doivent rester dans
            les coins arrondis) : on les cale donc entièrement à l'intérieur,
            sinon le découpage les aplatit en rectangles. -->
-      <div class="blob right-0 top-0 h-64 w-64 bg-corail/20" aria-hidden="true"></div>
-      <div class="blob bottom-0 left-1/3 h-40 w-40 bg-jaune/25" aria-hidden="true"></div>
+      <div class="blob right-0 top-0 h-64 w-64 bg-corail/15" aria-hidden="true"></div>
+      <div class="blob bottom-0 left-1/3 h-40 w-40 bg-jaune/15" aria-hidden="true"></div>
 
       <p class="text-xs uppercase tracking-[0.2em] text-accent">Restons en contact</p>
       <h2 class="mt-4 max-w-xl text-3xl font-extrabold leading-tight sm:text-5xl">

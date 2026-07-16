@@ -1,0 +1,50 @@
+---
+import { Image } from "astro:assets";
+
+// Icônes du portfolio. Les sources sont les PNG d'Audrey, en ~1240px et
+// ~800Ko pièce : on ne les sert JAMAIS telles quelles. En passant par
+// astro:assets, sharp les redimensionne et les convertit en webp au build,
+// ce qui les ramène à quelques Ko.
+//
+// Elles sont toutes décoratives : le texte à côté porte déjà le sens, donc
+// alt="" et elles sortent de l'arbre d'accessibilité (WCAG 1.1.1).
+import accessibilite from "../assets/icons/accessibilite.png";
+import arborescence from "../assets/icons/arborescence.png";
+import coeur from "../assets/icons/coeur.png";
+import crayon from "../assets/icons/crayon.png";
+import email from "../assets/icons/email.png";
+import envoi from "../assets/icons/envoi.png";
+import etoile from "../assets/icons/etoile-scintillante.png";
+import linkedin from "../assets/icons/linkedin.png";
+import recherche from "../assets/icons/recherche.png";
+import utilisateurs from "../assets/icons/utilisateurs.png";
+import wireframe from "../assets/icons/wireframe.png";
+
+const sources = {
+  accessibilite,
+  arborescence,
+  coeur,
+  crayon,
+  email,
+  envoi,
+  etoile,
+  linkedin,
+  recherche,
+  utilisateurs,
+  wireframe,
+};
+
+const { nom, taille = 24, class: classe = "" } = Astro.props;
+const src = sources[nom];
+---
+
+<Image
+  src={src}
+  alt=""
+  width={taille}
+  height={taille}
+  densities={[1, 2]}
+  loading="lazy"
+  aria-hidden="true"
+  class={classe}
+/>
