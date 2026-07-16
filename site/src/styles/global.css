@@ -1,60 +1,52 @@
 @import "tailwindcss";
 
-/* Variante sombre pilotée par la classe .dark sur <html> */
-@custom-variant dark (&:where(.dark, .dark *));
-
 /* ---------------------------------------------------------------
-   Thème — palette et typographies du portfolio
-   Les noms de couleurs deviennent des classes utilitaires Tailwind
-   (ex: bg-ivoire, text-encre, border-voile)
+   Thème — « Le théâtre contemporain du Product Design »
+   Une scène blanche : fond clair, corail vivant, bordeaux en trace.
+
+   Les noms deviennent des classes utilitaires Tailwind
+   (ex: bg-ivoire, text-encre, border-voile).
+
+   RÈGLE DE CONTRASTE — la plus importante de ce fichier.
+   Le corail #F26F62 ne plafonne qu'à 2.79:1 sur le blanc scène : il
+   échoue AA texte (4.5:1) et même le seuil composant (3:1). Il est
+   donc réservé aux SURFACES (formes, halos, aplats), jamais au texte
+   ni à un fond portant du texte clair.
+   Pour du corail lisible, --color-accent en est la version assombrie.
 --------------------------------------------------------------- */
 @theme {
-  --color-ivoire: #f8f5ef;
-  --color-encre: #1a1a1f;
-  /* Secondaire : assombri pour atteindre 4.5:1 sur ivoire (WCAG 1.4.3).
-     #8a847a, la valeur d'origine, ne montait qu'à 3.41:1. */
-  --color-voile: #6b665e;
-  --color-rose: #ecd5cd;
-  --color-bordeaux: #7b1e2b;
-  --color-brume: #c9d1d6;
-  --color-sauge: #c5cfb8;
+  /* --- Fondations --- */
+  --color-ivoire: #fcfaf7; /* blanc scène, chaud */
+  --color-encre: #1e1c1c; /* texte principal — 16.28:1 sur ivoire */
+  /* Secondaire. Assombri pour tenir 4.5:1 (WCAG 1.4.3) même quand une forme
+     décorative teinte le fond derrière lui : 5.99:1 sur ivoire, et encore
+     4.90:1 sur #faded9 (corail à 20 % composité sur ivoire), le pire cas
+     rencontré. La valeur précédente, #6b665e, tombait à 4.48:1 dans ce cas. */
+  --color-voile: #656058;
 
-  /* Accent lisible sur le fond courant. Distinct de --color-bordeaux, qui
-     reste la couleur de marque brute et sert de FOND à ::selection.
-     Clair : bordeaux sur ivoire = 9.36:1. Sombre : voir .dark plus bas. */
-  --color-accent: var(--color-bordeaux);
+  /* --- Décor : SURFACES UNIQUEMENT, jamais de texte dessus ni dedans --- */
+  --color-corail: #f26f62; /* la couleur vivante — formes, halos, aplats */
+  --color-rose: #f3c7c3; /* aplats doux */
+  --color-jaune: #f4d76c; /* lumière, projecteurs, moments-clés */
+  --color-brume: #dce5e8; /* bleu gris technique, ancre le côté produit */
 
-  --font-display: "Fraunces", Georgia, serif;
+  /* --- Accents lisibles --- */
+  /* Corail assombri jusqu'à 4.97:1 sur ivoire : même famille chromatique,
+     mais utilisable en texte, liens, soulignés et kickers. C'est lui qui
+     porte l'accent, pas --color-corail. Sert aussi de FOND au bouton
+     principal, texte ivoire dessus : 4.97:1 également. */
+  --color-accent: #c43d30;
+  /* Bordeaux coulisse — 9.95:1. Trace du théâtre traditionnel : étiquettes,
+     numéros de section, citations. Volontairement rare (cf. concept). */
+  --color-bordeaux: #672e39;
+
+  /* --- Typographies ---
+     Une seule famille porte titres ET texte : l'identité tient à la
+     graisse et à l'échelle, pas à un mélange de fontes. */
+  --font-display: "Manrope", system-ui, sans-serif;
   --font-body: "Manrope", system-ui, sans-serif;
-}
-
-/* ---------------------------------------------------------------
-   Mode salle obscure — surcharge des tokens sous .dark
---------------------------------------------------------------- */
-.dark {
-  --color-ivoire: #08111e; /* fond bleu nuit profond */
-  --color-encre: #f2ece0;  /* texte ivoire chaud */
-  --color-voile: #8b94a6;  /* secondaire / bordures, lisible sur nuit */
-  /* Le bordeaux tombe à 1.86:1 sur le fond nuit : illisible. Le rose,
-     déjà dans la palette, prend le relais comme accent (13.49:1). */
-  --color-accent: var(--color-rose);
-}
-
-/* Sélection lisible en mode sombre : texte clair sur bordeaux */
-.dark ::selection {
-  color: var(--color-encre);
-}
-
-/* Bascule jour / nuit fluide. Instantanée si prefers-reduced-motion. */
-@media (prefers-reduced-motion: no-preference) {
-  *,
-  *::before,
-  *::after {
-    transition-property: background-color, border-color, color, fill, stroke,
-      text-decoration-color;
-    transition-duration: 250ms;
-    transition-timing-function: ease;
-  }
+  /* Manuscrite. Réservée aux annotations courtes — jamais un paragraphe. */
+  --font-note: "Caveat", "Segoe Script", cursive;
 }
 
 /* ---------------------------------------------------------------
@@ -76,6 +68,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Ivoire sur bordeaux : 9.94:1 */
 ::selection {
   background-color: var(--color-bordeaux);
   color: var(--color-ivoire);
@@ -88,6 +81,19 @@ body {
   outline: 2px solid var(--color-encre);
   outline-offset: 3px;
   border-radius: 1px;
+}
+
+/* Cibles de saut (ex: <main tabindex="-1">) : reçoivent le focus par
+   programmation, sans avoir à afficher d'anneau autour du conteneur. */
+[tabindex="-1"]:focus {
+  outline: none;
+}
+
+/* Grands titres : l'échelle éditoriale du concept. Manrope se resserre
+   mal tout seul aux très grandes tailles, on l'aide. */
+h1,
+h2 {
+  letter-spacing: -0.025em;
 }
 
 /* ---------------------------------------------------------------
@@ -115,10 +121,49 @@ body {
   transform: translateY(0);
 }
 
-/* Cibles de saut (ex: <main tabindex="-1">) : reçoivent le focus par
-   programmation, sans avoir à afficher d'anneau autour du conteneur. */
-[tabindex="-1"]:focus {
-  outline: none;
+/* ---------------------------------------------------------------
+   Annotation manuscrite — « le trait de crayon ajouté après la mise
+   en page ». Encre pleine et non corail : à cette taille le corail
+   serait illisible, et l'effet vient de la fonte, pas de la couleur.
+--------------------------------------------------------------- */
+.note {
+  font-family: var(--font-note);
+  font-size: 1.35rem;
+  line-height: 1.25;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------------
+   Formes organiques — « une ou deux formes fortes par écran ».
+   Purement décoratives : toujours aria-hidden côté balisage.
+
+   Deux règles d'usage, apprises en les cassant :
+   1. Ne jamais poser une forme derrière du texte : le fond composité
+      fait chuter le contraste (le corail à 20 % sur ivoire donne
+      #faded9, où le gris secondaire tombait sous 4.5:1).
+   2. Les caler DANS la largeur du conteneur (right-0, pas -right-20)
+      plutôt que de rattraper le débordement avec overflow-hidden : sur
+      une section courte, le découpage rognait la forme en haut et en bas
+      et la transformait en rectangle arrondi.
+
+   z-index négatif : la forme passe derrière le FOND de son parent. Elle
+   est donc invisible dans un conteneur qui a un bg-*.
+--------------------------------------------------------------- */
+.blob {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 42% 58% 63% 37% / 47% 41% 59% 53%;
+}
+
+/* Souligné tracé à la main sous un mot. Épaisseur ≥ 2px : c'est une
+   décoration, pas un porteur d'information (donc corail autorisé). */
+.trace {
+  background-image: linear-gradient(var(--color-corail), var(--color-corail));
+  background-repeat: no-repeat;
+  background-position: 0 92%;
+  background-size: 100% 0.28em;
 }
 
 /* ---------------------------------------------------------------

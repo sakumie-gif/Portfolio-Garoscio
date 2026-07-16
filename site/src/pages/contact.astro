@@ -6,16 +6,27 @@ const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
 ---
 
 <Base title="Contact — Audrey Garoscio" current="contact">
-  <section class="mx-auto max-w-3xl px-6 pt-16 sm:px-10 sm:pt-24">
-    <h1 class="font-display text-4xl font-semibold sm:text-5xl">Le guichet</h1>
-    <p class="mt-5 max-w-xl font-display text-lg italic leading-relaxed text-voile">
+  <section class="relative mx-auto max-w-3xl px-6 pt-14 sm:px-10 sm:pt-20">
+    <!-- top positif : cf. works.astro, une forme sous la nav dégradait le
+         contraste des liens. La forme jaune est écartée du titre pour ne pas
+         teinter le fond du H1. -->
+    <div class="blob right-0 top-2 h-64 w-64 bg-corail/20" aria-hidden="true"></div>
+    <div class="blob left-0 top-80 h-40 w-40 bg-jaune/25" aria-hidden="true"></div>
+
+    <p class="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
+      <span aria-hidden="true">✳</span> Restons en contact
+    </p>
+    <h1 class="mt-4 max-w-xl text-4xl font-extrabold leading-[1.05] sm:text-5xl">
+      Construisons la <span class="trace">prochaine scène</span> ensemble.
+    </h1>
+    <p class="mt-6 max-w-xl text-lg leading-relaxed text-voile">
       Disponible dès octobre 2026 pour rejoindre votre équipe. Si mon profil
       résonne avec votre projet, écrivez-moi.
     </p>
 
-    <div class="mt-12 space-y-6 border-t border-voile/20 pt-10">
+    <div class="mt-12 space-y-6 border-t border-encre/10 pt-10">
       <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-8">
-        <span class="font-display text-sm text-voile sm:w-32">Email</span>
+        <span class="text-sm text-accent sm:w-32">Email</span>
         <div>
           <a
             href="mailto:product.garoscio@gmail.com?subject=Contact%20depuis%20votre%20portfolio"
@@ -31,7 +42,7 @@ const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
       </div>
 
       <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-8">
-        <span class="font-display text-sm text-voile sm:w-32">LinkedIn</span>
+        <span class="text-sm text-accent sm:w-32">LinkedIn</span>
         <a
           href="https://www.linkedin.com/in/audrey-garoscio-3a4660106/"
           target="_blank"
@@ -43,14 +54,14 @@ const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
       </div>
 
       <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-8">
-        <span class="font-display text-sm text-voile sm:w-32">Où</span>
+        <span class="text-sm text-accent sm:w-32">Où</span>
         <span class="text-lg">Noisy-le-Grand, Île-de-France</span>
       </div>
     </div>
 
     <!-- Formulaire de contact -->
-    <div class="mt-14 border-t border-voile/20 pt-10">
-      <h2 class="font-display text-2xl font-medium">Glissez-moi un mot</h2>
+    <div class="mt-14 border-t border-encre/10 pt-10">
+      <h2 class="text-2xl font-extrabold">Glissez-moi un mot</h2>
 
       <form
         id="contact-form"
@@ -66,7 +77,7 @@ const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
         <p class="text-sm text-voile">Tous les champs sont obligatoires.</p>
 
         <div>
-          <label for="name" class="font-display text-sm uppercase tracking-[0.14em] text-voile">
+          <label for="name" class="text-sm uppercase tracking-[0.14em] text-accent">
             Nom
           </label>
           <input
@@ -80,7 +91,7 @@ const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
         </div>
 
         <div>
-          <label for="email" class="font-display text-sm uppercase tracking-[0.14em] text-voile">
+          <label for="email" class="text-sm uppercase tracking-[0.14em] text-accent">
             Email
           </label>
           <input
@@ -94,7 +105,7 @@ const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
         </div>
 
         <div>
-          <label for="message" class="font-display text-sm uppercase tracking-[0.14em] text-voile">
+          <label for="message" class="text-sm uppercase tracking-[0.14em] text-accent">
             Message
           </label>
           <textarea
@@ -108,9 +119,9 @@ const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
 
         <button
           type="submit"
-          class="group inline-flex items-center gap-2 py-1 text-sm text-encre transition-colors hover:font-semibold"
+          class="group inline-flex items-center gap-2.5 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-ivoire transition-transform hover:scale-[1.02]"
         >
-          <span class="underline decoration-accent decoration-2 underline-offset-4">Envoyer le message</span>
+          Envoyer le message
           <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
         </button>
 
@@ -129,8 +140,8 @@ const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
       </form>
     </div>
 
-    <p class="mt-16 font-display text-xl italic leading-relaxed text-voile">
-      « Une idée en coulisses, un projet à mettre en scène ? Parlons-en. »
+    <p class="note mt-16 -rotate-1">
+      Une idée en coulisses, un projet à mettre en scène ? Parlons-en.
     </p>
   </section>
 

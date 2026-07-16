@@ -96,6 +96,15 @@ const competences = [
   "Interface web",
 ];
 
+// Chiffres tirés des missions réelles listées plus bas, pas de mesures
+// d'impact fabriquées : le concept écarte explicitement les « 100 % de
+// réussite » invérifiables.
+const chiffres = [
+  { valeur: "24", libelle: "composants du design system améliorés", teinte: "bg-rose/60" },
+  { valeur: "6", libelle: "fonctionnalités suivies jusqu'au développement", teinte: "bg-jaune/50" },
+  { valeur: "2025", libelle: "Product Designer chez EasyVista depuis", teinte: "bg-brume/70" },
+];
+
 const outils = [
   {
     titre: "Design et illustration",
@@ -115,32 +124,46 @@ const outils = [
 ---
 
 <Base title="Parcours — Audrey Garoscio" current="parcours">
-  <div class="mx-auto max-w-4xl px-6 pb-20 pt-16 sm:px-10 sm:pt-24">
+  <div class="relative mx-auto max-w-4xl px-6 pb-20 pt-14 sm:px-10 sm:pt-20">
     <!-- En-tête -->
-    <p class="font-display text-sm italic tracking-[0.12em] text-voile [font-variant:small-caps]">
-      Biographie de l'artiste
+    <div class="blob right-0 top-2 h-64 w-64 bg-jaune/35" aria-hidden="true"></div>
+
+    <p class="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
+      <span aria-hidden="true">✳</span> Le programme
     </p>
-    <h1 class="mt-3 font-display text-4xl font-semibold sm:text-5xl">Parcours</h1>
-    <p class="mt-5 font-display text-lg italic leading-relaxed text-voile">
+    <h1 class="mt-4 text-5xl font-extrabold leading-[1.03] sm:text-6xl">Parcours</h1>
+    <p class="mt-6 max-w-xl text-lg leading-relaxed text-voile">
       Product Designer UX/UI, en alternance chez EasyVista, MBA1 à Digital
       School Paris.
     </p>
 
-    <div class="mt-6">
+    <div class="mt-8">
       <!-- Pas d'aria-label : il masquait le texte visible sans le contenir (2.5.3) -->
       <a
         href="/cv/audrey-garoscio-cv.pdf"
         download
-        class="group inline-flex items-center gap-2 py-1 text-sm text-encre transition-colors hover:font-semibold"
+        class="group inline-flex items-center gap-2.5 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-ivoire transition-transform hover:scale-[1.02]"
       >
-        <span class="underline decoration-accent decoration-2 underline-offset-4">Télécharger le CV (PDF)</span>
+        Télécharger le CV (PDF)
         <span class="transition-transform group-hover:translate-y-1" aria-hidden="true">↓</span>
       </a>
     </div>
 
+    <!-- Chiffres-clés -->
+    <ul class="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-3">
+      {
+        chiffres.map((c) => (
+          <li class:list={["rounded-[20px] rounded-tl-[3px] p-6", c.teinte]}>
+            <p class="text-4xl font-extrabold leading-none text-encre">{c.valeur}</p>
+            <p class="mt-3 text-sm leading-snug text-encre">{c.libelle}</p>
+          </li>
+        ))
+      }
+    </ul>
+
     <!-- Expériences -->
-    <section class="mt-16 border-t border-voile/20 pt-12">
-      <h2 class="font-display text-3xl font-semibold">Expériences</h2>
+    <section class="mt-16 border-t border-encre/10 pt-12">
+      <h2 class="text-3xl font-extrabold">Expériences</h2>
       <ol class="mt-10">
         {
           experiences.map((x, i) => (
@@ -149,7 +172,7 @@ const outils = [
               <span class="relative z-10 mt-2 h-3 w-3 shrink-0 self-start rounded-full bg-accent" aria-hidden="true"></span>
               <div class={`flex-1 ${i < experiences.length - 1 ? "pb-10" : ""}`}>
                 <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-                  <h3 class="font-display text-xl font-medium leading-snug">{x.poste}</h3>
+                  <h3 class="text-xl font-bold leading-snug">{x.poste}</h3>
                   <p class="text-sm text-voile">{x.dates}</p>
                 </div>
                 <p class="mt-1 text-base text-voile">{x.employeur}</p>
@@ -166,15 +189,15 @@ const outils = [
     </section>
 
     <!-- Formation -->
-    <section class="mt-16 border-t border-voile/20 pt-12">
-      <h2 class="font-display text-3xl font-semibold">Formation</h2>
-      <div class="mt-10 divide-y divide-voile/15">
+    <section class="mt-16 border-t border-encre/10 pt-12">
+      <h2 class="text-3xl font-extrabold">Formation</h2>
+      <div class="mt-10 divide-y divide-encre/10">
         {
           formations.map((f) => (
             <div class="grid gap-1 py-5 first:pt-0 sm:grid-cols-[150px_1fr] sm:gap-10">
               <p class="text-sm text-voile sm:pt-0.5">{f.dates}</p>
               <div>
-                <h3 class="font-display text-lg font-medium leading-snug">{f.intitule}</h3>
+                <h3 class="text-lg font-bold leading-snug">{f.intitule}</h3>
                 <p class="mt-0.5 text-base text-voile">{f.lieu}</p>
               </div>
             </div>
@@ -184,12 +207,12 @@ const outils = [
     </section>
 
     <!-- Compétences UX/UI -->
-    <section class="mt-16 border-t border-voile/20 pt-12">
-      <h2 class="font-display text-3xl font-semibold">Compétences UX/UI</h2>
+    <section class="mt-16 border-t border-encre/10 pt-12">
+      <h2 class="text-3xl font-extrabold">Compétences UX/UI</h2>
       <div class="mt-8 flex flex-wrap gap-2">
         {
           competences.map((c) => (
-            <span class="rounded-full bg-voile/10 px-3 py-1 text-sm text-encre dark:bg-surface">
+            <span class="rounded-full bg-brume/60 px-3.5 py-1 text-sm text-encre">
               {c}
             </span>
           ))
@@ -198,13 +221,13 @@ const outils = [
     </section>
 
     <!-- Outils et langues -->
-    <section class="mt-16 border-t border-voile/20 pt-12">
-      <h2 class="font-display text-3xl font-semibold">Outils et langues</h2>
+    <section class="mt-16 border-t border-encre/10 pt-12">
+      <h2 class="text-3xl font-extrabold">Outils et langues</h2>
       <div class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-3">
         {
           outils.map((o) => (
             <div>
-              <h3 class="font-display text-lg font-medium">{o.titre}</h3>
+              <h3 class="text-lg font-bold">{o.titre}</h3>
               <div class="mt-3 space-y-1 text-base leading-relaxed text-voile">
                 {o.lignes.map((l) => (
                   <p>{l}</p>
@@ -214,7 +237,7 @@ const outils = [
           ))
         }
       </div>
-      <p class="mt-8 text-sm italic text-voile">
+      <p class="note mt-10 -rotate-1">
         Ce sur quoi on me prend souvent : sens du détail, collaboration,
         pédagogie.
       </p>

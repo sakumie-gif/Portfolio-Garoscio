@@ -6,27 +6,30 @@ const saison = [
     href: "/works/pool-party",
     titre: "Pool Party",
     sous: "Marketplace P2P de location de piscines",
-    didascalie:
-      "Du cadrage stratégique à la maquette livrable. Six mois, en autonomie.",
-    accent: "border-l-brume",
-    image: "/images/poolparty-wireframe-page-daccueil-ordinateur.png",
+    note: "Du cadrage stratégique à la maquette livrable. Six mois, en autonomie.",
+    role: "Cheffe de projet, de bout en bout",
+    contexte: "Projet de fin de cycle, MBA",
+    teinte: "bg-brume",
+    image: "/images/poolparty-page-daccueil-maquette-page-daccueil-ordinateur.jpg",
   },
   {
     href: "/works/sumo-tournament",
     titre: "Sumo Tournament",
     sous: "Site événementiel et back-office",
-    didascalie:
-      "Le projet où le design rencontre le code pour de vrai. Conception et mise en production.",
-    accent: "border-l-sauge",
+    note: "Le projet où le design rencontre le code pour de vrai. Conception et mise en production.",
+    role: "Conception et mise en production",
+    contexte: "Projet d'équipe",
+    teinte: "bg-jaune",
     image: "/images/sumo-home.png",
   },
   {
     href: "/works/pool-and-splash",
     titre: "Pool & Splash",
-    sous: "Refonte UI, direction kidculting",
-    didascalie:
-      "Oser un ton joyeux là où tout le secteur joue le sérieux.",
-    accent: "border-l-rose",
+    sous: "Refonte UI, direction kidkulting",
+    note: "Oser un ton joyeux là où tout le secteur joue le sérieux.",
+    role: "Direction artistique et UI",
+    contexte: "Refonte",
+    teinte: "bg-rose",
     image: "/images/homepage.png",
   },
 ];
@@ -42,63 +45,94 @@ const esquisses = [
 ];
 ---
 
-<Base title="Works — Audrey Garoscio" current="works">
-  <!-- LA SAISON -->
-  <section class="mx-auto max-w-5xl px-6 pt-10 sm:px-10 sm:pt-16">
-    <header class="max-w-xl">
-      <h1 class="font-display text-4xl font-semibold sm:text-5xl">À l'affiche</h1>
-      <p class="mt-4 font-display text-lg italic leading-relaxed text-voile">
+<Base title="Projets — Audrey Garoscio" current="works">
+  <!-- En-tête -->
+  <section class="relative mx-auto max-w-6xl px-6 pt-10 sm:px-10 sm:pt-16">
+    <!-- Calée sous la nav et dans la largeur : cf. les deux règles d'usage
+         de .blob dans global.css. Elle déborde librement vers le bas. -->
+    <div class="blob right-0 top-4 h-72 w-72 bg-corail/20" aria-hidden="true"></div>
+
+    <header class="max-w-2xl">
+      <p class="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
+        <span aria-hidden="true">✳</span> À l'affiche
+      </p>
+      <h1 class="mt-4 text-5xl font-extrabold leading-[1.03] sm:text-6xl">
+        Projets
+      </h1>
+      <p class="mt-6 text-lg leading-relaxed text-voile">
         Trois projets menés de bout en bout. Chacun avec son sujet, son rythme,
         ses contraintes.
       </p>
     </header>
+  </section>
 
-    <div class="mt-12 space-y-6">
+  <!-- La saison -->
+  <section class="mx-auto max-w-6xl px-6 pt-14 sm:px-10">
+    <div class="space-y-10">
       {
         /* Motif "stretched link" : seul le titre est un lien, mais son ::after
-           couvre toute la carte, qui reste donc cliquable en entier. Auparavant
-           un <a> englobait titre + sous-titre + didascalie + "Lire l'étude" +
-           l'alt de l'image : le nom du lien faisait un paragraphe (WCAG 2.4.4).
-           L'image devient décorative (alt=""), le titre la nomme déjà. */
+           couvre toute la carte, qui reste donc cliquable en entier. Un <a>
+           englobant titre + note + "Lire l'étude" + l'alt de l'image ferait un
+           nom de lien long d'un paragraphe (WCAG 2.4.4). L'image devient
+           décorative (alt=""), le titre la nomme déjà. */
         saison.map((p, i) => (
-          <article
-            class:list={[
-              "group relative border-l-2 bg-ivoire py-8 pl-8 pr-6 transition-colors hover:bg-encre/[0.03] focus-within:bg-encre/[0.03]",
-              p.accent,
-            ]}
-          >
-            <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-              <div class="max-w-xl">
-                <p class="font-display text-sm text-voile" aria-hidden="true">
-                  {String(i + 1).padStart(2, "0")}
-                </p>
-                <h2 class="mt-2 font-display text-3xl font-semibold leading-tight sm:text-4xl">
+          <article class="group relative overflow-hidden rounded-[28px] rounded-tl-[4px] border border-encre/10 transition-colors hover:border-encre/25">
+            <div
+              class:list={[
+                "grid grid-cols-1 lg:grid-cols-[1fr_1.1fr]",
+                i % 2 === 1 && "lg:grid-cols-[1.1fr_1fr]",
+              ]}
+            >
+              <div
+                class:list={[
+                  "order-2 bg-white/50 p-8 sm:p-10",
+                  i % 2 === 1 ? "lg:order-2" : "lg:order-1",
+                ]}
+              >
+                <div class="flex items-center gap-3">
+                  <span class="text-sm font-bold text-bordeaux" aria-hidden="true">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span class="text-xs uppercase tracking-[0.18em] text-bordeaux">
+                    {p.contexte}
+                  </span>
+                </div>
+
+                <h2 class="mt-4 text-3xl font-extrabold leading-tight sm:text-4xl">
                   <a href={p.href} class="after:absolute after:inset-0 after:content-['']">
                     {p.titre}
                   </a>
                 </h2>
                 <p class="mt-2 text-base text-voile">{p.sous}</p>
-                <p class="mt-4 font-display italic leading-relaxed text-voile">
-                  {p.didascalie}
+                <p class="mt-5 max-w-sm text-base leading-relaxed">{p.note}</p>
+
+                <p class="mt-7 border-t border-encre/10 pt-5 text-sm">
+                  <span class="text-accent">Rôle</span>
+                  <span class="ml-3 text-encre">{p.role}</span>
                 </p>
-                <span class="mt-5 inline-block text-sm text-encre" aria-hidden="true">
-                  Lire l'étude <span class="transition-transform group-hover:translate-x-1 inline-block">→</span>
+
+                <span class="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-encre" aria-hidden="true">
+                  Lire l'étude
+                  <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
                 </span>
               </div>
 
-              {p.image ? (
+              <div
+                class:list={[
+                  "order-1 flex items-center justify-center p-8",
+                  p.teinte,
+                  i % 2 === 1 ? "lg:order-1" : "lg:order-2",
+                ]}
+              >
+                <!-- Cadrage haut : ces maquettes sont des captures de page
+                     entière, très hautes. Cf. même choix sur la home. -->
                 <img
                   src={p.image}
                   alt=""
-                  class="aspect-[16/10] w-full shrink-0 rounded-[2px] object-contain lg:w-72"
+                  loading="lazy"
+                  class="h-[360px] w-full rounded-[4px] object-cover object-top shadow-[0_18px_45px_-24px_rgb(30_28_28/0.5)]"
                 />
-              ) : (
-                <div class="aspect-[16/10] w-full shrink-0 rounded-[2px] border border-dashed border-voile/40 lg:w-72">
-                  <div class="flex h-full items-center justify-center px-4 text-center font-display text-sm italic text-voile">
-                    Maquette à venir
-                  </div>
-                </div>
-              )}
+              </div>
             </div>
           </article>
         ))
@@ -106,11 +140,12 @@ const esquisses = [
     </div>
   </section>
 
-  <!-- ESQUISSES -->
-  <section class="mx-auto max-w-5xl px-6 pt-20 sm:px-10 sm:pt-28">
-    <header class="max-w-xl border-t border-voile/20 pt-12">
-      <h2 class="font-display text-3xl font-semibold">Esquisses</h2>
-      <p class="mt-4 font-display text-lg italic leading-relaxed text-voile">
+  <!-- Esquisses -->
+  <section class="mx-auto max-w-6xl px-6 pt-24 sm:px-10 sm:pt-32">
+    <header class="max-w-xl border-t border-encre/10 pt-12">
+      <p class="text-xs uppercase tracking-[0.2em] text-accent">Plus libre</p>
+      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Esquisses</h2>
+      <p class="mt-5 text-lg leading-relaxed text-voile">
         Explorations plus libres. Identités, pistes graphiques, projets en
         recherche.
       </p>
@@ -118,43 +153,35 @@ const esquisses = [
 
     <div class="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
       {
-        esquisses.map((e) =>
-          e.href ? (
-            <article class="group relative border border-voile/20 p-6 transition-colors hover:bg-encre/[0.03] focus-within:bg-encre/[0.03]">
+        esquisses.map((e) => (
+          <article class="group relative overflow-hidden rounded-[24px] rounded-tl-[4px] border border-encre/10 transition-colors hover:border-encre/25">
+            <div class="bg-rose/50 p-6">
               <img
                 src={e.cover}
                 alt=""
-                class="aspect-[4/3] w-full rounded-[2px] object-contain"
+                loading="lazy"
+                class="aspect-[4/3] w-full rounded-[4px] object-contain"
               />
-              <h3 class="mt-5 font-display text-xl font-medium">
+            </div>
+            <div class="bg-white/50 p-6">
+              <h3 class="text-xl font-bold">
                 <a href={e.href} class="after:absolute after:inset-0 after:content-['']">
                   {e.titre}
                 </a>
               </h3>
               <p class="mt-2 text-sm leading-relaxed text-voile">{e.note}</p>
-              <span class="mt-4 inline-block text-sm text-encre" aria-hidden="true">
-                Voir l'esquisse <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
+              <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-encre" aria-hidden="true">
+                Voir l'esquisse
+                <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
               </span>
-            </article>
-          ) : (
-            <article class="border border-voile/20 p-6">
-              <div class="aspect-[4/3] w-full rounded-[2px] border border-dashed border-voile/40">
-                <div class="flex h-full items-center justify-center px-4 text-center font-display text-sm italic text-voile">
-                  Visuel à venir
-                </div>
-              </div>
-              <h3 class="mt-5 font-display text-xl font-medium">{e.titre}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-voile">{e.note}</p>
-            </article>
-          )
-        )
+            </div>
+          </article>
+        ))
       }
 
-      {/* Emplacements libres pour d'autres esquisses */}
-      <article class="flex items-center justify-center border border-dashed border-voile/30 p-6">
-        <p class="text-center font-display text-sm italic text-voile">
-          Autres explorations à venir
-        </p>
+      {/* Emplacement libre pour d'autres esquisses */}
+      <article class="flex items-center justify-center rounded-[24px] rounded-tl-[4px] border border-dashed border-encre/20 p-6">
+        <p class="note text-center">Autres explorations à venir</p>
       </article>
     </div>
   </section>

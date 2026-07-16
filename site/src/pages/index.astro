@@ -2,79 +2,187 @@
 import Base from "../layouts/Base.astro";
 import Curtain from "../components/Curtain.astro";
 
-const saison = [
-  {
-    href: "/works/pool-party",
-    titre: "Pool Party",
-    note: "Marketplace de location de piscines entre particuliers.",
-  },
+// Un projet majeur, puis deux secondaires traités différemment : le concept
+// écarte explicitement la grille de cartes identiques.
+const majeur = {
+  href: "/works/pool-party",
+  titre: "Pool Party",
+  sous: "Marketplace P2P de location de piscines",
+  note: "Du cadrage stratégique à la maquette livrable. Six mois, en autonomie.",
+  image: "/images/poolparty-page-daccueil-maquette-page-daccueil-ordinateur.jpg",
+  role: "Cheffe de projet, de bout en bout",
+  contexte: "Projet de fin de cycle, MBA",
+};
+
+const secondaires = [
   {
     href: "/works/sumo-tournament",
     titre: "Sumo Tournament",
-    note: "Site événementiel pour un tournoi de sumo fictif.",
+    sous: "Site événementiel et back-office",
+    note: "Le projet où le design rencontre le code pour de vrai.",
+    image: "/images/sumo-home.png",
+    role: "Conception et mise en production",
+    teinte: "bg-brume",
   },
   {
     href: "/works/pool-and-splash",
     titre: "Pool & Splash",
-    note: "Refonte UI d'un site de vente de piscines.",
+    sous: "Refonte UI, direction kidkulting",
+    note: "Oser un ton joyeux là où tout le secteur joue le sérieux.",
+    image: "/images/homepage.png",
+    role: "Direction artistique et UI",
+    teinte: "bg-rose",
+  },
+];
+
+// Le vocabulaire est celui de son travail réel chez EasyVista, pas un
+// process générique : recherche, wireframes, design system, transmission dev.
+const etapes = [
+  {
+    titre: "Comprendre",
+    texte:
+      "J'analyse les besoins réels et je cherche les points de friction dans les parcours, côté agent comme côté utilisateur final.",
+  },
+  {
+    titre: "Structurer",
+    texte:
+      "Je pose l'architecture de l'information et les parcours avant de dessiner quoi que ce soit.",
+  },
+  {
+    titre: "Concevoir",
+    texte:
+      "Wireframes, puis maquettes haute fidélité et prototypes, alignés sur le design system.",
+  },
+  {
+    titre: "Tester",
+    texte:
+      "Tests utilisateurs, recette UX/UI, contrôle du responsive et de l'accessibilité.",
+  },
+  {
+    titre: "Transmettre",
+    texte:
+      "Maquettes propres, comportements détaillés, spécifications, et suivi jusqu'en développement.",
+  },
+];
+
+// Images réelles du travail, pas des visuels d'illustration.
+const coulisses = [
+  {
+    src: "/images/poolparty-wireframe-page-daccueil-ordinateur.png",
+    titre: "Wireframes",
+    note: "Explorer vite, trancher tôt.",
+  },
+  {
+    src: "/images/poolparty-moodboard.png",
+    titre: "Recherche visuelle",
+    note: "D'où vient une direction artistique.",
+  },
+  {
+    src: "/images/poolparty-chartre-graphique.png",
+    titre: "Charte et composants",
+    note: "Cohérence avant décoration.",
+  },
+  {
+    src: "/images/sumo-test-card.png",
+    titre: "Mise à l'épreuve",
+    note: "Ce que le test corrige.",
   },
 ];
 ---
 
 <Base current="">
   <Curtain />
-  <section class="mx-auto max-w-5xl px-6 pb-10 pt-8 sm:px-10 sm:pt-16">
-    <div class="grid grid-cols-1 items-center gap-12 md:grid-cols-[1fr_360px] md:gap-16">
-      <!-- Affiche -->
+
+  <!-- ÉCRAN 1 — Ouverture -->
+  <section class="relative mx-auto max-w-6xl px-6 pb-12 pt-6 sm:px-10 sm:pt-10">
+    <div class="grid grid-cols-1 items-center gap-10 md:grid-cols-[1.05fr_0.95fr] md:gap-14">
       <div>
-        <p class="lever lever-1 text-sm uppercase tracking-[0.18em] text-voile">
-          Portfolio, saison 2026
+        <p class="lever lever-1 flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
+          <span aria-hidden="true">✳</span>
+          Théâtre contemporain du Product Design
         </p>
-        <h1 class="lever lever-1 mt-5 font-display text-5xl font-semibold leading-[1.05] sm:text-6xl">
+
+        <h1 class="lever lever-1 mt-6 text-5xl font-extrabold leading-[1.02] sm:text-6xl lg:text-7xl">
           Audrey<br />Garoscio<span class="text-accent">.</span>
         </h1>
-        <p class="lever lever-2 mt-6 max-w-md font-display text-xl italic leading-relaxed text-voile">
+
+        <p class="lever lever-2 mt-6 max-w-md text-xl leading-snug text-voile">
           Product Designer, à la croisée du produit et de la scène.
         </p>
-        <p class="lever lever-2 mt-6 max-w-md text-base leading-relaxed">
+
+        <p class="lever lever-2 mt-5 max-w-md text-base leading-relaxed">
           Je conçois des interfaces comme on monte un spectacle. Une attention
           au rythme, au détail et à ce que l'on donne à voir en premier.
         </p>
 
-        <div class="lever lever-2 mt-8">
+        <ul class="lever lever-2 mt-8 flex flex-wrap gap-2.5">
+          <li class="rounded-full bg-rose/60 px-4 py-1.5 text-sm text-encre">
+            <span lang="en">Product Designer</span> UX/UI
+          </li>
+          <li class="rounded-full bg-jaune/50 px-4 py-1.5 text-sm text-encre">
+            SaaS B2B
+          </li>
+          <li class="rounded-full bg-brume/70 px-4 py-1.5 text-sm text-encre">
+            Accessibilité
+          </li>
+        </ul>
+
+        <div class="lever lever-2 mt-9 flex flex-wrap items-center gap-4">
+          <!-- Fond accent (#C43D30) et non corail : le corail à texte ivoire
+               ne monte qu'à 2.79:1. Ici on est à 4.96:1. -->
           <a
-            href="/about"
-            class="group inline-flex items-center gap-2 text-sm text-encre transition-colors hover:font-semibold"
+            href="/works"
+            class="group inline-flex items-center gap-2.5 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-ivoire transition-transform hover:scale-[1.02]"
           >
-            <span class="underline decoration-accent decoration-2 underline-offset-4">Mieux me connaître</span>
+            Découvrir mes projets
             <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+          </a>
+          <a
+            href="/contact"
+            class="inline-flex items-center gap-2.5 rounded-full border border-encre/25 px-6 py-3 text-sm text-encre transition-colors hover:border-encre hover:font-semibold"
+          >
+            Me contacter
           </a>
         </div>
       </div>
 
-      <!-- Portrait -->
-      <div class="lever lever-3 mx-auto w-full max-w-[320px] md:max-w-none">
+      <!-- Portrait posé sur une forme corail. Le corail est ici une surface
+           décorative : aucune règle de contraste ne s'y applique. -->
+      <div class="lever lever-3 relative mx-auto w-full max-w-[380px] md:max-w-none">
+        <div
+          class="blob -right-4 -top-8 h-[85%] w-[85%] bg-corail/85"
+          aria-hidden="true"
+        >
+        </div>
+        <div
+          class="blob -bottom-6 -left-6 h-[45%] w-[55%] bg-jaune/70"
+          aria-hidden="true"
+        >
+        </div>
         <img
           src="/images/portrait.png"
           alt="Portrait d'Audrey Garoscio"
           width="1086"
           height="1448"
-          class="w-full rounded-[2px] object-cover"
+          class="relative w-full rounded-[48%_52%_46%_54%/40%_38%_62%_60%] object-cover"
         />
+        <p class="note absolute -bottom-2 right-0 max-w-[13rem] -rotate-3 text-right sm:right-2">
+          Concevoir des expériences utiles, belles et humaines.
+        </p>
       </div>
     </div>
   </section>
 
   <!-- Actualité -->
-  <section class="mx-auto max-w-5xl px-6 pt-4 sm:px-10">
+  <section class="mx-auto max-w-6xl px-6 pt-8 sm:px-10">
     <div class="lever lever-3">
       <p
-        class="flex flex-wrap items-center gap-x-3 gap-y-2 rounded-2xl border border-encre/10 bg-white/45 px-5 py-4 text-sm shadow-[0_1px_20px_-10px_rgb(0_0_0/0.3)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.05]"
+        class="flex flex-wrap items-center gap-x-3 gap-y-2 rounded-2xl border border-encre/10 bg-white/60 px-5 py-4 text-sm shadow-[0_1px_20px_-12px_rgb(0_0_0/0.35)]"
       >
         <span
-          class="rounded-full border border-accent/25 px-2.5 py-0.5 text-xs uppercase tracking-[0.18em] text-accent"
+          class="rounded-full bg-bordeaux px-2.5 py-0.5 text-xs uppercase tracking-[0.18em] text-ivoire"
         >
-          News
+          Actualité
         </span>
         <span>
           Pool Party, le site présenté à ma soutenance, est en ligne. L'accès est protégé par un
@@ -100,34 +208,262 @@ const saison = [
     </div>
   </section>
 
-  <!-- Teasers vers la saison -->
-  <section class="mx-auto max-w-5xl px-6 pb-8 pt-12 sm:px-10 sm:pt-20">
-    <div class="flex items-baseline justify-between border-b border-voile/20 pb-4">
-      <h2 class="font-display text-2xl font-medium">À l'affiche</h2>
-      <a href="/works" class="-my-1 py-1 text-sm text-voile transition-colors hover:font-semibold hover:text-encre">
-        Tout voir <span aria-hidden="true">→</span>
+  <!-- ÉCRAN 2 — À l'affiche -->
+  <section class="mx-auto max-w-6xl px-6 pb-8 pt-20 sm:px-10 sm:pt-28">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p class="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
+          <span aria-hidden="true">✳</span> À l'affiche
+        </p>
+        <h2 class="mt-3 text-4xl font-extrabold sm:text-5xl">Projets</h2>
+      </div>
+      <a
+        href="/works"
+        class="group -my-1 py-1 text-sm text-voile transition-colors hover:font-semibold hover:text-encre"
+      >
+        Tout voir
+        <span class="inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
       </a>
     </div>
 
-    <ul>
-      {
-        saison.map((p, i) => (
-          <li class="border-b border-voile/15 transition-colors hover:border-voile/40">
-            <a
-              href={p.href}
-              class="group -mx-4 flex flex-col gap-1 rounded-lg px-4 py-6 transition-colors hover:bg-encre/[0.04] sm:flex-row sm:items-baseline sm:gap-8"
-            >
-              <span class="font-display text-sm text-voile sm:w-8">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span class="font-display text-2xl font-medium sm:w-64">
-                {p.titre}
-              </span>
-              <span class="text-base text-voile transition-colors group-hover:text-encre">{p.note}</span>
+    <!-- Le projet majeur occupe presque tout l'écran.
+         Motif "stretched link" : seul le titre est un lien, son ::after couvre
+         la carte entière, qui reste donc cliquable. L'image est décorative
+         (alt=""), le titre la nomme déjà (WCAG 2.4.4). -->
+    <article class="group relative mt-12 overflow-hidden rounded-[28px] rounded-tl-[4px] border border-encre/10 bg-white/50 transition-colors hover:border-encre/25">
+      <div class="grid grid-cols-1 gap-0 lg:grid-cols-[1fr_1.15fr]">
+        <div class="order-2 p-8 sm:p-10 lg:order-1">
+          <p class="text-xs uppercase tracking-[0.18em] text-bordeaux">
+            {majeur.contexte}
+          </p>
+          <h3 class="mt-4 text-3xl font-extrabold leading-tight sm:text-4xl">
+            <a href={majeur.href} class="after:absolute after:inset-0 after:content-['']">
+              {majeur.titre}
             </a>
-          </li>
+          </h3>
+          <p class="mt-2 text-base text-voile">{majeur.sous}</p>
+          <p class="mt-5 max-w-sm text-base leading-relaxed">{majeur.note}</p>
+
+          <dl class="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-encre/10 pt-6 text-sm">
+            <div>
+              <dt class="text-accent">Rôle</dt>
+              <dd class="mt-1 text-encre">{majeur.role}</dd>
+            </div>
+            <div>
+              <dt class="text-accent">Durée</dt>
+              <dd class="mt-1 text-encre">Six mois</dd>
+            </div>
+          </dl>
+
+          <span class="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-encre" aria-hidden="true">
+            Lire l'étude
+            <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
+          </span>
+        </div>
+
+        <!-- Pas de .blob ici : le fond brume de ce bloc le masquerait
+             (z-index négatif = derrière le fond du parent). -->
+        <div class="relative order-1 flex items-center justify-center overflow-hidden bg-brume/40 p-8 lg:order-2">
+          <!-- Les maquettes sont des captures de page entière (jusqu'à
+               1920x4948) : en object-contain elles imposaient une carte de
+               1300px de haut. On cadre sur le haut de la maquette, comme une
+               affiche. -->
+          <img
+            src={majeur.image}
+            alt=""
+            loading="lazy"
+            class="relative h-[420px] w-full rounded-[4px] object-cover object-top shadow-[0_20px_50px_-24px_rgb(30_28_28/0.5)]"
+          />
+        </div>
+      </div>
+    </article>
+
+    <!-- Les deux projets secondaires, traités plus sobrement -->
+    <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
+      {
+        secondaires.map((p) => (
+          <article class="group relative overflow-hidden rounded-[24px] rounded-tl-[4px] border border-encre/10 transition-colors hover:border-encre/25">
+            <div class:list={["flex items-center justify-center p-6", p.teinte]}>
+              <img
+                src={p.image}
+                alt=""
+                loading="lazy"
+                class="aspect-[16/10] w-full rounded-[4px] object-contain"
+              />
+            </div>
+            <div class="bg-white/50 p-7">
+              <h3 class="text-2xl font-extrabold leading-tight">
+                <a href={p.href} class="after:absolute after:inset-0 after:content-['']">
+                  {p.titre}
+                </a>
+              </h3>
+              <p class="mt-1.5 text-sm text-voile">{p.sous}</p>
+              <p class="mt-4 text-base leading-relaxed">{p.note}</p>
+              <p class="mt-5 border-t border-encre/10 pt-4 text-sm">
+                <span class="text-accent">Rôle</span>
+                <span class="ml-3 text-encre">{p.role}</span>
+              </p>
+            </div>
+          </article>
         ))
       }
-    </ul>
+    </div>
+  </section>
+
+  <!-- ÉCRAN 3 — Ma manière de travailler -->
+  <section class="relative mt-24 overflow-hidden border-y border-encre/10 bg-white/40 py-20 sm:mt-32">
+    <div class="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 sm:px-10 lg:grid-cols-[300px_1fr] lg:gap-16">
+      <div>
+        <p class="text-xs uppercase tracking-[0.2em] text-accent">
+          Ma manière de travailler
+        </p>
+        <h2 class="mt-4 text-3xl font-extrabold leading-tight sm:text-4xl">
+          De la compréhension<br />à la <span class="trace">réalisation</span>.
+        </h2>
+        <p class="mt-6 max-w-xs text-base leading-relaxed text-voile">
+          Je travaille au contact des Product Owners, des développeurs et des
+          équipes métier. Le design ne s'arrête pas à la maquette : il tient
+          jusqu'à ce que la fonctionnalité existe vraiment.
+        </p>
+      </div>
+
+      <ol class="grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          etapes.map((e, i) => (
+            <li>
+              <p class="text-sm font-semibold text-bordeaux" aria-hidden="true">
+                {String(i + 1).padStart(2, "0")}
+              </p>
+              <h3 class="mt-2 text-lg font-bold">{e.titre}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-voile">{e.texte}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- ÉCRAN 4 — Les coulisses -->
+  <section class="mx-auto max-w-6xl px-6 pt-24 sm:px-10 sm:pt-28">
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-[280px_1fr] lg:gap-14">
+      <div>
+        <p class="text-xs uppercase tracking-[0.2em] text-accent">
+          Dans les coulisses
+        </p>
+        <h2 class="mt-4 text-3xl font-extrabold leading-tight sm:text-4xl">
+          Un design pensé,<br />testé et documenté.
+        </h2>
+        <p class="mt-6 max-w-xs text-base leading-relaxed text-voile">
+          Ce qu'il y a avant la belle image. Les vrais brouillons, les pistes
+          abandonnées, les décisions qu'il a fallu argumenter.
+        </p>
+      </div>
+
+      <ul class="grid grid-cols-2 gap-5 lg:grid-cols-4">
+        {
+          coulisses.map((c) => (
+            <li class="overflow-hidden rounded-[18px] rounded-tl-[3px] border border-encre/10">
+              <img
+                src={c.src}
+                alt=""
+                loading="lazy"
+                class="aspect-[4/3] w-full bg-white object-cover object-top"
+              />
+              <div class="p-4">
+                <h3 class="text-sm font-bold">{c.titre}</h3>
+                <p class="mt-1 text-xs leading-relaxed text-voile">{c.note}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ÉCRAN 5 — À propos -->
+  <section class="mx-auto max-w-6xl px-6 pt-24 sm:px-10 sm:pt-32">
+    <div class="grid grid-cols-1 items-center gap-12 md:grid-cols-[300px_1fr] md:gap-16">
+      <div class="relative mx-auto w-full max-w-[260px] md:max-w-none">
+        <div class="blob -left-6 -top-6 h-[70%] w-[80%] bg-rose/80" aria-hidden="true"></div>
+        <div class="blob -bottom-4 right-0 h-[40%] w-[45%] bg-jaune/60" aria-hidden="true"></div>
+        <img
+          src="/images/about.jpg"
+          alt=""
+          width="599"
+          height="900"
+          loading="lazy"
+          class="relative w-full rounded-[52%_48%_44%_56%/42%_40%_60%_58%] object-cover"
+        />
+      </div>
+
+      <div>
+        <p class="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
+          <span aria-hidden="true">✳</span> À propos
+        </p>
+        <h2 class="mt-4 text-3xl font-extrabold leading-tight sm:text-4xl">
+          D'une costumière<br />à Product Designer.
+        </h2>
+        <p class="mt-6 max-w-lg text-base leading-relaxed">
+          J'ai commencé dans les loges, habilleuse sur les shows Marvel à
+          Disneyland Paris, costumière et chapelière sur des spectacles où
+          chaque détail est vu en direct, à cinq mètres d'un public qui ne
+          pardonne rien. Concevoir une interface, c'est habiller un usage comme
+          on habille un personnage : ajuster, mettre en scène, faire en sorte
+          qu'une personne reçoive ce qu'on lui adresse sans friction.
+        </p>
+        <p class="note mt-6 -rotate-1">Même exigence, autre décor.</p>
+
+        <div class="mt-9">
+          <a
+            href="/about"
+            class="group inline-flex items-center gap-2 text-sm text-encre transition-colors hover:font-semibold"
+          >
+            <span class="underline decoration-accent decoration-2 underline-offset-4">
+              Mieux me connaître
+            </span>
+            <span class="inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÉCRAN 6 — Contact -->
+  <section class="mx-auto mt-24 max-w-6xl px-6 sm:mt-32 sm:px-10">
+    <!-- Volontairement sans fond : les .blob ci-dessous se placent derrière le
+         fond de leur parent, un bg-white l'aurait annulé. La bordure suffit. -->
+    <div class="relative overflow-hidden rounded-[32px] rounded-tl-[4px] border border-encre/10 px-8 py-14 sm:px-14">
+      <!-- Cette carte garde overflow-hidden (les formes doivent rester dans
+           les coins arrondis) : on les cale donc entièrement à l'intérieur,
+           sinon le découpage les aplatit en rectangles. -->
+      <div class="blob right-0 top-0 h-64 w-64 bg-corail/20" aria-hidden="true"></div>
+      <div class="blob bottom-0 left-1/3 h-40 w-40 bg-jaune/25" aria-hidden="true"></div>
+
+      <p class="text-xs uppercase tracking-[0.2em] text-accent">Restons en contact</p>
+      <h2 class="mt-4 max-w-xl text-3xl font-extrabold leading-tight sm:text-5xl">
+        Construisons la <span class="trace">prochaine scène</span> ensemble.
+      </h2>
+      <p class="mt-6 max-w-md text-base leading-relaxed text-voile">
+        Disponible dès octobre 2026 pour rejoindre votre équipe. Si mon profil
+        résonne avec votre projet, écrivez-moi.
+      </p>
+
+      <div class="mt-9 flex flex-wrap items-center gap-4">
+        <a
+          href="/contact"
+          class="group inline-flex items-center gap-2.5 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-ivoire transition-transform hover:scale-[1.02]"
+        >
+          Me contacter
+          <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+        </a>
+        <a
+          href="/cv/audrey-garoscio-cv.pdf"
+          download
+          class="inline-flex items-center gap-2.5 rounded-full border border-encre/25 px-6 py-3 text-sm text-encre transition-colors hover:border-encre hover:font-semibold"
+        >
+          Télécharger le CV (PDF)
+        </a>
+      </div>
+    </div>
   </section>
 </Base>

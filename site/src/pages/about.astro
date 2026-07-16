@@ -42,15 +42,19 @@ const labelPoints = radar.map((c, i) => {
 });
 ---
 
-<Base title="About — Audrey Garoscio" current="about">
-  <section class="mx-auto max-w-5xl px-6 pt-10 sm:px-10 sm:pt-16">
+<Base title="À propos — Audrey Garoscio" current="about">
+  <section class="relative mx-auto max-w-5xl px-6 pt-10 sm:px-10 sm:pt-16">
     <!-- En-tête : titre + tagline -->
-    <header class="max-w-2xl border-b border-voile/20 pb-10">
-      <p class="text-sm uppercase tracking-[0.18em] text-voile">Les coulisses</p>
-      <h1 class="mt-3 font-display text-4xl font-semibold leading-tight sm:text-5xl">
-        Audrey Garoscio, Product Designer
+    <div class="blob right-0 top-2 h-64 w-64 bg-corail/20" aria-hidden="true"></div>
+
+    <header class="max-w-2xl border-b border-encre/10 pb-10">
+      <p class="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
+        <span aria-hidden="true">✳</span> À propos
+      </p>
+      <h1 class="mt-4 text-4xl font-extrabold leading-[1.05] sm:text-5xl">
+        D'une costumière à <span class="trace">Product Designer</span>.
       </h1>
-      <p class="mt-5 font-display text-lg italic leading-relaxed text-voile">
+      <p class="mt-6 text-lg leading-relaxed text-voile">
         À la croisée du produit et de la scène.
       </p>
     </header>
@@ -60,22 +64,22 @@ const labelPoints = radar.map((c, i) => {
       <div>
         <ul class="space-y-4 text-base">
           <li class="flex items-baseline gap-4">
-            <span class="font-display text-sm uppercase tracking-[0.14em] text-voile shrink-0 sm:w-28">Profil</span>
+            <span class="shrink-0 text-sm uppercase tracking-[0.14em] text-accent sm:w-28">Profil</span>
             <span>Audrey Garoscio, 36 ans, RQTH</span>
           </li>
           <li class="flex items-baseline gap-4">
-            <span class="font-display text-sm uppercase tracking-[0.14em] text-voile shrink-0 sm:w-28">Vit à</span>
+            <span class="shrink-0 text-sm uppercase tracking-[0.14em] text-accent sm:w-28">Vit à</span>
             <span>Noisy-le-Grand, Île-de-France</span>
           </li>
           <li class="flex items-baseline gap-4">
-            <span class="font-display text-sm uppercase tracking-[0.14em] text-voile shrink-0 sm:w-28">Aime</span>
+            <span class="shrink-0 text-sm uppercase tracking-[0.14em] text-accent sm:w-28">Aime</span>
             <span>le théâtre, le DIY, les reconstitutions historiques, les jeux de société, fouiner le net à la recherche d'inspiration</span>
           </li>
         </ul>
 
         <!-- Récit en trois temps -->
         <div class="mt-12 max-w-[60ch]">
-          <h2 class="font-display text-2xl font-medium">D'où je viens</h2>
+          <h2 class="text-2xl font-extrabold">D'où je viens</h2>
           <p class="mt-4 text-base leading-relaxed">
             J'ai commencé dans les loges. Habilleuse sur les shows Marvel à
             Disneyland Paris, costumière et chapelière sur des spectacles où
@@ -87,7 +91,7 @@ const labelPoints = radar.map((c, i) => {
         </div>
 
         <div class="mt-10 max-w-[60ch]">
-          <h2 class="font-display text-2xl font-medium">Pourquoi j'ai bougé</h2>
+          <h2 class="text-2xl font-extrabold">Pourquoi j'ai bougé</h2>
           <p class="mt-4 text-base leading-relaxed">
             En 2023 j'ai découvert l'UX/UI design. Pas par rupture, par
             prolongement. Concevoir une interface, c'est habiller un usage comme
@@ -99,7 +103,7 @@ const labelPoints = radar.map((c, i) => {
         </div>
 
         <div class="mt-10 max-w-[60ch]">
-          <h2 class="font-display text-2xl font-medium">Ce que je fais maintenant</h2>
+          <h2 class="text-2xl font-extrabold">Ce que je fais maintenant</h2>
           <p class="mt-4 text-base leading-relaxed">
             Trouver une alternance a pris du temps : mon profil atypique a
             d'abord effrayé. C'est la journée de l'inclusion handicap qui m'a
@@ -119,8 +123,8 @@ const labelPoints = radar.map((c, i) => {
         </div>
 
         <!-- Note sur le portfolio -->
-        <div class="mt-12 max-w-[60ch] border-t border-voile/20 pt-8">
-          <h2 class="font-display text-2xl font-medium">Une note sur ce portfolio</h2>
+        <div class="mt-12 max-w-[60ch] border-t border-encre/10 pt-8">
+          <h2 class="text-2xl font-extrabold">Une note sur ce portfolio</h2>
           <p class="mt-4 text-base leading-relaxed">
             Ce site a été conçu en moins de 24 heures, avec Claude comme copilote de code. Le positionnement, la direction artistique, l'architecture des pages, les contenus et les décisions de design sont les miens. La mise en code a été déléguée à l'IA, pour privilégier la rapidité d'exécution.
           </p>
@@ -143,27 +147,32 @@ const labelPoints = radar.map((c, i) => {
           <a
             href="/cv/audrey-garoscio-cv.pdf"
             download
-            class="inline-flex items-center rounded-[20px] border border-encre px-6 py-3 text-sm text-encre transition-colors hover:bg-encre/[0.04]"
+            class="inline-flex items-center rounded-full border border-encre/25 px-6 py-3 text-sm text-encre transition-colors hover:border-encre hover:font-semibold"
           >
             Télécharger le CV (PDF)
           </a>
         </div>
       </div>
 
-      <div class="mx-auto w-full max-w-[280px] md:max-w-none">
+      <div class="relative mx-auto w-full max-w-[280px] md:max-w-none">
+        <div class="blob -left-5 -top-5 h-[70%] w-[80%] bg-rose/80" aria-hidden="true"></div>
+        <div class="blob -bottom-4 right-0 h-[40%] w-[45%] bg-jaune/60" aria-hidden="true"></div>
         <img
           src="/images/about.jpg"
           alt="Portrait d'Audrey Garoscio"
           width="599"
           height="900"
-          class="w-full rounded-[2px] object-cover"
+          class="relative w-full rounded-[52%_48%_44%_56%/42%_40%_60%_58%] object-cover"
         />
+        <p class="note mt-6 -rotate-2 text-center">
+          Même exigence, autre décor.
+        </p>
       </div>
     </div>
 
     <!-- Radar des compétences -->
-    <div class="mt-20 border-t border-voile/20 pt-12">
-      <h2 class="font-display text-2xl font-medium">Le plateau</h2>
+    <div class="mt-20 border-t border-encre/10 pt-12">
+      <h2 class="text-2xl font-extrabold">Le plateau</h2>
       <p class="mt-3 max-w-xl text-base leading-relaxed text-voile">
         Les rôles que je sais tenir, et l'équilibre entre eux.
       </p>
