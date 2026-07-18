@@ -23,7 +23,6 @@ const secondaires = [
     note: "Le projet où le design rencontre le code pour de vrai.",
     image: "/images/sumo-home.png",
     role: "Conception et mise en production",
-    teinte: "bg-brume",
   },
   {
     href: "/works/pool-and-splash",
@@ -32,47 +31,43 @@ const secondaires = [
     note: "Oser un ton joyeux là où tout le secteur joue le sérieux.",
     image: "/images/homepage.png",
     role: "Direction artistique et UI",
-    teinte: "bg-corail/35",
   },
 ];
 
 // Le vocabulaire est celui de son travail réel chez EasyVista, pas un
 // process générique : recherche, wireframes, design system, transmission dev.
-// Les teintes des pastilles reprennent celles de la maquette. Ce sont des
-// aplats décoratifs : l'icône posée dessus est encre, jamais corail.
+// Pas de teinte par étape : les cinq pastilles partagent le même aplat, câblé
+// dans le balisage. Une couleur par étape ne distinguerait rien — elles sont
+// déjà numérotées et titrées — et en faire une donnée, c'est rouvrir
+// l'arc-en-ciel au prochain ajout.
 const etapes = [
   {
     titre: "Comprendre",
     icone: "recherche",
-    teinte: "bg-brume/35",
     texte:
       "J'analyse les besoins réels et je cherche les points de friction dans les parcours, côté agent comme côté utilisateur final.",
   },
   {
     titre: "Structurer",
     icone: "arborescence",
-    teinte: "bg-jaune/35",
     texte:
       "Je pose l'architecture de l'information et les parcours avant de dessiner quoi que ce soit.",
   },
   {
     titre: "Concevoir",
     icone: "crayon",
-    teinte: "bg-corail/35",
     texte:
       "Wireframes, puis maquettes haute fidélité et prototypes, alignés sur le design system.",
   },
   {
     titre: "Tester",
     icone: "utilisateurs",
-    teinte: "bg-corail/15",
     texte:
       "Tests utilisateurs, recette UX/UI, contrôle du responsive et de l'accessibilité.",
   },
   {
     titre: "Transmettre",
     icone: "envoi",
-    teinte: "bg-brume/15",
     texte:
       "Maquettes propres, comportements détaillés, spécifications, et suivi jusqu'en développement.",
   },
@@ -129,15 +124,15 @@ const coulisses = [
         </p>
 
         <ul class="lever lever-2 mt-8 flex flex-wrap gap-2.5">
-          <li class="flex items-center gap-2 rounded-full bg-corail/15 px-4 py-1.5 text-sm text-encre">
+          <li class="flex items-center gap-2 rounded-full bg-accent/10 px-4 py-1.5 text-sm text-encre">
             <Icone nom="wireframe" taille={15} class="shrink-0" />
             <span><span lang="en">Product Designer</span> UX/UI</span>
           </li>
-          <li class="flex items-center gap-2 rounded-full bg-jaune/35 px-4 py-1.5 text-sm text-encre">
+          <li class="flex items-center gap-2 rounded-full bg-accent/10 px-4 py-1.5 text-sm text-encre">
             <Icone nom="utilisateurs" taille={15} class="shrink-0" />
             SaaS B2B
           </li>
-          <li class="flex items-center gap-2 rounded-full bg-brume/35 px-4 py-1.5 text-sm text-encre">
+          <li class="flex items-center gap-2 rounded-full bg-accent/10 px-4 py-1.5 text-sm text-encre">
             <Icone nom="accessibilite" taille={15} class="shrink-0" />
             Accessibilité
           </li>
@@ -163,24 +158,19 @@ const coulisses = [
       </div>
 
       <!-- Portrait posé sur une forme corail. Le corail est ici une surface
-           décorative : aucune règle de contraste ne s'y applique. -->
+           décorative : aucune règle de contraste ne s'y applique.
+           La forme et le corail sont composités dans l'image : pas de .blob CSS
+           ici, son fond opaque les masquerait (cf. z-index négatif de .blob).
+           Recadrée depuis img/portrait-audrey-rideau.png pour écarter le nom et
+           la tagline incrustés, qui doublonnaient le <h1> et la note ci-dessous
+           sans être sélectionnables ni conformes AA. -->
       <div class="lever lever-3 relative mx-auto w-full max-w-[380px] md:max-w-none">
-        <div
-          class="blob -right-4 -top-8 h-[85%] w-[85%] bg-corail"
-          aria-hidden="true"
-        >
-        </div>
-        <div
-          class="blob -bottom-6 -left-6 h-[45%] w-[55%] bg-jaune/35"
-          aria-hidden="true"
-        >
-        </div>
         <img
-          src="/images/portrait.png"
+          src="/images/portrait-rideau.png"
           alt="Portrait d'Audrey Garoscio"
-          width="1086"
-          height="1448"
-          class="relative w-full rounded-[48%_52%_46%_54%/40%_38%_62%_60%] object-cover"
+          width="940"
+          height="1024"
+          class="relative w-full"
         />
         <!-- Sous le portrait et non dessus : en absolu par-dessus la photo,
              le corail de .note devenait illisible sur le visage. -->
@@ -198,7 +188,7 @@ const coulisses = [
         class="flex flex-wrap items-center gap-x-3 gap-y-2 rounded-2xl border border-encre/10 bg-white/60 px-5 py-4 text-sm shadow-[0_1px_20px_-12px_rgb(0_0_0/0.35)]"
       >
         <span
-          class="rounded-full bg-bordeaux px-2.5 py-0.5 text-xs uppercase tracking-[0.18em] text-ivoire"
+          class="rounded-full bg-accent px-2.5 py-0.5 text-xs uppercase tracking-[0.18em] text-ivoire"
         >
           Actualité
         </span>
@@ -251,7 +241,7 @@ const coulisses = [
     <article class="group relative mt-12 overflow-hidden rounded-[28px] rounded-tl-[4px] border border-encre/10 bg-white/50 transition-colors hover:border-encre/25">
       <div class="grid grid-cols-1 gap-0 lg:grid-cols-[1fr_1.15fr]">
         <div class="order-2 p-8 sm:p-10 lg:order-1">
-          <p class="text-xs uppercase tracking-[0.18em] text-bordeaux">
+          <p class="text-xs uppercase tracking-[0.18em] text-accent">
             {majeur.contexte}
           </p>
           <h3 class="mt-4 text-3xl font-extrabold leading-tight sm:text-4xl">
@@ -281,7 +271,7 @@ const coulisses = [
 
         <!-- Pas de .blob ici : le fond brume de ce bloc le masquerait
              (z-index négatif = derrière le fond du parent). -->
-        <div class="relative order-1 flex items-center justify-center overflow-hidden bg-brume/35 p-8 lg:order-2">
+        <div class="relative order-1 flex items-center justify-center overflow-hidden bg-accent/10 p-8 lg:order-2">
           <!-- Les maquettes sont des captures de page entière (jusqu'à
                1920x4948) : en object-contain elles imposaient une carte de
                1300px de haut. On cadre sur le haut de la maquette, comme une
@@ -301,7 +291,7 @@ const coulisses = [
       {
         secondaires.map((p) => (
           <article class="group relative overflow-hidden rounded-[24px] rounded-tl-[4px] border border-encre/10 transition-colors hover:border-encre/25">
-            <div class:list={["flex items-center justify-center p-6", p.teinte]}>
+            <div class="flex items-center justify-center bg-accent/10 p-6">
               <img
                 src={p.image}
                 alt=""
@@ -349,15 +339,10 @@ const coulisses = [
         {
           etapes.map((e, i) => (
             <li>
-              <span
-                class:list={[
-                  "flex h-14 w-14 items-center justify-center rounded-[18px] rounded-tl-[4px]",
-                  e.teinte,
-                ]}
-              >
+              <span class="flex h-14 w-14 items-center justify-center rounded-[18px] rounded-tl-[4px] bg-accent/10">
                 <Icone nom={e.icone} taille={26} />
               </span>
-              <p class="mt-4 text-sm font-semibold text-bordeaux" aria-hidden="true">
+              <p class="mt-4 text-sm font-semibold text-accent" aria-hidden="true">
                 {String(i + 1).padStart(2, "0")}
               </p>
               <h3 class="mt-1 text-lg font-bold">{e.titre}</h3>
@@ -410,8 +395,8 @@ const coulisses = [
   <section class="mx-auto max-w-6xl px-6 pt-24 sm:px-10 sm:pt-32">
     <div class="grid grid-cols-1 items-center gap-12 md:grid-cols-[300px_1fr] md:gap-16">
       <div class="relative mx-auto w-full max-w-[260px] md:max-w-none">
-        <div class="blob -left-6 -top-6 h-[70%] w-[80%] bg-corail/35" aria-hidden="true"></div>
-        <div class="blob -bottom-4 right-0 h-[40%] w-[45%] bg-jaune/35" aria-hidden="true"></div>
+        <div class="blob -left-6 -top-6 h-[70%] w-[80%] bg-accent/35" aria-hidden="true"></div>
+        <div class="blob -bottom-4 right-0 h-[40%] w-[45%] bg-accent/10" aria-hidden="true"></div>
         <img
           src="/images/about.jpg"
           alt=""
@@ -462,8 +447,8 @@ const coulisses = [
       <!-- Cette carte garde overflow-hidden (les formes doivent rester dans
            les coins arrondis) : on les cale donc entièrement à l'intérieur,
            sinon le découpage les aplatit en rectangles. -->
-      <div class="blob right-0 top-0 h-64 w-64 bg-corail/15" aria-hidden="true"></div>
-      <div class="blob bottom-0 left-1/3 h-40 w-40 bg-jaune/15" aria-hidden="true"></div>
+      <div class="blob right-0 top-0 h-64 w-64 bg-accent/10" aria-hidden="true"></div>
+      <div class="blob bottom-0 left-1/3 h-40 w-40 bg-accent/10" aria-hidden="true"></div>
 
       <p class="text-xs uppercase tracking-[0.2em] text-accent">Restons en contact</p>
       <h2 class="mt-4 max-w-xl text-3xl font-extrabold leading-tight sm:text-5xl">

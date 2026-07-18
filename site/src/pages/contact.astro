@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import Bouton from "../components/Bouton.astro";
 import Icone from "../components/Icone.astro";
 
 // Endpoint du formulaire Formspree (les messages arrivent sur product.garoscio@gmail.com).
@@ -9,10 +10,13 @@ const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
 <Base title="Contact — Audrey Garoscio" current="contact">
   <section class="relative mx-auto max-w-3xl px-6 pt-14 sm:px-10 sm:pt-20">
     <!-- top positif : cf. works.astro, une forme sous la nav dégradait le
-         contraste des liens. La forme jaune est écartée du titre pour ne pas
-         teinter le fond du H1. -->
-    <div class="blob right-0 top-2 h-64 w-64 bg-corail/15" aria-hidden="true"></div>
-    <div class="blob left-0 top-80 h-40 w-40 bg-jaune/15" aria-hidden="true"></div>
+         contraste des liens. La seconde forme est écartée du titre pour ne
+         pas teinter le fond du H1. -->
+    <div class="blob right-0 top-2 h-64 w-64 bg-accent/10" aria-hidden="true"></div>
+    <!-- Retirée : à top-80 elle passait derrière les libellés « Email » et
+         « LinkedIn », qui sont en text-accent. Le rouge sur son propre lavis
+         tombe à 4.3:1 — c'est le seul piège de la palette à un rouge, et
+         l'audit l'a trouvé ici. Une seule forme suffit à cet écran. -->
 
     <p class="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
       <Icone nom="etoile" taille={14} class="shrink-0" /> Restons en contact
@@ -110,6 +114,26 @@ const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
         </div>
 
         <div>
+          <label for="profil" class="text-sm uppercase tracking-[0.14em] text-accent">
+            Vous êtes
+          </label>
+          <select
+            id="profil"
+            name="profil"
+            required
+            class="mt-2 w-full rounded-lg border border-voile bg-transparent px-4 py-3 text-base text-encre transition-colors focus:border-encre"
+          >
+            <option value="">Choisissez…</option>
+            <option value="Recruteur ou recruteuse">Recruteur ou recruteuse</option>
+            <option value="Professionnel du design ou du produit">
+              Professionnel du design ou du produit
+            </option>
+            <option value="Étudiant ou étudiante">Étudiant ou étudiante</option>
+            <option value="Autre">Autre</option>
+          </select>
+        </div>
+
+        <div>
           <label for="message" class="text-sm uppercase tracking-[0.14em] text-accent">
             Message
           </label>
@@ -122,13 +146,7 @@ const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
           ></textarea>
         </div>
 
-        <button
-          type="submit"
-          class="group inline-flex items-center gap-2.5 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-ivoire transition-transform hover:scale-[1.02]"
-        >
-          Envoyer le message
-          <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
-        </button>
+        <Bouton type="submit">Envoyer le message</Bouton>
 
         <!-- Messages de retour.
              role="status" / role="alert" : sans eux, la bascule de la classe

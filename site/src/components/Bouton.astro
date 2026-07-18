@@ -1,0 +1,101 @@
+---
+// Les trois — et seulement trois — boutons du portfolio.
+//
+// Avant ce composant, chaque bouton était écrit à la main en Tailwind inline.
+// Le primaire et le secondaire avaient tenu (à un gap-2.5 près), mais le
+// tertiaire avait dérivé en quatre variantes : encre ou voile, souligné ou
+// non, hover semi-bold présent ou oublié. D'où la règle : un bouton du site
+// passe par ce fichier, sinon c'est un quatrième type qui commence.
+//
+// Ce qui N'EST PAS un bouton et ne passe donc pas par ici :
+//   - le lien dans une phrase (« parlons-en. ») — c'est du texte souligné,
+//     pas une cible : `underline decoration-accent decoration-2 underline-offset-4`
+//   - les liens du pied de page et du sommaire d'étude de cas — navigation.
+//
+// RÈGLE DE CONTRASTE (cf. global.css) : le fond du primaire est --color-accent,
+// texte ivoire dessus, 4.97:1. C'est aussi le seul rouge de la palette. Le
+// corail vif de la maquette (#f26f62) est tentant ici, mais il plafonne à
+// 2.79:1 avec du texte ivoire : il échoue AA, et il rouvrirait un second rouge.
+const {
+  variante = "primaire",
+  fleche = "droite",
+  class: classe = "",
+  ...reste
+} = Astro.props;
+
+// Un href fait un lien, son absence fait un bouton (le submit du formulaire
+// de contact). Évite de passer un `tag` à la main et de se tromper.
+const Tag = reste.href ? "a" : "button";
+
+// Le secondaire et le tertiaire passent en semi-bold au survol ; le primaire
+// est déjà semi-bold en permanence et ne bouge donc jamais.
+const graisseAuSurvol = variante !== "primaire";
+
+const variantes = {
+  // L'appel à l'action de l'écran. Un seul par vue : deux primaires côte à
+  // côte, c'est aucun primaire.
+  primaire:
+    "group inline-flex items-center gap-2.5 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-ivoire transition-transform hover:scale-[1.02]",
+  // L'action de repli, posée à côté du primaire. Contour discret qui se
+  // révèle au survol — pas d'aplat, pour ne pas concurrencer le primaire.
+  secondaire:
+    "inline-flex items-center gap-2.5 rounded-full border border-encre/25 px-6 py-3 text-sm text-encre transition-colors hover:border-encre hover:font-semibold",
+  // Le lien-action : pas de forme, l'affordance tient au souligné accent et
+  // à la flèche. `-my-1 py-1` agrandit la cible sans pousser les voisins.
+  tertiaire:
+    "group -my-1 inline-flex items-center gap-2 py-1 text-sm text-encre transition-colors hover:font-semibold",
+};
+
+const fleches = {
+  droite: { glyphe: "→", mouvement: "group-hover:translate-x-1", avant: false },
+  bas: { glyphe: "↓", mouvement: "group-hover:translate-y-1", avant: false },
+  gauche: { glyphe: "←", mouvement: "group-hover:-translate-x-1", avant: true },
+};
+
+const f = fleches[fleche];
+---
+
+<Tag class:list={[variantes[variante], classe]} {...reste}>
+  {f?.avant && (
+    <span class:list={["inline-block transition-transform", f.mouvement]} aria-hidden="true">
+      {f.glyphe}
+    </span>
+  )}
+
+  {
+    /* Le libellé est empilé en deux exemplaires dans une même cellule de
+       grille : un fantôme toujours semi-bold qui ne sert qu'à MESURER, et le
+       vrai texte par-dessus. La cellule fait donc en permanence la largeur du
+       gras, et le passage en semi-bold au survol ne réélargit plus rien —
+       sinon le bouton s'étirait et poussait son voisin (« Me contacter »
+       décalait le CV, la flèche du tertiaire sautait d'un cran).
+       Le fantôme est en visibility:hidden : il occupe la place, mais sort du
+       rendu, de la sélection de texte et de l'arbre d'accessibilité.
+
+       Le souligné du tertiaire ne porte QUE sur le libellé : à cheval sur la
+       flèche, il se lisait comme un trait qui bave après le mot. */
+    graisseAuSurvol ? (
+      <span class="grid">
+        <span class="invisible col-start-1 row-start-1 font-semibold" aria-hidden="true">
+          <slot />
+        </span>
+        <span
+          class:list={[
+            "col-start-1 row-start-1",
+            variante === "tertiaire" && "underline decoration-accent decoration-2 underline-offset-4",
+          ]}
+        >
+          <slot />
+        </span>
+      </span>
+    ) : (
+      <slot />
+    )
+  }
+
+  {!f?.avant && f && (
+    <span class:list={["inline-block transition-transform", f.mouvement]} aria-hidden="true">
+      {f.glyphe}
+    </span>
+  )}
+</Tag>

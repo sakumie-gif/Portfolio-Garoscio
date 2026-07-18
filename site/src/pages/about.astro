@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import Bouton from "../components/Bouton.astro";
 import Icone from "../components/Icone.astro";
 
 // Les six pointes du radar et leur valeur (de 0 à 100).
@@ -46,7 +47,7 @@ const labelPoints = radar.map((c, i) => {
 <Base title="À propos — Audrey Garoscio" current="about">
   <section class="relative mx-auto max-w-5xl px-6 pt-10 sm:px-10 sm:pt-16">
     <!-- En-tête : titre + tagline -->
-    <div class="blob right-0 top-2 h-64 w-64 bg-corail/15" aria-hidden="true"></div>
+    <div class="blob right-0 top-2 h-64 w-64 bg-accent/10" aria-hidden="true"></div>
 
     <header class="max-w-2xl border-b border-encre/10 pb-10">
       <p class="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
@@ -145,19 +146,15 @@ const labelPoints = radar.map((c, i) => {
         <div class="mt-6">
           <!-- Pas d'aria-label ici : il était redondant avec le texte visible
                tout en ne le contenant pas, ce qui casse WCAG 2.5.3. -->
-          <a
-            href="/cv/audrey-garoscio-cv.pdf"
-            download
-            class="inline-flex items-center rounded-full border border-encre/25 px-6 py-3 text-sm text-encre transition-colors hover:border-encre hover:font-semibold"
-          >
+          <Bouton variante="secondaire" fleche="aucune" href="/cv/audrey-garoscio-cv.pdf" download>
             Télécharger le CV (PDF)
-          </a>
+          </Bouton>
         </div>
       </div>
 
       <div class="relative mx-auto w-full max-w-[280px] md:max-w-none">
-        <div class="blob -left-5 -top-5 h-[70%] w-[80%] bg-corail/35" aria-hidden="true"></div>
-        <div class="blob -bottom-4 right-0 h-[40%] w-[45%] bg-jaune/35" aria-hidden="true"></div>
+        <div class="blob -left-5 -top-5 h-[70%] w-[80%] bg-accent/35" aria-hidden="true"></div>
+        <div class="blob -bottom-4 right-0 h-[40%] w-[45%] bg-accent/10" aria-hidden="true"></div>
         <img
           src="/images/about.jpg"
           alt="Portrait d'Audrey Garoscio"
@@ -218,7 +215,7 @@ const labelPoints = radar.map((c, i) => {
           <!-- Aire des compétences -->
           <polygon
             points={polygon(dataPoints)}
-            class="fill-corail/35 stroke-encre"
+            class="fill-accent/35 stroke-encre"
             fill-opacity="0.55"
             stroke-width="1.5"
             stroke-linejoin="round"

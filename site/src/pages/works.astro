@@ -10,7 +10,6 @@ const saison = [
     note: "Du cadrage stratégique à la maquette livrable. Six mois, en autonomie.",
     role: "Cheffe de projet, de bout en bout",
     contexte: "Projet de fin de cycle, MBA",
-    teinte: "bg-brume",
     image: "/images/poolparty-page-daccueil-maquette-page-daccueil-ordinateur.jpg",
   },
   {
@@ -20,7 +19,6 @@ const saison = [
     note: "Le projet où le design rencontre le code pour de vrai. Conception et mise en production.",
     role: "Conception et mise en production",
     contexte: "Projet d'équipe",
-    teinte: "bg-jaune",
     image: "/images/sumo-home.png",
   },
   {
@@ -30,7 +28,6 @@ const saison = [
     note: "Oser un ton joyeux là où tout le secteur joue le sérieux.",
     role: "Direction artistique et UI",
     contexte: "Refonte",
-    teinte: "bg-corail/35",
     image: "/images/homepage.png",
   },
 ];
@@ -51,7 +48,7 @@ const esquisses = [
   <section class="relative mx-auto max-w-6xl px-6 pt-10 sm:px-10 sm:pt-16">
     <!-- Calée sous la nav et dans la largeur : cf. les deux règles d'usage
          de .blob dans global.css. Elle déborde librement vers le bas. -->
-    <div class="blob right-0 top-4 h-72 w-72 bg-corail/15" aria-hidden="true"></div>
+    <div class="blob right-0 top-4 h-72 w-72 bg-accent/10" aria-hidden="true"></div>
 
     <header class="max-w-2xl">
       <p class="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
@@ -91,10 +88,10 @@ const esquisses = [
                 ]}
               >
                 <div class="flex items-center gap-3">
-                  <span class="text-sm font-bold text-bordeaux" aria-hidden="true">
+                  <span class="text-sm font-bold text-accent" aria-hidden="true">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span class="text-xs uppercase tracking-[0.18em] text-bordeaux">
+                  <span class="text-xs uppercase tracking-[0.18em] text-accent">
                     {p.contexte}
                   </span>
                 </div>
@@ -118,10 +115,11 @@ const esquisses = [
                 </span>
               </div>
 
+              <!-- Même aplat pour les trois projets : une couleur par carte ne
+                   distinguait rien que le titre ne dise déjà. -->
               <div
                 class:list={[
-                  "order-1 flex items-center justify-center p-8",
-                  p.teinte,
+                  "order-1 flex items-center justify-center bg-accent/10 p-8",
                   i % 2 === 1 ? "lg:order-1" : "lg:order-2",
                 ]}
               >
@@ -156,7 +154,7 @@ const esquisses = [
       {
         esquisses.map((e) => (
           <article class="group relative overflow-hidden rounded-[24px] rounded-tl-[4px] border border-encre/10 transition-colors hover:border-encre/25">
-            <div class="bg-corail/15 p-6">
+            <div class="bg-accent/10 p-6">
               <img
                 src={e.cover}
                 alt=""

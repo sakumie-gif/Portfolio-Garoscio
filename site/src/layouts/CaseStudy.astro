@@ -1,42 +1,23 @@
 ---
 import Base from "./Base.astro";
+import Bouton from "../components/Bouton.astro";
 
-const {
-  title,
-  kicker,
-  didascalie,
-  sections = [],
-  accent = "corail", // corail | brume | jaune
-} = Astro.props;
-
-// Teinte décorative de l'en-tête. Ces aplats ne portent jamais de texte :
-// aucune contrainte de contraste ne s'y applique.
-const accentClass = {
-  corail: "bg-corail/35",
-  brume: "bg-brume",
-  jaune: "bg-jaune",
-}[accent];
+// La prop `accent` a disparu : elle donnait à chaque étude une teinte
+// d'en-tête différente (corail / brume / jaune) alors qu'aucune ne
+// distinguait quoi que ce soit. Quatre études, quatre couleurs, zéro
+// information — c'était l'arc-en-ciel. Toutes partagent le même décor.
+const { title, kicker, didascalie, sections = [] } = Astro.props;
 ---
 
 <Base title={`${title} — Audrey Garoscio`} current="works">
   <article class="mx-auto max-w-6xl px-6 sm:px-10">
     <!-- En-tête du case study -->
     <header class="relative border-b border-encre/10 pb-14 pt-6">
-      <div
-        class:list={["blob right-0 top-2 h-64 w-64 opacity-70", accentClass]}
-        aria-hidden="true"
-      >
-      </div>
+      <div class="blob right-0 top-2 h-64 w-64 bg-accent/35" aria-hidden="true"></div>
 
-      <a
-        href="/works"
-        class="group inline-flex items-center gap-2 text-sm text-voile transition-colors hover:text-encre"
-      >
-        <span class="inline-block transition-transform group-hover:-translate-x-1" aria-hidden="true">←</span>
-        Tous les projets
-      </a>
+      <Bouton variante="tertiaire" fleche="gauche" href="/works">Tous les projets</Bouton>
       {kicker && (
-        <p class="mt-10 text-xs uppercase tracking-[0.2em] text-bordeaux">
+        <p class="mt-10 text-xs uppercase tracking-[0.2em] text-accent">
           {kicker}
         </p>
       )}
@@ -115,17 +96,18 @@ const accentClass = {
   .cs-content p {
     margin-bottom: 1.25rem;
   }
-  /* Citation — bordeaux, l'une des rares places que le concept lui laisse. */
+  /* Citation. Le filet et le texte partagent le même rouge : c'est un seul
+     élément, il n'a pas besoin de deux couleurs pour se faire voir. */
   .cs-content .citation {
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 1.5rem;
     letter-spacing: -0.02em;
     line-height: 1.35;
-    color: var(--color-bordeaux);
+    color: var(--color-accent);
     margin: 3rem 0;
     padding-left: 1.5rem;
-    border-left: 3px solid var(--color-corail);
+    border-left: 3px solid var(--color-accent);
   }
   .cs-content .meta {
     margin-top: 3.5rem;

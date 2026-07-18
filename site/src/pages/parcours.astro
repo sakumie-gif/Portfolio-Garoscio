@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import Bouton from "../components/Bouton.astro";
 import Icone from "../components/Icone.astro";
 
 const experiences = [
@@ -101,9 +102,9 @@ const competences = [
 // d'impact fabriquées : le concept écarte explicitement les « 100 % de
 // réussite » invérifiables.
 const chiffres = [
-  { valeur: "24", libelle: "composants du design system améliorés", teinte: "bg-corail/15" },
-  { valeur: "6", libelle: "fonctionnalités suivies jusqu'au développement", teinte: "bg-jaune/35" },
-  { valeur: "2025", libelle: "Product Designer chez EasyVista depuis", teinte: "bg-brume/35" },
+  { valeur: "24", libelle: "composants du design system améliorés" },
+  { valeur: "6", libelle: "fonctionnalités suivies jusqu'au développement" },
+  { valeur: "2025", libelle: "Product Designer chez EasyVista depuis" },
 ];
 
 const outils = [
@@ -127,7 +128,7 @@ const outils = [
 <Base title="Parcours — Audrey Garoscio" current="parcours">
   <div class="relative mx-auto max-w-4xl px-6 pb-20 pt-14 sm:px-10 sm:pt-20">
     <!-- En-tête -->
-    <div class="blob right-0 top-2 h-64 w-64 bg-jaune/35" aria-hidden="true"></div>
+    <div class="blob right-0 top-2 h-64 w-64 bg-accent/10" aria-hidden="true"></div>
 
     <p class="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
       <Icone nom="etoile" taille={14} class="shrink-0" /> Le programme
@@ -140,21 +141,16 @@ const outils = [
 
     <div class="mt-8">
       <!-- Pas d'aria-label : il masquait le texte visible sans le contenir (2.5.3) -->
-      <a
-        href="/cv/audrey-garoscio-cv.pdf"
-        download
-        class="group inline-flex items-center gap-2.5 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-ivoire transition-transform hover:scale-[1.02]"
-      >
+      <Bouton fleche="bas" href="/cv/audrey-garoscio-cv.pdf" download>
         Télécharger le CV (PDF)
-        <span class="transition-transform group-hover:translate-y-1" aria-hidden="true">↓</span>
-      </a>
+      </Bouton>
     </div>
 
     <!-- Chiffres-clés -->
     <ul class="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-3">
       {
         chiffres.map((c) => (
-          <li class:list={["rounded-[20px] rounded-tl-[3px] p-6", c.teinte]}>
+          <li class="rounded-[20px] rounded-tl-[3px] bg-accent/10 p-6">
             <p class="text-4xl font-extrabold leading-none text-encre">{c.valeur}</p>
             <p class="mt-3 text-sm leading-snug text-encre">{c.libelle}</p>
           </li>
@@ -213,7 +209,7 @@ const outils = [
       <div class="mt-8 flex flex-wrap gap-2">
         {
           competences.map((c) => (
-            <span class="rounded-full bg-brume/35 px-3.5 py-1 text-sm text-encre">
+            <span class="rounded-full bg-accent/10 px-3.5 py-1 text-sm text-encre">
               {c}
             </span>
           ))

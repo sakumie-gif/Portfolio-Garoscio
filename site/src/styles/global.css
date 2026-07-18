@@ -7,51 +7,47 @@
    Les noms deviennent des classes utilitaires Tailwind
    (ex: bg-ivoire, text-encre, border-voile).
 
-   RÈGLE DE CONTRASTE — la plus importante de ce fichier.
-   Le corail #F26F62 ne plafonne qu'à 2.79:1 sur le blanc scène : il
-   échoue AA texte (4.5:1) et même le seuil composant (3:1). Il est
-   donc réservé aux SURFACES (formes, halos, aplats), jamais au texte
-   ni à un fond portant du texte clair.
-   Pour du corail lisible, --color-accent en est la version assombrie.
+   RÈGLE — UN SEUL ROUGE.
+   La palette a porté jusqu'à trois rouges (corail #f26f62, accent
+   #c43d30, bordeaux #6b2e29). Même alignés sur la même teinte, trois
+   rouges se lisent comme trois couleurs : l'œil ne les range pas sur une
+   rampe, il y voit un arc-en-ciel. Il n'en reste qu'un.
+   Le choix est contraint : sur le blanc scène, le corail ne plafonne
+   qu'à 2.79:1 (il échoue AA texte à 4.5:1 ET le seuil composant à 3:1),
+   et le bordeaux à 9.84:1 est déjà presque noir. #c43d30 est le seul qui
+   soit encore un corail tout en portant du texte (4.97:1).
+   Les profondeurs se font à l'OPACITÉ : une même couleur plus claire
+   n'est pas un second rouge.
 
-   RÈGLE DE TEINTE — une seule famille rouge, trois profondeurs.
-   corail (L 67) → accent (L 48) → bordeaux (L 29), tous à H≈5°. Un
-   rouge qui s'écarte de cette teinte ne se lit pas comme « le corail
-   en plus sombre » mais comme un second rouge, et l'ensemble vire à
-   l'arc-en-ciel. C'est ce qui est arrivé à l'ancien bordeaux #672e39,
-   perché à 348° : 17° de dérive vers le magenta.
-   Il n'y a donc PAS de token « rose » : le rose, c'est corail/35.
+   RÈGLE — LA COULEUR PORTE DU SENS, SINON ELLE EST UNIQUE.
+   Il n'y a plus de --color-jaune ni de --color-brume. Ils ne codaient
+   rien : ni catégorie, ni état, ni hiérarchie. Ils coloriaient des tuiles
+   qui disent toutes la même chose, et c'est précisément ce qui faisait
+   l'arc-en-ciel. Une teinte ne revient que le jour où elle distingue
+   quelque chose que le texte ne dit pas déjà.
 --------------------------------------------------------------- */
 @theme {
   /* --- Fondations --- */
   --color-ivoire: #fcfaf7; /* blanc scène, chaud */
   --color-encre: #1e1c1c; /* texte principal — 16.28:1 sur ivoire */
-  /* Secondaire. Assombri pour tenir 4.5:1 (WCAG 1.4.3) même quand une forme
-     décorative teinte le fond derrière lui : 5.99:1 sur ivoire, et encore
-     5.17:1 sur #fbe5e1 (corail/15 composité sur ivoire), le pire cas qu'il
-     rencontre encore. La valeur précédente, #6b665e, tombait à 4.48:1. */
+  /* Secondaire. Assombri pour tenir 4.5:1 (WCAG 1.4.3 / RGAA 3.2) même
+     quand un aplat décoratif teinte le fond derrière lui : 5.99:1 sur
+     ivoire, 5.48:1 sur accent/10. La valeur précédente, #6b665e, tombait
+     à 4.48:1. */
   --color-voile: #656058;
 
-  /* --- Décor : SURFACES UNIQUEMENT, jamais de texte dessus ni dedans ---
-     Trois teintes, trois paliers chacune (/15 lavis, /35 doux, plein).
-     Ne pas inventer de palier intermédiaire : c'est l'inflation de nuances
-     (rose/50, /60, /70, /80 étalés sur 6 points de luminosité) qui rendait
-     la palette illisible, personne ne distinguait les paliers entre eux. */
-  --color-corail: #f26f62; /* la couleur vivante — formes, halos, aplats */
-  --color-jaune: #f4d76c; /* lumière, projecteurs, moments-clés */
-  --color-brume: #dce5e8; /* bleu gris technique, ancre le côté produit */
-
-  /* --- Accents lisibles --- */
-  /* Corail assombri jusqu'à 4.97:1 sur ivoire : même famille chromatique,
-     mais utilisable en texte, liens, soulignés et kickers. C'est lui qui
-     porte l'accent, pas --color-corail. Sert aussi de FOND au bouton
-     principal, texte ivoire dessus : 4.97:1 également. */
+  /* --- Le rouge, seul et unique ---
+     plein     : texte, liens, soulignés, fond du bouton principal (texte
+                 ivoire dessus, 4.97:1 dans les deux sens).
+     accent/10 : TOUS les aplats — tuiles, tags, chiffres-clés, cartes.
+     accent/35 : les formes organiques du décor.
+     Deux paliers, pas trois : /15 /25 /50 /60 /70 /80 étaient
+     indistinguables entre eux et c'est cette inflation qui a rendu la
+     palette illisible.
+     ATTENTION : text-accent sur accent/10 ne donne que 4.3:1 — le rouge
+     ne se pose pas sur son propre lavis. C'est le seul piège du système,
+     et il a été trouvé par l'audit, pas à l'œil. */
   --color-accent: #c43d30;
-  /* Bordeaux coulisse — 9.84:1. Trace du théâtre traditionnel : étiquettes,
-     numéros de section, citations. Volontairement rare (cf. concept).
-     Réaligné sur H≈5° (cf. RÈGLE DE TEINTE) : même rouge que corail et
-     accent, simplement au bout de la rampe. */
-  --color-bordeaux: #6b2e29;
 
   /* --- Typographies ---
      Une seule famille porte titres ET texte : l'identité tient à la
@@ -83,7 +79,7 @@ body {
 
 /* Ivoire sur bordeaux : 9.94:1 */
 ::selection {
-  background-color: var(--color-bordeaux);
+  background-color: var(--color-accent);
   color: var(--color-ivoire);
 }
 
@@ -152,12 +148,12 @@ h2 {
    Purement décoratives : toujours aria-hidden côté balisage.
 
    Deux règles d'usage, apprises en les cassant :
-   1. Ne jamais poser une forme derrière du texte : le fond composité
-      fait chuter le contraste. Si c'est inévitable, --color-encre tient
-      AA sur les neuf tons de l'échelle (5.84:1 au pire, sur corail plein).
-      --color-voile, lui, ne tient QUE sur les paliers /15 et /35 — sauf
-      corail/35 (4.21:1), jaune plein (4.39:1) et corail plein (2.15:1),
-      où il échoue.
+   1. Ne jamais poser une forme derrière du texte : le contraste se calcule
+      sur le fond RÉELLEMENT peint, pas sur le token de fond. --color-encre
+      tient partout, --color-voile passe encore, mais --color-accent tombe
+      à 4.3:1 sur son propre lavis accent/10 — le rouge ne se pose pas sur
+      sa propre teinte. C'est l'audit qui l'a trouvé sur la page contact,
+      pas l'œil.
    2. Les caler DANS la largeur du conteneur (right-0, pas -right-20)
       plutôt que de rattraper le débordement avec overflow-hidden : sur
       une section courte, le découpage rognait la forme en haut et en bas
@@ -176,7 +172,7 @@ h2 {
 /* Souligné tracé à la main sous un mot. Épaisseur ≥ 2px : c'est une
    décoration, pas un porteur d'information (donc corail autorisé). */
 .trace {
-  background-image: linear-gradient(var(--color-corail), var(--color-corail));
+  background-image: linear-gradient(var(--color-accent), var(--color-accent));
   background-repeat: no-repeat;
   background-position: 0 92%;
   background-size: 100% 0.28em;
