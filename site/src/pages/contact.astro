@@ -55,12 +55,15 @@ const infos = [
     <!-- En-tête « Le guichet ». Grille à deux colonnes en xl : le titre à
          gauche, la note manuscrite et son doodle à droite — sans absolu,
          pour que rien ne se chevauche à 1280. -->
-    <div class="grid gap-8 xl:grid-cols-[1fr_430px] xl:items-start">
+    <div class="grid gap-8 xl:grid-cols-[1fr_clamp(380px,29.5vw,565px)] xl:items-start">
       <div>
         <p class="flex items-center gap-3.5 py-5 font-display text-xl font-semibold uppercase">
           <Icone nom="etoile" taille={38} class="shrink-0" /> Le guichet
         </p>
-        <h1 class="mt-2 font-display text-4xl font-bold sm:text-5xl xl:text-[64px] xl:leading-[1.05]">
+        <!-- Tailles proportionnelles (clamp, comme l'accueil) : la maquette
+             est dessinée à 1920 ; en px figés, à 1280 le titre passait sur
+             deux lignes et la citation paraissait disproportionnée. -->
+        <h1 class="mt-2 font-display text-4xl font-bold leading-[normal] sm:text-5xl lg:text-[clamp(40px,3.34vw,64px)]">
           Disponible dès <span class="text-accent">octobre 2026</span>
         </h1>
         <p class="mt-5 max-w-2xl text-lg font-semibold">
@@ -72,10 +75,10 @@ const infos = [
            (1.35rem, hors layer) écrase les utilitaires text-[…] et rendait
            le texte trop petit. Ici on pose la fonte et les 40px à la main. -->
       <div class="hidden xl:block xl:pt-8">
-        <p class="-rotate-3 font-note text-[40px] font-bold leading-[1.15] text-accent">
+        <p class="-rotate-3 font-note text-[clamp(28px,2.09vw,40px)] font-bold leading-[1.15] text-accent">
           Une idée en coulisses, un projet à mettre en scène ? Parlons-en.
         </p>
-        <!-- Le doodle est volontairement aplati (228×40, object-fill) :
+        <!-- Le doodle est volontairement aplati (228×40 à 1920, object-fill) :
              c'est le cadrage écrasé de la maquette, pas le ratio du PNG. -->
         <img
           src="/images/figma-contact-doodle.png"
@@ -83,7 +86,7 @@ const infos = [
           aria-hidden="true"
           width="464"
           height="194"
-          class="ml-auto mr-2 mt-5 h-[40px] w-[228px] -rotate-[10deg]"
+          class="ml-auto mr-2 mt-5 h-[clamp(28px,2.09vw,40px)] w-[clamp(160px,11.9vw,228px)] -rotate-[10deg]"
         />
       </div>
     </div>
@@ -94,13 +97,18 @@ const infos = [
       <div class="flex flex-col gap-3.5 rounded-[20px] bg-accent/10 p-5">
         <!-- Illustration décorative (bulles de dialogue) : le sens est porté
              par les infos en dessous. -->
+        <!-- h-[240px] + flex-1 : la hauteur « naturelle » de la photo est
+             basse, c'est donc le FORMULAIRE qui fixe la hauteur de la rangée
+             et la photo grandit pour remplir. En hauteur auto, la photo
+             (plein cadre) dépassait le formulaire et creusait un grand vide
+             sous « Envoyer le message ». -->
         <img
           src="/images/figma-contact-bulles.jpg"
           alt=""
           width="1542"
           height="1028"
           loading="lazy"
-          class="min-h-[240px] w-full flex-1 rounded-[10px] object-cover"
+          class="h-[240px] w-full flex-1 rounded-[10px] object-cover"
         />
 
         <ul class="flex flex-col pt-6">
