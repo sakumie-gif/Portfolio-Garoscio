@@ -34,7 +34,9 @@ const {
   ]}
 >
   <div class="flex flex-col gap-5 lg:flex-row lg:items-stretch lg:self-stretch">
-    <div class="flex flex-col gap-2.5 lg:w-56 lg:shrink-0 lg:px-5">
+    <!-- 309px : largeur exacte du « Text container » de la maquette. En w-56
+         « Tournament » débordait sur la description. -->
+    <div class="flex flex-col gap-2.5 lg:w-[309px] lg:shrink-0 lg:px-5">
       <p class="py-1 text-lg font-semibold text-accent transition-colors group-hover:text-accent-bord lg:py-5">
         {numero}
       </p>

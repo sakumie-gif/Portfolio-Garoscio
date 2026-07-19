@@ -82,13 +82,33 @@ const etapes = [
   },
 ];
 
-// Coulisses : la maquette répète la même vignette sur les cinq tuiles.
+// Coulisses : une vignette dédiée par tuile (sources : img/ et img/planches).
 const coulisses = [
-  { titre: "Recherche & Wireframes", note: "Explorer vite, tester tôt." },
-  { titre: "Annotations & idées", note: "Penser avec clarté." },
-  { titre: "Composants réutilisables", note: "Cohérence et efficacité." },
-  { titre: "Accessibilité", note: "Concevoir pour tous." },
-  { titre: "Avant / Après", note: "Mesurer l'impact réel." },
+  {
+    image: "/images/coulisse-wireframes.png",
+    titre: "Recherche & Wireframes",
+    note: "Explorer vite, tester tôt.",
+  },
+  {
+    image: "/images/coulisse-annotations.png",
+    titre: "Annotations & idées",
+    note: "Penser avec clarté.",
+  },
+  {
+    image: "/images/coulisse-composants.png",
+    titre: "Composants réutilisables",
+    note: "Cohérence et efficacité.",
+  },
+  {
+    image: "/images/coulisse-accessibilite.png",
+    titre: "Accessibilité",
+    note: "Concevoir pour tous.",
+  },
+  {
+    image: "/images/coulisse-avant-apres.png",
+    titre: "Avant / Après",
+    note: "Mesurer l'impact réel.",
+  },
 ];
 
 const apropos = [
@@ -141,15 +161,18 @@ const apropos = [
 
     <main id="contenu" tabindex="-1">
       <!-- Introduction (maquette node 56:1154) : le portrait touche le bord
-           droit de l'écran, le texte est calé sur la marge de 80px. -->
-      <section class="mx-auto flex max-w-[1920px] flex-col gap-10 md:flex-row md:items-start md:gap-6">
+           droit de l'écran, le texte est calé sur la marge de 80px.
+           Sous 1920, tout est proportionnel : portrait en %, titre en clamp,
+           retours à la ligne forcés seulement quand la colonne est assez
+           large (2xl). -->
+      <section class="mx-auto flex max-w-[1920px] flex-col gap-10 lg:flex-row lg:items-start lg:gap-6">
         <div class="min-w-0 flex-1 px-6 pt-6 sm:px-10 xl:pl-20 xl:pr-0">
           <p class="flex items-center gap-[14px] py-5 font-display text-lg font-semibold text-encre sm:text-xl">
             <Icone nom="etoile" taille={38} class="shrink-0" />
             THÉÂTRE CONTEMPORAIN DU PRODUCT DESIGN
           </p>
 
-          <h1 class="pb-[50px] font-display text-4xl font-bold leading-[normal] text-encre sm:text-5xl xl:text-[64px]">
+          <h1 class="pb-[50px] font-display text-4xl font-bold leading-[normal] text-encre sm:text-5xl lg:text-[clamp(40px,3.34vw,64px)]">
             Je conçois des produits<br />
             clairs, utiles et
             <span class="relative inline-block text-accent">
@@ -165,10 +188,10 @@ const apropos = [
 
           <p class="text-base font-semibold leading-[normal] text-encre sm:text-lg">
             Product Designer UX/UI, j'accompagne la conception d'interfaces SaaS B2B complexes,<br
-              class="hidden xl:block"
+              class="hidden 2xl:block"
             />
             du wireframe au prototype, en collaboration étroite avec les Product Owners, les<br
-              class="hidden xl:block"
+              class="hidden 2xl:block"
             />
             développeurs et les métiers.
           </p>
@@ -206,7 +229,7 @@ const apropos = [
           alt="Portrait d'Audrey Garoscio"
           width="848"
           height="607"
-          class="w-full self-start md:w-[42%] xl:w-[742px]"
+          class="w-full self-start lg:w-[38.7%] lg:max-w-[742px]"
         />
       </section>
 
@@ -248,7 +271,7 @@ const apropos = [
         <!-- Tuiles : design de la maquette, données du portfolio actuel.
              « Stretched link » : seul le titre est un lien, son ::after couvre
              la carte entière ; l'image est décorative. -->
-        <ul class="mt-5 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <ul class="mt-5 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {
             projets.map((p) => (
               <li class="group relative flex flex-col rounded-[10px] rounded-tl-none border border-[rgba(186,186,186,0.3)] bg-white transition-colors hover:border-encre/25">
@@ -281,9 +304,11 @@ const apropos = [
 
         <div class="mt-16 border-t border-trait-2" aria-hidden="true"></div>
 
-        <!-- Ma manière de travailler (node 59:1350) -->
+        <!-- Ma manière de travailler (node 59:1350). La rangée maquette avec
+             connecteurs pointillés ne tient qu'à partir de 2xl ; en dessous,
+             grille progressive sans connecteurs. -->
         <div class="flex flex-col gap-8 pt-16 xl:flex-row xl:items-start xl:gap-2.5">
-          <div class="flex w-full flex-col gap-[30px] xl:w-[422px] xl:shrink-0">
+          <div class="flex w-full flex-col gap-[30px] xl:w-[24%] xl:shrink-0">
             <p class="font-display text-lg font-semibold sm:text-xl">
               <span class="text-accent">M</span><span class="text-encre">A MANIÈRE DE TRAVAILLER</span>
             </p>
@@ -292,11 +317,11 @@ const apropos = [
             </h2>
           </div>
 
-          <ol class="grid flex-1 grid-cols-1 gap-8 sm:grid-cols-2 xl:flex xl:items-start xl:gap-0">
+          <ol class="grid flex-1 grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 xl:gap-4 2xl:flex 2xl:items-start 2xl:gap-0">
             {
               etapes.map((e, i) => (
                 <>
-                  <li class="flex w-full flex-col items-start gap-2 rounded-[10px] xl:w-[194px] xl:shrink-0">
+                  <li class="flex w-full flex-col items-start gap-2 rounded-[10px] 2xl:w-[11%] 2xl:shrink-0">
                     <div class="relative h-[92.5px] w-[117.5px] self-center">
                       <img src={e.blob} alt="" aria-hidden="true" class="absolute inset-0 h-full w-full" />
                       <img
@@ -313,7 +338,7 @@ const apropos = [
                     <p class="whitespace-pre-line text-base text-encre">{e.texte}</p>
                   </li>
                   {i < etapes.length - 1 && (
-                    <li class="hidden min-w-0 flex-1 pt-[58px] xl:block" aria-hidden="true">
+                    <li class="hidden min-w-0 flex-1 pt-[58px] 2xl:block" aria-hidden="true">
                       <img src="/images/figma-line-dashed.svg" alt="" class="h-[5px] w-full" />
                     </li>
                   )}
@@ -327,7 +352,7 @@ const apropos = [
 
         <!-- Dans les coulisses (node 60:534) -->
         <div id="coulisses" class="flex flex-col gap-8 pb-20 pt-16 xl:flex-row xl:items-start xl:gap-[14px]">
-          <div class="flex w-full flex-col gap-[30px] xl:w-[345px] xl:shrink-0">
+          <div class="flex w-full flex-col gap-[30px] xl:w-[19.6%] xl:shrink-0">
             <p class="font-display text-lg font-semibold sm:text-xl">
               <span class="text-accent">D</span><span class="text-encre">ANS LES COULISSES</span>
             </p>
@@ -348,7 +373,7 @@ const apropos = [
                 <li class="flex flex-col rounded-[10px] rounded-tl-none border border-[rgba(186,186,186,0.3)] bg-white">
                   <div class="flex h-[167px] items-end justify-center overflow-hidden rounded-tr-[10px] border-b border-trait-2 bg-[rgba(154,39,55,0.1)]">
                     <img
-                      src="/images/figma-coulisses.png"
+                      src={c.image}
                       alt=""
                       loading="lazy"
                       class="h-[147px] w-[89%] object-cover object-top"
@@ -364,28 +389,30 @@ const apropos = [
           </ul>
         </div>
 
-        <!-- A propos (node 60:809) -->
-        <div class="flex flex-col gap-8 pb-24 lg:flex-row lg:items-start lg:gap-5">
+        <!-- A propos (node 60:809). Largeurs proportionnelles au cadre 1760 de
+             la maquette (311 / 431 / 488 / reste) : des largeurs fixes en px
+             écrasaient la derniere colonne sur les écrans plus étroits. -->
+        <div class="flex flex-col gap-8 pb-24 xl:flex-row xl:items-start xl:gap-5">
           <img
             src="/images/figma-about-photo.png"
             alt="Audrey Garoscio en costume de scène, lors d'un spectacle historique"
             width="311"
             height="430"
             loading="lazy"
-            class="mx-auto h-auto w-[260px] shrink-0 object-cover lg:mx-0 lg:h-[430px] lg:w-[311px]"
+            class="mx-auto h-auto w-[260px] shrink-0 object-cover xl:mx-0 xl:w-[17.7%]"
           />
 
-          <div class="flex w-full flex-col gap-2.5 lg:w-[431px] lg:shrink-0">
+          <div class="flex w-full flex-col gap-2.5 xl:w-[24.5%] xl:shrink-0">
             <p class="flex items-center gap-[14px] py-5 text-lg font-semibold text-encre">
               <Icone nom="etoile" taille={38} class="shrink-0" />
               À PROPOS
             </p>
-            <h2 class="font-display text-3xl font-bold leading-[normal] text-encre sm:text-[40px]">
+            <h2 class="font-display text-3xl font-bold leading-[normal] text-encre sm:text-[40px] xl:text-[clamp(28px,2.1vw,40px)]">
               De costumière<br />à Product Designer
             </h2>
           </div>
 
-          <div class="relative flex w-full flex-col gap-6 border-trait-2 pr-5 lg:w-[488px] lg:shrink-0 lg:gap-[78px] lg:border-r lg:pt-[104px]">
+          <div class="relative flex w-full flex-col gap-6 border-trait-2 pr-5 xl:w-[27.7%] xl:shrink-0 xl:gap-[78px] xl:border-r xl:pt-[104px]">
             <p class="text-lg font-semibold leading-[normal] text-encre">
               Ma première scène, ma passion, c'est le théâtre. Costumière de formation, j'ai
               appris à écouter les intentions, comprendre les personnages et raconter des
@@ -397,7 +424,7 @@ const apropos = [
             </p>
           </div>
 
-          <ul class="flex flex-1 flex-col justify-center gap-6 px-0 lg:gap-[34px] lg:self-stretch lg:px-5">
+          <ul class="flex flex-1 flex-col justify-center gap-6 px-0 xl:gap-[34px] xl:self-stretch xl:px-5">
             {
               apropos.map((a) => (
                 <li class="flex items-start gap-2">

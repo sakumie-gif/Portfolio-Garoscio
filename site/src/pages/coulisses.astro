@@ -72,7 +72,7 @@ const histoires = [
         </p>
 
         <div class="relative pb-[50px]">
-          <h1 class="font-display text-4xl font-bold leading-[normal] text-encre sm:text-5xl xl:text-[64px]">
+          <h1 class="font-display text-4xl font-bold leading-[normal] text-encre sm:text-5xl lg:text-[clamp(40px,3.34vw,64px)]">
             Audrey Garoscio,<br />
             Product
             <span class="relative inline-block whitespace-nowrap text-accent">
@@ -135,7 +135,9 @@ const histoires = [
           <!-- Composition photo : blob jaune derrière, photo détourée en forme
                organique, flèche doodle par-dessus (retournée verticalement,
                recadrée pour écarter le texte incrusté dans la planche). -->
-          <div class="relative mx-auto w-full max-w-[560px] shrink-0 xl:mx-0 xl:w-[929px] xl:max-w-none">
+          <!-- Largeur proportionnelle (929/1920) : une largeur fixe écrasait
+               la colonne de texte sous 1920. -->
+          <div class="relative mx-auto w-full max-w-[560px] shrink-0 xl:mx-0 xl:w-[48.4%] xl:max-w-[929px]">
             <img
               src="/images/figma-coulisses-blob.svg"
               alt=""

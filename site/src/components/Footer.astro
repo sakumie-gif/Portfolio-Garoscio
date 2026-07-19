@@ -7,14 +7,16 @@ const year = new Date().getFullYear();
 
 <footer class="border-t border-[#fbf9f7] bg-[rgba(188,134,128,0.1)]">
   <div class="mx-auto flex max-w-[1920px] flex-col gap-5 px-6 py-5 sm:px-10 xl:px-20">
-    <div class="relative flex flex-col items-start justify-between gap-8 lg:min-h-[182px] lg:flex-row lg:items-end">
-      <div class="flex flex-col gap-8 self-stretch lg:justify-between">
+    <!-- La rangée titre / note / liens légaux ne passe qu'à partir de xl :
+         en dessous, la note Caveat chevauchait le titre. -->
+    <div class="relative flex flex-col items-start justify-between gap-8 xl:min-h-[182px] xl:flex-row xl:items-end">
+      <div class="flex flex-col gap-8 self-stretch xl:justify-between">
         <div class="flex flex-col gap-2.5">
           <p class="text-lg font-semibold">
             <span class="text-accent">R</span><span class="text-encre">estons en contact !</span>
           </p>
           <p class="relative font-display text-3xl font-bold text-encre sm:text-[40px]">
-            Parlons de votre prochain projet !
+            Parlons de votre prochain projet&nbsp;!
             <img
               src="/images/trait-souligne.png"
               alt=""
@@ -47,7 +49,7 @@ const year = new Date().getFullYear();
         </ul>
       </div>
 
-      <p class="note -rotate-3 text-3xl font-normal sm:text-[36px] lg:absolute lg:right-[10%] lg:top-4">
+      <p class="note -rotate-3 text-3xl font-normal sm:text-[36px] xl:absolute xl:right-[10%] xl:top-4">
         Concevoir avec sens,<br />livrer avec impact.
       </p>
 
