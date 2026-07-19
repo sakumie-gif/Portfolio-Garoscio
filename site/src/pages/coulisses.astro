@@ -44,10 +44,10 @@ const histoires = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Audrey Garoscio — Coulisses</title>
+    <title>Audrey Garoscio — Metteur en scène</title>
     <meta
       name="description"
-      content="Les coulisses : d'où je viens, pourquoi j'ai changé, ce que je fais maintenant. Audrey Garoscio, Product Designer."
+      content="Metteur en scène : d'où je viens, pourquoi j'ai changé, ce que je fais maintenant. Audrey Garoscio, Product Designer."
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -68,7 +68,7 @@ const histoires = [
       <section class="mx-auto max-w-[1920px] px-6 pt-2 sm:px-10 xl:px-20">
         <p class="flex items-center gap-[14px] py-[14px] font-display text-lg font-semibold text-encre sm:text-xl">
           <Icone nom="etoile" taille={38} class="shrink-0" />
-          LES COULISSES
+          METTEUR EN SCÈNE
         </p>
 
         <div class="relative pb-[50px]">
@@ -133,8 +133,10 @@ const histoires = [
           </div>
 
           <!-- Composition photo : blob jaune derrière, photo détourée en forme
-               organique, flèche doodle par-dessus (retournée verticalement,
-               recadrée pour écarter le texte incrusté dans la planche). -->
+               organique, flèche doodle par-dessus. fleche-coulisses.png est la
+               version recadrée sans texte incrusté (scripts/recadre-fleche.mjs) ;
+               retournée verticalement, elle pointe vers Audrey (à gauche sur la
+               photo) en s'arrêtant au-dessus de sa tête. -->
           <!-- Largeur proportionnelle (929/1920) : une largeur fixe écrasait
                la colonne de texte sous 1920. -->
           <div class="relative mx-auto w-full max-w-[560px] shrink-0 xl:mx-0 xl:w-[48.4%] xl:max-w-[929px]">
@@ -151,16 +153,14 @@ const histoires = [
               height="1171"
               class="relative w-full"
             />
-            <span
-              class="pointer-events-none absolute left-[0.5%] top-[21.7%] block h-[19.7%] w-[16.4%] -scale-y-100 overflow-hidden"
+            <img
+              src="/images/fleche-coulisses.png"
+              alt=""
               aria-hidden="true"
-            >
-              <img
-                src="/images/figma-coulisses-fleche.png"
-                alt=""
-                class="absolute left-0 top-0 h-[160%] w-full"
-              />
-            </span>
+              width="928"
+              height="571"
+              class="pointer-events-none absolute left-[3%] top-[10%] w-[14%] -scale-y-100"
+            />
           </div>
         </div>
 
@@ -175,7 +175,11 @@ const histoires = [
         </p>
 
         <!-- Le plateau est une planche exportée de la maquette ; le radar
-             rose est superposé sur le centre, comme dans le fichier Figma. -->
+             rose est superposé sur le centre, comme dans le fichier Figma.
+             Le radar est redessiné en SVG (géométrie et couleurs relevées sur
+             figma-plateau-radar.png, 220×236, qui pixelisait une fois étiré) ;
+             le rect de fond opaque masque le radar corail de la planche,
+             comme le faisait le PNG. -->
         <div class="relative mx-auto mt-8 w-full">
           <img
             src="/images/figma-plateau.png"
@@ -184,14 +188,38 @@ const histoires = [
             height="1006"
             class="w-full"
           />
-          <img
-            src="/images/figma-plateau-radar.png"
-            alt=""
+          <svg
+            viewBox="0 0 220 236"
             aria-hidden="true"
-            width="220"
-            height="236"
             class="absolute left-[33.6%] top-[21.4%] w-[34.3%]"
-          />
+          >
+            <rect width="220" height="236" fill="#F8F5EF"></rect>
+            <!-- Grille : 4 hexagones concentriques + rayons -->
+            <g stroke="#DED4C9" stroke-width="1" fill="none">
+              <polygon points="110,12.5 201,65 201,170 110,222.5 19,170 19,65"></polygon>
+              <polygon points="110,38.75 178.25,78.13 178.25,156.88 110,196.25 41.75,156.88 41.75,78.13"></polygon>
+              <polygon points="110,65 155.5,91.25 155.5,143.75 110,170 64.5,143.75 64.5,91.25"></polygon>
+              <polygon points="110,91.25 132.75,104.38 132.75,130.63 110,143.75 87.25,130.63 87.25,104.38"></polygon>
+              <path d="M110 12.5V222.5M19 65l182 105M201 65L19 170"></path>
+            </g>
+            <!-- Valeurs : sommets relevés sur le PNG d'origine -->
+            <polygon
+              points="110,17 198,63 203,171 108,218 27,167 19,63"
+              fill="#DEC3BB"
+              fill-opacity="0.5"
+              stroke="#1E1E1E"
+              stroke-width="1.5"
+              stroke-linejoin="round"
+            ></polygon>
+            <g fill="#1E1E1E">
+              <circle cx="110" cy="17" r="3.5"></circle>
+              <circle cx="198" cy="63" r="3.5"></circle>
+              <circle cx="203" cy="171" r="3.5"></circle>
+              <circle cx="108" cy="218" r="3.5"></circle>
+              <circle cx="27" cy="167" r="3.5"></circle>
+              <circle cx="19" cy="63" r="3.5"></circle>
+            </g>
+          </svg>
         </div>
       </section>
     </main>

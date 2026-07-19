@@ -315,11 +315,10 @@ const apropos = [
 
         <div class="mt-16 border-t border-trait-2" aria-hidden="true"></div>
 
-        <!-- Ma manière de travailler (node 59:1350). La rangée maquette avec
-             connecteurs pointillés ne tient qu'à partir de 2xl ; en dessous,
-             grille progressive sans connecteurs. -->
+        <!-- Ma manière de travailler (node 59:1350) : rangée maquette avec
+             connecteurs pointillés et tuiles fixes de 194px dès xl. -->
         <div class="flex flex-col gap-8 pt-16 xl:flex-row xl:items-start xl:gap-2.5">
-          <div class="flex w-full flex-col gap-[30px] xl:w-[24%] xl:shrink-0">
+          <div class="flex w-full flex-col gap-[30px] xl:w-[422px] xl:shrink-0">
             <p class="font-display text-lg font-semibold sm:text-xl">
               <span class="text-accent">M</span><span class="text-encre">A MANIÈRE DE TRAVAILLER</span>
             </p>
@@ -328,11 +327,11 @@ const apropos = [
             </h2>
           </div>
 
-          <ol class="grid flex-1 grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 xl:gap-4 2xl:flex 2xl:items-start 2xl:gap-0">
+          <ol class="grid flex-1 grid-cols-1 gap-8 sm:grid-cols-2 xl:flex xl:items-start xl:gap-0">
             {
               etapes.map((e, i) => (
                 <>
-                  <li class="flex w-full flex-col items-start gap-2 rounded-[10px] 2xl:w-[11%] 2xl:shrink-0">
+                  <li class="flex w-full flex-col items-start gap-2 rounded-[10px] xl:w-[194px] xl:shrink-0">
                     <div class="relative h-[92.5px] w-[117.5px] self-center">
                       <img src={e.blob} alt="" aria-hidden="true" class="absolute inset-0 h-full w-full" />
                       <img
@@ -349,7 +348,7 @@ const apropos = [
                     <p class="whitespace-pre-line text-base text-encre">{e.texte}</p>
                   </li>
                   {i < etapes.length - 1 && (
-                    <li class="hidden min-w-0 flex-1 pt-[58px] 2xl:block" aria-hidden="true">
+                    <li class="hidden min-w-0 flex-1 pt-[58px] xl:block" aria-hidden="true">
                       <img src="/images/figma-line-dashed.svg" alt="" class="h-[5px] w-full" />
                     </li>
                   )}
