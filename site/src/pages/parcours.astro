@@ -193,7 +193,12 @@ const outils = [
     </h2>
   </section>
 
-  <div class="relative mx-auto max-w-4xl px-6 pb-20 sm:px-10">
+  <!-- Sur la maquette, la timeline n'est pas centrée : elle est calée à
+       gauche sous le titre EXPÉRIENCE, avec un léger retrait (~50px à 1920),
+       et le contenu remplit la largeur jusqu'à la marge droite (demande
+       d'Audrey : « fill », pas de colonne étroite à gauche). -->
+  <div class="mx-auto max-w-[1920px] px-6 pb-20 sm:px-10 xl:px-20">
+    <div class="relative xl:ml-[50px]">
     <!-- Expériences (contenu conservé ; le titre est désormais porté par le
          h2 étoilé ci-dessus) -->
     <section>
@@ -275,5 +280,6 @@ const outils = [
         pédagogie.
       </p>
     </section>
+    </div>
   </div>
 </Base>
