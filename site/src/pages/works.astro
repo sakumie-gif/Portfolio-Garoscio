@@ -1,187 +1,164 @@
 ---
-import Base from "../layouts/Base.astro";
+// Page « À l'affiche » refaite depuis la maquette Figma (node 15119:930) :
+// titre souligné, sous-section « Les mises en scène » avec les rangées projets
+// (composant TuileProjet, node 15119:1369), filet, sous-section « Esquisses »,
+// header/footer partagés conformes à la maquette, fond #f7f4f2.
+// Textes : contenus de la maquette, coquilles corrigées (demande d'Audrey du
+// 19/07/2026 : « hésite pas à corriger les fautes »).
+// L'ancien design (cartes arrondies, blob) est conservé dans l'historique git
+// (commit fb08c44) ; /affiche-v2 était la page de préparation de cette refonte.
+import "../styles/global.css";
 import Icone from "../components/Icone.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import TuileProjet from "../components/TuileProjet.astro";
 
-const saison = [
+const projets = [
   {
     href: "/works/pool-party",
+    numero: "01",
     titre: "Pool Party",
-    sous: "Marketplace P2P de location de piscines",
-    note: "Du cadrage stratégique à la maquette livrable. Six mois, en autonomie.",
-    role: "Cheffe de projet, de bout en bout",
-    contexte: "Projet de fin de cycle, MBA",
-    image: "/images/poolparty-page-daccueil-maquette-page-daccueil-ordinateur.jpg",
+    accroche: "Marketplace P2P de location de piscines",
+    description: "Du cadrage stratégique à la maquette livrable. Six mois, en autonomie.",
+    image: "/images/poolparty-affiche-hero.jpg",
   },
   {
     href: "/works/sumo-tournament",
+    numero: "02",
     titre: "Sumo Tournament",
-    sous: "Site événementiel et back-office",
-    note: "Le projet où le design rencontre le code pour de vrai. Conception et mise en production.",
-    role: "Conception et mise en production",
-    contexte: "Projet d'équipe",
+    accroche: "Site événementiel et back-office",
+    description: "Le projet où le design rencontre le code pour de vrai. Conception et mise en production.",
     image: "/images/sumo-home.png",
   },
   {
     href: "/works/pool-and-splash",
+    numero: "03",
     titre: "Pool & Splash",
-    sous: "Refonte UI, direction kidkulting",
-    note: "Oser un ton joyeux là où tout le secteur joue le sérieux.",
-    role: "Direction artistique et UI",
-    contexte: "Refonte",
+    accroche: "Refonte UI, direction kidulting",
+    description: "Oser là où tout le secteur joue le sérieux.",
     image: "/images/homepage.png",
-  },
-];
-
-const esquisses = [
-  {
-    href: "/works/golyeo-korea",
-    titre: "Golyeo Korea",
-    note:
-      "Exploration d'identité pour un restaurant coréen. Deux directions : une mignonne et pastel inspirée du design kawaii coréen, une plus traditionnelle et sobre. Recherche de logo, palette, carte de visite.",
-    cover: "/images/golyeo-logo-1.jpg",
   },
 ];
 ---
 
-<Base title="Projets — Audrey Garoscio" current="works">
-  <!-- En-tête -->
-  <section class="relative mx-auto max-w-6xl px-6 pt-10 sm:px-10 sm:pt-16">
-    <!-- Calée sous la nav et dans la largeur : cf. les deux règles d'usage
-         de .blob dans global.css. Elle déborde librement vers le bas. -->
-    <div class="blob right-0 top-4 h-72 w-72 bg-accent/10" aria-hidden="true"></div>
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>À l'affiche — Audrey Garoscio</title>
+    <meta
+      name="description"
+      content="Trois projets menés de bout en bout. Chacun avec son sujet, son rythme, ses contraintes."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Caveat:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <!-- Fond #F7F4F2 : couleur « principal-bg » de la maquette (cf. accueil-v2). -->
+  <body style="background-color:#f7f4f2">
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
 
-    <header class="max-w-2xl">
-      <p class="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
-        <Icone nom="etoile" taille={14} class="shrink-0" /> À l'affiche
-      </p>
-      <h1 class="mt-4 text-5xl font-extrabold leading-[1.03] sm:text-6xl">
-        Projets
-      </h1>
-      <p class="mt-6 text-lg leading-relaxed text-voile">
-        Trois projets menés de bout en bout. Chacun avec son sujet, son rythme,
-        ses contraintes.
-      </p>
-    </header>
-  </section>
+    <Nav current="works" />
 
-  <!-- La saison -->
-  <section class="mx-auto max-w-6xl px-6 pt-14 sm:px-10">
-    <div class="space-y-10">
-      {
-        /* Motif "stretched link" : seul le titre est un lien, mais son ::after
-           couvre toute la carte, qui reste donc cliquable en entier. Un <a>
-           englobant titre + note + "Lire l'étude" + l'alt de l'image ferait un
-           nom de lien long d'un paragraphe (WCAG 2.4.4). L'image devient
-           décorative (alt=""), le titre la nomme déjà. */
-        saison.map((p, i) => (
-          <article class="group relative overflow-hidden rounded-[28px] rounded-tl-[4px] border border-encre/10 transition-colors hover:border-encre/25">
-            <div
-              class:list={[
-                "grid grid-cols-1 lg:grid-cols-[1fr_1.1fr]",
-                i % 2 === 1 && "lg:grid-cols-[1.1fr_1fr]",
-              ]}
-            >
-              <div
-                class:list={[
-                  "order-2 bg-white/50 p-8 sm:p-10",
-                  i % 2 === 1 ? "lg:order-2" : "lg:order-1",
-                ]}
-              >
-                <div class="flex items-center gap-3">
-                  <span class="text-sm font-bold text-accent" aria-hidden="true">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span class="text-xs uppercase tracking-[0.18em] text-accent">
-                    {p.contexte}
-                  </span>
-                </div>
+    <main id="contenu" tabindex="-1" class="mx-auto max-w-[1920px] px-6 sm:px-10 xl:px-20">
+      <!-- Titre de page (node 15119:932) -->
+      <header class="pt-8 sm:pt-[50px]">
+        <h1 class="font-display text-4xl font-bold leading-[normal] text-encre sm:text-5xl xl:text-[64px]">
+          À l'<span class="relative inline-block text-accent">
+            affiche
+            <img
+              src="/images/trait-souligne.png"
+              alt=""
+              aria-hidden="true"
+              class="pointer-events-none absolute left-0 top-full w-full"
+            />
+          </span>
+        </h1>
+        <p class="max-w-[717px] pt-5 text-base font-semibold leading-[normal] text-encre sm:text-lg">
+          Trois projets menés de bout en bout. Chacun avec son sujet, son rythme,
+          ses contraintes.
+        </p>
+      </header>
 
-                <h2 class="mt-4 text-3xl font-extrabold leading-tight sm:text-4xl">
-                  <a href={p.href} class="after:absolute after:inset-0 after:content-['']">
-                    {p.titre}
-                  </a>
-                </h2>
-                <p class="mt-2 text-base text-voile">{p.sous}</p>
-                <p class="mt-5 max-w-sm text-base leading-relaxed">{p.note}</p>
+      <!-- Les mises en scène (nodes 15119:1437 + 15119:1458) -->
+      <section class="pt-8">
+        <h2 class="titre-section flex items-center gap-[14px] py-5 font-display text-lg text-encre sm:text-xl">
+          <Icone nom="etoile" taille={38} class="shrink-0" />
+          Les mises en scène
+        </h2>
 
-                <p class="mt-7 border-t border-encre/10 pt-5 text-sm">
-                  <span class="text-accent">Rôle</span>
-                  <span class="ml-3 text-encre">{p.role}</span>
-                </p>
-
-                <span class="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-encre" aria-hidden="true">
-                  Lire l'étude
-                  <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
-                </span>
-              </div>
-
-              <!-- Même aplat pour les trois projets : une couleur par carte ne
-                   distinguait rien que le titre ne dise déjà. -->
-              <div
-                class:list={[
-                  "order-1 flex items-center justify-center bg-accent/10 p-8",
-                  i % 2 === 1 ? "lg:order-1" : "lg:order-2",
-                ]}
-              >
-                <!-- Cadrage haut : ces maquettes sont des captures de page
-                     entière, très hautes. Cf. même choix sur la home. -->
-                <img
-                  src={p.image}
-                  alt=""
-                  loading="lazy"
-                  class="h-[360px] w-full rounded-[4px] object-cover object-top shadow-[0_18px_45px_-24px_rgb(30_28_28/0.5)]"
-                />
-              </div>
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </section>
-
-  <!-- Esquisses -->
-  <section class="mx-auto max-w-6xl px-6 pt-24 sm:px-10 sm:pt-32">
-    <header class="max-w-xl border-t border-encre/10 pt-12">
-      <p class="text-xs uppercase tracking-[0.2em] text-accent">Plus libre</p>
-      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">Esquisses</h2>
-      <p class="mt-5 text-lg leading-relaxed text-voile">
-        Explorations plus libres. Identités, pistes graphiques, projets en
-        recherche.
-      </p>
-    </header>
-
-    <div class="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
-      {
-        esquisses.map((e) => (
-          <article class="group relative overflow-hidden rounded-[24px] rounded-tl-[4px] border border-encre/10 transition-colors hover:border-encre/25">
-            <div class="bg-accent/10 p-6">
-              <img
-                src={e.cover}
-                alt=""
-                loading="lazy"
-                class="aspect-[4/3] w-full rounded-[4px] object-contain"
+        <div class="flex flex-col gap-6 pt-4 lg:gap-14">
+          {
+            projets.map((p) => (
+              <TuileProjet
+                href={p.href}
+                numero={p.numero}
+                titre={p.titre}
+                accroche={p.accroche}
+                description={p.description}
+                image={p.image}
               />
-            </div>
-            <div class="bg-white/50 p-6">
-              <h3 class="text-xl font-bold">
-                <a href={e.href} class="after:absolute after:inset-0 after:content-['']">
-                  {e.titre}
-                </a>
-              </h3>
-              <p class="mt-2 text-sm leading-relaxed text-voile">{e.note}</p>
-              <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-encre" aria-hidden="true">
-                Voir l'esquisse
-                <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
-              </span>
-            </div>
-          </article>
-        ))
-      }
+            ))
+          }
+        </div>
+      </section>
 
-      {/* Emplacement libre pour d'autres esquisses */}
-      <article class="flex items-center justify-center rounded-[24px] rounded-tl-[4px] border border-dashed border-encre/20 p-6">
-        <p class="note text-center">Autres explorations à venir</p>
-      </article>
-    </div>
-  </section>
-</Base>
+      <!-- Filet (node 15119:1435) -->
+      <div class="mt-14 border-t border-trait-2" aria-hidden="true"></div>
+
+      <!-- Esquisses (nodes 15119:1441 + 15119:1445) : même rangée que les mises
+           en scène, sans colonne numéro/titre — l'accroche manuscrite porte le
+           lien, étendu à toute la rangée (motif « stretched link »). -->
+      <section class="pb-20 pt-8">
+        <h2 class="titre-section flex items-center gap-[14px] py-5 font-display text-lg text-encre sm:text-xl">
+          <Icone nom="etoile" taille={38} class="shrink-0" />
+          Esquisses
+        </h2>
+
+        <article class="group relative mt-2 flex w-full flex-col gap-6 p-5 transition-colors hover:bg-accent/10 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:py-[30px] lg:pr-[30px]">
+          <div class="flex flex-col justify-center gap-5 border-trait-2 lg:max-w-[580px] lg:self-stretch lg:border-l lg:px-5">
+            <h3 class="titre-esquisse w-fit -rotate-[0.9deg] text-3xl text-accent lg:text-4xl">
+              <a href="/works/golyeo-korea" class="after:absolute after:inset-0 after:content-['']">
+                Golyeo Korea
+              </a>
+            </h3>
+            <p class="text-lg font-semibold text-encre">
+              Exploration d'identité pour un restaurant coréen. Deux directions :
+              une mignonne et pastel inspirée du design kawaii coréen, une plus
+              traditionnelle et sobre. Recherche de logo, palette, carte de visite.
+            </p>
+          </div>
+          <!-- Logo détouré (img/golyeo.png d'Audrey) : le jpg posait une plaque
+               blanche sur le fond beige de la page. -->
+          <img
+            src="/images/golyeo-logo.png"
+            alt=""
+            loading="lazy"
+            class="aspect-[497/280] w-full rounded-[15px] object-contain lg:w-[42%] lg:max-w-[497px] lg:shrink-0"
+          />
+        </article>
+      </section>
+    </main>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+  /* La base h1–h6 de global.css (hors @layer) prime sur les utilitaires
+     Tailwind : on repose ici, en scoped, les styles exacts de la maquette. */
+  /* Sous-titres de section (Figma Title/H4/Semibold : Poppins 600). */
+  .titre-section {
+    font-weight: 600;
+  }
+  /* Accroche-titre des esquisses (Figma Accent/Accent-3 : Caveat 400). */
+  .titre-esquisse {
+    font-family: var(--font-note);
+    font-weight: 400;
+  }
+</style>
