@@ -12,6 +12,8 @@ const px = (x, y) => {
   const i = (y * width + x) * channels;
   return [data[i], data[i + 1], data[i + 2]];
 };
+// Alpha du pixel : l'image est détourée, on ignore les pixels transparents.
+const alpha = (x, y) => data[(y * width + x) * channels + 3];
 
 const hex = ([r, g, b]) =>
   "#" + [r, g, b].map((v) => v.toString(16).padStart(2, "0")).join("");
@@ -52,6 +54,7 @@ for (const [nom, fx, fy] of spots) {
       if (dx * dx + dy * dy > 45 * 45) continue;
       const x = cx + dx, y = cy + dy;
       if (x < 0 || y < 0 || x >= width || y >= height) continue;
+      if (alpha(x, y) < 200) continue;
       const c = px(x, y);
       const h = hex(c);
       counts.set(h, (counts.get(h) || 0) + 1);
@@ -82,6 +85,7 @@ const scanBande = (nom, fx, fy, demiH) => {
     for (let dx = -160; dx <= 160; dx++) {
       const x = cx + dx, y = cy + dy;
       if (x < 0 || y < 0 || x >= width || y >= height) continue;
+      if (alpha(x, y) < 200) continue;
       const c = px(x, y);
       const l = lum(c);
       if (l < darkestLum) {

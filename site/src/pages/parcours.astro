@@ -8,15 +8,15 @@ const experiences = [
     dates: "Février 2025 à septembre 2026 (en cours, alternance)",
     poste: "Product Designer UX/UI",
     employeur: "EasyVista",
+    // Missions alignées sur le CV 2026 (img/cv Garoscio Audrey_product design.pdf).
     missions: [
-      "Analyse et formalisation des besoins utilisateurs pour identifier les points de friction dans les parcours agents, administrateurs et utilisateurs finaux.",
-      "Création de wireframes, maquettes haute fidélité et prototypes interactifs sur Figma pour des interfaces SaaS B2B.",
-      "Contribution au design system : composants Figma, styles, règles d'usage, cohérence graphique, accessibilité.",
-      "Préparation de la transmission aux développeurs : maquettes propres, comportements détaillés, spécifications fonctionnelles, suivi de l'implémentation.",
-      "Participation aux tests utilisateurs, recette UX/UI, contrôle du rendu responsive.",
-      "Collaboration avec PO, développeurs et équipes métier.",
-      "Contribution à l'amélioration de 24 composants du design system.",
-      "Suivi de 6 fonctionnalités jusqu'à leur passage en développement.",
+      "Conception d'interfaces SaaS B2B complexes : portail client personnalisable, panneaux de configuration de widgets, refonte des panneaux SLA/OLA. Wireframes, maquettes haute fidélité et prototypes cliquables sur Figma.",
+      "Rédaction des spécifications UX/UI : règles d'usage, comportements détaillés, critères d'acceptation. Préparation de la transmission aux développeurs et suivi de l'implémentation.",
+      "Conduite de la recette UX/UI : contrôle du rendu responsive, relevé des anomalies, retests. Suivi de 6 fonctionnalités jusqu'à leur passage en développement.",
+      "Contribution au design system : 24 composants Figma, styles, règles d'usage, cohérence graphique inter-produits.",
+      "Rédaction de la documentation d'accessibilité (WCAG 2.2 / RGAA) et intégration des critères dans les composants du design system.",
+      "Analyse et formalisation des besoins utilisateurs, tests utilisateurs, identification des points de friction (agents, administrateurs, utilisateurs finaux).",
+      "Collaboration en cycles de sprints avec le PO, les développeurs et les équipes métier.",
     ],
   },
   {
@@ -47,7 +47,7 @@ const experiences = [
     missions: [
       "Habilleuse sur les shows Marvel.",
       "Gestion des stocks de costumes et organisation des loges.",
-      "Création, ajustements et entretien de chapeaux et accessoires pour les spectacles.",
+      "Costumière et chapelière pour les spectacles Disneyland Paris : création, ajustements et entretien de chapeaux et accessoires.",
     ],
   },
 ];
@@ -173,14 +173,17 @@ const outils = [
         </div>
       </div>
 
-      <!-- Note manuscrite de la maquette, à droite du titre en xl. -->
-      <p class="hidden -rotate-[7deg] font-note text-[clamp(26px,1.88vw,36px)] leading-[normal] text-accent xl:block xl:pt-20">
+      <!-- Note manuscrite de la maquette, à droite du titre en xl.
+           Taille alignée sur la citation de la page contact.
+           Ancienne taille (au cas où) : clamp(26px,1.88vw,36px). -->
+      <p class="hidden -rotate-[7deg] font-note text-[clamp(28px,2.09vw,40px)] leading-[normal] text-accent xl:block xl:pt-20">
         D'un univers à l'autre, un parcours guidé par le détail.
       </p>
     </div>
 
-    <!-- La note passe sous le bouton quand la colonne de droite disparaît. -->
-    <p class="mt-10 max-w-md -rotate-[7deg] font-note text-[28px] leading-[normal] text-accent xl:hidden">
+    <!-- La note passe sous le bouton quand la colonne de droite disparaît.
+         Taille alignée sur contact ; ancienne taille (au cas où) : 28px. -->
+    <p class="mt-10 max-w-md -rotate-[7deg] font-note text-[32px] leading-[normal] text-accent xl:hidden">
       D'un univers à l'autre, un parcours guidé par le détail.
     </p>
 

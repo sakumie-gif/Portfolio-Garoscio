@@ -19,7 +19,7 @@ const projets = [
     titre: "Pool Party",
     accroche: "Marketplace P2P de location de piscines",
     description: "Du cadrage stratégique à la maquette livrable. Six mois, en autonomie.",
-    image: "/images/poolparty-page-daccueil-maquette-page-daccueil-ordinateur.jpg",
+    image: "/images/poolparty-affiche-hero.jpg",
   },
   {
     href: "/works/sumo-tournament",
@@ -86,7 +86,7 @@ const projets = [
 
       <!-- Les mises en scène (nodes 15119:1437 + 15119:1458) -->
       <section class="pt-8">
-        <h2 class="flex items-center gap-[14px] py-5 font-display text-lg font-semibold text-encre sm:text-xl">
+        <h2 class="titre-section flex items-center gap-[14px] py-5 font-display text-lg text-encre sm:text-xl">
           <Icone nom="etoile" taille={38} class="shrink-0" />
           Les mises en scène
         </h2>
@@ -114,14 +114,14 @@ const projets = [
            en scène, sans colonne numéro/titre — l'accroche manuscrite porte le
            lien, étendu à toute la rangée (motif « stretched link »). -->
       <section class="pb-20 pt-8">
-        <h2 class="flex items-center gap-[14px] py-5 font-display text-lg font-semibold text-encre sm:text-xl">
+        <h2 class="titre-section flex items-center gap-[14px] py-5 font-display text-lg text-encre sm:text-xl">
           <Icone nom="etoile" taille={38} class="shrink-0" />
           Esquisses
         </h2>
 
         <article class="group relative mt-2 flex w-full flex-col gap-6 p-5 transition-colors hover:bg-accent/10 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:py-[30px] lg:pr-[30px]">
           <div class="flex flex-col justify-center gap-5 border-trait-2 lg:max-w-[580px] lg:self-stretch lg:border-l lg:px-5">
-            <h3 class="w-fit -rotate-[0.9deg] font-note text-3xl font-normal text-accent lg:text-4xl">
+            <h3 class="titre-esquisse w-fit -rotate-[0.9deg] text-3xl text-accent lg:text-4xl">
               <a href="/works/golyeo-korea" class="after:absolute after:inset-0 after:content-['']">
                 Golyeo Korea
               </a>
@@ -147,3 +147,17 @@ const projets = [
     <Footer />
   </body>
 </html>
+
+<style>
+  /* La base h1–h6 de global.css (hors @layer) prime sur les utilitaires
+     Tailwind : on repose ici, en scoped, les styles exacts de la maquette. */
+  /* Sous-titres de section (Figma Title/H4/Semibold : Poppins 600). */
+  .titre-section {
+    font-weight: 600;
+  }
+  /* Accroche-titre des esquisses (Figma Accent/Accent-3 : Caveat 400). */
+  .titre-esquisse {
+    font-family: var(--font-note);
+    font-weight: 400;
+  }
+</style>

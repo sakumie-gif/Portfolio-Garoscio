@@ -37,6 +37,71 @@ const histoires = [
       "Trouver une alternance a pris du temps : mon profil atypique a d'abord effrayé. C'est la journée de l'inclusion handicap qui m'a permis de convaincre EasyVista, qui ne regrette pas d'avoir fait confiance à ce parcours. Depuis 2025, j'y suis Product Designer, en alternance avec un MBA1 Marketing, Communication et Design digital à la Digital School Paris (IEF2I). Je travaille sur des interfaces SaaS B2B où la clarté n'est pas un confort mais une condition de service, et je passe du stratégique au visuel, de la matrice à la maquette, sans rupture. Mes journées se passent entre recherche utilisateur, wireframes, maquettes Figma, contributions au design system, et la transmission propre aux développeurs. Ce que je cherche maintenant, c'est continuer à construire des produits qui ont du caractère, sans sacrifier la lisibilité : la rencontre entre une exigence d'usage et une vraie présence de marque.",
   },
 ];
+
+// Le plateau — compétences autour du radar. Positions (x, y) : centres des
+// pastilles relevés sur la planche de la maquette (composition 1760×1132),
+// utilisés par la mise en page absolue à partir de lg.
+const plateau = [
+  {
+    titre: "Conception UX/UI",
+    detail: "Recherche, wireframes, maquettes, prototypes",
+    icone: "crayon",
+    x: "50.7%",
+    y: "6.9%",
+  },
+  {
+    titre: "Direction artistique",
+    detail: "Identité visuelle, univers graphique, storytelling",
+    icone: "palette",
+    x: "76.6%",
+    y: "29.6%",
+  },
+  {
+    titre: "Mise en scène, narration",
+    detail: "Structurer un récit clair et engageant",
+    icone: "micro",
+    x: "75.2%",
+    y: "62.7%",
+  },
+  {
+    titre: "Rythme et lisibilité",
+    detail: "Aller à l'essentiel, rendre fluide et compréhensible",
+    icone: "chrono",
+    x: "50.7%",
+    y: "83.7%",
+  },
+  {
+    titre: "Gestion de projet",
+    detail: "Organisation, planification, suivi et collaboration",
+    icone: "organigramme",
+    x: "24.5%",
+    y: "61.5%",
+  },
+  {
+    titre: "Sens du service",
+    detail: "Écoute, empathie, solutions utiles",
+    icone: "coeur",
+    x: "23.6%",
+    y: "28.7%",
+  },
+];
+
+// Icônes redessinées en SVG (la planche Figma est une image aplatie : icônes
+// pixelisées et corail sur corail clair à ~2.6:1). Traits en currentColor.
+const icones: Record<string, string> = {
+  crayon:
+    '<path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/>',
+  palette:
+    '<path d="M12 2a10 10 0 1 0 0 20 1.7 1.7 0 0 0 1.65-1.7c0-.44-.18-.84-.44-1.13-.25-.29-.43-.68-.43-1.12a1.65 1.65 0 0 1 1.65-1.65h2c3.05 0 5.57-2.5 5.57-5.55C22 6.01 17.46 2 12 2Z"/><circle cx="13.5" cy="6.5" r=".8" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".8" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".8" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".8" fill="currentColor"/>',
+  micro:
+    '<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/>',
+  chrono:
+    '<line x1="10" y1="2" x2="14" y2="2"/><line x1="12" y1="14" x2="15" y2="11"/><circle cx="12" cy="14" r="8"/>',
+  organigramme:
+    '<rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/>',
+  coeur:
+    '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>',
+};
 ---
 
 <!doctype html>
@@ -86,8 +151,12 @@ const histoires = [
             </span>
           </h1>
 
+          <!-- Citation (node 64:3717), centrée sur l'axe de la colonne photo
+               (48.4% de droite). Pas la classe .note : sa taille fixe
+               (1.35rem, hors layer) écrase les utilitaires text-[…].
+               Taille alignée sur la citation de la page contact. -->
           <p
-            class="note mt-6 -rotate-[7deg] text-3xl font-normal sm:text-[36px] xl:absolute xl:left-[53%] xl:top-[120px] xl:mt-0"
+            class="mt-6 -rotate-[7deg] font-note text-[32px] font-bold leading-[1.15] text-accent xl:absolute xl:left-[51.6%] xl:top-[96px] xl:mt-0 xl:w-[48.4%] xl:text-center xl:text-[clamp(28px,2.09vw,40px)]"
           >
             A la croisée du produit et de la scène
           </p>
@@ -115,8 +184,9 @@ const histoires = [
               }
             </ul>
 
-            <!-- Histoires -->
-            <div class="mt-14 flex flex-col items-start gap-5 xl:px-5">
+            <!-- Histoires — même marge gauche que « En Bref » (maquette : x=0,
+                 pas d'indentation). -->
+            <div class="mt-14 flex flex-col items-start gap-5">
               {
                 histoires.map((h) => (
                   <>
@@ -174,26 +244,19 @@ const histoires = [
           Le plateau
         </p>
 
-        <!-- Le plateau est une planche exportée de la maquette ; le radar
-             rose est superposé sur le centre, comme dans le fichier Figma.
-             Le radar est redessiné en SVG (géométrie et couleurs relevées sur
-             figma-plateau-radar.png, 220×236, qui pixelisait une fois étiré) ;
-             le rect de fond opaque masque le radar corail de la planche,
-             comme le faisait le PNG. -->
-        <div class="relative mx-auto mt-8 w-full">
-          <img
-            src="/images/figma-plateau.png"
-            alt="Radar des compétences : Conception UX/UI (recherche, wireframes, maquettes, prototypes), Direction artistique (identité visuelle, univers graphique, storytelling), Mise en scène et narration (structurer un récit clair et engageant), Rythme et lisibilité (aller à l'essentiel, rendre fluide et compréhensible), Gestion de projet (organisation, planification, suivi et collaboration), Sens du service (écoute, empathie, solutions utiles)"
-            width="1564"
-            height="1006"
-            class="w-full"
-          />
+        <!-- La planche de la maquette est une image aplatie (textes pixelisés
+             une fois étirés, icônes corail #f76049 sur pastille corail clair
+             #fbe3dd : 2.6:1, sous le seuil non-texte de 3:1). Reconstruction
+             en HTML : vrais textes (titres encre, sous-titres voile ≥ 4.5:1),
+             icônes SVG lie de vin sur pastille corail/15 (≈ 6:1), radar SVG
+             identique à sa position maquette (33.6% / 21.4% / 34.3%).
+             En dessous de lg : radar centré + liste en grille. -->
+        <div class="plateau relative mx-auto mt-8 w-full">
           <svg
             viewBox="0 0 220 236"
             aria-hidden="true"
-            class="absolute left-[33.6%] top-[21.4%] w-[34.3%]"
+            class="plateau-radar mx-auto mb-10 w-full max-w-[420px] lg:mb-0 lg:max-w-none"
           >
-            <rect width="220" height="236" fill="#F8F5EF"></rect>
             <!-- Grille : 4 hexagones concentriques + rayons -->
             <g stroke="#DED4C9" stroke-width="1" fill="none">
               <polygon points="110,12.5 201,65 201,170 110,222.5 19,170 19,65"></polygon>
@@ -220,6 +283,39 @@ const histoires = [
               <circle cx="19" cy="63" r="3.5"></circle>
             </g>
           </svg>
+
+          <ul class="plateau-liste grid grid-cols-1 gap-10 sm:grid-cols-2">
+            {
+              plateau.map((c) => (
+                <li
+                  class="plateau-item flex flex-col items-center text-center"
+                  style={`--x:${c.x};--y:${c.y}`}
+                >
+                  <span
+                    class="mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-corail/15 text-accent lg:h-[72px] lg:w-[72px] 2xl:h-[92px] 2xl:w-[92px]"
+                    aria-hidden="true"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="h-7 w-7 lg:h-8 lg:w-8 2xl:h-10 2xl:w-10"
+                      set:html={icones[c.icone]}
+                    />
+                  </span>
+                  <p class="font-display text-lg font-semibold text-encre lg:text-xl 2xl:text-2xl">
+                    {c.titre}
+                  </p>
+                  <p class="mt-1 max-w-[320px] text-sm text-voile lg:text-base 2xl:text-lg">
+                    {c.detail}
+                  </p>
+                </li>
+              ))
+            }
+          </ul>
         </div>
       </section>
     </main>
@@ -227,3 +323,39 @@ const histoires = [
     <Footer />
   </body>
 </html>
+
+<style>
+  /* « Le plateau » : à partir de lg, la composition reprend la planche de la
+     maquette (1760×1132) — radar au centre, six compétences positionnées en
+     absolu via --x/--y (centres des pastilles). En dessous, tout reste en
+     flux (radar centré + grille). */
+  @media (min-width: 1024px) {
+    .plateau {
+      aspect-ratio: 1760 / 1132;
+    }
+    .plateau-radar {
+      position: absolute;
+      left: 33.6%;
+      top: 21.4%;
+      width: 34.3%;
+    }
+    .plateau-liste {
+      display: contents;
+    }
+    .plateau-item {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      width: 280px;
+      /* --x/--y visent le centre de la pastille (h-[72px] → -36px) */
+      transform: translate(-50%, -36px);
+    }
+  }
+  @media (min-width: 1536px) {
+    .plateau-item {
+      width: 360px;
+      /* Pastille 2xl : h-[92px] → -46px */
+      transform: translate(-50%, -46px);
+    }
+  }
+</style>
