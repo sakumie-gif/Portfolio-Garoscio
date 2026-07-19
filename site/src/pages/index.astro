@@ -235,9 +235,11 @@ const apropos = [
 
       <!-- Projets (nodes 15117:948 + 59:1312 + 58:1221) -->
       <section id="projets" class="mx-auto max-w-[1920px] px-6 pt-8 sm:px-10 xl:px-20">
-        <!-- Actualité (node 15117:948) : carte bordée lie-de-vin -->
+        <!-- Actualité (node 15117:948) : carte bordée lie-de-vin, posée à plat
+             sur le fond de page — sans ombre, qui lui donnait un air de carte
+             blanche flottante. -->
         <div
-          class="flex flex-col items-start gap-[14px] rounded-[20px] border border-accent p-5 shadow-[0px_16px_16px_0px_rgba(12,12,13,0.1),0px_4px_4px_0px_rgba(12,12,13,0.05)]"
+          class="flex flex-col items-start gap-[14px] rounded-[20px] border border-accent p-5"
         >
           <p
             class="rounded-[10px] bg-[rgba(154,39,55,0.1)] px-[14px] py-2 text-sm font-bold text-accent shadow-[0px_4px_6px_0px_rgba(0,0,0,0.1),0px_2px_4px_0px_rgba(0,0,0,0.1)]"
@@ -259,12 +261,21 @@ const apropos = [
           <h2 class="font-display text-2xl font-semibold text-encre sm:text-[28px]">
             Projets sélectionnés
           </h2>
+          <!-- Le trait est en absolu : en flux (w-full dans un flex-col), sa
+               largeur naturelle (~460px) élargissait le lien et il dépassait
+               largement du texte. En absolu, il fait exactement la largeur
+               du libellé, comme sur la maquette. -->
           <a
             href="/works"
-            class="note flex flex-col items-center py-2 text-2xl font-normal drop-shadow-[0px_10px_7.5px_rgba(0,0,0,0.1),0px_4px_3px_rgba(0,0,0,0.1)] transition-transform hover:scale-[1.03]"
+            class="note relative inline-block py-2 text-2xl font-normal drop-shadow-[0px_10px_7.5px_rgba(0,0,0,0.1),0px_4px_3px_rgba(0,0,0,0.1)] transition-transform hover:scale-[1.03]"
           >
             Voir tous les projets
-            <img src="/images/trait-souligne.png" alt="" aria-hidden="true" class="w-full" />
+            <img
+              src="/images/trait-souligne.png"
+              alt=""
+              aria-hidden="true"
+              class="pointer-events-none absolute bottom-0 left-0 w-full"
+            />
           </a>
         </div>
 
