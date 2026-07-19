@@ -71,11 +71,13 @@ const projets = [
         <h1 class="font-display text-4xl font-bold leading-[normal] text-encre sm:text-5xl xl:text-[64px]">
           À l'<span class="relative inline-block text-accent">
             affiche
+            <!-- top-[72%] : le trait frôle le bas des lettres comme sur la
+                 maquette (top-full le posait sous la boîte de ligne, trop bas). -->
             <img
               src="/images/trait-souligne.png"
               alt=""
               aria-hidden="true"
-              class="pointer-events-none absolute left-0 top-full w-full"
+              class="pointer-events-none absolute left-0 top-[72%] w-full"
             />
           </span>
         </h1>
