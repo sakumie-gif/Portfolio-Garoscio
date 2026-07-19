@@ -101,11 +101,14 @@ const competences = [
 // Chiffres tirés des missions réelles listées plus bas, pas de mesures
 // d'impact fabriquées : le concept écarte explicitement les « 100 % de
 // réussite » invérifiables.
-const chiffres = [
-  { valeur: "24", libelle: "composants du design system améliorés" },
-  { valeur: "6", libelle: "fonctionnalités suivies jusqu'au développement" },
-  { valeur: "2025", libelle: "Product Designer chez EasyVista depuis" },
-];
+// ⚠ Section retirée de l'affichage : la nouvelle maquette du haut de page
+// (node Figma 15122:1459) ne comporte plus les tuiles chiffres-clés.
+// Données conservées ici au cas où elles reviendraient.
+// const chiffres = [
+//   { valeur: "24", libelle: "composants du design system améliorés" },
+//   { valeur: "6", libelle: "fonctionnalités suivies jusqu'au développement" },
+//   { valeur: "2025", libelle: "Product Designer chez EasyVista depuis" },
+// ];
 
 const outils = [
   {
@@ -126,42 +129,75 @@ const outils = [
 ---
 
 <Base title="Parcours — Audrey Garoscio" current="parcours">
-  <div class="relative mx-auto max-w-4xl px-6 pb-20 pt-14 sm:px-10 sm:pt-20">
-    <!-- En-tête -->
-    <div class="blob right-0 top-2 h-64 w-64 bg-accent/10" aria-hidden="true"></div>
+  <!-- Haut de page refait sur la maquette Figma « Page Principal » parcours
+       (node 15122:1459) : titre étoilé « Le programme », « Parcours. » avec
+       trait souligné, note manuscrite à droite, bouton CV, séparateur puis
+       titre EXPÉRIENCE. La suite (timeline, formation, compétences, outils)
+       est conservée telle quelle, comme demandé. -->
+  <section class="mx-auto max-w-[1920px] px-6 pt-8 sm:px-10 xl:px-20">
+    <div class="grid gap-8 xl:grid-cols-[1fr_clamp(400px,36.6vw,703px)] xl:items-start">
+      <div>
+        <p class="flex items-center gap-3.5 py-3.5 font-display text-xl font-semibold">
+          <Icone nom="etoile" taille={38} class="shrink-0" /> Le programme
+        </p>
+        <!-- Tailles proportionnelles (clamp, comme l'accueil et le contact) :
+             la maquette est dessinée à 1920. -->
+        <h1 class="mt-2 font-display text-4xl font-bold leading-[normal] sm:text-5xl lg:text-[clamp(40px,3.34vw,64px)]">
+          <span class="relative inline-block">
+            Parcours<span class="text-accent">.</span>
+            <img
+              src="/images/trait-souligne.png"
+              alt=""
+              aria-hidden="true"
+              class="pointer-events-none absolute left-0 top-full w-full"
+            />
+          </span>
+        </h1>
+        <p class="mt-8 max-w-2xl text-lg font-semibold">
+          Product Designer UX/UI, en alternance chez EasyVista, MBA1 à Digital
+          School Paris.
+        </p>
 
-    <p class="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
-      <Icone nom="etoile" taille={14} class="shrink-0" /> Le programme
-    </p>
-    <h1 class="mt-4 text-5xl font-extrabold leading-[1.03] sm:text-6xl">Parcours</h1>
-    <p class="mt-6 max-w-xl text-lg leading-relaxed text-voile">
-      Product Designer UX/UI, en alternance chez EasyVista, MBA1 à Digital
-      School Paris.
-    </p>
+        <div class="mt-6">
+          <!-- Pas d'aria-label : il masquait le texte visible sans le contenir (2.5.3).
+               Coins 15px et ombre portée de la maquette (comme le bouton du
+               formulaire de contact). -->
+          <Bouton
+            fleche="aucune"
+            href="/cv/audrey-garoscio-cv.pdf"
+            download
+            class="!rounded-[15px] drop-shadow-[0px_10px_7.5px_rgba(0,0,0,0.1),0px_4px_3px_rgba(0,0,0,0.1)]"
+          >
+            Télécharger le CV (PDF)
+          </Bouton>
+        </div>
+      </div>
 
-    <div class="mt-8">
-      <!-- Pas d'aria-label : il masquait le texte visible sans le contenir (2.5.3) -->
-      <Bouton fleche="bas" href="/cv/audrey-garoscio-cv.pdf" download>
-        Télécharger le CV (PDF)
-      </Bouton>
+      <!-- Note manuscrite de la maquette, à droite du titre en xl. -->
+      <p class="hidden -rotate-[7deg] font-note text-[clamp(26px,1.88vw,36px)] leading-[normal] text-accent xl:block xl:pt-20">
+        D'un univers à l'autre, un parcours guidé par le détail.
+      </p>
     </div>
 
-    <!-- Chiffres-clés -->
-    <ul class="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-3">
-      {
-        chiffres.map((c) => (
-          <li class="rounded-[20px] rounded-tl-[3px] bg-accent/10 p-6">
-            <p class="text-4xl font-extrabold leading-none text-encre">{c.valeur}</p>
-            <p class="mt-3 text-sm leading-snug text-encre">{c.libelle}</p>
-          </li>
-        ))
-      }
-    </ul>
+    <!-- La note passe sous le bouton quand la colonne de droite disparaît. -->
+    <p class="mt-10 max-w-md -rotate-[7deg] font-note text-[28px] leading-[normal] text-accent xl:hidden">
+      D'un univers à l'autre, un parcours guidé par le détail.
+    </p>
 
-    <!-- Expériences -->
-    <section class="mt-16 border-t border-encre/10 pt-12">
-      <h2 class="text-3xl font-extrabold">Expériences</h2>
-      <ol class="mt-10">
+    <div class="mt-10 border-t border-trait-2" aria-hidden="true"></div>
+
+    <!-- « EXPERIENCE » sur la maquette : accent rétabli, pas de typo dans le
+         livrable. -->
+    <h2 class="mt-8 flex items-center gap-3.5 py-3.5 font-display text-xl font-semibold">
+      <Icone nom="etoile" taille={38} class="shrink-0" /> EXPÉRIENCE
+    </h2>
+  </section>
+
+  <div class="relative mx-auto max-w-4xl px-6 pb-20 sm:px-10">
+    <!-- Expériences (contenu conservé ; le titre est désormais porté par le
+         h2 étoilé ci-dessus) -->
+    <section>
+      <ol class="mt-2">
         {
           experiences.map((x, i) => (
             <li class="relative flex gap-5">
