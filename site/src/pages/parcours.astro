@@ -62,9 +62,21 @@ const experiences = [
     dates: "Mai à juin 2017",
     poste: "Costumière",
     employeur: "IDZ Production, Paris",
+    // Une mission peut être une chaîne simple, ou { texte, lien, libelle }
+    // pour ajouter un lien vidéo à la fin (règle des 3 boutons : un lien
+    // dans une phrase est un texte souligné, pas un bouton).
     missions: [
-      "Réalisation du costume de Norman pour le clip musical « Zelda ».",
-      "Réalisation des costumes d'extra-terrestres pour une vidéo de promotion du film « Valérian » de Jimmy.",
+      {
+        texte: "Réalisation du costume de Norman pour le clip musical « Zelda ».",
+        lien: "https://www.youtube.com/watch?v=ci8HQFF6d5A",
+        libelle: "Voir le clip sur YouTube",
+      },
+      {
+        texte:
+          "Réalisation des costumes d'extra-terrestres pour une vidéo de promotion du film « Valérian » de Jimmy.",
+        lien: "https://www.youtube.com/watch?v=0gMW3ijIczI&t=93s",
+        libelle: "Voir la vidéo sur YouTube",
+      },
     ],
   },
 ];
@@ -234,9 +246,23 @@ const outils = [
                 </div>
                 <p class="mt-1 text-base text-voile">{x.employeur}</p>
                 <ul class="mt-4 space-y-2 text-base leading-relaxed">
-                  {x.missions.map((m) => (
-                    <li>{m}</li>
-                  ))}
+                  {x.missions.map((m) =>
+                    typeof m === "string" ? (
+                      <li>{m}</li>
+                    ) : (
+                      <li>
+                        {m.texte}{" "}
+                        <a
+                          href={m.lien}
+                          target="_blank"
+                          rel="noopener"
+                          class="whitespace-nowrap font-semibold underline decoration-accent decoration-2 underline-offset-4 hover:decoration-[3px]"
+                        >
+                          {m.libelle}
+                        </a>
+                      </li>
+                    ),
+                  )}
                 </ul>
               </div>
             </li>
