@@ -11,3 +11,4 @@ Registre des images déjà lues (ne jamais relire une image listée ici : se fie
 | figma-icon-telephone.svg | Icône combiné téléphone, trait lie de vin #9A2737, 1.5px. | Ligne Téléphone de /contact |
 | figma-icon-adresse.svg | Icône épingle de localisation, trait lie de vin #9A2737. | Ligne Adresse de /contact |
 | figma-icon-trombone.svg | Icône trombone (pièce jointe), trait lie de vin #9A2737. | « Joindre un fichier » du formulaire /contact |
+| golyeo-logo.png | Logo rond « Golyeo Korea » (chat + bol de nouilles, lie de vin), 398×399, détouré par flood fill depuis les bords (l'original img/golyeo.png avait un fond opaque #F7F7F7). | Rangée Esquisses de /affiche-v2 |
