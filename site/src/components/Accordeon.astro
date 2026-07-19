@@ -1,0 +1,40 @@
+---
+// Accordéon / FAQ (design system Figma « Background+Border » question item).
+//
+// Bâti sur <details>/<summary> natifs : ouverture au clavier (Entrée/Espace),
+// état exposé aux technologies d'assistance et fonctionnel sans JavaScript
+// (WCAG 4.1.2). Fermé, la question est en gris ; ouvert, elle passe en lie de
+// vin gras — repris de la maquette via la variante `group-open`.
+//
+// question : le libellé cliquable. La réponse est le contenu par défaut (slot).
+const { question, ouvert = false, class: classe = "" } = Astro.props;
+---
+
+<details
+  class:list={[
+    "group rounded-lg border border-trait-2 bg-ivoire px-5 py-4",
+    classe,
+  ]}
+  open={ouvert}
+>
+  <summary
+    class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg text-voile-fort transition-colors group-open:font-bold group-open:text-accent [&::-webkit-details-marker]:hidden"
+  >
+    <span>{question}</span>
+    <svg
+      class="size-6 shrink-0 text-current transition-transform group-open:-rotate-180"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  </summary>
+  <div class="mt-3.5 text-base leading-relaxed text-voile-fort">
+    <slot />
+  </div>
+</details>

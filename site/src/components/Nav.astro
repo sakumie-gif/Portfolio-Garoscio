@@ -1,45 +1,36 @@
 ---
+// Header repris de la maquette Figma « CV-Portfolio » (node 64:1609) :
+// nom en Poppins Bold + tagline manuscrite lie-de-vin, liens À l'affiche /
+// Parcours / Metteur en scène / Contact, filet bas.
 const { current = "" } = Astro.props;
-// Libellés en français : un recruteur doit comprendre où cliquer sans
-// décoder un vocabulaire de scène. Les routes restent inchangées pour ne
-// casser ni les liens existants ni le référencement.
 const links = [
-  { href: "/works", label: "Projets", key: "works" },
-  { href: "/about", label: "À propos", key: "about" },
+  { href: "/works", label: "À l'affiche", key: "works" },
   { href: "/parcours", label: "Parcours", key: "parcours" },
+  { href: "/coulisses", label: "Metteur en scène", key: "coulisses" },
   { href: "/contact", label: "Contact", key: "contact" },
 ];
 ---
 
-<header class="w-full">
-  <!-- flex-wrap : à 390px, nom + 4 liens font 397px et faisaient scroller la
-       page horizontalement. Les liens passent à la ligne plutôt que déborder. -->
+<header class="border-b border-trait-2">
   <nav
-    class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-6 sm:px-10"
+    class="mx-auto flex max-w-[1920px] flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-[25px] sm:px-10 xl:px-20"
     aria-label="Navigation principale"
   >
-    <a
-      href="/"
-      class="group flex items-baseline gap-2.5 transition-colors"
-      aria-label="Audrey Garoscio — retour à l'accueil"
-    >
-      <span class="text-base font-extrabold tracking-tight text-encre sm:text-lg">
-        Audrey Garoscio
-      </span>
-      <span class="note hidden text-base sm:inline" aria-hidden="true">
-        Product Designer
+    <a href="/" class="flex items-baseline gap-4" aria-label="Audrey Garoscio — retour à l'accueil">
+      <span class="font-display text-xl font-bold text-encre sm:text-[28px]">Audrey Garoscio</span>
+      <span class="note hidden text-2xl font-bold sm:inline sm:text-[32px]" aria-hidden="true">
+        Product Design UX/UI
       </span>
     </a>
-
-    <ul class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm sm:gap-x-8">
+    <ul class="flex flex-wrap items-center gap-[14px]">
       {
         links.map((link) => (
           <li>
             <a
               href={link.href}
               class:list={[
-                "-my-1 block py-1 transition-colors hover:font-semibold hover:text-encre",
-                current === link.key ? "font-semibold text-encre" : "text-voile",
+                "block rounded-[30px] px-5 py-2 text-base text-encre transition-colors hover:font-semibold",
+                current === link.key && "font-semibold",
               ]}
               aria-current={current === link.key ? "page" : undefined}
             >

@@ -1,0 +1,53 @@
+---
+// Interrupteur / toggle (design system Figma « Switch »).
+//
+// <input type="checkbox"> natif masqué (peer) rendu en bascule : l'état activé
+// est un vrai `checked`, lisible par les technologies d'assistance, et le clic
+// sur le label bascule (WCAG 4.1.2). Piste activée en lie de vin (la maquette
+// la laissait en teal). `desactive` grise et bloque l'interaction.
+const {
+  name,
+  id = name,
+  label,
+  checked = false,
+  desactive = false,
+  icone = false,
+  class: classe = "",
+  ...reste
+} = Astro.props;
+---
+
+<label
+  class:list={[
+    "inline-flex items-center justify-between gap-5",
+    desactive ? "cursor-not-allowed opacity-50" : "cursor-pointer",
+    classe,
+  ]}
+>
+  <span class="inline-flex items-center gap-3 text-base text-encre">
+    {
+      icone && (
+        <svg class="size-6 shrink-0 text-voile-fort" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a7 7 0 0 1 14 0c0 5.6-7 10-7 10Z" /><circle cx="12" cy="11" r="2.5" /></svg>
+      )
+    }
+    {label}
+  </span>
+
+  <span class="relative inline-block h-8 w-14 shrink-0">
+    <input
+      type="checkbox"
+      id={id}
+      name={name}
+      checked={checked}
+      disabled={desactive}
+      class="peer sr-only"
+      {...reste}
+    />
+    <span
+      class="absolute inset-0 rounded-full bg-voile transition-colors peer-checked:bg-accent peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-encre"
+    ></span>
+    <span
+      class="absolute left-1 top-1 size-6 rounded-full bg-ivoire shadow transition-transform peer-checked:translate-x-6"
+    ></span>
+  </span>
+</label>

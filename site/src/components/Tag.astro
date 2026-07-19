@@ -1,0 +1,31 @@
+---
+// Étiquette / puce de catégorie (design system Figma « Tag »).
+//
+// Un tag NOMME une catégorie ou un état ; il ne clique pas. Pour une cible
+// cliquable, c'est un bouton ou un lien, pas un tag.
+//
+// Les cinq variantes de la maquette, renommées par intention plutôt que par
+// couleur (le Figma nommait « Grey » un tag jaune et « Orange » un tag gris) :
+//   defaut  — contour lie de vin sur blanc (catégories de projet : « UX Research »)
+//   plein   — lavis lie de vin (accent/10), texte lie de vin
+//   solide  — aplat lie de vin, texte blanc (mise en avant : « Le plus proche »)
+//   neutre  — gris clair, texte gris foncé (méta discrète)
+//   info    — lavis bleu, texte bleu (une teinte qui code un sens distinct)
+const { variante = "defaut", class: classe = "" } = Astro.props;
+
+const base =
+  "inline-flex items-center justify-center gap-1 rounded-[10px] px-3.5 py-2 text-sm";
+
+const variantes = {
+  defaut: "border border-accent bg-ivoire text-accent shadow-sm",
+  plein: "bg-accent/10 text-accent",
+  solide: "bg-accent text-ivoire shadow-sm",
+  neutre: "bg-trait text-voile-fort",
+  info: "bg-bleu/10 text-bleu",
+};
+---
+
+<span class:list={[base, variantes[variante], classe]}>
+  <slot name="icone" />
+  <slot />
+</span>

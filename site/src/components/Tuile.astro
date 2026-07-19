@@ -1,0 +1,68 @@
+---
+// Tuile / carte (design system Figma « Generique tiles »).
+//
+// En-tête sur lavis lie de vin (accent/10) portant le visuel, puis un corps :
+// tag, titre, description, filet, rôle. Coin haut-gauche carré, trois autres
+// arrondis — le détail de forme de la maquette. Survol : légère élévation.
+//
+// href rend toute la carte cliquable. Le titre porte alors le lien (le reste
+// de la carte l'étend via ::after) pour rester une seule cible accessible.
+import Tag from "./Tag.astro";
+
+const {
+  href,
+  image,
+  imageAlt = "",
+  titre,
+  description,
+  tag,
+  role,
+  roleDescription,
+  class: classe = "",
+} = Astro.props;
+---
+
+<article
+  class:list={[
+    "group relative flex w-full max-w-[294px] flex-col overflow-hidden rounded-b-[10px] rounded-tr-[10px] border border-trait-2 bg-ivoire transition-all hover:-translate-y-0.5 hover:shadow-lg",
+    classe,
+  ]}
+>
+  <div class="flex h-40 items-end justify-center border-b border-trait-2 bg-accent/10">
+    {
+      image && (
+        <img src={image} alt={imageAlt} class="h-full w-full object-cover" loading="lazy" />
+      )
+    }
+  </div>
+
+  <div class="flex flex-1 flex-col gap-2 px-4 py-2.5">
+    {tag && <Tag variante="solide" class="self-start">{tag}</Tag>}
+
+    <h3 class="truncate font-semibold text-encre">
+      {
+        href ? (
+          <a href={href} class="after:absolute after:inset-0 after:content-['']">
+            {titre}
+          </a>
+        ) : (
+          titre
+        )
+      }
+    </h3>
+
+    {description && <p class="text-xs text-encre">{description}</p>}
+
+    {
+      (role || roleDescription) && (
+        <>
+          <hr class="border-trait" />
+          <p class="flex items-center gap-3.5 text-xs">
+            {role && <span class="font-semibold text-corail">{role}</span>}
+            {roleDescription && <span class="text-encre">{roleDescription}</span>}
+          </p>
+        </>
+      )
+    }
+  </div>
+</article>

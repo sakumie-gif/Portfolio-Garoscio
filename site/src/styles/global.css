@@ -2,59 +2,65 @@
 
 /* ---------------------------------------------------------------
    Thème — « Le théâtre contemporain du Product Design »
-   Une scène blanche : fond clair, corail vivant, bordeaux en trace.
+   Une scène blanche : fond clair, lie de vin en signature.
 
    Les noms deviennent des classes utilitaires Tailwind
-   (ex: bg-ivoire, text-encre, border-voile).
+   (ex: bg-ivoire, text-encre, border-voile). Les valeurs sont
+   alignées sur les variables Figma (fichier CV-Portfolio).
 
-   RÈGLE — UN SEUL ROUGE.
-   La palette a porté jusqu'à trois rouges (corail #f26f62, accent
-   #c43d30, bordeaux #6b2e29). Même alignés sur la même teinte, trois
-   rouges se lisent comme trois couleurs : l'œil ne les range pas sur une
-   rampe, il y voit un arc-en-ciel. Il n'en reste qu'un.
-   Le choix est contraint : sur le blanc scène, le corail ne plafonne
-   qu'à 2.79:1 (il échoue AA texte à 4.5:1 ET le seuil composant à 3:1),
-   et le bordeaux à 9.84:1 est déjà presque noir. #c43d30 est le seul qui
-   soit encore un corail tout en portant du texte (4.97:1).
-   Les profondeurs se font à l'OPACITÉ : une même couleur plus claire
-   n'est pas un second rouge.
+   RÈGLE — UN SEUL ROUGE (côté portfolio).
+   Le rouge de marque est le LIE DE VIN #9a2737 (Figma « Color/lie de
+   vin »). Contrairement au corail #c43d30 précédent (qui ne portait du
+   texte qu'à 4.97:1), le lie de vin est assez sombre pour tenir 7.5:1
+   contre le blanc scène, dans les deux sens : texte accent sur ivoire,
+   ET texte ivoire sur bouton primaire. Les profondeurs se font à
+   l'OPACITÉ ou via --color-accent-bord ; une teinte plus claire n'est
+   pas un second rouge.
 
    RÈGLE — LA COULEUR PORTE DU SENS, SINON ELLE EST UNIQUE.
-   Il n'y a plus de --color-jaune ni de --color-brume. Ils ne codaient
-   rien : ni catégorie, ni état, ni hiérarchie. Ils coloriaient des tuiles
-   qui disent toutes la même chose, et c'est précisément ce qui faisait
-   l'arc-en-ciel. Une teinte ne revient que le jour où elle distingue
-   quelque chose que le texte ne dit pas déjà.
+   Les teintes catégorielles (corail, jaune, bleu, vert) existent dans le
+   design system pour distinguer des tags/tuiles. Elles ne s'invitent sur
+   une page que le jour où elles codent quelque chose que le texte ne dit
+   pas déjà — sinon on rouvre l'arc-en-ciel.
 --------------------------------------------------------------- */
 @theme {
   /* --- Fondations --- */
-  --color-ivoire: #fcfaf7; /* blanc scène, chaud */
-  --color-encre: #1e1c1c; /* texte principal — 16.28:1 sur ivoire */
-  /* Secondaire. Assombri pour tenir 4.5:1 (WCAG 1.4.3 / RGAA 3.2) même
-     quand un aplat décoratif teinte le fond derrière lui : 5.99:1 sur
-     ivoire, 5.48:1 sur accent/10. La valeur précédente, #6b665e, tombait
-     à 4.48:1. */
-  --color-voile: #656058;
+  --color-ivoire: #fcfbf9; /* Figma Color/White — blanc scène */
+  --color-encre: #201b19; /* Figma Color/Middle black — texte principal, 15.9:1 sur ivoire */
+  /* Secondaire (Figma Grey Font-2). Tient 4.5:1 (WCAG 1.4.3 / RGAA 3.2) :
+     5.26:1 sur ivoire, 4.69:1 sur un fond teinté accent/10. Pour un
+     secondaire qui doit passer partout sans marge, préférer --color-voile-fort. */
+  --color-voile: #6a6a6a;
+  --color-voile-fort: #454343; /* Figma Grey-font-1 — secondaire renforcé, 8.9:1 sur ivoire */
 
-  /* --- Le rouge, seul et unique ---
-     plein     : texte, liens, soulignés, fond du bouton principal (texte
-                 ivoire dessus, 4.97:1 dans les deux sens).
-     accent/10 : TOUS les aplats — tuiles, tags, chiffres-clés, cartes.
-     accent/35 : les formes organiques du décor.
-     Deux paliers, pas trois : /15 /25 /50 /60 /70 /80 étaient
-     indistinguables entre eux et c'est cette inflation qui a rendu la
-     palette illisible.
-     ATTENTION : text-accent sur accent/10 ne donne que 4.3:1 — le rouge
-     ne se pose pas sur son propre lavis. C'est le seul piège du système,
-     et il a été trouvé par l'audit, pas à l'œil. */
-  --color-accent: #c43d30;
+  /* --- Le lie de vin, rouge de marque ---
+     plein     : texte, liens, soulignés, fond du bouton primaire (texte
+                 ivoire dessus, 7.5:1 dans les deux sens).
+     accent/10 : les aplats — tuiles, tags, chiffres-clés, cartes.
+     accent-bord : profondeur et contours (Figma « lie de vin-border »). */
+  --color-accent: #9a2737; /* Figma Color/lie de vin */
+  --color-accent-bord: #4b151d; /* Figma Color/lie de vin-border */
 
-  /* --- Typographies ---
-     Une seule famille porte titres ET texte : l'identité tient à la
-     graisse et à l'échelle, pas à un mélange de fontes. */
-  --font-display: "Manrope", system-ui, sans-serif;
-  --font-body: "Manrope", system-ui, sans-serif;
-  /* Manuscrite. Réservée aux annotations courtes — jamais un paragraphe. */
+  /* --- Bordures neutres --- */
+  --color-trait: #ebebeb; /* Figma Border-1 */
+  --color-trait-2: #d4d4d4; /* Figma Border-2 */
+
+  /* --- Accents catégoriels (composants : tags, tuiles). Une teinte = un sens. --- */
+  --color-corail: #f76049; /* Figma Color/Corail */
+  --color-jaune: #b88d1a; /* Figma Color/Yellow */
+  --color-bleu: #4a6e89; /* Figma Color/Blue */
+  --color-vert: #156b67; /* Figma Accent/Bleu Green */
+  --color-rose: #bc8680; /* Figma pink-bg — fond doux du footer, via /10 */
+
+  /* --- Disable --- */
+  --color-inactif: #949494; /* Figma Disable */
+
+  /* --- Typographies (Figma « Portfolio » + « Accent ») ---
+     Poppins porte les titres, Inter le corps : l'identité tient à ce
+     contraste de familles autant qu'à la graisse et à l'échelle. */
+  --font-display: "Poppins", system-ui, sans-serif; /* Titres H2/H3/H4 */
+  --font-body: "Inter", system-ui, sans-serif; /* Corps P1/P2/P3 */
+  /* Manuscrite (Caveat). Réservée aux annotations courtes — jamais un paragraphe. */
   --font-note: "Caveat", "Segoe Script", cursive;
 }
 
@@ -98,8 +104,20 @@ body {
   outline: none;
 }
 
-/* Grands titres : l'échelle éditoriale du concept. Manrope se resserre
-   mal tout seul aux très grandes tailles, on l'aide. */
+/* Titres : Poppins porte toute la hiérarchie éditoriale (Figma H2/H3/H4).
+   On pose la famille et la graisse par défaut en base — les utilitaires
+   Tailwind d'une page restent prioritaires et peuvent surcharger. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+/* Aux grandes tailles Poppins gagne à se resserrer légèrement. */
 h1,
 h2 {
   letter-spacing: -0.025em;

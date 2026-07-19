@@ -12,10 +12,10 @@
 //     pas une cible : `underline decoration-accent decoration-2 underline-offset-4`
 //   - les liens du pied de page et du sommaire d'étude de cas — navigation.
 //
-// RÈGLE DE CONTRASTE (cf. global.css) : le fond du primaire est --color-accent,
-// texte ivoire dessus, 4.97:1. C'est aussi le seul rouge de la palette. Le
-// corail vif de la maquette (#f26f62) est tentant ici, mais il plafonne à
-// 2.79:1 avec du texte ivoire : il échoue AA, et il rouvrirait un second rouge.
+// RÈGLE DE CONTRASTE (cf. global.css) : le fond du primaire est --color-accent
+// (lie de vin #9a2737), texte ivoire dessus, 7.5:1. C'est le rouge de marque,
+// assez sombre pour porter du texte dans les deux sens. Les teintes catégorielles
+// (corail, bleu, vert…) restent aux composants du design system, pas aux boutons.
 const {
   variante = "primaire",
   fleche = "droite",
@@ -40,10 +40,12 @@ const variantes = {
   // révèle au survol — pas d'aplat, pour ne pas concurrencer le primaire.
   secondaire:
     "inline-flex items-center gap-2.5 rounded-full border border-encre/25 px-6 py-3 text-sm text-encre transition-colors hover:border-encre hover:font-semibold",
-  // Le lien-action : pas de forme, l'affordance tient au souligné accent et
-  // à la flèche. `-my-1 py-1` agrandit la cible sans pousser les voisins.
+  // Le lien-action manuscrit (maquette Figma « Tertiary ») : Caveat en lie de
+  // vin, souligné tracé à la main. Pas de forme ; l'affordance tient à la
+  // fonte, au trait et à la flèche. `-my-1 py-1` agrandit la cible sans
+  // pousser les voisins.
   tertiaire:
-    "group -my-1 inline-flex items-center gap-2 py-1 text-sm text-encre transition-colors hover:font-semibold",
+    "group -my-1 inline-flex items-center gap-2 py-1 font-note text-2xl leading-none text-accent transition-colors hover:font-semibold",
 };
 
 const fleches = {
@@ -79,13 +81,18 @@ const f = fleches[fleche];
         <span class="invisible col-start-1 row-start-1 font-semibold" aria-hidden="true">
           <slot />
         </span>
-        <span
-          class:list={[
-            "col-start-1 row-start-1",
-            variante === "tertiaire" && "underline decoration-accent decoration-2 underline-offset-4",
-          ]}
-        >
+        <span class="relative col-start-1 row-start-1">
           <slot />
+          {
+            variante === "tertiaire" && (
+              <img
+                src="/images/trait-souligne.png"
+                alt=""
+                aria-hidden="true"
+                class="pointer-events-none absolute -bottom-1 left-0 h-auto w-full"
+              />
+            )
+          }
         </span>
       </span>
     ) : (

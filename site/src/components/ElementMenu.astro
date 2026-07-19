@@ -1,0 +1,45 @@
+---
+// Élément de menu (design system Figma « Menu item »).
+//
+// États de la maquette :
+//   défaut  — contour lie de vin, texte lie de vin, fond transparent
+//   survol  — aplat lie de vin, texte ivoire (géré en CSS :hover)
+//   actif   — fond ivoire, contour lie de vin, texte lie de vin semi-bold
+// L'icône (slot « icone ») et le chevron héritent de la couleur du texte
+// (currentColor), donc suivent le survol sans réglage supplémentaire.
+//
+// href => lien, sinon bouton. `actif` marque l'élément courant (aria-current).
+const {
+  label,
+  actif = false,
+  chevron = false,
+  class: classe = "",
+  ...reste
+} = Astro.props;
+
+const Tag = reste.href ? "a" : "button";
+---
+
+<Tag
+  class:list={[
+    "inline-flex items-center gap-3.5 rounded-[15px] border border-accent px-2 py-2 text-base transition-colors hover:bg-accent hover:text-ivoire",
+    actif ? "bg-ivoire font-semibold text-accent" : "text-accent",
+    classe,
+  ]}
+  aria-current={actif ? "page" : undefined}
+  {...reste}
+>
+  <span class="flex items-center gap-3.5">
+    <slot name="icone">
+      <svg class="size-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5" /><rect x="14" y="3" width="7" height="7" rx="1.5" /><rect x="3" y="14" width="7" height="7" rx="1.5" /><rect x="14" y="14" width="7" height="7" rx="1.5" /></svg>
+    </slot>
+    <span>{label}</span>
+  </span>
+  {
+    chevron && (
+      <svg class="size-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m6 9 6 6 6-6" />
+      </svg>
+    )
+  }
+</Tag>

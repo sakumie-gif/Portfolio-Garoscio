@@ -1,0 +1,58 @@
+---
+// Fil d'Ariane (design system Figma « Breadscrumbs »).
+//
+// Balisage sémantique : <nav aria-label> + liste ordonnée. Le dernier maillon
+// est la page courante — pas un lien, et porté par aria-current="page"
+// (WCAG 2.4.8). Les chevrons de séparation sont décoratifs (aria-hidden).
+//
+// items : [{ label, href? }]. Le premier peut porter accueil=true pour
+// afficher l'icône maison. Le dernier item (sans href ou non) est rendu
+// comme page courante.
+const { items = [], class: classe = "" } = Astro.props;
+---
+
+<nav aria-label="Fil d'Ariane" class:list={["text-base", classe]}>
+  <ol class="flex flex-wrap items-center gap-2">
+    {
+      items.map((item, i) => {
+        const courant = i === items.length - 1;
+        return (
+          <li class="flex items-center gap-2">
+            {i > 0 && (
+              <svg
+                class="size-4 shrink-0 text-voile"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m9 6 6 6-6 6" />
+              </svg>
+            )}
+            {courant ? (
+              <span class="font-semibold text-accent" aria-current="page">
+                {item.accueil && (
+                  <svg class="mr-1.5 inline size-5 -translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5" /><path d="M5 9.5V21h14V9.5" /></svg>
+                )}
+                {item.label}
+              </span>
+            ) : (
+              <a
+                href={item.href}
+                class="inline-flex items-center text-voile-fort transition-colors hover:font-semibold hover:text-accent"
+              >
+                {item.accueil && (
+                  <svg class="mr-1.5 size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5" /><path d="M5 9.5V21h14V9.5" /></svg>
+                )}
+                {item.label}
+              </a>
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>

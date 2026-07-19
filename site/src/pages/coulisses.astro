@@ -1,0 +1,199 @@
+---
+// Reproduction fidèle de la maquette Figma « Page Principal » — Coulisses
+// (node 64:3357). Textes, visuels et mise en page repris tels quels ; les
+// assets sont les exports du fichier Figma. Header et footer partagés.
+import "../styles/global.css";
+import Icone from "../components/Icone.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+
+const enBref = [
+  { label: "PROFIL", valeur: "Audrey Garoscio, 36 ans, RQTH" },
+  { label: "VIT A", valeur: "Noisy-le-Grand, Ile-de-France" },
+  {
+    label: "AIME",
+    valeur:
+      "le théâtre, le DIY, les reconstitutions historiques, les jeux de société, fouiner le net à la recherche d'inspiration",
+  },
+];
+
+const histoires = [
+  {
+    titre: "'OU JE VIENS",
+    initiale: "D",
+    texte:
+      "J'ai commencé dans les loges. Habilleuse sur les shows Marvel à Disneyland Paris, costumière et chapelière sur des spectacles où chaque détail compte parce qu'il sera vu en direct, à cinq mètres d'un public qui ne pardonne pas l'à-peu-près. C'est là que j'ai appris à travailler vite, propre, et à servir quelque chose de plus grand que mon geste : la présence d'un personnage sur scène.",
+  },
+  {
+    titre: "OURQUOI J'AI CHANGE",
+    initiale: "P",
+    texte:
+      "En 2023 j'ai découvert l'UX/UI design. Pas par rupture, par prolongement. Concevoir une interface, c'est habiller un usage comme on habille un personnage. L'un est virtuel, l'autre physique, mais l'intention reste la même : ajuster, mettre en scène, faire en sorte qu'une personne reçoive ce qu'on lui adresse sans friction. Le style n'est jamais décoratif. Il révèle, il guide, il sert la lecture.",
+  },
+  {
+    titre: "E QUE JE FAIS MAINTENANT",
+    initiale: "C",
+    texte:
+      "Trouver une alternance a pris du temps : mon profil atypique a d'abord effrayé. C'est la journée de l'inclusion handicap qui m'a permis de convaincre EasyVista, qui ne regrette pas d'avoir fait confiance à ce parcours. Depuis 2025, j'y suis Product Designer, en alternance avec un MBA1 Marketing, Communication et Design digital à la Digital School Paris (IEF2I). Je travaille sur des interfaces SaaS B2B où la clarté n'est pas un confort mais une condition de service, et je passe du stratégique au visuel, de la matrice à la maquette, sans rupture. Mes journées se passent entre recherche utilisateur, wireframes, maquettes Figma, contributions au design system, et la transmission propre aux développeurs. Ce que je cherche maintenant, c'est continuer à construire des produits qui ont du caractère, sans sacrifier la lisibilité : la rencontre entre une exigence d'usage et une vraie présence de marque.",
+  },
+];
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audrey Garoscio — Coulisses</title>
+    <meta
+      name="description"
+      content="Les coulisses : d'où je viens, pourquoi j'ai changé, ce que je fais maintenant. Audrey Garoscio, Product Designer."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Caveat:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <!-- Fond #F7F4F2 : couleur de fond de la maquette (cf. accueil-v2). -->
+  <body style="background-color:#f7f4f2">
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <Nav current="coulisses" />
+
+    <main id="contenu" tabindex="-1">
+      <!-- Introduction (node 64:3359) -->
+      <section class="mx-auto max-w-[1920px] px-6 pt-2 sm:px-10 xl:px-20">
+        <p class="flex items-center gap-[14px] py-[14px] font-display text-lg font-semibold text-encre sm:text-xl">
+          <Icone nom="etoile" taille={38} class="shrink-0" />
+          LES COULISSES
+        </p>
+
+        <div class="relative pb-[50px]">
+          <h1 class="font-display text-4xl font-bold leading-[normal] text-encre sm:text-5xl xl:text-[64px]">
+            Audrey Garoscio,<br />
+            Product
+            <span class="relative inline-block whitespace-nowrap text-accent">
+              Designer
+              <img
+                src="/images/trait-souligne.png"
+                alt=""
+                aria-hidden="true"
+                class="pointer-events-none absolute left-0 top-[calc(100%-8px)] w-full"
+              />
+            </span>
+          </h1>
+
+          <p
+            class="note mt-6 -rotate-[7deg] text-3xl font-normal sm:text-[36px] xl:absolute xl:left-[53%] xl:top-[120px] xl:mt-0"
+          >
+            A la croisée du produit et de la scène
+          </p>
+        </div>
+      </section>
+
+      <!-- En Bref + histoires + photo (nodes 64:3420 / 64:3431 / 64:3864) -->
+      <section class="mx-auto max-w-[1920px] px-6 sm:px-10 xl:px-20">
+        <div class="border-t border-trait-2 pt-8" aria-hidden="true"></div>
+
+        <div class="flex flex-col gap-10 xl:flex-row xl:items-start xl:gap-6">
+          <div class="min-w-0 flex-1">
+            <!-- En Bref -->
+            <p class="py-5 text-lg font-semibold">
+              <span class="text-accent">E</span><span class="text-encre">n Bref</span>
+            </p>
+            <ul class="flex flex-col gap-5">
+              {
+                enBref.map((l) => (
+                  <li class="flex items-start gap-5">
+                    <span class="shrink-0 text-lg font-semibold text-voile-fort">{l.label}</span>
+                    <span class="min-w-0 flex-1 pt-0.5 text-base text-encre">{l.valeur}</span>
+                  </li>
+                ))
+              }
+            </ul>
+
+            <!-- Histoires -->
+            <div class="mt-14 flex flex-col items-start gap-5 xl:px-5">
+              {
+                histoires.map((h) => (
+                  <>
+                    <h2 class="font-display text-lg font-semibold sm:text-xl">
+                      <span class="text-accent">{h.initiale}</span><span class="text-encre">{h.titre}</span>
+                    </h2>
+                    <p class="max-w-[814px] pr-5 text-base leading-[normal] text-encre sm:text-lg">
+                      {h.texte}
+                    </p>
+                  </>
+                ))
+              }
+            </div>
+          </div>
+
+          <!-- Composition photo : blob jaune derrière, photo détourée en forme
+               organique, flèche doodle par-dessus (retournée verticalement,
+               recadrée pour écarter le texte incrusté dans la planche). -->
+          <div class="relative mx-auto w-full max-w-[560px] shrink-0 xl:mx-0 xl:w-[929px] xl:max-w-none">
+            <img
+              src="/images/figma-coulisses-blob.svg"
+              alt=""
+              aria-hidden="true"
+              class="absolute bottom-[-17%] right-0 w-[45.6%]"
+            />
+            <img
+              src="/images/figma-coulisses-photo.png"
+              alt="La troupe en costumes de scène, posant sur un passage piéton devant la mairie"
+              width="1859"
+              height="1171"
+              class="relative w-full"
+            />
+            <span
+              class="pointer-events-none absolute left-[0.5%] top-[21.7%] block h-[19.7%] w-[16.4%] -scale-y-100 overflow-hidden"
+              aria-hidden="true"
+            >
+              <img
+                src="/images/figma-coulisses-fleche.png"
+                alt=""
+                class="absolute left-0 top-0 h-[160%] w-full"
+              />
+            </span>
+          </div>
+        </div>
+
+        <div class="mt-14 border-t border-trait-2" aria-hidden="true"></div>
+      </section>
+
+      <!-- Le plateau (nodes 15110:1844 / 15110:1848 / 15110:1856) -->
+      <section class="mx-auto max-w-[1920px] px-6 pb-10 sm:px-10 xl:px-20">
+        <p class="flex items-center gap-[14px] py-[14px] pt-14 font-display text-lg font-semibold text-encre sm:text-xl">
+          <Icone nom="etoile" taille={38} class="shrink-0" />
+          Le plateau
+        </p>
+
+        <!-- Le plateau est une planche exportée de la maquette ; le radar
+             rose est superposé sur le centre, comme dans le fichier Figma. -->
+        <div class="relative mx-auto mt-8 w-full">
+          <img
+            src="/images/figma-plateau.png"
+            alt="Radar des compétences : Conception UX/UI (recherche, wireframes, maquettes, prototypes), Direction artistique (identité visuelle, univers graphique, storytelling), Mise en scène et narration (structurer un récit clair et engageant), Rythme et lisibilité (aller à l'essentiel, rendre fluide et compréhensible), Gestion de projet (organisation, planification, suivi et collaboration), Sens du service (écoute, empathie, solutions utiles)"
+            width="1564"
+            height="1006"
+            class="w-full"
+          />
+          <img
+            src="/images/figma-plateau-radar.png"
+            alt=""
+            aria-hidden="true"
+            width="220"
+            height="236"
+            class="absolute left-[33.6%] top-[21.4%] w-[34.3%]"
+          />
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </body>
+</html>

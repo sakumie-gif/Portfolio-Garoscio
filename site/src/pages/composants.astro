@@ -1,0 +1,172 @@
+---
+// Styleguide interne : présente tous les composants du design system sur une
+// page, pour vérification visuelle et référence. Non indexée (noindex) : ce
+// n'est pas une page du portfolio public.
+import Base from "../layouts/Base.astro";
+import Bouton from "../components/Bouton.astro";
+import Tag from "../components/Tag.astro";
+import FilAriane from "../components/FilAriane.astro";
+import Accordeon from "../components/Accordeon.astro";
+import ElementMenu from "../components/ElementMenu.astro";
+import Champ from "../components/Champ.astro";
+import Selection from "../components/Selection.astro";
+import CaseACocher from "../components/CaseACocher.astro";
+import BoutonRadio from "../components/BoutonRadio.astro";
+import Interrupteur from "../components/Interrupteur.astro";
+import Tuile from "../components/Tuile.astro";
+import TuileProjet from "../components/TuileProjet.astro";
+import Jauge from "../components/Jauge.astro";
+import Notation from "../components/Notation.astro";
+---
+
+<Base title="Composants — Design system">
+  <Fragment slot="head">
+    <meta name="robots" content="noindex" />
+  </Fragment>
+
+  <div class="mx-auto max-w-5xl space-y-16 px-6 py-16 sm:px-10">
+    <header>
+      <h1 class="text-4xl font-extrabold">Design system</h1>
+      <p class="mt-3 text-lg text-voile">
+        Bibliothèque de composants, palette lie de vin · Poppins / Inter / Caveat.
+      </p>
+    </header>
+
+    <section class="space-y-5">
+      <h2 class="text-2xl font-bold">Boutons</h2>
+      <div class="flex flex-wrap items-center gap-4">
+        <Bouton href="#" fleche="aucune">Primaire</Bouton>
+        <Bouton variante="secondaire" fleche="aucune" href="#">Secondaire</Bouton>
+        <Bouton variante="tertiaire" href="#">Tertiaire</Bouton>
+      </div>
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-2xl font-bold">Tags</h2>
+      <div class="flex flex-wrap items-center gap-3">
+        <Tag>UX Research</Tag>
+        <Tag variante="plein">UI design</Tag>
+        <Tag variante="solide">Le plus proche</Tag>
+        <Tag variante="neutre">Prototypage</Tag>
+        <Tag variante="info">Nouveau</Tag>
+      </div>
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-2xl font-bold">Fil d'Ariane</h2>
+      <FilAriane
+        items={[
+          { label: "Accueil", href: "/", accueil: true },
+          { label: "Projets", href: "/works" },
+          { label: "Pool Party" },
+        ]}
+      />
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-2xl font-bold">Menu</h2>
+      <div class="flex flex-wrap items-center gap-3">
+        <ElementMenu label="Catégories" href="#" chevron />
+        <ElementMenu label="Catégories" href="#" chevron actif />
+      </div>
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-2xl font-bold">Champs de formulaire</h2>
+      <form class="grid max-w-xl gap-6" onsubmit="return false">
+        <Champ label="Nom" name="demo-nom" placeholder="Entrez votre nom" />
+        <Champ label="Email" type="email" name="demo-mail" placeholder="exemple@email.com" />
+        <Champ label="Mot de passe" type="password" name="demo-mdp" placeholder="••••••••" />
+        <Champ type="search" name="demo-search" placeholder="Recherche…" />
+        <Selection
+          label="Type de projet"
+          name="demo-select"
+          placeholder="Choisissez…"
+          options={[
+            { value: "ux", label: "UX Research" },
+            { value: "ui", label: "UI design" },
+            { value: "proto", label: "Prototypage" },
+          ]}
+        />
+        <fieldset class="flex flex-col gap-3">
+          <legend class="mb-1 text-sm font-semibold text-encre">Cases à cocher</legend>
+          <CaseACocher name="demo-check1" label="Notifications" checked />
+          <CaseACocher name="demo-check2" label="Vibrer" />
+        </fieldset>
+        <fieldset class="flex flex-col gap-3">
+          <legend class="mb-1 text-sm font-semibold text-encre">Boutons radio</legend>
+          <BoutonRadio name="demo-radio" value="oui" label="Oui" checked />
+          <BoutonRadio name="demo-radio" value="non" label="Non" />
+        </fieldset>
+        <div class="flex flex-col gap-4">
+          <Interrupteur name="demo-switch1" label="Afficher la carte" icone checked />
+          <Interrupteur name="demo-switch2" label="Mode sombre" desactive />
+        </div>
+      </form>
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-2xl font-bold">Barres de progression</h2>
+      <div class="max-w-md space-y-4">
+        <Jauge valeur={37} etiquette="Recherche" />
+        <Jauge valeur={75} etiquette="Design" />
+        <Jauge valeur={100} etiquette="Livraison" />
+      </div>
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-2xl font-bold">Notation</h2>
+      <div class="flex flex-col gap-3">
+        <Notation note={4} nombre={128} />
+        <Notation note={5} />
+      </div>
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-2xl font-bold">Tuiles</h2>
+      <div class="flex flex-wrap gap-6">
+        <Tuile
+          href="#"
+          titre="Design system"
+          tag="Le plus proche"
+          description="Créer un langage visuel robuste"
+          role="Rôle"
+          roleDescription="UI · Design system"
+        />
+        <Tuile
+          href="#"
+          titre="Pool Party"
+          tag="UX / UI"
+          description="Refonte de l'expérience de réservation"
+          role="Rôle"
+          roleDescription="Product Design"
+        />
+      </div>
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-2xl font-bold">Tuile projet (liste)</h2>
+      <TuileProjet
+        href="#"
+        numero="01"
+        titre="PoolParty"
+        accroche="Marketplace P2P de location de piscine"
+        description="Du cadrage stratégique à la maquette livrable. Six, en autonomie"
+        image="/images/figma-tuile-projet-poolparty.png"
+        imageAlt="Aperçu du site PoolParty : page d'accueil et carte des annonces"
+      />
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-2xl font-bold">FAQ / Accordéon</h2>
+      <div class="max-w-2xl space-y-3">
+        <Accordeon question="Question ?">
+          Réponse repliée par défaut, ouverte au clic ou au clavier.
+        </Accordeon>
+        <Accordeon question="Comment modifier les dates de ma réservation ?" ouvert>
+          Rendez-vous dans votre espace, section réservations, puis « modifier ».
+        </Accordeon>
+      </div>
+    </section>
+  </div>
+</Base>

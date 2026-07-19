@@ -1,0 +1,70 @@
+---
+// Tuile projet « liste » (maquette Figma, node 43:1463).
+//
+// Rangée large pour la liste des projets : numéro et titre à gauche,
+// accroche manuscrite + description au centre (séparées par un filet
+// vertical), visuel à droite. Survol : lavis lie de vin (accent/10) sur
+// toute la rangée — état « Hover » de la maquette.
+//
+// Sur le lavis du survol, l'accent plein ne tient que 4.3:1 (cf. note des
+// formes organiques dans global.css) : le numéro bascule donc en
+// accent-bord au survol pour rester AA — même famille de rouge, pas une
+// seconde teinte.
+//
+// href rend toute la rangée cliquable : le titre porte le lien, le reste
+// l'étend via ::after (une seule cible accessible, comme Tuile).
+//
+// En dessous de lg, la rangée s'empile : texte puis visuel pleine largeur.
+const {
+  href,
+  numero,
+  titre,
+  accroche,
+  description,
+  image,
+  imageAlt = "",
+  class: classe = "",
+} = Astro.props;
+---
+
+<article
+  class:list={[
+    "group relative flex w-full flex-col gap-6 p-5 transition-colors hover:bg-accent/10 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:py-[30px] lg:pr-[30px]",
+    classe,
+  ]}
+>
+  <div class="flex flex-col gap-5 lg:flex-row lg:items-stretch lg:self-stretch">
+    <div class="flex flex-col gap-2.5 lg:w-56 lg:shrink-0 lg:px-5">
+      <p class="py-1 text-lg font-semibold text-accent transition-colors group-hover:text-accent-bord lg:py-5">
+        {numero}
+      </p>
+      <h3 class="font-display text-3xl font-bold text-encre lg:text-[40px] lg:leading-none">
+        {
+          href ? (
+            <a href={href} class="after:absolute after:inset-0 after:content-['']">
+              {titre}
+            </a>
+          ) : (
+            titre
+          )
+        }
+      </h3>
+    </div>
+
+    <div class="flex flex-col justify-center gap-5 border-trait-2 lg:max-w-[580px] lg:border-l lg:px-5">
+      {accroche && <p class="w-fit -rotate-[0.9deg] font-note text-3xl font-normal text-accent lg:text-4xl">{accroche}</p>}
+      {description && <p class="text-lg font-semibold text-encre">{description}</p>}
+    </div>
+  </div>
+
+  {
+    image && (
+      <img
+        src={image}
+        alt={imageAlt}
+        class="aspect-[497/280] w-full rounded-[15px] object-cover lg:w-[42%] lg:max-w-[497px] lg:shrink-0"
+        loading="lazy"
+      />
+    )
+  }
+</article>

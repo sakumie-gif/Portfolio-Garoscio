@@ -1,0 +1,27 @@
+---
+// Bouton radio (design system Figma « Radio »).
+//
+// <input type="radio"> natif masqué (peer) + pastille dessinée. Regrouper
+// plusieurs BoutonRadio sous le même `name` forme le groupe exclusif ; la
+// navigation flèches et le focus restent natifs (WCAG 4.1.2). Sélection en
+// lie de vin (la maquette la posait en teal : on suit la couleur de marque).
+const {
+  name,
+  value,
+  id = `${name}-${value}`,
+  label,
+  checked = false,
+  class: classe = "",
+  ...reste
+} = Astro.props;
+---
+
+<label class:list={["group inline-flex cursor-pointer items-center gap-3", classe]}>
+  <input type="radio" id={id} name={name} value={value} checked={checked} class="peer sr-only" {...reste} />
+  <span
+    class="grid size-6 place-items-center rounded-full border-2 border-voile bg-ivoire transition-colors peer-checked:border-accent peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-encre"
+  >
+    <span class="size-3 rounded-full bg-accent opacity-0 transition-opacity group-has-[:checked]:opacity-100"></span>
+  </span>
+  <span class="text-base text-encre">{label}</span>
+</label>

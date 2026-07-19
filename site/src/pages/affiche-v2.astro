@@ -1,0 +1,147 @@
+---
+// Reproduction fidèle de la maquette Figma « À l'affiche » (node 15119:930) :
+// titre souligné, sous-section « Les mises en scène » avec les rangées projets
+// (composant TuileProjet, node 15119:1369), filet, sous-section « Esquisses ».
+// Page autonome comme accueil-v2 : mêmes header/footer partagés (déjà conformes
+// à la maquette), fond #f7f4f2 de la maquette.
+// Textes : contenus de la maquette, coquilles corrigées (demande d'Audrey du
+// 19/07/2026 : « hésite pas à corriger les fautes »).
+import "../styles/global.css";
+import Icone from "../components/Icone.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import TuileProjet from "../components/TuileProjet.astro";
+
+const projets = [
+  {
+    href: "/works/pool-party",
+    numero: "01",
+    titre: "Pool Party",
+    accroche: "Marketplace P2P de location de piscines",
+    description: "Du cadrage stratégique à la maquette livrable. Six mois, en autonomie.",
+    image: "/images/poolparty-page-daccueil-maquette-page-daccueil-ordinateur.jpg",
+  },
+  {
+    href: "/works/sumo-tournament",
+    numero: "02",
+    titre: "Sumo Tournament",
+    accroche: "Site événementiel et back-office",
+    description: "Le projet où le design rencontre le code pour de vrai. Conception et mise en production.",
+    image: "/images/sumo-home.png",
+  },
+  {
+    href: "/works/pool-and-splash",
+    numero: "03",
+    titre: "Pool & Splash",
+    accroche: "Refonte UI, direction kidulting",
+    description: "Oser là où tout le secteur joue le sérieux.",
+    image: "/images/homepage.png",
+  },
+];
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>À l'affiche — Audrey Garoscio</title>
+    <meta
+      name="description"
+      content="Trois projets menés de bout en bout. Chacun avec son sujet, son rythme, ses contraintes."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Caveat:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <!-- Fond #F7F4F2 : couleur « principal-bg » de la maquette (cf. accueil-v2). -->
+  <body style="background-color:#f7f4f2">
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <Nav current="works" />
+
+    <main id="contenu" tabindex="-1" class="mx-auto max-w-[1920px] px-6 sm:px-10 xl:px-20">
+      <!-- Titre de page (node 15119:932) -->
+      <header class="pt-8 sm:pt-[50px]">
+        <h1 class="font-display text-4xl font-bold leading-[normal] text-encre sm:text-5xl xl:text-[64px]">
+          À l'<span class="relative inline-block text-accent">
+            affiche
+            <img
+              src="/images/trait-souligne.png"
+              alt=""
+              aria-hidden="true"
+              class="pointer-events-none absolute left-0 top-full w-full"
+            />
+          </span>
+        </h1>
+        <p class="max-w-[717px] pt-5 text-base font-semibold leading-[normal] text-encre sm:text-lg">
+          Trois projets menés de bout en bout. Chacun avec son sujet, son rythme,
+          ses contraintes.
+        </p>
+      </header>
+
+      <!-- Les mises en scène (nodes 15119:1437 + 15119:1458) -->
+      <section class="pt-8">
+        <h2 class="flex items-center gap-[14px] py-5 font-display text-lg font-semibold text-encre sm:text-xl">
+          <Icone nom="etoile" taille={38} class="shrink-0" />
+          Les mises en scène
+        </h2>
+
+        <div class="flex flex-col gap-6 pt-4 lg:gap-14">
+          {
+            projets.map((p) => (
+              <TuileProjet
+                href={p.href}
+                numero={p.numero}
+                titre={p.titre}
+                accroche={p.accroche}
+                description={p.description}
+                image={p.image}
+              />
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Filet (node 15119:1435) -->
+      <div class="mt-14 border-t border-trait-2" aria-hidden="true"></div>
+
+      <!-- Esquisses (nodes 15119:1441 + 15119:1445) : même rangée que les mises
+           en scène, sans colonne numéro/titre — l'accroche manuscrite porte le
+           lien, étendu à toute la rangée (motif « stretched link »). -->
+      <section class="pb-20 pt-8">
+        <h2 class="flex items-center gap-[14px] py-5 font-display text-lg font-semibold text-encre sm:text-xl">
+          <Icone nom="etoile" taille={38} class="shrink-0" />
+          Esquisses
+        </h2>
+
+        <article class="group relative mt-2 flex w-full flex-col gap-6 p-5 transition-colors hover:bg-accent/10 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:py-[30px] lg:pr-[30px]">
+          <div class="flex flex-col justify-center gap-5 border-trait-2 lg:max-w-[580px] lg:self-stretch lg:border-l lg:px-5">
+            <h3 class="w-fit -rotate-[0.9deg] font-note text-3xl font-normal text-accent lg:text-4xl">
+              <a href="/works/golyeo-korea" class="after:absolute after:inset-0 after:content-['']">
+                Golyeo Korea
+              </a>
+            </h3>
+            <p class="text-lg font-semibold text-encre">
+              Exploration d'identité pour un restaurant coréen. Deux directions :
+              une mignonne et pastel inspirée du design kawaii coréen, une plus
+              traditionnelle et sobre. Recherche de logo, palette, carte de visite.
+            </p>
+          </div>
+          <img
+            src="/images/golyeo-logo-1.jpg"
+            alt=""
+            loading="lazy"
+            class="aspect-[497/280] w-full rounded-[15px] object-contain lg:w-[42%] lg:max-w-[497px] lg:shrink-0"
+          />
+        </article>
+      </section>
+    </main>
+
+    <Footer />
+  </body>
+</html>

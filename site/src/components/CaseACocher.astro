@@ -1,0 +1,38 @@
+---
+// Case à cocher (design system Figma « Checkbox »).
+//
+// <input type="checkbox"> natif, visuellement masqué (peer) et remplacé par
+// une case dessinée : l'état, le focus clavier et le clic sur le label restent
+// natifs (WCAG 1.3.1 / 4.1.2). La coche n'apparaît que sur :checked via
+// group-has. État coché en lie de vin (la maquette le laissait en vert : on
+// suit la couleur de marque).
+const {
+  name,
+  id = name,
+  label,
+  checked = false,
+  class: classe = "",
+  ...reste
+} = Astro.props;
+---
+
+<label class:list={["group inline-flex cursor-pointer items-center gap-3", classe]}>
+  <input type="checkbox" id={id} name={name} checked={checked} class="peer sr-only" {...reste} />
+  <span
+    class="grid size-6 place-items-center rounded border-2 border-voile bg-ivoire transition-colors peer-checked:border-accent peer-checked:bg-accent peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-encre"
+  >
+    <svg
+      class="size-4 text-ivoire opacity-0 transition-opacity group-has-[:checked]:opacity-100"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="3"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M20 6 9 17l-5-5" />
+    </svg>
+  </span>
+  <span class="text-base text-encre">{label}</span>
+</label>

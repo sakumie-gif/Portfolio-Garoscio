@@ -1,0 +1,100 @@
+---
+// Champ de saisie (design system Figma « Input » — Nom, Mail, Password, Search).
+//
+// Toujours un <label> lié par for/id (WCAG 1.3.1 / 3.3.2) : jamais un simple
+// placeholder en guise d'étiquette. Le type password expose un bouton
+// afficher/masquer ; le type search un bouton loupe.
+//
+// Bordures : défaut voile → survol voile-fort → focus encre. La maquette pose
+// un défaut #ebebeb très clair, écarté ici car il ne tient pas le seuil 3:1
+// de WCAG 1.4.11 (limite de champ). Le focus clavier garde en plus l'anneau
+// global défini dans global.css.
+const {
+  type = "text",
+  name,
+  id = name,
+  label,
+  placeholder = "",
+  required = false,
+  icone,
+  class: classe = "",
+  ...reste
+} = Astro.props;
+
+const estMotDePasse = type === "password";
+const estRecherche = type === "search" || icone === "recherche";
+const champClasses =
+  "w-full rounded-lg border border-voile bg-transparent px-4 py-3 text-base text-encre transition-colors placeholder:text-voile hover:border-voile-fort focus:border-encre";
+---
+
+<div class:list={["flex flex-col gap-2", classe]}>
+  {
+    label && (
+      <label for={id} class="text-sm font-semibold text-encre">
+        {label}
+        {required && <span class="text-accent" aria-hidden="true"> *</span>}
+      </label>
+    )
+  }
+
+  <div class="relative">
+    <input
+      id={id}
+      name={name}
+      type={estMotDePasse ? "password" : estRecherche ? "search" : type}
+      required={required}
+      placeholder={placeholder}
+      class:list={[
+        champClasses,
+        (estMotDePasse || estRecherche) && "pr-12",
+      ]}
+      {...reste}
+    />
+
+    {
+      estRecherche && (
+        <button
+          type="submit"
+          class="absolute inset-y-0 right-0 my-1.5 mr-1.5 grid aspect-square place-items-center rounded-full bg-accent text-ivoire transition-transform hover:scale-105"
+          aria-label="Lancer la recherche"
+        >
+          <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+        </button>
+      )
+    }
+
+    {
+      estMotDePasse && (
+        <button
+          type="button"
+          data-toggle-password
+          class="absolute inset-y-0 right-0 grid place-items-center px-4 text-voile-fort transition-colors hover:text-accent"
+          aria-label="Afficher le mot de passe"
+          aria-pressed="false"
+        >
+          <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" /><circle cx="12" cy="12" r="3" /></svg>
+        </button>
+      )
+    }
+  </div>
+</div>
+
+{
+  estMotDePasse && (
+    <script>
+      document.querySelectorAll("[data-toggle-password]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const champ = btn.parentElement?.querySelector("input");
+          if (!champ) return;
+          const visible = champ.type === "text";
+          champ.type = visible ? "password" : "text";
+          btn.setAttribute("aria-pressed", String(!visible));
+          btn.setAttribute(
+            "aria-label",
+            visible ? "Afficher le mot de passe" : "Masquer le mot de passe",
+          );
+        });
+      });
+    </script>
+  )
+}

@@ -1,0 +1,57 @@
+---
+// Liste déroulante (design system Figma « Input » — variante Chevron).
+//
+// <select> natif : ouverture, navigation clavier et accessibilité gérées par
+// le navigateur (WCAG 4.1.2). On stylise l'enveloppe et on remplace le chevron
+// système par le nôtre, sans réécrire le menu (qui casserait l'accessibilité).
+//
+// options : [{ value, label }]. `placeholder` devient une première option
+// désactivée si fournie.
+const {
+  name,
+  id = name,
+  label,
+  options = [],
+  placeholder,
+  required = false,
+  class: classe = "",
+  ...reste
+} = Astro.props;
+---
+
+<div class:list={["flex flex-col gap-2", classe]}>
+  {
+    label && (
+      <label for={id} class="text-sm font-semibold text-encre">
+        {label}
+        {required && <span class="text-accent" aria-hidden="true"> *</span>}
+      </label>
+    )
+  }
+
+  <div class="relative">
+    <select
+      id={id}
+      name={name}
+      required={required}
+      class="w-full appearance-none rounded-lg border border-voile bg-transparent px-4 py-3 pr-12 text-base text-encre transition-colors hover:border-voile-fort focus:border-encre"
+      {...reste}
+    >
+      {placeholder && <option value="" disabled selected>{placeholder}</option>}
+      {options.map((o) => <option value={o.value}>{o.label}</option>)}
+    </select>
+
+    <svg
+      class="pointer-events-none absolute inset-y-0 right-4 my-auto size-5 text-voile-fort"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  </div>
+</div>

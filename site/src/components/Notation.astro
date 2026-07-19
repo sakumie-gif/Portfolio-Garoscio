@@ -1,0 +1,40 @@
+---
+// Notation en étoiles (design system Figma « Progress bar » — avis/commentaire).
+//
+// La note est portée par un aria-label textuel (« 4 sur 5 ») : les étoiles sont
+// décoratives (aria-hidden), l'information n'est pas qu'une couleur (WCAG 1.1.1
+// / 1.4.1). Étoiles pleines en lie de vin, vides en gris.
+//
+// note : 0–5 (demi-valeurs arrondies au rendu). `nombre` affiche le total d'avis.
+const {
+  note = 0,
+  max = 5,
+  nombre,
+  class: classe = "",
+} = Astro.props;
+
+const n = Math.max(0, Math.min(max, Number(note)));
+const etoiles = Array.from({ length: max }, (_, i) => i < Math.round(n));
+const libelle = `Note : ${n} sur ${max}${nombre != null ? `, ${nombre} avis` : ""}`;
+---
+
+<span class:list={["inline-flex items-center gap-1.5", classe]} role="img" aria-label={libelle}>
+  <span class="inline-flex items-center gap-0.5" aria-hidden="true">
+    {
+      etoiles.map((plein) => (
+        <svg
+          class:list={["size-5", plein ? "text-accent" : "text-voile/40"]}
+          viewBox="0 0 24 24"
+          fill={plein ? "currentColor" : "none"}
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2Z" />
+        </svg>
+      ))
+    }
+  </span>
+  {nombre != null && <span class="text-sm text-voile-fort" aria-hidden="true">({nombre})</span>}
+</span>

@@ -1,480 +1,416 @@
 ---
-import Base from "../layouts/Base.astro";
-import Curtain from "../components/Curtain.astro";
+// Reproduction fidèle de la maquette Figma « Page Principal » (node 51:9945).
+// Tous les visuels, couleurs, typos et textes viennent de la maquette (assets
+// exportés via le MCP Figma). Page autonome : elle porte son propre header et
+// son propre footer, conformes à la maquette (les composants partagés du site
+// ne correspondent pas et ne sont pas modifiés).
+// Seule exception, demandée par Audrey : les DONNÉES des tuiles projets
+// (visuels, descriptions, rôles, liens) sont celles du portfolio actuel,
+// pas les exemples de la maquette.
+import "../styles/global.css";
 import Icone from "../components/Icone.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
 
-// Un projet majeur, puis deux secondaires traités différemment : le concept
-// écarte explicitement la grille de cartes identiques.
-const majeur = {
-  href: "/works/pool-party",
-  titre: "Pool Party",
-  sous: "Marketplace P2P de location de piscines",
-  note: "Du cadrage stratégique à la maquette livrable. Six mois, en autonomie.",
-  image: "/images/poolparty-page-daccueil-maquette-page-daccueil-ordinateur.jpg",
-  role: "Cheffe de projet, de bout en bout",
-  contexte: "Projet de fin de cycle, MBA",
-};
-
-const secondaires = [
+const projets = [
+  {
+    href: "/works/pool-party",
+    image: "/images/poolparty-page-daccueil-maquette-page-daccueil-ordinateur.jpg",
+    tag: "Marketplace",
+    tagBg: "#f76049", // Color/corail
+    titre: "Pool Party",
+    texte: "Marketplace P2P de location de piscines.",
+    role: "Cheffe de projet, de bout en bout",
+  },
   {
     href: "/works/sumo-tournament",
-    titre: "Sumo Tournament",
-    sous: "Site événementiel et back-office",
-    note: "Le projet où le design rencontre le code pour de vrai.",
     image: "/images/sumo-home.png",
+    tag: "Événementiel",
+    tagBg: "#b88d1a", // Color/yellow
+    titre: "Sumo Tournament",
+    texte: "Site événementiel et back-office.",
     role: "Conception et mise en production",
   },
   {
     href: "/works/pool-and-splash",
-    titre: "Pool & Splash",
-    sous: "Refonte UI, direction kidkulting",
-    note: "Oser un ton joyeux là où tout le secteur joue le sérieux.",
     image: "/images/homepage.png",
+    tag: "Refonte UI",
+    tagBg: "#9a2737", // Color/lie de vin
+    titre: "Pool & Splash",
+    texte: "Refonte UI, direction kidulting.",
     role: "Direction artistique et UI",
   },
 ];
 
-// Le vocabulaire est celui de son travail réel chez EasyVista, pas un
-// process générique : recherche, wireframes, design system, transmission dev.
-// Pas de teinte par étape : les cinq pastilles partagent le même aplat, câblé
-// dans le balisage. Une couleur par étape ne distinguerait rien — elles sont
-// déjà numérotées et titrées — et en faire une donnée, c'est rouvrir
-// l'arc-en-ciel au prochain ajout.
+// Étapes du process : blob teinté (token à 10 %) + icône colorée, exports
+// exacts de la maquette.
 const etapes = [
   {
+    blob: "/images/figma-blob-1.svg",
+    icone: "/images/figma-proc-icon-1.svg",
+    num: "01",
     titre: "Comprendre",
-    icone: "recherche",
-    texte:
-      "J'analyse les besoins réels et je cherche les points de friction dans les parcours, côté agent comme côté utilisateur final.",
+    texte: "J'explore les besoins utilisateurs,\nles objectifs métier et les contraintes.",
   },
   {
+    blob: "/images/figma-blob-2.svg",
+    icone: "/images/figma-proc-icon-2.svg",
+    num: "02",
     titre: "Structurer",
-    icone: "arborescence",
-    texte:
-      "Je pose l'architecture de l'information et les parcours avant de dessiner quoi que ce soit.",
+    texte: "Je pose les fondations de l'expérience : parcours, architecture, contenu.",
   },
   {
+    blob: "/images/figma-blob-3.svg",
+    icone: "/images/figma-proc-icon-3.svg",
+    num: "03",
     titre: "Concevoir",
-    icone: "crayon",
-    texte:
-      "Wireframes, puis maquettes haute fidélité et prototypes, alignés sur le design system.",
+    texte: "Je crée des interfaces claires, utiles et alignées avec la stratégie produit.",
   },
   {
+    blob: "/images/figma-blob-4.svg",
+    icone: "/images/figma-proc-icon-4.svg",
+    num: "04",
     titre: "Tester",
-    icone: "utilisateurs",
-    texte:
-      "Tests utilisateurs, recette UX/UI, contrôle du responsive et de l'accessibilité.",
+    texte: "Je confronte, j'itère et j'améliore en continu avec les utilisateurs.",
   },
   {
-    titre: "Transmettre",
-    icone: "envoi",
-    texte:
-      "Maquettes propres, comportements détaillés, spécifications, et suivi jusqu'en développement.",
+    blob: "/images/figma-blob-5.svg",
+    icone: "/images/figma-proc-icon-5.svg",
+    num: "05",
+    titre: "Livrer",
+    texte: "Je collabore avec les développeurs et je m'assure d'un produit accessible et durable.",
   },
 ];
 
-// Images réelles du travail, pas des visuels d'illustration.
+// Coulisses : la maquette répète la même vignette sur les cinq tuiles.
 const coulisses = [
+  { titre: "Recherche & Wireframes", note: "Explorer vite, tester tôt." },
+  { titre: "Annotations & idées", note: "Penser avec clarté." },
+  { titre: "Composants réutilisables", note: "Cohérence et efficacité." },
+  { titre: "Accessibilité", note: "Concevoir pour tous." },
+  { titre: "Avant / Après", note: "Mesurer l'impact réel." },
+];
+
+const apropos = [
   {
-    src: "/images/poolparty-wireframe-page-daccueil-ordinateur.png",
-    titre: "Wireframes",
-    note: "Explorer vite, trancher tôt.",
+    icone: "/images/figma-apropos-1.svg",
+    texte: "Une expertise des produits SaaS B2B et des outils métier",
   },
   {
-    src: "/images/poolparty-moodboard.png",
-    titre: "Recherche visuelle",
-    note: "D'où vient une direction artistique.",
+    icone: "/images/figma-apropos-2.svg",
+    texte: "Je transforme des parcours complexes en interfaces claires",
   },
   {
-    src: "/images/poolparty-chartre-graphique.png",
-    titre: "Charte et composants",
-    note: "Cohérence avant décoration.",
+    icone: "/images/figma-apropos-3.svg",
+    texte: "Culture produit, rigueur et empathie",
   },
   {
-    src: "/images/sumo-test-card.png",
-    titre: "Mise à l'épreuve",
-    note: "Ce que le test corrige.",
+    icone: "/images/figma-apropos-4.svg",
+    texte: "Une attention particulière portée à l'accessibilité et à la cohérence",
   },
 ];
+
 ---
 
-<Base current="">
-  <Curtain />
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audrey Garoscio — Product Designer UX/UI</title>
+    <meta
+      name="description"
+      content="Product Designer UX/UI, j'accompagne la conception d'interfaces SaaS B2B complexes, du wireframe au prototype."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Caveat:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <!-- Fond #F7F4F2 : la couleur de fond de la maquette, identique au fond de
+       l'image portrait-audrey-rideau — le portrait se fond ainsi dans la page.
+       En style inline : la règle body de global.css (non-layered) l'emporte
+       sur les utilitaires Tailwind (layered). -->
+  <body style="background-color:#f7f4f2">
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
 
-  <!-- ÉCRAN 1 — Ouverture -->
-  <section class="relative mx-auto max-w-6xl px-6 pb-12 pt-6 sm:px-10 sm:pt-10">
-    <div class="grid grid-cols-1 items-center gap-10 md:grid-cols-[1.05fr_0.95fr] md:gap-14">
-      <div>
-        <p class="lever lever-1 flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
-          <Icone nom="etoile" taille={14} class="shrink-0" />
-          Théâtre contemporain du Product Design
+    <Nav current="" />
+
+    <main id="contenu" tabindex="-1">
+      <!-- Introduction (maquette node 56:1154) : le portrait touche le bord
+           droit de l'écran, le texte est calé sur la marge de 80px. -->
+      <section class="mx-auto flex max-w-[1920px] flex-col gap-10 md:flex-row md:items-start md:gap-6">
+        <div class="min-w-0 flex-1 px-6 pt-6 sm:px-10 xl:pl-20 xl:pr-0">
+          <p class="flex items-center gap-[14px] py-5 font-display text-lg font-semibold text-encre sm:text-xl">
+            <Icone nom="etoile" taille={38} class="shrink-0" />
+            THÉÂTRE CONTEMPORAIN DU PRODUCT DESIGN
+          </p>
+
+          <h1 class="pb-[50px] font-display text-4xl font-bold leading-[normal] text-encre sm:text-5xl xl:text-[64px]">
+            Je conçois des produits<br />
+            clairs, utiles et
+            <span class="relative inline-block text-accent">
+              humains.
+              <img
+                src="/images/trait-souligne.png"
+                alt=""
+                aria-hidden="true"
+                class="pointer-events-none absolute left-0 top-full w-full"
+              />
+            </span>
+          </h1>
+
+          <p class="text-base font-semibold leading-[normal] text-encre sm:text-lg">
+            Product Designer UX/UI, j'accompagne la conception d'interfaces SaaS B2B complexes,<br
+              class="hidden xl:block"
+            />
+            du wireframe au prototype, en collaboration étroite avec les Product Owners, les<br
+              class="hidden xl:block"
+            />
+            développeurs et les métiers.
+          </p>
+
+          <!-- Tags (node 58:1098) : fond token/10, texte et icône de la même
+               teinte, coins 10px, ombre portée. -->
+          <ul class="flex flex-wrap items-center gap-5 py-[14px] pt-6">
+            <li
+              class="flex items-center justify-center gap-1 rounded-[10px] bg-[rgba(154,39,55,0.1)] px-[14px] py-2 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.1),0px_2px_4px_0px_rgba(0,0,0,0.1)]"
+            >
+              <img src="/images/figma-tag-designer.svg" alt="" aria-hidden="true" class="size-4" />
+              <span class="text-sm text-[#9a2737]">Product Designer UX/UI</span>
+            </li>
+            <li
+              class="flex items-center justify-center gap-1 rounded-[10px] bg-[rgba(184,141,26,0.1)] px-[14px] py-2 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.1),0px_2px_4px_0px_rgba(0,0,0,0.1)]"
+            >
+              <img src="/images/figma-tag-saas.svg" alt="" aria-hidden="true" class="h-[14px] w-4" />
+              <span class="text-sm text-[#b88d1a]">SaaS B2B</span>
+            </li>
+            <li
+              class="flex items-center justify-center gap-1 rounded-[10px] bg-[rgba(74,110,137,0.1)] px-[14px] py-2 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.1),0px_2px_4px_0px_rgba(0,0,0,0.1)]"
+            >
+              <img src="/images/figma-tag-a11y.svg" alt="" aria-hidden="true" class="size-4" />
+              <span class="text-sm text-[#4a6e89]">Accessibilité</span>
+            </li>
+          </ul>
+
+        </div>
+
+        <!-- portrait-audrey-rideau (node 56:1156), collé au bord droit.
+             Le conteneur « Recherche + CV » (58:1157) est masqué dans la
+             maquette : il n'est pas rendu. -->
+        <img
+          src="/images/portrait-audrey-rideau.png"
+          alt="Portrait d'Audrey Garoscio"
+          width="848"
+          height="607"
+          class="w-full self-start md:w-[42%] xl:w-[742px]"
+        />
+      </section>
+
+      <!-- Projets (nodes 15117:948 + 59:1312 + 58:1221) -->
+      <section id="projets" class="mx-auto max-w-[1920px] px-6 pt-8 sm:px-10 xl:px-20">
+        <!-- Actualité (node 15117:948) : carte bordée lie-de-vin -->
+        <div
+          class="flex flex-col items-start gap-[14px] rounded-[20px] border border-accent p-5 shadow-[0px_16px_16px_0px_rgba(12,12,13,0.1),0px_4px_4px_0px_rgba(12,12,13,0.05)]"
+        >
+          <p
+            class="rounded-[10px] bg-[rgba(154,39,55,0.1)] px-[14px] py-2 text-sm font-bold text-accent shadow-[0px_4px_6px_0px_rgba(0,0,0,0.1),0px_2px_4px_0px_rgba(0,0,0,0.1)]"
+          >
+            ACTUALITÉ
+          </p>
+          <p class="text-sm leading-[normal] text-encre">
+            Pool Party, le site présenté à ma soutenance, est en ligne.<br />
+            L'accès est protégé par un code jusqu'en septembre : écrivez-moi et je vous le
+            communique.
+          </p>
+        </div>
+
+        <p class="mt-14 flex items-center gap-[14px] py-2 font-display text-2xl font-semibold text-encre sm:text-[28px]">
+          <Icone nom="etoile" taille={38} class="shrink-0" />
+          À L'AFFICHE
         </p>
-
-        <h1 class="lever lever-1 mt-6 text-5xl font-extrabold leading-[1.02] sm:text-6xl lg:text-7xl">
-          Audrey<br />Garoscio<span class="text-accent">.</span>
-        </h1>
-
-        <p class="lever lever-2 mt-6 max-w-md text-xl leading-snug text-voile">
-          Product Designer, à la croisée du produit et de la scène.
-        </p>
-
-        <p class="lever lever-2 mt-5 max-w-md text-base leading-relaxed">
-          Je conçois des interfaces comme on monte un spectacle. Une attention
-          au rythme, au détail et à ce que l'on donne à voir en premier.
-        </p>
-
-        <ul class="lever lever-2 mt-8 flex flex-wrap gap-2.5">
-          <li class="flex items-center gap-2 rounded-full bg-accent/10 px-4 py-1.5 text-sm text-encre">
-            <Icone nom="wireframe" taille={15} class="shrink-0" />
-            <span><span lang="en">Product Designer</span> UX/UI</span>
-          </li>
-          <li class="flex items-center gap-2 rounded-full bg-accent/10 px-4 py-1.5 text-sm text-encre">
-            <Icone nom="utilisateurs" taille={15} class="shrink-0" />
-            SaaS B2B
-          </li>
-          <li class="flex items-center gap-2 rounded-full bg-accent/10 px-4 py-1.5 text-sm text-encre">
-            <Icone nom="accessibilite" taille={15} class="shrink-0" />
-            Accessibilité
-          </li>
-        </ul>
-
-        <div class="lever lever-2 mt-9 flex flex-wrap items-center gap-4">
-          <!-- Fond accent (#C43D30) et non corail : le corail à texte ivoire
-               ne monte qu'à 2.79:1. Ici on est à 4.96:1. -->
+        <div class="mt-2.5 flex flex-wrap items-center justify-between gap-4">
+          <h2 class="font-display text-2xl font-semibold text-encre sm:text-[28px]">
+            Projets sélectionnés
+          </h2>
           <a
             href="/works"
-            class="group inline-flex items-center gap-2.5 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-ivoire transition-transform hover:scale-[1.02]"
+            class="note flex flex-col items-center py-2 text-2xl font-normal drop-shadow-[0px_10px_7.5px_rgba(0,0,0,0.1),0px_4px_3px_rgba(0,0,0,0.1)] transition-transform hover:scale-[1.03]"
           >
-            Découvrir mes projets
-            <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
-          </a>
-          <a
-            href="/contact"
-            class="inline-flex items-center gap-2.5 rounded-full border border-encre/25 px-6 py-3 text-sm text-encre transition-colors hover:border-encre hover:font-semibold"
-          >
-            Me contacter
+            Voir tous les projets
+            <img src="/images/trait-souligne.png" alt="" aria-hidden="true" class="w-full" />
           </a>
         </div>
-      </div>
 
-      <!-- Portrait posé sur une forme corail. Le corail est ici une surface
-           décorative : aucune règle de contraste ne s'y applique.
-           La forme et le corail sont composités dans l'image : pas de .blob CSS
-           ici, son fond opaque les masquerait (cf. z-index négatif de .blob).
-           Recadrée depuis img/portrait-audrey-rideau.png pour écarter le nom et
-           la tagline incrustés, qui doublonnaient le <h1> et la note ci-dessous
-           sans être sélectionnables ni conformes AA. -->
-      <div class="lever lever-3 relative mx-auto w-full max-w-[380px] md:max-w-none">
-        <img
-          src="/images/portrait-rideau.png"
-          alt="Portrait d'Audrey Garoscio"
-          width="940"
-          height="1024"
-          class="relative w-full"
-        />
-        <!-- Sous le portrait et non dessus : en absolu par-dessus la photo,
-             le corail de .note devenait illisible sur le visage. -->
-        <p class="note mt-5 max-w-[15rem] -rotate-2 sm:ml-auto sm:text-right">
-          Concevoir des expériences utiles, belles et humaines.
-        </p>
-      </div>
-    </div>
-  </section>
+        <!-- Tuiles : design de la maquette, données du portfolio actuel.
+             « Stretched link » : seul le titre est un lien, son ::after couvre
+             la carte entière ; l'image est décorative. -->
+        <ul class="mt-5 grid grid-cols-1 gap-6 md:grid-cols-3">
+          {
+            projets.map((p) => (
+              <li class="group relative flex flex-col rounded-[10px] rounded-tl-none border border-[rgba(186,186,186,0.3)] bg-white transition-colors hover:border-encre/25">
+                <div class="flex h-60 items-start justify-center overflow-hidden rounded-tr-[10px] border-b border-trait-2 bg-[rgba(154,39,55,0.1)] pt-5">
+                  <img src={p.image} alt="" loading="lazy" class="h-full w-[87%] object-cover object-top" />
+                </div>
+                <div class="flex flex-1 flex-col items-start gap-2 px-4 py-[14px]">
+                  <span
+                    class="rounded-[10px] px-[14px] py-2 text-sm text-white drop-shadow-[0px_4px_3px_rgba(0,0,0,0.1),0px_2px_2px_rgba(0,0,0,0.1)]"
+                    style={`background-color:${p.tagBg}`}
+                  >
+                    {p.tag}
+                  </span>
+                  <h3 class="font-display text-xl font-semibold text-[#393939]">
+                    <a href={p.href} class="after:absolute after:inset-0 after:content-['']">
+                      {p.titre}
+                    </a>
+                  </h3>
+                  <p class="text-sm text-encre">{p.texte}</p>
+                  <div class="w-full border-t border-trait" aria-hidden="true" />
+                  <p class="flex items-center gap-2 text-sm">
+                    <span class="text-base font-semibold text-[#f76049]">Rôle</span>
+                    <span class="text-encre">{p.role}</span>
+                  </p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
 
-  <!-- Actualité -->
-  <section class="mx-auto max-w-6xl px-6 pt-8 sm:px-10">
-    <div class="lever lever-3">
-      <p
-        class="flex flex-wrap items-center gap-x-3 gap-y-2 rounded-2xl border border-encre/10 bg-white/60 px-5 py-4 text-sm shadow-[0_1px_20px_-12px_rgb(0_0_0/0.35)]"
-      >
-        <span
-          class="rounded-full bg-accent px-2.5 py-0.5 text-xs uppercase tracking-[0.18em] text-ivoire"
-        >
-          Actualité
-        </span>
-        <span>
-          Pool Party, le site présenté à ma soutenance, est en ligne. L'accès est protégé par un
-          code jusqu'en septembre&nbsp;: écrivez-moi et je vous le communique.
-        </span>
-        <a href="/contact" class="group text-encre transition-colors hover:font-semibold">
-          <span class="underline decoration-accent decoration-2 underline-offset-4">
-            Demander l'accès
-          </span>
-          <span class="inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
-        </a>
-        <a
-          href="https://poolparty-dsp-ddm-f25a-o24b-g4.fr"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-encre underline decoration-voile/50 underline-offset-4 transition-colors hover:font-semibold"
-        >
-          Voir le site
-          <span aria-hidden="true">↗</span>
-          <span class="sr-only">(nouvel onglet)</span>
-        </a>
-      </p>
-    </div>
-  </section>
+        <div class="mt-16 border-t border-trait-2" aria-hidden="true"></div>
 
-  <!-- ÉCRAN 2 — À l'affiche -->
-  <section class="mx-auto max-w-6xl px-6 pb-8 pt-20 sm:px-10 sm:pt-28">
-    <div class="flex flex-wrap items-end justify-between gap-4">
-      <div>
-        <p class="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
-          <Icone nom="etoile" taille={14} class="shrink-0" /> À l'affiche
-        </p>
-        <h2 class="mt-3 text-4xl font-extrabold sm:text-5xl">Projets</h2>
-      </div>
-      <a
-        href="/works"
-        class="group -my-1 py-1 text-sm text-voile transition-colors hover:font-semibold hover:text-encre"
-      >
-        Tout voir
-        <span class="inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
-      </a>
-    </div>
+        <!-- Ma manière de travailler (node 59:1350) -->
+        <div class="flex flex-col gap-8 pt-16 xl:flex-row xl:items-start xl:gap-2.5">
+          <div class="flex w-full flex-col gap-[30px] xl:w-[422px] xl:shrink-0">
+            <p class="font-display text-lg font-semibold sm:text-xl">
+              <span class="text-accent">M</span><span class="text-encre">A MANIÈRE DE TRAVAILLER</span>
+            </p>
+            <h2 class="font-display text-2xl font-semibold text-encre sm:text-[28px]">
+              De la compréhension à l'impact
+            </h2>
+          </div>
 
-    <!-- Le projet majeur occupe presque tout l'écran.
-         Motif "stretched link" : seul le titre est un lien, son ::after couvre
-         la carte entière, qui reste donc cliquable. L'image est décorative
-         (alt=""), le titre la nomme déjà (WCAG 2.4.4). -->
-    <article class="group relative mt-12 overflow-hidden rounded-[28px] rounded-tl-[4px] border border-encre/10 bg-white/50 transition-colors hover:border-encre/25">
-      <div class="grid grid-cols-1 gap-0 lg:grid-cols-[1fr_1.15fr]">
-        <div class="order-2 p-8 sm:p-10 lg:order-1">
-          <p class="text-xs uppercase tracking-[0.18em] text-accent">
-            {majeur.contexte}
-          </p>
-          <h3 class="mt-4 text-3xl font-extrabold leading-tight sm:text-4xl">
-            <a href={majeur.href} class="after:absolute after:inset-0 after:content-['']">
-              {majeur.titre}
-            </a>
-          </h3>
-          <p class="mt-2 text-base text-voile">{majeur.sous}</p>
-          <p class="mt-5 max-w-sm text-base leading-relaxed">{majeur.note}</p>
-
-          <dl class="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-encre/10 pt-6 text-sm">
-            <div>
-              <dt class="text-accent">Rôle</dt>
-              <dd class="mt-1 text-encre">{majeur.role}</dd>
-            </div>
-            <div>
-              <dt class="text-accent">Durée</dt>
-              <dd class="mt-1 text-encre">Six mois</dd>
-            </div>
-          </dl>
-
-          <span class="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-encre" aria-hidden="true">
-            Lire l'étude
-            <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
-          </span>
+          <ol class="grid flex-1 grid-cols-1 gap-8 sm:grid-cols-2 xl:flex xl:items-start xl:gap-0">
+            {
+              etapes.map((e, i) => (
+                <>
+                  <li class="flex w-full flex-col items-start gap-2 rounded-[10px] xl:w-[194px] xl:shrink-0">
+                    <div class="relative h-[92.5px] w-[117.5px] self-center">
+                      <img src={e.blob} alt="" aria-hidden="true" class="absolute inset-0 h-full w-full" />
+                      <img
+                        src={e.icone}
+                        alt=""
+                        aria-hidden="true"
+                        class="absolute left-1/2 top-1/2 size-10 -translate-x-1/2 -translate-y-1/2"
+                      />
+                    </div>
+                    <p class="text-lg font-semibold text-accent" aria-hidden="true">
+                      {e.num}
+                    </p>
+                    <h3 class="text-lg font-semibold text-encre">{e.titre}</h3>
+                    <p class="whitespace-pre-line text-base text-encre">{e.texte}</p>
+                  </li>
+                  {i < etapes.length - 1 && (
+                    <li class="hidden min-w-0 flex-1 pt-[58px] xl:block" aria-hidden="true">
+                      <img src="/images/figma-line-dashed.svg" alt="" class="h-[5px] w-full" />
+                    </li>
+                  )}
+                </>
+              ))
+            }
+          </ol>
         </div>
 
-        <!-- Pas de .blob ici : le fond brume de ce bloc le masquerait
-             (z-index négatif = derrière le fond du parent). -->
-        <div class="relative order-1 flex items-center justify-center overflow-hidden bg-accent/10 p-8 lg:order-2">
-          <!-- Les maquettes sont des captures de page entière (jusqu'à
-               1920x4948) : en object-contain elles imposaient une carte de
-               1300px de haut. On cadre sur le haut de la maquette, comme une
-               affiche. -->
+        <div class="mt-16 border-t border-trait-2" aria-hidden="true"></div>
+
+        <!-- Dans les coulisses (node 60:534) -->
+        <div id="coulisses" class="flex flex-col gap-8 pb-20 pt-16 xl:flex-row xl:items-start xl:gap-[14px]">
+          <div class="flex w-full flex-col gap-[30px] xl:w-[345px] xl:shrink-0">
+            <p class="font-display text-lg font-semibold sm:text-xl">
+              <span class="text-accent">D</span><span class="text-encre">ANS LES COULISSES</span>
+            </p>
+            <h2 class="relative font-display text-2xl font-semibold text-encre sm:text-[28px]">
+              Un design pensé, testé et documenté.
+              <img
+                src="/images/trait-souligne.png"
+                alt=""
+                aria-hidden="true"
+                class="pointer-events-none absolute -bottom-6 left-[20%] w-[208px]"
+              />
+            </h2>
+          </div>
+
+          <ul class="grid flex-1 grid-cols-2 gap-[14px] sm:grid-cols-3 xl:grid-cols-5">
+            {
+              coulisses.map((c) => (
+                <li class="flex flex-col rounded-[10px] rounded-tl-none border border-[rgba(186,186,186,0.3)] bg-white">
+                  <div class="flex h-[167px] items-end justify-center overflow-hidden rounded-tr-[10px] border-b border-trait-2 bg-[rgba(154,39,55,0.1)]">
+                    <img
+                      src="/images/figma-coulisses.png"
+                      alt=""
+                      loading="lazy"
+                      class="h-[147px] w-[89%] object-cover object-top"
+                    />
+                  </div>
+                  <div class="flex flex-1 flex-col gap-2 px-4 py-2">
+                    <h3 class="text-base font-semibold text-[#393939]">{c.titre}</h3>
+                    <p class="text-xs text-encre">{c.note}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <!-- A propos (node 60:809) -->
+        <div class="flex flex-col gap-8 pb-24 lg:flex-row lg:items-start lg:gap-5">
           <img
-            src={majeur.image}
-            alt=""
+            src="/images/figma-about-photo.png"
+            alt="Audrey Garoscio en costume de scène, lors d'un spectacle historique"
+            width="311"
+            height="430"
             loading="lazy"
-            class="relative h-[420px] w-full rounded-[4px] object-cover object-top shadow-[0_20px_50px_-24px_rgb(30_28_28/0.5)]"
+            class="mx-auto h-auto w-[260px] shrink-0 object-cover lg:mx-0 lg:h-[430px] lg:w-[311px]"
           />
+
+          <div class="flex w-full flex-col gap-2.5 lg:w-[431px] lg:shrink-0">
+            <p class="flex items-center gap-[14px] py-5 text-lg font-semibold text-encre">
+              <Icone nom="etoile" taille={38} class="shrink-0" />
+              À PROPOS
+            </p>
+            <h2 class="font-display text-3xl font-bold leading-[normal] text-encre sm:text-[40px]">
+              De costumière<br />à Product Designer
+            </h2>
+          </div>
+
+          <div class="relative flex w-full flex-col gap-6 border-trait-2 pr-5 lg:w-[488px] lg:shrink-0 lg:gap-[78px] lg:border-r lg:pt-[104px]">
+            <p class="text-lg font-semibold leading-[normal] text-encre">
+              Ma première scène, ma passion, c'est le théâtre. Costumière de formation, j'ai
+              appris à écouter les intentions, comprendre les personnages et raconter des
+              histoires à travers chaque détail. Aujourd'hui, je conçois des interfaces qui
+              mettent en scène des expériences utiles, accessibles et mémorables.
+            </p>
+            <p class="note -rotate-3 text-3xl font-normal sm:text-[36px]">
+              Même exigence, autre décor !
+            </p>
+          </div>
+
+          <ul class="flex flex-1 flex-col justify-center gap-6 px-0 lg:gap-[34px] lg:self-stretch lg:px-5">
+            {
+              apropos.map((a) => (
+                <li class="flex items-start gap-2">
+                  <img src={a.icone} alt="" aria-hidden="true" class="size-8 shrink-0" />
+                  <p class="flex-1 text-lg font-semibold leading-[normal] text-voile-fort">{a.texte}</p>
+                </li>
+              ))
+            }
+          </ul>
         </div>
-      </div>
-    </article>
+      </section>
+    </main>
 
-    <!-- Les deux projets secondaires, traités plus sobrement -->
-    <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
-      {
-        secondaires.map((p) => (
-          <article class="group relative overflow-hidden rounded-[24px] rounded-tl-[4px] border border-encre/10 transition-colors hover:border-encre/25">
-            <div class="flex items-center justify-center bg-accent/10 p-6">
-              <img
-                src={p.image}
-                alt=""
-                loading="lazy"
-                class="aspect-[16/10] w-full rounded-[4px] object-contain"
-              />
-            </div>
-            <div class="bg-white/50 p-7">
-              <h3 class="text-2xl font-extrabold leading-tight">
-                <a href={p.href} class="after:absolute after:inset-0 after:content-['']">
-                  {p.titre}
-                </a>
-              </h3>
-              <p class="mt-1.5 text-sm text-voile">{p.sous}</p>
-              <p class="mt-4 text-base leading-relaxed">{p.note}</p>
-              <p class="mt-5 border-t border-encre/10 pt-4 text-sm">
-                <span class="text-accent">Rôle</span>
-                <span class="ml-3 text-encre">{p.role}</span>
-              </p>
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </section>
-
-  <!-- ÉCRAN 3 — Ma manière de travailler -->
-  <section class="relative mt-24 overflow-hidden border-y border-encre/10 bg-white/40 py-20 sm:mt-32">
-    <div class="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 sm:px-10 lg:grid-cols-[300px_1fr] lg:gap-16">
-      <div>
-        <p class="text-xs uppercase tracking-[0.2em] text-accent">
-          Ma manière de travailler
-        </p>
-        <h2 class="mt-4 text-3xl font-extrabold leading-tight sm:text-4xl">
-          De la compréhension<br />à la <span class="trace">réalisation</span>.
-        </h2>
-        <p class="mt-6 max-w-xs text-base leading-relaxed text-voile">
-          Je travaille au contact des Product Owners, des développeurs et des
-          équipes métier. Le design ne s'arrête pas à la maquette : il tient
-          jusqu'à ce que la fonctionnalité existe vraiment.
-        </p>
-      </div>
-
-      <ol class="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-        {
-          etapes.map((e, i) => (
-            <li>
-              <span class="flex h-14 w-14 items-center justify-center rounded-[18px] rounded-tl-[4px] bg-accent/10">
-                <Icone nom={e.icone} taille={26} />
-              </span>
-              <p class="mt-4 text-sm font-semibold text-accent" aria-hidden="true">
-                {String(i + 1).padStart(2, "0")}
-              </p>
-              <h3 class="mt-1 text-lg font-bold">{e.titre}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-voile">{e.texte}</p>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-  </section>
-
-  <!-- ÉCRAN 4 — Les coulisses -->
-  <section class="mx-auto max-w-6xl px-6 pt-24 sm:px-10 sm:pt-28">
-    <div class="grid grid-cols-1 gap-10 lg:grid-cols-[280px_1fr] lg:gap-14">
-      <div>
-        <p class="text-xs uppercase tracking-[0.2em] text-accent">
-          Dans les coulisses
-        </p>
-        <h2 class="mt-4 text-3xl font-extrabold leading-tight sm:text-4xl">
-          Un design pensé,<br />testé et documenté.
-        </h2>
-        <p class="mt-6 max-w-xs text-base leading-relaxed text-voile">
-          Ce qu'il y a avant la belle image. Les vrais brouillons, les pistes
-          abandonnées, les décisions qu'il a fallu argumenter.
-        </p>
-      </div>
-
-      <ul class="grid grid-cols-2 gap-5 lg:grid-cols-4">
-        {
-          coulisses.map((c) => (
-            <li class="overflow-hidden rounded-[18px] rounded-tl-[3px] border border-encre/10">
-              <img
-                src={c.src}
-                alt=""
-                loading="lazy"
-                class="aspect-[4/3] w-full bg-white object-cover object-top"
-              />
-              <div class="p-4">
-                <h3 class="text-sm font-bold">{c.titre}</h3>
-                <p class="mt-1 text-xs leading-relaxed text-voile">{c.note}</p>
-              </div>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
-
-  <!-- ÉCRAN 5 — À propos -->
-  <section class="mx-auto max-w-6xl px-6 pt-24 sm:px-10 sm:pt-32">
-    <div class="grid grid-cols-1 items-center gap-12 md:grid-cols-[300px_1fr] md:gap-16">
-      <div class="relative mx-auto w-full max-w-[260px] md:max-w-none">
-        <div class="blob -left-6 -top-6 h-[70%] w-[80%] bg-accent/35" aria-hidden="true"></div>
-        <div class="blob -bottom-4 right-0 h-[40%] w-[45%] bg-accent/10" aria-hidden="true"></div>
-        <img
-          src="/images/about.jpg"
-          alt=""
-          width="599"
-          height="900"
-          loading="lazy"
-          class="relative w-full rounded-[52%_48%_44%_56%/42%_40%_60%_58%] object-cover"
-        />
-      </div>
-
-      <div>
-        <p class="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-accent">
-          <Icone nom="etoile" taille={14} class="shrink-0" /> À propos
-        </p>
-        <h2 class="mt-4 text-3xl font-extrabold leading-tight sm:text-4xl">
-          D'une costumière<br />à Product Designer.
-        </h2>
-        <p class="mt-6 max-w-lg text-base leading-relaxed">
-          J'ai commencé dans les loges, habilleuse sur les shows Marvel à
-          Disneyland Paris, costumière et chapelière sur des spectacles où
-          chaque détail est vu en direct, à cinq mètres d'un public qui ne
-          pardonne rien. Concevoir une interface, c'est habiller un usage comme
-          on habille un personnage : ajuster, mettre en scène, faire en sorte
-          qu'une personne reçoive ce qu'on lui adresse sans friction.
-        </p>
-        <p class="note mt-6 -rotate-1">Même exigence, autre décor.</p>
-
-        <div class="mt-9">
-          <a
-            href="/about"
-            class="group inline-flex items-center gap-2 text-sm text-encre transition-colors hover:font-semibold"
-          >
-            <span class="underline decoration-accent decoration-2 underline-offset-4">
-              Mieux me connaître
-            </span>
-            <span class="inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ÉCRAN 6 — Contact -->
-  <section class="mx-auto mt-24 max-w-6xl px-6 sm:mt-32 sm:px-10">
-    <!-- Volontairement sans fond : les .blob ci-dessous se placent derrière le
-         fond de leur parent, un bg-white l'aurait annulé. La bordure suffit. -->
-    <div class="relative overflow-hidden rounded-[32px] rounded-tl-[4px] border border-encre/10 px-8 py-14 sm:px-14">
-      <!-- Cette carte garde overflow-hidden (les formes doivent rester dans
-           les coins arrondis) : on les cale donc entièrement à l'intérieur,
-           sinon le découpage les aplatit en rectangles. -->
-      <div class="blob right-0 top-0 h-64 w-64 bg-accent/10" aria-hidden="true"></div>
-      <div class="blob bottom-0 left-1/3 h-40 w-40 bg-accent/10" aria-hidden="true"></div>
-
-      <p class="text-xs uppercase tracking-[0.2em] text-accent">Restons en contact</p>
-      <h2 class="mt-4 max-w-xl text-3xl font-extrabold leading-tight sm:text-5xl">
-        Construisons la <span class="trace">prochaine scène</span> ensemble.
-      </h2>
-      <p class="mt-6 max-w-md text-base leading-relaxed text-voile">
-        Disponible dès octobre 2026 pour rejoindre votre équipe. Si mon profil
-        résonne avec votre projet, écrivez-moi.
-      </p>
-
-      <div class="mt-9 flex flex-wrap items-center gap-4">
-        <a
-          href="/contact"
-          class="group inline-flex items-center gap-2.5 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-ivoire transition-transform hover:scale-[1.02]"
-        >
-          Me contacter
-          <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
-        </a>
-        <a
-          href="/cv/audrey-garoscio-cv.pdf"
-          download
-          class="inline-flex items-center gap-2.5 rounded-full border border-encre/25 px-6 py-3 text-sm text-encre transition-colors hover:border-encre hover:font-semibold"
-        >
-          Télécharger le CV (PDF)
-        </a>
-      </div>
-    </div>
-  </section>
-</Base>
+    <Footer />
+  </body>
+</html>

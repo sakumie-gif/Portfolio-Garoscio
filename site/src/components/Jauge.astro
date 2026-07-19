@@ -1,0 +1,37 @@
+---
+// Barre de progression (design system Figma « Progress bar » — pourcentage).
+//
+// role="progressbar" + aria-valuenow/min/max : la valeur est annoncée aux
+// technologies d'assistance, pas seulement peinte (WCAG 1.3.1 / 4.1.2). La
+// couleur de remplissage est le lie de vin de marque.
+//
+// valeur : 0–100. `etiquette` affiche le libellé + le pourcentage au-dessus.
+const {
+  valeur = 0,
+  etiquette,
+  class: classe = "",
+} = Astro.props;
+
+const pct = Math.max(0, Math.min(100, Number(valeur)));
+---
+
+<div class:list={["flex flex-col gap-1.5", classe]}>
+  {
+    etiquette && (
+      <div class="flex items-center justify-between text-sm text-voile-fort">
+        <span>{etiquette}</span>
+        <span class="font-semibold text-encre">{pct}%</span>
+      </div>
+    )
+  }
+  <div
+    class="h-2 w-full overflow-hidden rounded-full bg-accent/10"
+    role="progressbar"
+    aria-valuenow={pct}
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-label={etiquette ?? "Progression"}
+  >
+    <div class="h-full rounded-full bg-accent transition-[width] duration-500" style={`width:${pct}%`}></div>
+  </div>
+</div>
