@@ -165,13 +165,13 @@ const apropos = [
            Sous 1920, tout est proportionnel : portrait en %, titre en clamp,
            retours à la ligne forcés seulement quand la colonne est assez
            large (2xl). -->
-      <!-- Section pleine largeur : le portrait reste collé au bord droit de
-           l'écran à toutes les tailles (choix d'Audrey, 20/07). Au-delà de
-           1920px il ne « flotte » plus (avant, le cadre se centrait et la
-           photo se détachait du bord). Le texte, lui, reste aligné sur la
-           grille du reste du contenu (sections en max-w-1920 + px-20) : sa
-           marge gauche suit la même colonne via max(80px, 50vw-880px). -->
-      <section class="flex w-full flex-col gap-10 lg:flex-row lg:items-start lg:gap-6">
+      <!-- Portrait (choix d'Audrey, 20/07) : collé au bord droit de l'écran
+           jusqu'au 14 pouces (1280px) inclus ; au-delà, son bord droit
+           s'aligne sur la marge du reste du contenu (min-[1281px]:pr =
+           marge de la grille), pour ne plus dépasser les cartes sur grand
+           écran. Le texte reste aligné sur cette même grille via sa marge
+           gauche max(80px, 50vw-880px). -->
+      <section class="flex w-full flex-col gap-10 lg:flex-row lg:items-start lg:gap-6 min-[1281px]:pr-[max(80px,calc(50vw_-_880px))]">
         <div class="min-w-0 flex-1 px-6 pt-6 sm:px-10 xl:pr-0 xl:pl-[max(80px,calc(50vw_-_880px))]">
           <p class="flex items-center gap-[14px] py-5 font-display text-lg font-semibold text-encre sm:text-xl">
             <Icone nom="etoile" taille={38} class="shrink-0" />

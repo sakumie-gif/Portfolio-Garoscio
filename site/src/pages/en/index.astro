@@ -148,9 +148,9 @@ const apropos = [
     <Nav current="" lang="en" />
 
     <main id="contenu" tabindex="-1">
-      <!-- Cf. index.astro FR : portrait collé au bord droit à toutes les
-           tailles, texte aligné sur la grille du contenu. -->
-      <section class="flex w-full flex-col gap-10 lg:flex-row lg:items-start lg:gap-6">
+      <!-- Cf. index.astro FR : portrait collé au bord droit jusqu'au 14 pouces,
+           aligné sur la grille du contenu au-delà. -->
+      <section class="flex w-full flex-col gap-10 lg:flex-row lg:items-start lg:gap-6 min-[1281px]:pr-[max(80px,calc(50vw_-_880px))]">
         <div class="min-w-0 flex-1 px-6 pt-6 sm:px-10 xl:pr-0 xl:pl-[max(80px,calc(50vw_-_880px))]">
           <p class="flex items-center gap-[14px] py-5 font-display text-lg font-semibold text-encre sm:text-xl">
             <Icone nom="etoile" taille={38} class="shrink-0" />
