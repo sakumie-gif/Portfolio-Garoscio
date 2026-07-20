@@ -73,9 +73,13 @@ const infos = [
 
       <!-- La citation n'utilise pas la classe .note : sa taille fixe
            (1.35rem, hors layer) écrase les utilitaires text-[…] et rendait
-           le texte trop petit. Ici on pose la fonte et les 40px à la main. -->
+           le texte trop petit. Taille alignée sur la note de la page
+           parcours (référence des citations Caveat) : même graisse normale
+           et même interligne, pas seulement la même taille.
+           Ancien style contact (au cas où) : clamp(28px,2.09vw,40px),
+           font-bold, leading-[1.15]. -->
       <div class="hidden xl:block xl:pt-8">
-        <p class="-rotate-3 font-note text-[clamp(28px,2.09vw,40px)] font-bold leading-[1.15] text-accent">
+        <p class="-rotate-3 font-note text-[clamp(26px,1.88vw,36px)] leading-[normal] text-accent">
           Une idée en coulisses, un projet à mettre en scène ? Parlons-en.
         </p>
         <!-- Le doodle est volontairement aplati (228×40 à 1920, object-fill) :
@@ -284,9 +288,10 @@ const infos = [
     </div>
 
     <!-- La note manuscrite passe sous les panneaux quand la colonne de
-         droite disparaît (en dessous de xl). -->
+         droite disparaît (en dessous de xl). Style aligné sur parcours ;
+         ancien style (au cas où) : 32px, font-bold, leading-[1.15]. -->
     <div class="mt-10 xl:hidden">
-      <p class="max-w-md -rotate-2 font-note text-[32px] font-bold leading-[1.15] text-accent">
+      <p class="max-w-md -rotate-2 font-note text-[28px] leading-[normal] text-accent">
         Une idée en coulisses, un projet à mettre en scène ? Parlons-en.
       </p>
       <img
