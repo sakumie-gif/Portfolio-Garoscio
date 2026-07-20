@@ -32,8 +32,14 @@
      colonnes rebasculaient alors en version empilée (citation en biais, photo
      repoussée en bas, grands vides). On descend xl à 1200px pour que la mise
      en page bureau reste active sur cet écran, barre de défilement comprise.
-     Ne pas remonter au-dessus de ~1240px sans re-tester le 14 pouces. */
-  --breakpoint-xl: 1200px;
+     Ne pas remonter au-dessus de ~1240px sans re-tester le 14 pouces.
+
+     IMPORTANT — valeur en REM (75rem = 1200px), pas en px : les breakpoints
+     par défaut de Tailwind sont en rem, et un override en px n'était pas trié
+     au bon rang. La media query xl se retrouvait AVANT sm/md/lg dans le CSS,
+     si bien qu'à ≥1200px un `sm:grid-cols-3` écrasait un `xl:grid-cols-5`
+     (tuiles « coulisses » bloquées à 3 colonnes). En rem, l'ordre est correct. */
+  --breakpoint-xl: 75rem;
 
   /* --- Fondations --- */
   --color-ivoire: #fcfbf9; /* Figma Color/White — blanc scène */
