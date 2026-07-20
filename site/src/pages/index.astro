@@ -165,7 +165,12 @@ const apropos = [
            Sous 1920, tout est proportionnel : portrait en %, titre en clamp,
            retours à la ligne forcés seulement quand la colonne est assez
            large (2xl). -->
-      <section class="mx-auto flex max-w-[1920px] flex-col gap-10 lg:flex-row lg:items-start lg:gap-6">
+      <!-- xl:pr-20 : à partir du 14 pouces (1280px), le bord droit de la photo
+           s'aligne sur la marge droite des autres sections (px-20) et sur le
+           FR/EN de la nav. Sans ça, au-delà de 1920px le cadre se centre et la
+           photo « flottait » : elle dépassait les cartes sans toucher le bord
+           de l'écran (retour d'Audrey du 20/07). -->
+      <section class="mx-auto flex max-w-[1920px] flex-col gap-10 lg:flex-row lg:items-start lg:gap-6 xl:pr-20">
         <div class="min-w-0 flex-1 px-6 pt-6 sm:px-10 xl:pl-20 xl:pr-0">
           <p class="flex items-center gap-[14px] py-5 font-display text-lg font-semibold text-encre sm:text-xl">
             <Icone nom="etoile" taille={38} class="shrink-0" />

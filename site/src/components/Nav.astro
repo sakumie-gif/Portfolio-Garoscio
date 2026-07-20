@@ -47,11 +47,7 @@ const hrefEn = en ? chemin : chemin === "/" ? "/en/" : `/en${chemin}`;
         Product Design UX/UI
       </span>
     </a>
-    <!-- Sur grand écran (≥1860px), le groupe de liens démarre au bord gauche
-         du portrait de l'accueil (photo à 38,7 % du cadre 1920) : largeur
-         fixée à 37,7 % du contenu de la nav ≈ 663px à 1920, liens calés à
-         gauche. En dessous (dont le 1280 d'Audrey), rien ne change. -->
-    <ul class="flex flex-wrap items-center gap-[14px] min-[1860px]:w-[37.7%] min-[1860px]:justify-start">
+    <ul class="flex flex-wrap items-center gap-[14px]">
       {
         links.map((link) => (
           <li>
