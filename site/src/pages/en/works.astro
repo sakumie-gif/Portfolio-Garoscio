@@ -59,8 +59,12 @@ const projets = [
     <Nav current="works" lang="en" />
 
     <main id="contenu" tabindex="-1" class="mx-auto max-w-[1920px] px-6 sm:px-10 xl:px-20">
-      <header class="pt-8 sm:pt-[50px]">
-        <h1 class="font-display text-4xl font-bold leading-[normal] text-encre sm:text-5xl xl:text-[64px]">
+      <header class="pt-8">
+        <p class="flex items-center gap-[14px] py-3.5 font-display text-lg font-semibold uppercase text-encre sm:text-xl">
+          <Icone nom="etoile" taille={38} class="shrink-0" />
+          The season
+        </p>
+        <h1 class="mt-2 font-display text-4xl font-bold leading-[normal] text-encre sm:text-5xl xl:text-[64px]">
           Now <span class="relative inline-block text-accent">
             Showing
             <!-- top-[72%] : le trait frôle le bas des lettres (cf. works FR). -->
@@ -80,9 +84,8 @@ const projets = [
 
       <!-- The productions -->
       <section class="pt-8">
-        <h2 class="titre-section flex items-center gap-[14px] py-5 font-display text-lg text-encre sm:text-xl">
-          <Icone nom="etoile" taille={38} class="shrink-0" />
-          The productions
+        <h2 class="titre-section py-5 font-display text-lg sm:text-xl">
+          <span class="text-accent">T</span><span class="text-encre">HE PRODUCTIONS</span>
         </h2>
 
         <div class="flex flex-col gap-6 pt-4 lg:gap-14">
@@ -105,9 +108,8 @@ const projets = [
 
       <!-- Sketches -->
       <section class="pb-20 pt-8">
-        <h2 class="titre-section flex items-center gap-[14px] py-5 font-display text-lg text-encre sm:text-xl">
-          <Icone nom="etoile" taille={38} class="shrink-0" />
-          Sketches
+        <h2 class="titre-section py-5 font-display text-lg sm:text-xl">
+          <span class="text-accent">S</span><span class="text-encre">KETCHES</span>
         </h2>
 
         <article class="group relative mt-2 flex w-full flex-col gap-6 p-5 transition-colors hover:bg-accent/10 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:py-[30px] lg:pr-[30px]">

@@ -1,14 +1,19 @@
 ---
 // English mirror of mentions-legales.astro (legal notice).
 import Base from "../../layouts/Base.astro";
+import Icone from "../../components/Icone.astro";
 
 const dateMaj = "June 2026";
 ---
 
 <Base title="Legal notice — Audrey Garoscio" description="Legal information for this website." current="" lang="en">
-  <section class="mx-auto max-w-3xl px-6 pt-10 sm:px-10 sm:pt-16">
-    <p class="text-xs uppercase tracking-[0.2em] text-accent">Legal notice</p>
-    <h1 class="mt-4 text-4xl font-extrabold sm:text-5xl">
+  <section class="mx-auto max-w-[1920px] px-6 pt-8 sm:px-10 xl:px-20">
+    <div class="max-w-3xl">
+    <p class="flex items-center gap-[14px] py-3.5 font-display text-lg font-semibold uppercase text-encre sm:text-xl">
+      <Icone nom="etoile" taille={38} class="shrink-0" />
+      Legal notice
+    </p>
+    <h1 class="mt-2 font-display text-4xl font-bold leading-[1.05] sm:text-5xl">
       For good practice
     </h1>
     <p class="mt-6 max-w-xl text-lg leading-relaxed text-voile">
@@ -101,6 +106,7 @@ const dateMaj = "June 2026";
       <p class="pt-6 text-sm text-voile">
         Last updated: {dateMaj}.
       </p>
+    </div>
     </div>
   </section>
 </Base>
