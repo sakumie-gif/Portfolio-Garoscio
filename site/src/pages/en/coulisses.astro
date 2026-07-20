@@ -1,0 +1,330 @@
+---
+// English mirror of the "Metteur en scène" page (coulisses.astro) — same
+// layout and assets, translated copy.
+import "../../styles/global.css";
+import Icone from "../../components/Icone.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+
+const enBref = [
+  { label: "PROFILE", valeur: "Audrey Garoscio, 36, RQTH (French disability recognition)" },
+  { label: "BASED IN", valeur: "Noisy-le-Grand, Île-de-France (Greater Paris)" },
+  {
+    label: "LOVES",
+    valeur:
+      "theater, DIY, historical reenactment, board games, scouring the web for inspiration",
+  },
+];
+
+const histoires = [
+  {
+    titre: "HERE I COME FROM",
+    initiale: "W",
+    texte:
+      "I started in the dressing rooms. Dresser on the Marvel shows at Disneyland Paris, costume and hat maker on shows where every detail counts because it will be seen live, five meters from an audience that doesn't forgive sloppiness. That's where I learned to work fast and clean, and to serve something bigger than my own craft: a character's presence on stage.",
+  },
+  {
+    titre: "HY I CHANGED",
+    initiale: "W",
+    texte:
+      "In 2023 I discovered UX/UI design. Not a break — a continuation. Designing an interface is dressing a use case the way you dress a character. One is virtual, the other physical, but the intent is the same: adjusting, staging, making sure a person receives what you're addressing to them without friction. Style is never decorative. It reveals, it guides, it serves the reading.",
+  },
+  {
+    titre: "HAT I DO NOW",
+    initiale: "W",
+    texte:
+      "Finding an apprenticeship took time: my unusual profile scared people at first. A disability-inclusion day gave me the chance to convince EasyVista — who don't regret trusting this journey. Since 2025 I've been a Product Designer there, alongside an MBA1 in Marketing, Communication and Digital Design at Digital School Paris (IEF2I). I work on B2B SaaS interfaces where clarity is not a comfort but a condition of service, moving from strategy to visuals, from the matrix to the mockup, without missing a beat. My days are spent between user research, wireframes, Figma mockups, design system contributions, and clean handoffs to developers. What I'm looking for now is to keep building products with character, without sacrificing readability: the meeting point between usability standards and a true brand presence.",
+  },
+];
+
+// Le plateau — same positions as the French page (composition 1760×1132).
+const plateau = [
+  {
+    titre: "UX/UI design",
+    detail: "Research, wireframes, mockups, prototypes",
+    icone: "crayon",
+    x: "50.7%",
+    y: "6.9%",
+  },
+  {
+    titre: "Art direction",
+    detail: "Visual identity, graphic universe, storytelling",
+    icone: "palette",
+    x: "76.6%",
+    y: "29.6%",
+  },
+  {
+    titre: "Staging & narrative",
+    detail: "Structuring a clear, engaging story",
+    icone: "micro",
+    x: "75.2%",
+    y: "62.7%",
+  },
+  {
+    titre: "Pace & readability",
+    detail: "Getting to the point, keeping things fluid and clear",
+    icone: "chrono",
+    x: "50.7%",
+    y: "83.7%",
+  },
+  {
+    titre: "Project management",
+    detail: "Organization, planning, follow-through and collaboration",
+    icone: "organigramme",
+    x: "24.5%",
+    y: "61.5%",
+  },
+  {
+    titre: "Service mindset",
+    detail: "Listening, empathy, useful solutions",
+    icone: "coeur",
+    x: "23.6%",
+    y: "28.7%",
+  },
+];
+
+// Icônes SVG identiques à la page FR (traits en currentColor).
+const icones: Record<string, string> = {
+  crayon:
+    '<path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/>',
+  palette:
+    '<path d="M12 2a10 10 0 1 0 0 20 1.7 1.7 0 0 0 1.65-1.7c0-.44-.18-.84-.44-1.13-.25-.29-.43-.68-.43-1.12a1.65 1.65 0 0 1 1.65-1.65h2c3.05 0 5.57-2.5 5.57-5.55C22 6.01 17.46 2 12 2Z"/><circle cx="13.5" cy="6.5" r=".8" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".8" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".8" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".8" fill="currentColor"/>',
+  micro:
+    '<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/>',
+  chrono:
+    '<line x1="10" y1="2" x2="14" y2="2"/><line x1="12" y1="14" x2="15" y2="11"/><circle cx="12" cy="14" r="8"/>',
+  organigramme:
+    '<rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/>',
+  coeur:
+    '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>',
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audrey Garoscio — Director</title>
+    <meta
+      name="description"
+      content="Director: where I come from, why I changed, what I do now. Audrey Garoscio, Product Designer."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Caveat:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body style="background-color:#f7f4f2">
+    <a class="skip-link" href="#contenu">Skip to content</a>
+
+    <Nav current="coulisses" lang="en" />
+
+    <main id="contenu" tabindex="-1">
+      <!-- Introduction -->
+      <section class="mx-auto max-w-[1920px] px-6 pt-2 sm:px-10 xl:px-20">
+        <p class="flex items-center gap-[14px] py-[14px] font-display text-lg font-semibold text-encre sm:text-xl">
+          <Icone nom="etoile" taille={38} class="shrink-0" />
+          DIRECTOR
+        </p>
+
+        <div class="relative pb-[50px]">
+          <h1 class="font-display text-4xl font-bold leading-[normal] text-encre sm:text-5xl lg:text-[clamp(40px,3.34vw,64px)]">
+            Audrey Garoscio,<br />
+            Product
+            <span class="relative inline-block whitespace-nowrap text-accent">
+              Designer
+              <img
+                src="/images/trait-souligne.png"
+                alt=""
+                aria-hidden="true"
+                class="pointer-events-none absolute left-0 top-[calc(100%-8px)] w-full"
+              />
+            </span>
+          </h1>
+
+          <p
+            class="mt-6 -rotate-[7deg] font-note text-[28px] leading-[normal] text-accent xl:absolute xl:left-[51.6%] xl:top-[96px] xl:mt-0 xl:w-[48.4%] xl:text-center xl:text-[clamp(26px,1.88vw,36px)]"
+          >
+            At the crossroads of product and stage
+          </p>
+        </div>
+      </section>
+
+      <!-- In short + stories + photo -->
+      <section class="mx-auto max-w-[1920px] px-6 sm:px-10 xl:px-20">
+        <div class="border-t border-trait-2 pt-8" aria-hidden="true"></div>
+
+        <div class="flex flex-col gap-10 xl:flex-row xl:items-start xl:gap-6">
+          <div class="min-w-0 flex-1">
+            <!-- In short -->
+            <p class="py-5 text-lg font-semibold">
+              <span class="text-accent">I</span><span class="text-encre">n short</span>
+            </p>
+            <ul class="flex flex-col gap-5">
+              {
+                enBref.map((l) => (
+                  <li class="flex items-start gap-5">
+                    <span class="shrink-0 text-lg font-semibold text-voile-fort">{l.label}</span>
+                    <span class="min-w-0 flex-1 pt-0.5 text-base text-encre">{l.valeur}</span>
+                  </li>
+                ))
+              }
+            </ul>
+
+            <!-- Stories -->
+            <div class="mt-14 flex flex-col items-start gap-5">
+              {
+                histoires.map((h) => (
+                  <>
+                    <h2 class="font-display text-lg font-semibold sm:text-xl">
+                      <span class="text-accent">{h.initiale}</span><span class="text-encre">{h.titre}</span>
+                    </h2>
+                    <p class="max-w-[814px] pr-5 text-base leading-[normal] text-encre sm:text-lg">
+                      {h.texte}
+                    </p>
+                  </>
+                ))
+              }
+            </div>
+          </div>
+
+          <div class="relative mx-auto w-full max-w-[560px] shrink-0 xl:mx-0 xl:w-[48.4%] xl:max-w-[929px]">
+            <img
+              src="/images/figma-coulisses-blob.svg"
+              alt=""
+              aria-hidden="true"
+              class="absolute bottom-[-17%] right-0 w-[45.6%]"
+            />
+            <img
+              src="/images/figma-coulisses-photo.png"
+              alt="The troupe in stage costumes, posing on a crosswalk in front of the town hall"
+              width="1859"
+              height="1171"
+              class="relative w-full"
+            />
+            <img
+              src="/images/fleche-coulisses.png"
+              alt=""
+              aria-hidden="true"
+              width="928"
+              height="571"
+              class="pointer-events-none absolute left-[3%] top-[10%] w-[14%] -scale-y-100"
+            />
+          </div>
+        </div>
+
+        <div class="mt-14 border-t border-trait-2" aria-hidden="true"></div>
+      </section>
+
+      <!-- The stage -->
+      <section class="mx-auto max-w-[1920px] px-6 pb-10 sm:px-10 xl:px-20">
+        <p class="flex items-center gap-[14px] py-[14px] pt-14 font-display text-lg font-semibold text-encre sm:text-xl">
+          <Icone nom="etoile" taille={38} class="shrink-0" />
+          The stage
+        </p>
+
+        <div class="plateau relative mx-auto mt-8 w-full">
+          <svg
+            viewBox="0 0 220 236"
+            aria-hidden="true"
+            class="plateau-radar mx-auto mb-10 w-full max-w-[420px] lg:mb-0 lg:max-w-none"
+          >
+            <g stroke="#DED4C9" stroke-width="1" fill="none">
+              <polygon points="110,12.5 201,65 201,170 110,222.5 19,170 19,65"></polygon>
+              <polygon points="110,38.75 178.25,78.13 178.25,156.88 110,196.25 41.75,156.88 41.75,78.13"></polygon>
+              <polygon points="110,65 155.5,91.25 155.5,143.75 110,170 64.5,143.75 64.5,91.25"></polygon>
+              <polygon points="110,91.25 132.75,104.38 132.75,130.63 110,143.75 87.25,130.63 87.25,104.38"></polygon>
+              <path d="M110 12.5V222.5M19 65l182 105M201 65L19 170"></path>
+            </g>
+            <polygon
+              points="110,17 198,63 203,171 108,218 27,167 19,63"
+              fill="#DEC3BB"
+              fill-opacity="0.5"
+              stroke="#1E1E1E"
+              stroke-width="1.5"
+              stroke-linejoin="round"
+            ></polygon>
+            <g fill="#1E1E1E">
+              <circle cx="110" cy="17" r="3.5"></circle>
+              <circle cx="198" cy="63" r="3.5"></circle>
+              <circle cx="203" cy="171" r="3.5"></circle>
+              <circle cx="108" cy="218" r="3.5"></circle>
+              <circle cx="27" cy="167" r="3.5"></circle>
+              <circle cx="19" cy="63" r="3.5"></circle>
+            </g>
+          </svg>
+
+          <ul class="plateau-liste grid grid-cols-1 gap-10 sm:grid-cols-2">
+            {
+              plateau.map((c) => (
+                <li
+                  class="plateau-item flex flex-col items-center text-center"
+                  style={`--x:${c.x};--y:${c.y}`}
+                >
+                  <span
+                    class="mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-corail/15 text-accent lg:h-[72px] lg:w-[72px] 2xl:h-[92px] 2xl:w-[92px]"
+                    aria-hidden="true"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="h-7 w-7 lg:h-8 lg:w-8 2xl:h-10 2xl:w-10"
+                      set:html={icones[c.icone]}
+                    />
+                  </span>
+                  <p class="font-display text-lg font-semibold text-encre lg:text-xl 2xl:text-2xl">
+                    {c.titre}
+                  </p>
+                  <p class="mt-1 max-w-[320px] text-sm text-voile lg:text-base 2xl:text-lg">
+                    {c.detail}
+                  </p>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <Footer lang="en" />
+  </body>
+</html>
+
+<style>
+  /* Cf. coulisses.astro : composition absolue du plateau à partir de lg. */
+  @media (min-width: 1024px) {
+    .plateau {
+      aspect-ratio: 1760 / 1132;
+    }
+    .plateau-radar {
+      position: absolute;
+      left: 33.6%;
+      top: 21.4%;
+      width: 34.3%;
+    }
+    .plateau-liste {
+      display: contents;
+    }
+    .plateau-item {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      width: 280px;
+      transform: translate(-50%, -36px);
+    }
+  }
+  @media (min-width: 1536px) {
+    .plateau-item {
+      width: 360px;
+      transform: translate(-50%, -46px);
+    }
+  }
+</style>

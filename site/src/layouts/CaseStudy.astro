@@ -6,16 +6,20 @@ import Bouton from "../components/Bouton.astro";
 // d'en-tête différente (corail / brume / jaune) alors qu'aucune ne
 // distinguait quoi que ce soit. Quatre études, quatre couleurs, zéro
 // information — c'était l'arc-en-ciel. Toutes partagent le même décor.
-const { title, kicker, didascalie, sections = [] } = Astro.props;
+// Bilingue : prop `lang` ("fr" par défaut, "en" pour les études sous /en/).
+const { title, kicker, didascalie, sections = [], lang = "fr" } = Astro.props;
+const en = lang === "en";
 ---
 
-<Base title={`${title} — Audrey Garoscio`} current="works">
+<Base title={`${title} — Audrey Garoscio`} current="works" lang={lang}>
   <article class="mx-auto max-w-6xl px-6 sm:px-10">
     <!-- En-tête du case study -->
     <header class="relative border-b border-encre/10 pb-14 pt-6">
       <div class="blob right-0 top-2 h-64 w-64 bg-accent/35" aria-hidden="true"></div>
 
-      <Bouton variante="tertiaire" fleche="gauche" href="/works">Tous les projets</Bouton>
+      <Bouton variante="tertiaire" fleche="gauche" href={en ? "/en/works" : "/works"}>
+        {en ? "All projects" : "Tous les projets"}
+      </Bouton>
       {kicker && (
         <p class="mt-10 text-xs uppercase tracking-[0.2em] text-accent">
           {kicker}
@@ -42,9 +46,9 @@ const { title, kicker, didascalie, sections = [] } = Astro.props;
       {
         sections.length > 0 && (
           <aside class="hidden lg:block">
-            <nav class="sticky top-24" aria-label="Sommaire">
+            <nav class="sticky top-24" aria-label={en ? "Contents" : "Sommaire"}>
               <p class="mb-4 text-xs uppercase tracking-[0.2em] text-accent">
-                Sommaire
+                {en ? "Contents" : "Sommaire"}
               </p>
               <ul class="space-y-3 text-sm">
                 {sections.map((s) => (

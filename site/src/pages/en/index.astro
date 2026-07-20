@@ -1,0 +1,418 @@
+---
+// English mirror of the home page (index.astro) — same layout, same assets,
+// translated copy. Any structural change on the French page must be mirrored
+// here (same Figma source: node 51:9945).
+import "../../styles/global.css";
+import Icone from "../../components/Icone.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+
+const projets = [
+  {
+    href: "/en/works/pool-party",
+    image: "/images/poolparty-page-daccueil-maquette-page-daccueil-ordinateur.jpg",
+    tag: "Marketplace",
+    tagBg: "#f76049", // Color/corail
+    titre: "Pool Party",
+    texte: "Peer-to-peer pool rental marketplace.",
+    role: "Project lead, end to end",
+  },
+  {
+    href: "/en/works/sumo-tournament",
+    image: "/images/sumo-home.png",
+    tag: "Event website",
+    tagBg: "#b88d1a", // Color/yellow
+    titre: "Sumo Tournament",
+    texte: "Event website and back office.",
+    role: "Design and production",
+  },
+  {
+    href: "/en/works/pool-and-splash",
+    image: "/images/homepage.png",
+    tag: "UI redesign",
+    tagBg: "#9a2737", // Color/lie de vin
+    titre: "Pool & Splash",
+    texte: "UI redesign, kidulting direction.",
+    role: "Art direction and UI",
+  },
+];
+
+const etapes = [
+  {
+    blob: "/images/figma-blob-1.svg",
+    icone: "/images/figma-proc-icon-1.svg",
+    num: "01",
+    titre: "Understand",
+    texte: "I explore user needs,\nbusiness goals and constraints.",
+  },
+  {
+    blob: "/images/figma-blob-2.svg",
+    icone: "/images/figma-proc-icon-2.svg",
+    num: "02",
+    titre: "Structure",
+    texte: "I lay the foundations of the experience: journeys, architecture, content.",
+  },
+  {
+    blob: "/images/figma-blob-3.svg",
+    icone: "/images/figma-proc-icon-3.svg",
+    num: "03",
+    titre: "Design",
+    texte: "I craft clear, useful interfaces aligned with the product strategy.",
+  },
+  {
+    blob: "/images/figma-blob-4.svg",
+    icone: "/images/figma-proc-icon-4.svg",
+    num: "04",
+    titre: "Test",
+    texte: "I challenge, iterate and keep improving with users.",
+  },
+  {
+    blob: "/images/figma-blob-5.svg",
+    icone: "/images/figma-proc-icon-5.svg",
+    num: "05",
+    titre: "Deliver",
+    texte: "I work with developers and make sure the product ships accessible and built to last.",
+  },
+];
+
+const coulisses = [
+  {
+    image: "/images/coulisse-wireframes.png",
+    titre: "Research & wireframes",
+    note: "Explore fast, test early.",
+  },
+  {
+    image: "/images/coulisse-annotations.png",
+    titre: "Annotations & ideas",
+    note: "Think with clarity.",
+  },
+  {
+    image: "/images/coulisse-composants.png",
+    titre: "Reusable components",
+    note: "Consistency and efficiency.",
+  },
+  {
+    image: "/images/coulisse-accessibilite.png",
+    titre: "Accessibility",
+    note: "Designing for everyone.",
+  },
+  {
+    image: "/images/coulisse-avant-apres.png",
+    titre: "Before / After",
+    note: "Measuring real impact.",
+  },
+];
+
+const apropos = [
+  {
+    icone: "/images/figma-apropos-1.svg",
+    texte: "Hands-on expertise in B2B SaaS products and business tools",
+  },
+  {
+    icone: "/images/figma-apropos-2.svg",
+    texte: "I turn complex journeys into clear interfaces",
+  },
+  {
+    icone: "/images/figma-apropos-3.svg",
+    texte: "Product culture, rigor and empathy",
+  },
+  {
+    icone: "/images/figma-apropos-4.svg",
+    texte: "Careful attention to accessibility and consistency",
+  },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audrey Garoscio — UX/UI Product Designer</title>
+    <meta
+      name="description"
+      content="UX/UI Product Designer crafting complex B2B SaaS interfaces, from wireframe to prototype."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Caveat:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <!-- Fond #F7F4F2 : couleur « principal-bg » de la maquette (cf. index FR). -->
+  <body style="background-color:#f7f4f2">
+    <a class="skip-link" href="#contenu">Skip to content</a>
+
+    <Nav current="" lang="en" />
+
+    <main id="contenu" tabindex="-1">
+      <section class="mx-auto flex max-w-[1920px] flex-col gap-10 lg:flex-row lg:items-start lg:gap-6">
+        <div class="min-w-0 flex-1 px-6 pt-6 sm:px-10 xl:pl-20 xl:pr-0">
+          <p class="flex items-center gap-[14px] py-5 font-display text-lg font-semibold text-encre sm:text-xl">
+            <Icone nom="etoile" taille={38} class="shrink-0" />
+            A CONTEMPORARY THEATER OF PRODUCT DESIGN
+          </p>
+
+          <h1 class="pb-[50px] font-display text-4xl font-bold leading-[normal] text-encre sm:text-5xl lg:text-[clamp(40px,3.34vw,64px)]">
+            I design products that are<br />
+            clear, useful and
+            <span class="relative inline-block text-accent">
+              human.
+              <img
+                src="/images/trait-souligne.png"
+                alt=""
+                aria-hidden="true"
+                class="pointer-events-none absolute left-0 top-full w-full"
+              />
+            </span>
+          </h1>
+
+          <p class="text-base font-semibold leading-[normal] text-encre sm:text-lg">
+            As a UX/UI Product Designer, I craft complex B2B SaaS interfaces,<br
+              class="hidden 2xl:block"
+            />
+            from wireframe to prototype, working closely with Product Owners,<br
+              class="hidden 2xl:block"
+            />
+            developers and business teams.
+          </p>
+
+          <ul class="flex flex-wrap items-center gap-5 py-[14px] pt-6">
+            <li
+              class="flex items-center justify-center gap-1 rounded-[10px] bg-[rgba(154,39,55,0.1)] px-[14px] py-2 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.1),0px_2px_4px_0px_rgba(0,0,0,0.1)]"
+            >
+              <img src="/images/figma-tag-designer.svg" alt="" aria-hidden="true" class="size-4" />
+              <span class="text-sm text-[#9a2737]">UX/UI Product Designer</span>
+            </li>
+            <li
+              class="flex items-center justify-center gap-1 rounded-[10px] bg-[rgba(184,141,26,0.1)] px-[14px] py-2 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.1),0px_2px_4px_0px_rgba(0,0,0,0.1)]"
+            >
+              <img src="/images/figma-tag-saas.svg" alt="" aria-hidden="true" class="h-[14px] w-4" />
+              <span class="text-sm text-[#b88d1a]">B2B SaaS</span>
+            </li>
+            <li
+              class="flex items-center justify-center gap-1 rounded-[10px] bg-[rgba(74,110,137,0.1)] px-[14px] py-2 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.1),0px_2px_4px_0px_rgba(0,0,0,0.1)]"
+            >
+              <img src="/images/figma-tag-a11y.svg" alt="" aria-hidden="true" class="size-4" />
+              <span class="text-sm text-[#4a6e89]">Accessibility</span>
+            </li>
+          </ul>
+
+        </div>
+
+        <img
+          src="/images/portrait-audrey-rideau.png"
+          alt="Portrait of Audrey Garoscio"
+          width="848"
+          height="607"
+          class="w-full self-start lg:w-[38.7%] lg:max-w-[742px]"
+        />
+      </section>
+
+      <!-- Projects -->
+      <section id="projets" class="mx-auto max-w-[1920px] px-6 pt-8 sm:px-10 xl:px-20">
+        <div
+          class="flex flex-col items-start gap-[14px] rounded-[20px] border border-accent p-5"
+        >
+          <p
+            class="rounded-[10px] bg-[rgba(154,39,55,0.1)] px-[14px] py-2 text-sm font-bold text-accent shadow-[0px_4px_6px_0px_rgba(0,0,0,0.1),0px_2px_4px_0px_rgba(0,0,0,0.1)]"
+          >
+            NEWS
+          </p>
+          <p class="text-sm leading-[normal] text-encre">
+            Pool Party, the project I presented at my final defense, is now live.<br />
+            Access is code-protected until September: drop me a line and I'll send
+            you the code.
+          </p>
+        </div>
+
+        <p class="mt-14 flex items-center gap-[14px] py-2 font-display text-2xl font-semibold text-encre sm:text-[28px]">
+          <Icone nom="etoile" taille={38} class="shrink-0" />
+          NOW SHOWING
+        </p>
+        <div class="mt-2.5 flex flex-wrap items-center justify-between gap-4">
+          <h2 class="font-display text-2xl font-semibold text-encre sm:text-[28px]">
+            Selected projects
+          </h2>
+          <a
+            href="/en/works"
+            class="note relative inline-block py-2 text-2xl font-normal drop-shadow-[0px_10px_7.5px_rgba(0,0,0,0.1),0px_4px_3px_rgba(0,0,0,0.1)] transition-transform hover:scale-[1.03]"
+          >
+            See all projects
+            <img
+              src="/images/trait-souligne.png"
+              alt=""
+              aria-hidden="true"
+              class="pointer-events-none absolute bottom-0 left-0 w-full"
+            />
+          </a>
+        </div>
+
+        <ul class="mt-5 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {
+            projets.map((p) => (
+              <li class="group relative flex flex-col rounded-[10px] rounded-tl-none border border-[rgba(186,186,186,0.3)] bg-white transition-colors hover:border-encre/25">
+                <div class="flex h-60 items-start justify-center overflow-hidden rounded-tr-[10px] border-b border-trait-2 bg-[rgba(154,39,55,0.1)] pt-5">
+                  <img src={p.image} alt="" loading="lazy" class="h-full w-[87%] object-cover object-top" />
+                </div>
+                <div class="flex flex-1 flex-col items-start gap-2 px-4 py-[14px]">
+                  <span
+                    class="rounded-[10px] px-[14px] py-2 text-sm text-white drop-shadow-[0px_4px_3px_rgba(0,0,0,0.1),0px_2px_2px_rgba(0,0,0,0.1)]"
+                    style={`background-color:${p.tagBg}`}
+                  >
+                    {p.tag}
+                  </span>
+                  <h3 class="font-display text-xl font-semibold text-[#393939]">
+                    <a href={p.href} class="after:absolute after:inset-0 after:content-['']">
+                      {p.titre}
+                    </a>
+                  </h3>
+                  <p class="text-sm text-encre">{p.texte}</p>
+                  <div class="w-full border-t border-trait" aria-hidden="true" />
+                  <p class="flex items-center gap-2 text-sm">
+                    <span class="text-base font-semibold text-[#f76049]">Role</span>
+                    <span class="text-encre">{p.role}</span>
+                  </p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="mt-16 border-t border-trait-2" aria-hidden="true"></div>
+
+        <!-- How I work -->
+        <div class="flex flex-col gap-8 pt-16 xl:flex-row xl:items-start xl:gap-2.5">
+          <div class="flex w-full flex-col gap-[30px] xl:w-[422px] xl:shrink-0">
+            <p class="font-display text-lg font-semibold sm:text-xl">
+              <span class="text-accent">H</span><span class="text-encre">OW I WORK</span>
+            </p>
+            <h2 class="font-display text-2xl font-semibold text-encre sm:text-[28px]">
+              From understanding to impact
+            </h2>
+          </div>
+
+          <ol class="grid flex-1 grid-cols-1 gap-8 sm:grid-cols-2 xl:flex xl:items-start xl:gap-0">
+            {
+              etapes.map((e, i) => (
+                <>
+                  <li class="flex w-full flex-col items-start gap-2 rounded-[10px] xl:w-[194px] xl:shrink-0">
+                    <div class="relative h-[92.5px] w-[117.5px] self-center">
+                      <img src={e.blob} alt="" aria-hidden="true" class="absolute inset-0 h-full w-full" />
+                      <img
+                        src={e.icone}
+                        alt=""
+                        aria-hidden="true"
+                        class="absolute left-1/2 top-1/2 size-10 -translate-x-1/2 -translate-y-1/2"
+                      />
+                    </div>
+                    <p class="text-lg font-semibold text-accent" aria-hidden="true">
+                      {e.num}
+                    </p>
+                    <h3 class="text-lg font-semibold text-encre">{e.titre}</h3>
+                    <p class="whitespace-pre-line text-base text-encre">{e.texte}</p>
+                  </li>
+                  {i < etapes.length - 1 && (
+                    <li class="hidden min-w-0 flex-1 pt-[58px] xl:block" aria-hidden="true">
+                      <img src="/images/figma-line-dashed.svg" alt="" class="h-[5px] w-full" />
+                    </li>
+                  )}
+                </>
+              ))
+            }
+          </ol>
+        </div>
+
+        <div class="mt-16 border-t border-trait-2" aria-hidden="true"></div>
+
+        <!-- Behind the scenes -->
+        <div id="coulisses" class="flex flex-col gap-8 pb-20 pt-16 xl:flex-row xl:items-start xl:gap-[14px]">
+          <div class="flex w-full flex-col gap-[30px] xl:w-[19.6%] xl:shrink-0">
+            <p class="font-display text-lg font-semibold sm:text-xl">
+              <span class="text-accent">B</span><span class="text-encre">EHIND THE SCENES</span>
+            </p>
+            <h2 class="relative font-display text-2xl font-semibold text-encre sm:text-[28px]">
+              Design that is thought through, tested and documented.
+              <img
+                src="/images/trait-souligne.png"
+                alt=""
+                aria-hidden="true"
+                class="pointer-events-none absolute -bottom-6 left-[20%] w-[208px]"
+              />
+            </h2>
+          </div>
+
+          <ul class="grid flex-1 grid-cols-2 gap-[14px] sm:grid-cols-3 xl:grid-cols-5">
+            {
+              coulisses.map((c) => (
+                <li class="flex flex-col rounded-[10px] rounded-tl-none border border-[rgba(186,186,186,0.3)] bg-white">
+                  <div class="flex h-[167px] items-end justify-center overflow-hidden rounded-tr-[10px] border-b border-trait-2 bg-[rgba(154,39,55,0.1)]">
+                    <img
+                      src={c.image}
+                      alt=""
+                      loading="lazy"
+                      class="h-[147px] w-[89%] object-cover object-top"
+                    />
+                  </div>
+                  <div class="flex flex-1 flex-col gap-2 px-4 py-2">
+                    <h3 class="text-base font-semibold text-[#393939]">{c.titre}</h3>
+                    <p class="text-xs text-encre">{c.note}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <!-- About -->
+        <div class="flex flex-col gap-8 pb-24 xl:flex-row xl:items-start xl:gap-5">
+          <img
+            src="/images/figma-about-photo.png"
+            alt="Audrey Garoscio in stage costume, during a historical show"
+            width="311"
+            height="430"
+            loading="lazy"
+            class="mx-auto h-auto w-[260px] shrink-0 object-cover xl:mx-0 xl:w-[17.7%]"
+          />
+
+          <div class="flex w-full flex-col gap-2.5 xl:w-[24.5%] xl:shrink-0">
+            <p class="flex items-center gap-[14px] py-5 text-lg font-semibold text-encre">
+              <Icone nom="etoile" taille={38} class="shrink-0" />
+              ABOUT
+            </p>
+            <h2 class="font-display text-3xl font-bold leading-[normal] text-encre sm:text-[40px] xl:text-[clamp(28px,2.1vw,40px)]">
+              From costume maker<br />to Product Designer
+            </h2>
+          </div>
+
+          <div class="relative flex w-full flex-col gap-6 border-trait-2 pr-5 xl:w-[27.7%] xl:shrink-0 xl:gap-[78px] xl:border-r xl:pt-[104px]">
+            <p class="text-lg font-semibold leading-[normal] text-encre">
+              My first stage, my first passion, is theater. Trained as a costume
+              maker, I learned to listen to intentions, understand characters and
+              tell stories through every detail. Today I design interfaces that
+              stage useful, accessible and memorable experiences.
+            </p>
+            <p class="note -rotate-3 text-3xl font-normal sm:text-[36px]">
+              Same standards, different stage!
+            </p>
+          </div>
+
+          <ul class="flex flex-1 flex-col justify-center gap-6 px-0 xl:gap-[34px] xl:self-stretch xl:px-5">
+            {
+              apropos.map((a) => (
+                <li class="flex items-start gap-2">
+                  <img src={a.icone} alt="" aria-hidden="true" class="size-8 shrink-0" />
+                  <p class="flex-1 text-lg font-semibold leading-[normal] text-voile-fort">{a.texte}</p>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <Footer lang="en" />
+  </body>
+</html>

@@ -2,7 +2,34 @@
 // Footer repris de la maquette Figma « CV-Portfolio » (node 64:3792) :
 // bande rose pâle pleine largeur, titre Poppins Bold souligné du trait
 // manuscrit, contacts, liens légaux, note Caveat, barre copyright.
+// Bilingue : prop `lang` ("fr" par défaut, "en" pour les pages /en/).
+const { lang = "fr" } = Astro.props;
+const en = lang === "en";
 const year = new Date().getFullYear();
+
+const t = en
+  ? {
+      accroche1: "L",
+      accroche2: "et's keep in touch!",
+      titre: "Let's talk about your next project!",
+      nouvelOnglet: " (new tab)",
+      mentions: "Legal notice",
+      confidentialite: "Privacy policy",
+      hrefMentions: "/en/mentions-legales",
+      note1: "Design with purpose,",
+      note2: "deliver with impact.",
+    }
+  : {
+      accroche1: "R",
+      accroche2: "estons en contact !",
+      titre: "Parlons de votre prochain projet !",
+      nouvelOnglet: " (nouvel onglet)",
+      mentions: "Mentions légales",
+      confidentialite: "Politique de confidentialité",
+      hrefMentions: "/mentions-legales",
+      note1: "Concevoir avec sens,",
+      note2: "livrer avec impact.",
+    };
 ---
 
 <footer class="border-t border-[#fbf9f7] bg-[rgba(188,134,128,0.1)]">
@@ -13,10 +40,10 @@ const year = new Date().getFullYear();
       <div class="flex flex-col gap-8 self-stretch xl:justify-between">
         <div class="flex flex-col gap-2.5">
           <p class="text-lg font-semibold">
-            <span class="text-accent">R</span><span class="text-encre">estons en contact !</span>
+            <span class="text-accent">{t.accroche1}</span><span class="text-encre">{t.accroche2}</span>
           </p>
           <p class="relative font-display text-3xl font-bold text-encre sm:text-[40px]">
-            Parlons de votre prochain projet&nbsp;!
+            {t.titre}
             <img
               src="/images/trait-souligne.png"
               alt=""
@@ -43,28 +70,28 @@ const year = new Date().getFullYear();
               class="flex items-center gap-2 text-sm text-voile-fort transition-colors hover:font-semibold hover:text-encre"
             >
               <img src="/images/figma-icon-linkedin.svg" alt="" aria-hidden="true" class="size-6" />
-              linkedin.com/in/audrey-garoscio<span class="sr-only"> (nouvel onglet)</span>
+              linkedin.com/in/audrey-garoscio<span class="sr-only">{t.nouvelOnglet}</span>
             </a>
           </li>
         </ul>
       </div>
 
       <p class="note -rotate-3 text-3xl font-normal sm:text-[36px] xl:absolute xl:right-[10%] xl:top-4">
-        Concevoir avec sens,<br />livrer avec impact.
+        {t.note1}<br />{t.note2}
       </p>
 
       <div class="flex flex-wrap items-center gap-[14px]">
         <a
-          href="/mentions-legales"
+          href={t.hrefMentions}
           class="rounded-[30px] px-5 py-2 text-base text-encre transition-colors hover:font-semibold"
         >
-          Mentions légales
+          {t.mentions}
         </a>
         <a
-          href="/mentions-legales"
+          href={t.hrefMentions}
           class="rounded-[30px] px-5 py-2 text-base text-encre transition-colors hover:font-semibold"
         >
-          Politique de confidentialité
+          {t.confidentialite}
         </a>
       </div>
     </div>

@@ -1,0 +1,331 @@
+---
+// English mirror of the contact page (contact.astro) — same layout, same
+// Formspree endpoint, translated copy and form labels.
+import Base from "../../layouts/Base.astro";
+import Bouton from "../../components/Bouton.astro";
+import Icone from "../../components/Icone.astro";
+
+// Formspree endpoint (messages arrive at product.garoscio@gmail.com).
+const formspreeEndpoint = "https://formspree.io/f/mojzoeqz";
+
+// Cf. contact.astro pour les choix de style (champ, étiquettes accent-bord).
+const champ =
+  "w-full rounded-[10px] border border-trait bg-white px-5 py-3 text-base text-encre shadow-[3px_2px_7px_0_rgba(0,0,0,0.36)] transition-colors placeholder:text-voile hover:border-voile-fort focus:border-encre";
+
+const etiquette = "text-lg font-semibold text-accent-bord";
+
+const infos = [
+  {
+    label: "Email",
+    valeur: "product.garoscio@gmail.com",
+    href: "mailto:product.garoscio@gmail.com?subject=Contact%20from%20your%20portfolio",
+    icone: "/images/figma-icon-email-35.svg",
+    bordure: true,
+  },
+  {
+    // ⚠ Numéro factice repris de la maquette — cf. contact.astro.
+    label: "Phone",
+    valeur: "+33 6 12 34 56 78",
+    href: "tel:+33612345678",
+    icone: "/images/figma-icon-telephone.svg",
+    bordure: true,
+  },
+  {
+    label: "Address",
+    valeur: "Noisy-le-Grand, Île-de-France (Greater Paris)",
+    icone: "/images/figma-icon-adresse.svg",
+    bordure: false,
+  },
+];
+---
+
+<Base title="Contact — Audrey Garoscio" description="Available from October 2026. If my profile resonates with your project, drop me a line." current="contact" lang="en">
+  <section class="mx-auto max-w-[1920px] px-6 pb-16 pt-8 sm:px-10 xl:px-20">
+    <div class="grid gap-8 xl:grid-cols-[1fr_clamp(380px,29.5vw,565px)] xl:items-start">
+      <div>
+        <p class="flex items-center gap-3.5 py-5 font-display text-xl font-semibold uppercase">
+          <Icone nom="etoile" taille={38} class="shrink-0" /> The box office
+        </p>
+        <h1 class="mt-2 font-display text-4xl font-bold leading-[normal] sm:text-5xl lg:text-[clamp(40px,3.34vw,64px)]">
+          Available from <span class="text-accent">October 2026</span>
+        </h1>
+        <p class="mt-5 max-w-2xl text-lg font-semibold">
+          If my profile resonates with your project, drop me a line.
+        </p>
+      </div>
+
+      <div class="hidden xl:block xl:pt-8">
+        <p class="-rotate-3 font-note text-[clamp(26px,1.88vw,36px)] leading-[normal] text-accent">
+          An idea in the wings, a project to stage? Let's talk.
+        </p>
+        <img
+          src="/images/figma-contact-doodle.png"
+          alt=""
+          aria-hidden="true"
+          width="464"
+          height="194"
+          class="ml-auto mr-2 mt-5 h-[clamp(20px,1.56vw,30px)] w-[clamp(120px,8.9vw,170px)] -rotate-[10deg]"
+        />
+      </div>
+    </div>
+
+    <!-- The two panels -->
+    <div class="mt-8 grid gap-8 lg:grid-cols-2">
+      <!-- Contact info -->
+      <div class="flex flex-col gap-3.5 rounded-[20px] bg-accent/10 p-5">
+        <img
+          src="/images/figma-contact-bulles.jpg"
+          alt=""
+          width="1542"
+          height="1028"
+          loading="lazy"
+          class="h-[240px] w-full flex-1 rounded-[10px] object-cover"
+        />
+
+        <ul class="flex flex-col pt-6">
+          {
+            infos.map((info) => (
+              <li
+                class:list={[
+                  "flex items-center gap-3 py-2",
+                  info.bordure && "border-b border-voile",
+                ]}
+              >
+                <img src={info.icone} alt="" aria-hidden="true" class="w-[33px] shrink-0" />
+                <div class="flex flex-col gap-1 py-2">
+                  <p class="text-lg leading-snug">{info.label}</p>
+                  {info.href ? (
+                    <a
+                      href={info.href}
+                      class="font-semibold leading-snug underline-offset-4 decoration-accent decoration-2 hover:underline"
+                    >
+                      {info.valeur}
+                    </a>
+                  ) : (
+                    <p class="font-semibold leading-snug">{info.valeur}</p>
+                  )}
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Form -->
+      <div class="rounded-[20px] bg-accent/10 px-5 py-8">
+        <form
+          id="contact-form"
+          action={formspreeEndpoint}
+          method="POST"
+          enctype="multipart/form-data"
+          class="flex flex-col gap-8"
+        >
+          <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" />
+          <input type="hidden" name="_subject" value="New message from the portfolio (EN)" />
+
+          <div class="grid gap-6 sm:grid-cols-2">
+            <div class="flex flex-col gap-2">
+              <label for="nom" class={etiquette}>Last name</label>
+              <input
+                id="nom"
+                type="text"
+                name="nom"
+                required
+                autocomplete="family-name"
+                placeholder="Enter your last name"
+                class={champ}
+              />
+            </div>
+            <div class="flex flex-col gap-2">
+              <label for="prenom" class={etiquette}>First name</label>
+              <input
+                id="prenom"
+                type="text"
+                name="prenom"
+                required
+                autocomplete="given-name"
+                placeholder="Enter your first name"
+                class={champ}
+              />
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="email" class={etiquette}>Email</label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              required
+              autocomplete="email"
+              placeholder="your@email.com"
+              class={champ}
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="profil" class={etiquette}>You are…?</label>
+            <div class="relative">
+              <select id="profil" name="profil" required class:list={[champ, "appearance-none pr-12"]}>
+                <option value="">Select…</option>
+                <option value="Recruiter">Recruiter</option>
+                <option value="Design or product professional">
+                  Design or product professional
+                </option>
+                <option value="Student">Student</option>
+                <option value="Other">Other</option>
+              </select>
+              <svg
+                class="pointer-events-none absolute inset-y-0 right-4 my-auto size-5 text-voile-fort"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="message" class="sr-only">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              maxlength="1000"
+              placeholder="How can I help?"
+              aria-describedby="compteur-caracteres"
+              class:list={[champ, "h-[223px] resize-y"]}></textarea>
+
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <label
+                class="flex cursor-pointer items-center gap-3 text-sm text-voile-fort transition-colors hover:font-semibold hover:text-encre has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-encre"
+              >
+                <input
+                  id="piece-jointe"
+                  type="file"
+                  name="piece-jointe"
+                  accept=".jpg,.jpeg,.png,.pdf"
+                  class="sr-only"
+                />
+                <img
+                  src="/images/figma-icon-trombone.svg"
+                  alt=""
+                  aria-hidden="true"
+                  class="h-[22px] w-auto shrink-0"
+                />
+                Attach a file (JPG, PNG, PDF, 5&nbsp;MB max)
+              </label>
+              <p id="compteur-caracteres" class="text-sm text-voile">0/1000 characters</p>
+            </div>
+            <p id="fichier-info" class="text-sm text-encre" role="status"></p>
+          </div>
+
+          <Bouton type="submit" fleche="aucune" class="w-full justify-center !rounded-[15px]">
+            Send message
+          </Bouton>
+
+          <p id="form-success" class="hidden text-sm text-encre" role="status">
+            Thank you, your message is on its way. I'll get back to you very soon.
+          </p>
+          <p id="form-error" class="hidden text-sm font-semibold text-accent-bord" role="alert">
+            Oops, something went wrong. Please try again, or email me directly at
+            product.garoscio@gmail.com.
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <div class="mt-10 xl:hidden">
+      <p class="max-w-md -rotate-2 font-note text-[28px] leading-[normal] text-accent">
+        An idea in the wings, a project to stage? Let's talk.
+      </p>
+      <img
+        src="/images/figma-contact-doodle.png"
+        alt=""
+        aria-hidden="true"
+        width="464"
+        height="194"
+        class="mt-4 h-[24px] w-[140px] -rotate-[10deg]"
+      />
+    </div>
+  </section>
+
+  <script>
+    const form = document.getElementById("contact-form") as HTMLFormElement | null;
+    const success = document.getElementById("form-success");
+    const error = document.getElementById("form-error");
+
+    // Character counter.
+    const message = document.getElementById("message") as HTMLTextAreaElement | null;
+    const compteur = document.getElementById("compteur-caracteres");
+    if (message && compteur) {
+      const majCompteur = () => {
+        compteur.textContent = `${message.value.length}/1000 characters`;
+      };
+      message.addEventListener("input", majCompteur);
+      majCompteur();
+    }
+
+    // Attachment: size check (5 MB) and chosen-file reminder.
+    const fichier = document.getElementById("piece-jointe") as HTMLInputElement | null;
+    const fichierInfo = document.getElementById("fichier-info");
+    if (fichier && fichierInfo) {
+      fichier.addEventListener("change", () => {
+        const f = fichier.files?.[0];
+        if (!f) {
+          fichierInfo.textContent = "";
+          return;
+        }
+        if (f.size > 5 * 1024 * 1024) {
+          fichier.value = "";
+          fichierInfo.textContent =
+            "This file exceeds 5 MB — please pick a lighter one.";
+          return;
+        }
+        fichierInfo.textContent = `Attached file: ${f.name}`;
+      });
+    }
+
+    if (form && success && error) {
+      // Cf. contact.astro : pas de bouton désactivé pendant l'envoi (focus).
+      let envoiEnCours = false;
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (envoiEnCours) return;
+        envoiEnCours = true;
+
+        success.classList.add("hidden");
+        error.classList.add("hidden");
+        form.setAttribute("aria-busy", "true");
+
+        try {
+          const response = await fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: { Accept: "application/json" },
+          });
+
+          if (response.ok) {
+            form.reset();
+            if (fichierInfo) fichierInfo.textContent = "";
+            if (compteur) compteur.textContent = "0/1000 characters";
+            success.classList.remove("hidden");
+          } else {
+            error.classList.remove("hidden");
+          }
+        } catch {
+          error.classList.remove("hidden");
+        } finally {
+          form.removeAttribute("aria-busy");
+          envoiEnCours = false;
+        }
+      });
+    }
+  </script>
+</Base>

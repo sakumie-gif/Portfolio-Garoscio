@@ -1,0 +1,101 @@
+---
+// English mirror of works/sumo-tournament.astro.
+import CaseStudy from "../../../layouts/CaseStudy.astro";
+
+const sections = [
+  { id: "en-bref", label: "In short" },
+  { id: "le-sujet", label: "The subject" },
+  { id: "ce-que-jai-fait", label: "What I did" },
+  { id: "difficile", label: "What was hard" },
+  { id: "retiens", label: "What I take away" },
+];
+---
+
+<CaseStudy
+  title="Sumo Tournament"
+  kicker="Event, design and code"
+  didascalie="Event website for a fictional sumo tournament. Paris."
+  sections={sections}
+  lang="en"
+>
+  <h2 id="en-bref">In short</h2>
+  <p>
+    Designing and developing a complete website for an imaginary sumo
+    tournament in Paris. Not just a showcase: a real platform with ticketing
+    and a back office to manage tournament data, wrestlers, bouts and bookings.
+    The project where design truly meets code.
+  </p>
+  <p class="text-voile">
+    Training project. Design and production end to end. One week, in an
+    intense sprint.
+  </p>
+
+  <figure>
+    <img src="/images/sumo-home.png" alt="Sumo Tournament website home page" loading="lazy" />
+    <figcaption>The tournament home page. A contemporary interface for a highly codified universe.</figcaption>
+  </figure>
+
+  <h2 id="le-sujet">The subject</h2>
+  <p>
+    Sumo is a world of rare visual richness. Centuries of codes, rituals and
+    symbols. The challenge was to translate this strong, highly codified
+    culture into a contemporary web interface, without betraying it and
+    without falling into cliché. Finding the point where respect for the
+    universe meets the clarity of a modern interface.
+  </p>
+
+  <h2 id="ce-que-jai-fait">What I did</h2>
+
+  <h3>The design</h3>
+  <p>
+    Sitemap, wireframes for the main pages, component design. This is the core
+    of my work and where I was fully in charge.
+  </p>
+
+  <h3>The production</h3>
+  <p>
+    To bring the project to life, I handled the front-end integration (HTML,
+    CSS) and the dynamic side (PHP, MySQL database), using AI as a code
+    copilot. My role wasn't to write every line as an expert, but to steer the
+    build: understanding the architecture, asking the right questions,
+    integrating, testing, debugging until the site actually worked.
+  </p>
+
+  <div class="my-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <img src="/images/sumo-header.png" alt="Sumo Tournament site header" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/sumo-event.png" alt="Tournament event page" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/sumo-history.png" alt="History of sumo page" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/sumo-contact.png" alt="Site contact page" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/sumo-test-card.png" alt="Event card (test card)" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+  </div>
+
+  <h2 id="difficile">What was hard</h2>
+  <p>
+    Making the site actually work. Understanding why a page didn't render as
+    expected, why a piece of data didn't come through, and fixing things until
+    everything responded. It's a different kind of rigor from design, more
+    binary. Either it works or it doesn't, and you have to understand why.
+  </p>
+
+  <h2 id="retiens">What I take away</h2>
+  <p>
+    The moment the site came to life, when the pages became dynamic and my
+    mockups went from image to a working tool that responds.
+  </p>
+  <p>
+    Above all, this project taught me to produce with AI without letting it
+    take over. Knowing what I want, phrasing it clearly, checking what comes
+    back, correcting. It's a project-lead skill as much as a designer's:
+    getting the right result by orchestrating the right tools, without needing
+    to master everything yourself.
+  </p>
+
+  <p class="citation">
+    Designing means knowing what you want to achieve. Even when other tools do
+    the executing.
+  </p>
+
+  <div class="meta">
+    <p><strong>Tools</strong>: Figma, VS Code, HTML, CSS, PHP, MySQL.</p>
+  </div>
+</CaseStudy>

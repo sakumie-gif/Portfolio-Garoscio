@@ -1,0 +1,297 @@
+---
+// English mirror of the "Parcours" page (parcours.astro) — same layout,
+// translated copy. School names and diplomas keep their French names, with a
+// short English gloss where useful.
+import Base from "../../layouts/Base.astro";
+import Bouton from "../../components/Bouton.astro";
+import Icone from "../../components/Icone.astro";
+
+const experiences = [
+  {
+    dates: "February 2025 to September 2026 (ongoing, apprenticeship)",
+    poste: "UX/UI Product Designer",
+    employeur: "EasyVista",
+    missions: [
+      "Analyzing and formalizing user needs to identify friction points in agent, administrator and end-user journeys.",
+      "Creating wireframes, high-fidelity mockups and interactive prototypes in Figma for B2B SaaS interfaces.",
+      "Contributing to the design system: Figma components, styles, usage guidelines, visual consistency, accessibility.",
+      "Preparing handoff to developers: clean mockups, detailed behaviors, functional specifications, implementation follow-up.",
+      "Taking part in user testing, UX/UI acceptance reviews and responsive rendering checks.",
+      "Collaborating with Product Owners, developers and business teams.",
+      "Contributed improvements to 24 design system components.",
+      "Followed 6 features through to development.",
+    ],
+  },
+  {
+    dates: "2024",
+    poste: "Administrative officer",
+    employeur: "URSSAF (French social contributions agency)",
+    missions: [
+      "Supporting employers with the TESE scheme by phone and email, with active listening, rephrasing and plain-language explanations.",
+      "Ensuring the reliability of employer data: entering, checking and updating declarations.",
+      "Checking document compliance and detecting anomalies.",
+      "Tracking actions and administrative follow-up, filing and updating records.",
+    ],
+  },
+  {
+    dates: "2019",
+    poste: "Sales consultant",
+    employeur: "Pronuptia",
+    missions: [
+      "Personalized advice and support for brides choosing their wedding dress.",
+      "Presenting, showcasing and organizing the displays.",
+      "Taking measurements and following up alterations with the workshop.",
+    ],
+  },
+  {
+    dates: "2017 to 2018",
+    poste: "Costumer and dresser",
+    employeur: "Disneyland Paris",
+    missions: [
+      "Dresser on the Marvel shows.",
+      "Managing costume stocks and organizing the dressing rooms.",
+      "Creating, fitting and maintaining hats and accessories for the shows.",
+    ],
+  },
+  {
+    dates: "July and September 2017",
+    poste: "Costume and hat maker",
+    employeur: "FBG 22-11, Paris",
+    missions: [
+      "Costume and hat maker for Disneyland Paris.",
+    ],
+  },
+  {
+    dates: "May to June 2017",
+    poste: "Costume maker",
+    employeur: "IDZ Production, Paris",
+    missions: [
+      {
+        texte: "Made Norman's costume for the music video “Zelda”.",
+        lien: "https://www.youtube.com/watch?v=ci8HQFF6d5A",
+        libelle: "Watch the video on YouTube",
+      },
+      {
+        texte:
+          "Made the alien costumes for a promotional video for the film “Valérian” by Jimmy.",
+        lien: "https://www.youtube.com/watch?v=0gMW3ijIczI",
+        libelle: "Watch the video on YouTube",
+      },
+    ],
+  },
+];
+
+const formations = [
+  {
+    dates: "2025 to 2026",
+    intitule: "MBA1 & B3 Digital Project Management, Design and Digital Marketing",
+    lieu: "Institut IEF2I, Digital School Paris, Vincennes",
+  },
+  {
+    dates: "2016",
+    intitule: "CAP in millinery (hat making)",
+    lieu: "Lycée La Source, Nogent-sur-Marne",
+  },
+  {
+    dates: "2015",
+    intitule: "DMA in costume design and making",
+    lieu: "Lycée des Coteaux, Cannes",
+  },
+  {
+    dates: "2013",
+    intitule: "DTMS in stage dressing",
+    lieu: "Lycée La Source, Nogent-sur-Marne",
+  },
+  {
+    dates: "2010",
+    intitule: "Baccalauréat STG, accounting and corporate finance",
+    lieu: "Lycée Cabrini, Noisy-le-Grand",
+  },
+];
+
+const competences = [
+  "User research",
+  "Customer journeys",
+  "Wireframes",
+  "Figma prototyping",
+  "UI mockups",
+  "UI design",
+  "Design systems",
+  "Responsive design",
+  "Mobile first",
+  "Accessibility",
+  "User testing",
+  "UX/UI acceptance testing",
+  "UX/UI specifications",
+  "Competitive benchmarking",
+  "Web interfaces",
+];
+
+const outils = [
+  {
+    titre: "Design and illustration",
+    lignes: [
+      "Figma, Illustrator, Photoshop, InDesign, Clip Studio Paint, Krita, Inkscape, Vegas Pro",
+    ],
+  },
+  {
+    titre: "Collaboration and environment",
+    lignes: ["VS Code, Notion, Loop, Teams, Discord, Office suite, generative AI"],
+  },
+  {
+    titre: "Languages",
+    lignes: ["French, native", "English, written comprehension"],
+  },
+];
+---
+
+<Base title="Journey — Audrey Garoscio" description="UX/UI Product Designer, apprentice at EasyVista, MBA1 at Digital School Paris." current="parcours" lang="en">
+  <section class="mx-auto max-w-[1920px] px-6 pt-8 sm:px-10 xl:px-20">
+    <div class="grid gap-8 xl:grid-cols-[1fr_clamp(400px,36.6vw,703px)] xl:items-start">
+      <div>
+        <p class="flex items-center gap-3.5 py-3.5 font-display text-xl font-semibold">
+          <Icone nom="etoile" taille={38} class="shrink-0" /> The program
+        </p>
+        <h1 class="mt-2 font-display text-4xl font-bold leading-[normal] sm:text-5xl lg:text-[clamp(40px,3.34vw,64px)]">
+          <span class="relative inline-block">
+            Journey<span class="text-accent">.</span>
+            <img
+              src="/images/trait-souligne.png"
+              alt=""
+              aria-hidden="true"
+              class="pointer-events-none absolute left-0 top-full w-full"
+            />
+          </span>
+        </h1>
+        <p class="mt-8 max-w-2xl text-lg font-semibold">
+          UX/UI Product Designer, apprentice at EasyVista, MBA1 at Digital
+          School Paris.
+        </p>
+
+        <div class="mt-6">
+          <!-- Le CV lié est en français : signalé dans le libellé. -->
+          <Bouton
+            fleche="aucune"
+            href="/cv/audrey-garoscio-cv.pdf"
+            download
+            class="!rounded-[15px] drop-shadow-[0px_10px_7.5px_rgba(0,0,0,0.1),0px_4px_3px_rgba(0,0,0,0.1)]"
+          >
+            Download my resume (PDF, in French)
+          </Bouton>
+        </div>
+      </div>
+
+      <p class="hidden -rotate-[7deg] font-note text-[clamp(26px,1.88vw,36px)] leading-[normal] text-accent xl:block xl:pt-20">
+        From one world to another, a journey guided by detail.
+      </p>
+    </div>
+
+    <p class="mt-10 max-w-md -rotate-[7deg] font-note text-[28px] leading-[normal] text-accent xl:hidden">
+      From one world to another, a journey guided by detail.
+    </p>
+
+    <div class="mt-10 border-t border-trait-2" aria-hidden="true"></div>
+
+    <h2 class="mt-8 flex items-center gap-3.5 py-3.5 font-display text-xl font-semibold">
+      <Icone nom="etoile" taille={38} class="shrink-0" /> EXPERIENCE
+    </h2>
+  </section>
+
+  <div class="mx-auto max-w-[1920px] px-6 pb-20 sm:px-10 xl:px-20">
+    <div class="relative xl:ml-[50px]">
+    <section>
+      <ol class="mt-2">
+        {
+          experiences.map((x, i) => (
+            <li class="relative flex gap-5">
+              <span class="absolute left-[5.5px] top-2 h-full w-px bg-voile/30"></span>
+              <span class="relative z-10 mt-2 h-3 w-3 shrink-0 self-start rounded-full bg-accent" aria-hidden="true"></span>
+              <div class={`flex-1 ${i < experiences.length - 1 ? "pb-10" : ""}`}>
+                <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                  <h3 class="text-xl font-bold leading-snug">{x.poste}</h3>
+                  <p class="text-sm text-voile">{x.dates}</p>
+                </div>
+                <p class="mt-1 text-base text-voile">{x.employeur}</p>
+                <ul class="mt-4 space-y-2 text-base leading-relaxed">
+                  {x.missions.map((m) =>
+                    typeof m === "string" ? (
+                      <li>{m}</li>
+                    ) : (
+                      <li>
+                        {m.texte}{" "}
+                        <a
+                          href={m.lien}
+                          target="_blank"
+                          rel="noopener"
+                          class="whitespace-nowrap font-semibold underline decoration-accent decoration-2 underline-offset-4 hover:decoration-[3px]"
+                        >
+                          {m.libelle}
+                        </a>
+                      </li>
+                    ),
+                  )}
+                </ul>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <!-- Education -->
+    <section class="mt-16 border-t border-encre/10 pt-12">
+      <h2 class="text-3xl font-extrabold">Education</h2>
+      <div class="mt-10 divide-y divide-encre/10">
+        {
+          formations.map((f) => (
+            <div class="grid gap-1 py-5 first:pt-0 sm:grid-cols-[150px_1fr] sm:gap-10">
+              <p class="text-sm text-voile sm:pt-0.5">{f.dates}</p>
+              <div>
+                <h3 class="text-lg font-bold leading-snug">{f.intitule}</h3>
+                <p class="mt-0.5 text-base text-voile">{f.lieu}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- UX/UI skills -->
+    <section class="mt-16 border-t border-encre/10 pt-12">
+      <h2 class="text-3xl font-extrabold">UX/UI skills</h2>
+      <div class="mt-8 flex flex-wrap gap-2">
+        {
+          competences.map((c) => (
+            <span class="rounded-full bg-accent/10 px-3.5 py-1 text-sm text-encre">
+              {c}
+            </span>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Tools and languages -->
+    <section class="mt-16 border-t border-encre/10 pt-12">
+      <h2 class="text-3xl font-extrabold">Tools and languages</h2>
+      <div class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-3">
+        {
+          outils.map((o) => (
+            <div>
+              <h3 class="text-lg font-bold">{o.titre}</h3>
+              <div class="mt-3 space-y-1 text-base leading-relaxed text-voile">
+                {o.lignes.map((l) => (
+                  <p>{l}</p>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <p class="note mt-10 -rotate-1">
+        What people often come to me for: attention to detail, collaboration,
+        a knack for explaining things.
+      </p>
+    </section>
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,71 @@
+---
+// English mirror of works/golyeo-korea.astro.
+import CaseStudy from "../../../layouts/CaseStudy.astro";
+
+// Each exploration keeps its own alt (WCAG 1.1.1). The common motif is a
+// nine-tailed fox holding a bowl of noodles, burgundy on ivory.
+const logos = [
+  {
+    src: "/images/golyeo-logo-1.jpg",
+    alt: "Direction 1: the fox inside a thin circular outline, GOLYEO arched above, KOREA arched below, a solid diamond on each side.",
+  },
+  {
+    src: "/images/golyeo-logo-3.jpg",
+    alt: "Direction 2: the same composition without the circle, the two text arcs standing alone, diamonds pushed to the edges.",
+  },
+  {
+    src: "/images/golyeo-logo-4.jpg",
+    alt: "Direction 3: a medallion version with a double outline, the text running along the ring and the fox enclosed in the inner circle.",
+  },
+  {
+    src: "/images/golyeo-logo-5.jpg",
+    alt: "Direction 4: a circle-free variant, tails spread wider and the noodle bowl brought lower.",
+  },
+  {
+    src: "/images/golyeo-logo-2.jpg",
+    alt: "Direction 5, pastel route: the whole logo in apricot orange, a thick circular outline, a more detailed fox drawing, diamonds brought inside the circle.",
+  },
+];
+---
+
+<CaseStudy
+  title="Golyeo Korea"
+  kicker="Sketch — visual identity"
+  didascalie="Identity exploration for a traditional Korean restaurant."
+  lang="en"
+>
+  <h2>The exploration</h2>
+  <p>
+    Visual identity research for Golyeo Korea, a traditional Korean
+    restaurant. The goal: finding a universe that tells both the authenticity
+    of the cuisine and a certain softness, without falling into cliché.
+  </p>
+  <p>
+    Two directions explored: one cute and pastel, inspired by Korean kawaii
+    design; the other more traditional and understated. The work covered the
+    logo, the palette and the business card.
+  </p>
+
+  <figure>
+    <img src="/images/golyeo-photo.jpg" alt="Golyeo Korea identity in context" loading="lazy" />
+    <figcaption>The Golyeo Korea universe in context.</figcaption>
+  </figure>
+
+  <h2>Logo directions</h2>
+  <div class="my-10 grid grid-cols-2 gap-4 sm:grid-cols-3">
+    {logos.map((logo) => (
+      <img src={logo.src} alt={logo.alt} loading="lazy" class="w-full rounded-[2px]" />
+    ))}
+  </div>
+
+  <h2>The business card</h2>
+  <figure>
+    <img
+      src="/images/golyeo-carte.png"
+      alt="Golyeo Korea business card"
+      loading="lazy"
+      class="mx-auto max-w-[260px]"
+    />
+    <figcaption>Business card, traditional direction.</figcaption>
+  </figure>
+</CaseStudy>

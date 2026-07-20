@@ -1,0 +1,164 @@
+---
+// English mirror of works/pool-party.astro.
+import CaseStudy from "../../../layouts/CaseStudy.astro";
+
+const sections = [
+  { id: "en-bref", label: "In short" },
+  { id: "contexte", label: "Context" },
+  { id: "mon-role", label: "My role" },
+  { id: "ce-que-jai-fait", label: "What I did" },
+  { id: "difficile", label: "What was hard" },
+  { id: "retiens", label: "What I take away" },
+];
+---
+
+<CaseStudy
+  title="Pool Party"
+  kicker="P2P marketplace"
+  didascalie="Peer-to-peer marketplace for renting private pools. Île-de-France."
+  sections={sections}
+  lang="en"
+>
+  <h2 id="en-bref">In short</h2>
+  <p>
+    A final-year brief, a fictional client treated like a real one. Designing a
+    peer-to-peer marketplace for renting private aquatic spaces (pools,
+    jacuzzis, spas, hammams) between individuals. From strategic framing to the
+    deliverable mockups, through art direction and communication strategy.
+  </p>
+  <p class="text-voile">
+    Solo project. Institut IEF2I, MBA in Digital Project Management. Six
+    months.
+  </p>
+
+  <figure>
+    <img src="/images/poolparty-page-daccueil-maquette-page-daccueil-ordinateur.jpg" alt="Pool Party home page mockup (desktop)" loading="lazy" />
+    <figcaption>Preview of the marketplace. High-fidelity Figma mockup.</figcaption>
+  </figure>
+
+  <h2 id="contexte">Context</h2>
+  <p>
+    The use of private pools exploded after 2020. On the owners' side,
+    maintaining a pool is expensive for a few weeks of actual use. On the
+    demand side, families look for private aquatic spaces, by the day, without
+    committing to a membership. The meeting point between the two remained
+    poorly structured, scattered across a few platforms still largely unknown
+    to the general public. That's where Pool Party started.
+  </p>
+  <p>
+    The brief called for a complete deliverable, from the requirements document
+    to the website mockups, handled like a client project.
+  </p>
+
+  <h2 id="mon-role">My role</h2>
+  <p>
+    Project lead across the whole scope. Framing, user research, information
+    architecture, art direction, screen design, budget planning. I carried
+    every phase end to end.
+  </p>
+
+  <h2 id="ce-que-jai-fait">What I did</h2>
+
+  <h3>Strategic framing</h3>
+  <p>
+    Competitive review of P2P marketplaces, SEO and accessibility audit of
+    competitors, three personas, MoSCoW matrix to prioritize features. This
+    work laid the foundations for everything else.
+  </p>
+
+  <h3>Architecture and user journeys</h3>
+  <p>
+    Card sorting on Optimal Workshop to validate the sitemap with real users.
+    Journey maps for both sides of the marketplace: the owner listing their
+    pool, the visitor booking it. Information hierarchy designed mobile-first.
+  </p>
+
+  <div class="my-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <img src="/images/poolparty-wireframe-page-daccueil-ordinateur.png" alt="Home page wireframe (desktop)" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-page-contact-wireframe-tablette.png" alt="Contact page wireframe (tablet)" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+  </div>
+
+  <h3>Art direction</h3>
+  <p>
+    A visual universe inspired by Art Nouveau and organic design, in response
+    to the subject: water, soft shapes, curves. A distinctive palette, a type
+    pairing of Cormorant Garamond for headings with Inter and Poppins for body
+    text. Custom iconography.
+  </p>
+
+  <div class="my-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <img src="/images/poolparty-moodboard.png" alt="Pool Party moodboard" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-chartre-graphique.png" alt="Pool Party brand guidelines" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-concept-4-1.png" alt="Visual concept exploration" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-enseigne.png" alt="Storefront sign application" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-sac-logo.png" alt="Tote bag application" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-serviette.png" alt="Towel application" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-carte-de-visite.png" alt="Pool Party business card" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+  </div>
+
+  <h3>The mockups</h3>
+  <p>
+    A complete design system in Figma, high-fidelity screens for the eight main
+    pages of the site, responsive desktop and mobile variants.
+  </p>
+
+  <div class="my-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <img src="/images/poolparty-page-daccueil-maquette-tablette.png" alt="Home page — tablet" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-page-daccueil-maquette-mobile.png" alt="Home page — mobile" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-page-ctegorie-maquette-page-produit.png" alt="Category page — desktop" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-page-ctegorie-maquette-mobile.png" alt="Category page — mobile" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-page-produit-maquette-page-produit.png" alt="Product page — desktop" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-maquette-page-produit-map.png" alt="Product page with map" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-page-produit-mobile.png" alt="Product page — mobile" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-page-contact-maquette-mobile.png" alt="Contact page — mobile" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-login.png" alt="Login screen" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+    <img src="/images/poolparty-calendar.png" alt="Booking calendar picker" loading="lazy" class="w-full rounded-[2px] border border-voile/15" />
+  </div>
+
+  <h3>Communication strategy</h3>
+  <p>
+    A twelve-month action plan covering SEO, SEA, SMO, emailing and CRM, with
+    matching KPIs. Three budget scenarios to adapt the strategy to the client's
+    actual budget.
+  </p>
+
+  <h2 id="difficile">What was hard</h2>
+  <p>
+    Staying the course over time. A six-month solo project is an endurance
+    exercise as much as a design one. There are moments of doubt, moments when
+    you want to rewrite everything, moments when you have to accept that a
+    decision made a month ago no longer holds and iterate.
+  </p>
+  <p>
+    The other difficulty was juggling very different registers. Going from a
+    budget to a color palette, from a steering matrix to a high-fidelity
+    mockup, from an SEO study to a vector icon. These are different modes of
+    thinking, and you have to learn to switch between them without losing the
+    thread.
+  </p>
+
+  <h2 id="retiens">What I take away</h2>
+  <p>
+    Learning to carry a project alone from A to Z, knowing when to rely on my
+    own resources and when to look for help outside. Knowing how to move from
+    strategic thinking to a design decision without losing the coherence of
+    the whole. And accepting that a long project demands as much flexibility
+    as method.
+  </p>
+
+  <p class="citation">
+    Rigor is what keeps a project standing. Flexibility is what makes it good.
+  </p>
+
+  <div class="meta">
+    <p>
+      <strong>Tools</strong>: Figma (Dev Mode), VS Code, Optimal Workshop,
+      GanttProject, Notion, Google Analytics 4.
+    </p>
+    <p>
+      <strong>Methods</strong>: card sorting, personas, competitive
+      benchmarking, SEO and accessibility audits, prioritization matrices, risk
+      analysis, planning, budget scenarios.
+    </p>
+  </div>
+</CaseStudy>

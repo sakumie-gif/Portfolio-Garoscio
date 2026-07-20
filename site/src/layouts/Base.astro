@@ -7,7 +7,8 @@ const {
   title = "Audrey Garoscio — Product Designer",
   description = "Product Designer, à la croisée du produit et de la scène.",
   current = "",
-  // Langue du document (WCAG 3.1.1). Surchargeable pour une page traduite.
+  // Langue du document (WCAG 3.1.1). "en" pour les pages miroirs sous /en/ :
+  // propagée à la nav (libellés + sélecteur FR/EN) et au footer.
   lang = "fr",
 } = Astro.props;
 ---
@@ -31,11 +32,11 @@ const {
     <slot name="head" />
   </head>
   <body>
-    <a class="skip-link" href="#contenu">Aller au contenu</a>
-    <Nav current={current} />
+    <a class="skip-link" href="#contenu">{lang === "en" ? "Skip to content" : "Aller au contenu"}</a>
+    <Nav current={current} lang={lang} />
     <main id="contenu" tabindex="-1">
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
   </body>
 </html>

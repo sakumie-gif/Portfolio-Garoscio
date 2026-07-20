@@ -1,0 +1,149 @@
+---
+// English mirror of the "Now Showing" page (works.astro) — same layout as the
+// Figma design (node 15119:930), translated copy.
+import "../../styles/global.css";
+import Icone from "../../components/Icone.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import TuileProjet from "../../components/TuileProjet.astro";
+
+const projets = [
+  {
+    href: "/en/works/pool-party",
+    numero: "01",
+    titre: "Pool Party",
+    accroche: "Peer-to-peer pool rental marketplace",
+    description: "From strategic framing to the final mockups. Six months, solo.",
+    image: "/images/poolparty-affiche-hero.jpg",
+  },
+  {
+    href: "/en/works/sumo-tournament",
+    numero: "02",
+    titre: "Sumo Tournament",
+    accroche: "Event website and back office",
+    description: "The project where design truly meets code. Design and production.",
+    image: "/images/sumo-home.png",
+  },
+  {
+    href: "/en/works/pool-and-splash",
+    numero: "03",
+    titre: "Pool & Splash",
+    accroche: "UI redesign, kidulting direction",
+    description: "Daring to be playful where the whole industry plays it straight.",
+    image: "/images/homepage.png",
+  },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Now Showing — Audrey Garoscio</title>
+    <meta
+      name="description"
+      content="Three projects carried end to end. Each with its own subject, pace and constraints."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Caveat:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body style="background-color:#f7f4f2">
+    <a class="skip-link" href="#contenu">Skip to content</a>
+
+    <Nav current="works" lang="en" />
+
+    <main id="contenu" tabindex="-1" class="mx-auto max-w-[1920px] px-6 sm:px-10 xl:px-20">
+      <header class="pt-8 sm:pt-[50px]">
+        <h1 class="font-display text-4xl font-bold leading-[normal] text-encre sm:text-5xl xl:text-[64px]">
+          Now <span class="relative inline-block text-accent">
+            Showing
+            <!-- top-[72%] : le trait frôle le bas des lettres (cf. works FR). -->
+            <img
+              src="/images/trait-souligne.png"
+              alt=""
+              aria-hidden="true"
+              class="pointer-events-none absolute left-0 top-[72%] w-full"
+            />
+          </span>
+        </h1>
+        <p class="max-w-[717px] pt-5 text-base font-semibold leading-[normal] text-encre sm:text-lg">
+          Three projects carried end to end. Each with its own subject, its own
+          pace, its own constraints.
+        </p>
+      </header>
+
+      <!-- The productions -->
+      <section class="pt-8">
+        <h2 class="titre-section flex items-center gap-[14px] py-5 font-display text-lg text-encre sm:text-xl">
+          <Icone nom="etoile" taille={38} class="shrink-0" />
+          The productions
+        </h2>
+
+        <div class="flex flex-col gap-6 pt-4 lg:gap-14">
+          {
+            projets.map((p) => (
+              <TuileProjet
+                href={p.href}
+                numero={p.numero}
+                titre={p.titre}
+                accroche={p.accroche}
+                description={p.description}
+                image={p.image}
+              />
+            ))
+          }
+        </div>
+      </section>
+
+      <div class="mt-14 border-t border-trait-2" aria-hidden="true"></div>
+
+      <!-- Sketches -->
+      <section class="pb-20 pt-8">
+        <h2 class="titre-section flex items-center gap-[14px] py-5 font-display text-lg text-encre sm:text-xl">
+          <Icone nom="etoile" taille={38} class="shrink-0" />
+          Sketches
+        </h2>
+
+        <article class="group relative mt-2 flex w-full flex-col gap-6 p-5 transition-colors hover:bg-accent/10 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:py-[30px] lg:pr-[30px]">
+          <div class="flex flex-col justify-center gap-5 border-trait-2 lg:max-w-[580px] lg:self-stretch lg:border-l lg:px-5">
+            <h3 class="titre-esquisse w-fit -rotate-[0.9deg] text-3xl text-accent lg:text-4xl">
+              <a href="/en/works/golyeo-korea" class="after:absolute after:inset-0 after:content-['']">
+                Golyeo Korea
+              </a>
+            </h3>
+            <p class="text-lg font-semibold text-encre">
+              Identity exploration for a Korean restaurant. Two directions: a
+              cute pastel one inspired by Korean kawaii design, and a more
+              traditional, understated one. Logo, palette, business card.
+            </p>
+          </div>
+          <img
+            src="/images/golyeo-logo.png"
+            alt=""
+            loading="lazy"
+            class="aspect-[497/280] w-full rounded-[15px] object-contain lg:w-[42%] lg:max-w-[497px] lg:shrink-0"
+          />
+        </article>
+      </section>
+    </main>
+
+    <Footer lang="en" />
+  </body>
+</html>
+
+<style>
+  /* Cf. works.astro : styles exacts de la maquette, posés en scoped. */
+  .titre-section {
+    font-weight: 600;
+  }
+  .titre-esquisse {
+    font-family: var(--font-note);
+    font-weight: 400;
+  }
+</style>
