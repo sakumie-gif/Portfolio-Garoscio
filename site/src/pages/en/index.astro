@@ -148,10 +148,10 @@ const apropos = [
     <Nav current="" lang="en" />
 
     <main id="contenu" tabindex="-1">
-      <!-- xl:pr-20 : cf. index.astro FR — bord droit de la photo aligné sur
-           la marge droite du contenu à partir du 14 pouces. -->
-      <section class="mx-auto flex max-w-[1920px] flex-col gap-10 lg:flex-row lg:items-start lg:gap-6 xl:pr-20">
-        <div class="min-w-0 flex-1 px-6 pt-6 sm:px-10 xl:pl-20 xl:pr-0">
+      <!-- Cf. index.astro FR : portrait collé au bord droit à toutes les
+           tailles, texte aligné sur la grille du contenu. -->
+      <section class="flex w-full flex-col gap-10 lg:flex-row lg:items-start lg:gap-6">
+        <div class="min-w-0 flex-1 px-6 pt-6 sm:px-10 xl:pr-0 xl:pl-[max(80px,calc(50vw_-_880px))]">
           <p class="flex items-center gap-[14px] py-5 font-display text-lg font-semibold text-encre sm:text-xl">
             <Icone nom="etoile" taille={38} class="shrink-0" />
             A CONTEMPORARY THEATER OF PRODUCT DESIGN
