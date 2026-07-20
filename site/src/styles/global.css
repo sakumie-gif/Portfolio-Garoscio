@@ -24,6 +24,17 @@
    pas déjà — sinon on rouvre l'arc-en-ciel.
 --------------------------------------------------------------- */
 @theme {
+  /* --- Points de rupture ---
+     Le seuil « bureau deux colonnes » par défaut de Tailwind (xl = 1280px)
+     tombait EXACTEMENT sur la largeur CSS d'un 14 pouces (1920px physiques à
+     150% = 1280px). La barre de défilement verticale (~15px) ramenait la
+     largeur réelle à ~1265px, juste SOUS le seuil : toutes les pages à deux
+     colonnes rebasculaient alors en version empilée (citation en biais, photo
+     repoussée en bas, grands vides). On descend xl à 1200px pour que la mise
+     en page bureau reste active sur cet écran, barre de défilement comprise.
+     Ne pas remonter au-dessus de ~1240px sans re-tester le 14 pouces. */
+  --breakpoint-xl: 1200px;
+
   /* --- Fondations --- */
   --color-ivoire: #fcfbf9; /* Figma Color/White — blanc scène */
   --color-encre: #201b19; /* Figma Color/Middle black — texte principal, 15.9:1 sur ivoire */

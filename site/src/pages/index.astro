@@ -245,10 +245,10 @@ const apropos = [
              sur le fond de page — sans ombre, qui lui donnait un air de carte
              blanche flottante. -->
         <div
-          class="flex flex-col items-start gap-[14px] rounded-[20px] border border-accent p-5"
+          class="flex flex-col items-start gap-[14px] rounded-[20px] border border-accent px-5 py-[14px]"
         >
           <p
-            class="rounded-[10px] bg-[rgba(154,39,55,0.1)] px-[14px] py-2 text-sm font-bold text-accent shadow-[0px_4px_6px_0px_rgba(0,0,0,0.1),0px_2px_4px_0px_rgba(0,0,0,0.1)]"
+            class="rounded-[10px] bg-[rgba(154,39,55,0.1)] px-[14px] py-[6px] text-sm font-bold text-accent shadow-[0px_4px_6px_0px_rgba(0,0,0,0.1),0px_2px_4px_0px_rgba(0,0,0,0.1)]"
           >
             ACTUALITÉ
           </p>
@@ -324,7 +324,7 @@ const apropos = [
         <!-- Ma manière de travailler (node 59:1350) : rangée maquette avec
              connecteurs pointillés et tuiles fixes de 194px dès xl. -->
         <div class="flex flex-col gap-8 pt-16 xl:flex-row xl:items-start xl:gap-2.5">
-          <div class="flex w-full flex-col gap-[30px] xl:w-[422px] xl:shrink-0">
+          <div class="flex w-full flex-col gap-[30px] xl:w-[360px] xl:shrink-0">
             <p class="font-display text-lg font-semibold sm:text-xl">
               <span class="text-accent">M</span><span class="text-encre">A MANIÈRE DE TRAVAILLER</span>
             </p>
@@ -337,7 +337,7 @@ const apropos = [
             {
               etapes.map((e, i) => (
                 <>
-                  <li class="flex w-full flex-col items-start gap-2 rounded-[10px] xl:w-[194px] xl:shrink-0">
+                  <li class="flex w-full flex-col items-start gap-2 rounded-[10px] xl:min-w-[118px] xl:flex-1 xl:basis-0">
                     <div class="relative h-[92.5px] w-[117.5px] self-center">
                       <img src={e.blob} alt="" aria-hidden="true" class="absolute inset-0 h-full w-full" />
                       <img
@@ -354,7 +354,7 @@ const apropos = [
                     <p class="whitespace-pre-line text-base text-encre">{e.texte}</p>
                   </li>
                   {i < etapes.length - 1 && (
-                    <li class="hidden min-w-0 flex-1 pt-[58px] xl:block" aria-hidden="true">
+                    <li class="hidden shrink-0 pt-[58px] xl:block xl:w-[32px]" aria-hidden="true">
                       <img src="/images/figma-line-dashed.svg" alt="" class="h-[5px] w-full" />
                     </li>
                   )}
