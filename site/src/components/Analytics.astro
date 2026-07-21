@@ -75,23 +75,32 @@ const t =
         window.dataLayer.push(arguments);
       }
       window.gtag = gtag;
-      gtag("js", new Date());
 
       // Le QR code du CV pointe vers portfolio-garoscio.vercel.app (adresse
-      // conservée volontairement, sans redirection). On marque donc ces
-      // visites comme venant du « QR code » directement dans la config GA :
-      // elles remontent en qrcode / print dans les rapports d'acquisition,
-      // sans jamais quitter le domaine. Les visites via agaroscio.fr ne sont
-      // pas affectées.
-      var cfg = {};
-      if (location.hostname === "portfolio-garoscio.vercel.app") {
-        cfg = {
-          campaign_source: "qrcode",
-          campaign_medium: "print",
-          campaign_name: "portfolio",
-        };
+      // conservée volontairement, sans redirection). Pour attribuer ces
+      // visites au « QR code », on ajoute les paramètres UTM à l'adresse AVANT
+      // de lancer la mesure : GA4 lit automatiquement les utm_* de l'URL et
+      // range la session en qrcode / print. On reste sur le même domaine
+      // (l'adresse vercel.app fonctionne toujours). Les visites via
+      // agaroscio.fr ne sont pas touchées.
+      if (
+        location.hostname === "portfolio-garoscio.vercel.app" &&
+        location.search.indexOf("utm_source") === -1
+      ) {
+        var sep = location.search ? "&" : "?";
+        var nouvelleUrl =
+          location.pathname +
+          location.search +
+          sep +
+          "utm_source=qrcode&utm_medium=print&utm_campaign=portfolio" +
+          location.hash;
+        try {
+          history.replaceState(null, "", nouvelleUrl);
+        } catch (e) {}
       }
-      gtag("config", GA_ID, cfg);
+
+      gtag("js", new Date());
+      gtag("config", GA_ID);
     }
 
     var choix = null;
