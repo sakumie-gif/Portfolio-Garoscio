@@ -105,19 +105,22 @@ const t =
 </script>
 
 <style>
+  /* Barre pleine largeur, collée au bas de l'écran. Texte à gauche,
+     boutons à droite ; passe en colonne sur mobile (flex-wrap). */
   .consent {
     position: fixed;
-    bottom: 1rem;
-    left: 1rem;
-    right: 1rem;
+    bottom: 0;
+    left: 0;
+    right: 0;
     z-index: 150;
-    max-width: 30rem;
-    margin-inline: auto;
-    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 2rem;
+    padding: 1rem 1.5rem;
     background-color: var(--color-ivoire);
-    border: 1px solid var(--color-trait-2);
-    border-radius: 8px;
-    box-shadow: 0 10px 34px rgba(32, 27, 25, 0.14);
+    border-top: 1px solid var(--color-trait-2);
+    box-shadow: 0 -6px 24px rgba(32, 27, 25, 0.1);
     font-family: var(--font-body);
   }
 
@@ -126,7 +129,9 @@ const t =
   }
 
   .consent__texte {
-    margin: 0 0 1rem;
+    /* Occupe l'espace disponible et repousse les boutons à droite. */
+    flex: 1 1 22rem;
+    margin: 0;
     font-size: 0.875rem;
     line-height: 1.55;
     color: var(--color-encre);
@@ -149,6 +154,7 @@ const t =
     gap: 1.25rem;
     align-items: center;
     justify-content: flex-end;
+    flex-shrink: 0;
   }
 
   /* Hover = passage en semi-bold, jamais de fill agressif (charte). */
