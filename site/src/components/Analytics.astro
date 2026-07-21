@@ -1,0 +1,187 @@
+---
+/* ---------------------------------------------------------------
+   Mesure d'audience — Google Analytics 4 (RGPD / CNIL)
+
+   Principe : RIEN n'est chargé tant que le visiteur n'a pas cliqué
+   « Accepter ». Aucun script Google, aucun cookie déposé avant ce clic.
+   Le choix (accepté / refusé) est mémorisé dans localStorage : le
+   bandeau ne réapparaît pas à chaque visite.
+
+   Placé une seule fois dans Base.astro → couvre tout le site (FR + EN).
+--------------------------------------------------------------- */
+const GA_ID = "G-S4JFDZJKN5";
+
+const { lang = "fr" } = Astro.props;
+
+const t =
+  lang === "en"
+    ? {
+        aria: "Audience measurement cookies",
+        texte:
+          "This site uses Google Analytics to measure its audience anonymously. No cookies are set without your consent.",
+        enSavoirPlus: "Learn more",
+        refuser: "Decline",
+        accepter: "Accept",
+        lienLegal: "/en/mentions-legales",
+      }
+    : {
+        aria: "Cookies de mesure d'audience",
+        texte:
+          "Ce site utilise Google Analytics pour mesurer son audience de façon anonyme. Aucun cookie n'est déposé sans ton accord.",
+        enSavoirPlus: "En savoir plus",
+        refuser: "Refuser",
+        accepter: "Accepter",
+        lienLegal: "/mentions-legales",
+      };
+---
+
+<div
+  id="consent-cookies"
+  class="consent"
+  role="dialog"
+  aria-label={t.aria}
+  hidden
+>
+  <p class="consent__texte">
+    {t.texte}
+    <a class="consent__lien" href={t.lienLegal}>{t.enSavoirPlus}</a>
+  </p>
+  <div class="consent__actions">
+    <button type="button" class="consent__btn consent__btn--secondaire" data-consent="refuse">
+      {t.refuser}
+    </button>
+    <button type="button" class="consent__btn consent__btn--primaire" data-consent="accepte">
+      {t.accepter}
+    </button>
+  </div>
+</div>
+
+<script define:vars={{ GA_ID }}>
+  (function () {
+    var KEY = "consent-ga";
+    var banner = document.getElementById("consent-cookies");
+    if (!banner) return;
+
+    // Injecte gtag.js et lance la mesure — appelé UNIQUEMENT après « Accepter ».
+    function chargerGA() {
+      if (window.__gaCharge) return;
+      window.__gaCharge = true;
+      var s = document.createElement("script");
+      s.async = true;
+      s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      window.gtag = gtag;
+      gtag("js", new Date());
+      gtag("config", GA_ID);
+    }
+
+    var choix = null;
+    try {
+      choix = localStorage.getItem(KEY);
+    } catch (e) {}
+
+    if (choix === "accepte") {
+      chargerGA();
+    } else if (choix !== "refuse") {
+      // Aucun choix mémorisé : on demande.
+      banner.hidden = false;
+    }
+
+    banner.addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-consent]");
+      if (!btn) return;
+      var val = btn.getAttribute("data-consent");
+      try {
+        localStorage.setItem(KEY, val);
+      } catch (e) {}
+      banner.hidden = true;
+      if (val === "accepte") chargerGA();
+    });
+  })();
+</script>
+
+<style>
+  .consent {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    z-index: 150;
+    max-width: 30rem;
+    margin-inline: auto;
+    padding: 1.25rem 1.5rem;
+    background-color: var(--color-ivoire);
+    border: 1px solid var(--color-trait-2);
+    border-radius: 8px;
+    box-shadow: 0 10px 34px rgba(32, 27, 25, 0.14);
+    font-family: var(--font-body);
+  }
+
+  .consent[hidden] {
+    display: none;
+  }
+
+  .consent__texte {
+    margin: 0 0 1rem;
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--color-encre);
+  }
+
+  /* Lien discret vers les mentions légales — souligné bordeaux, flèche exclue. */
+  .consent__lien {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    white-space: nowrap;
+  }
+
+  .consent__lien:hover {
+    font-weight: 600;
+  }
+
+  .consent__actions {
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  /* Hover = passage en semi-bold, jamais de fill agressif (charte). */
+  .consent__btn {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.2;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  /* Primaire : encre plein, texte ivoire (15.9:1). */
+  .consent__btn--primaire {
+    padding: 0.6rem 1.4rem;
+    background-color: var(--color-encre);
+    color: var(--color-ivoire);
+    border-radius: 4px;
+  }
+
+  .consent__btn--primaire:hover {
+    font-weight: 600;
+  }
+
+  /* Secondaire : souligné bordeaux (7.5:1 sur ivoire). */
+  .consent__btn--secondaire {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .consent__btn--secondaire:hover {
+    font-weight: 600;
+  }
+</style>

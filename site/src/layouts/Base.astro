@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+import Analytics from "../components/Analytics.astro";
 
 const {
   title = "Audrey Garoscio — Product Designer",
@@ -38,5 +39,6 @@ const {
       <slot />
     </main>
     <Footer lang={lang} />
+    <Analytics lang={lang} />
   </body>
 </html>
